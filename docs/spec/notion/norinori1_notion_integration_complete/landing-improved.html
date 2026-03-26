@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>norinori1 - Game Developer Portfolio</title>
+    <style>
+        :root {
+            --color-primary-dark: #1F5BA6;
+            --color-primary: #3B8FD9;
+            --color-neutral-50: #FFFFFF;
+            --color-neutral-100: #F8FAFC;
+            --color-neutral-900: #0F172A;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        
+        /* ========================================
+           ランディングセクション
+           ======================================== */
+        .landing {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .landing__logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 3rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .landing__text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            font-family: 'Geist Mono', 'JetBrains Mono', monospace;
+            text-shadow: 0 2px 8px rgba(31, 91, 166, 0.1);
+        }
+        
+        .landing__cta {
+            margin-top: 3rem;
+            padding: 0.75rem 2rem;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .landing__cta:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(31, 91, 166, 0.2);
+        }
+        
+        .landing__subtitle {
+            font-size: 1.2rem;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        
+        /* フローティングアニメーション */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        /* レスポンシブ */
+        @media (max-width: 768px) {
+            .landing__text {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="landing">
+        <!-- ロゴアイコン -->
+        <svg class="landing__logo" viewBox="0 0 40 40">
+            <defs>
+                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3B8FD9;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#1F5BA6;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+            <g stroke="url(#logoGrad)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="8" y="12" width="12" height="12" />
+                <polyline points="8,12 14,6 26,6 20,12" />
+                <polyline points="20,12 26,6" />
+                <polyline points="20,12 20,24" />
+                <polyline points="20,24 26,18" />
+                <polyline points="26,6 26,18" />
+            </g>
+        </svg>
+        
+        <!-- テキスト（修正版：濃いブルーに変更） -->
+        <h1 class="landing__text">norinori1</h1>
+        
+        <p class="landing__subtitle">Game Developer & Creator</p>
+        
+        <!-- CTA -->
+        <a href="#featured-games" class="landing__cta">
+            作品を見る
+        </a>
+    </section>
+</body>
+</html>
