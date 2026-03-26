@@ -167,8 +167,8 @@ export default function Home() {
               src="/norinori1-splash.svg"
               alt="norinori1 - Game Developer & Creator logo"
               className="brand-splash"
-              width={420}
-              height={42}
+              width={520}
+              height={52}
               priority
             />
           </a>
