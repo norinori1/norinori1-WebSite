@@ -165,7 +165,7 @@ export default function Home() {
           <a href="#top" className="brand" aria-label="norinori1 top">
             <Image
               src="/norinori1-splash.svg"
-              alt="norinori1 splash logo"
+              alt="norinori1 - Game Developer & Creator logo"
               className="brand-splash"
               width={420}
               height={42}
@@ -220,7 +220,7 @@ export default function Home() {
         <div className="container hero-content">
           <Image
             src="/norinori1-splash.svg"
-            alt="norinori1 splash image"
+            alt="norinori1 logo with Game Developer & Creator branding"
             className="hero-splash"
             width={560}
             height={120}
