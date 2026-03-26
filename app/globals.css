@@ -61,7 +61,6 @@ body {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
   color: inherit;
   text-decoration: none;
 }
@@ -70,15 +69,10 @@ body {
   opacity: 0.8;
 }
 
-.brand-icon {
-  width: 32px;
-  height: 32px;
-}
-
-.brand-text {
-  color: var(--color-primary-dark);
-  font-size: 1.25rem;
-  font-weight: 700;
+.brand-splash {
+  height: 42px;
+  width: auto;
+  display: block;
 }
 
 .menu-toggle {
@@ -107,10 +101,11 @@ body {
 }
 
 .hero {
-  min-height: 100vh;
+  min-height: 70vh;
   display: grid;
   place-items: center;
   padding-top: 64px;
+  padding-bottom: 2rem;
   background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-lighter));
 }
 
@@ -119,14 +114,21 @@ body {
   color: #fff;
 }
 
-.hero-content h1 {
-  font-size: clamp(2.5rem, 8vw, 3.5rem);
-  margin: 0;
+.hero-splash {
+  width: min(560px, 85vw);
+  height: auto;
+  display: block;
+  margin: 0 auto 1.25rem;
+}
+
+.hero-copy {
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .hero-subtitle {
   font-size: clamp(1.1rem, 4vw, 1.5rem);
-  margin: 0.75rem 0 1rem;
+  margin: 0 0 0.8rem;
 }
 
 .hero-content p {
@@ -377,6 +379,18 @@ body {
 
   .site-nav.open {
     display: flex;
+  }
+
+  .brand-splash {
+    height: 34px;
+  }
+
+  .hero {
+    min-height: 62vh;
+  }
+
+  .hero-splash {
+    width: min(420px, 88vw);
   }
 
   .hero-cta {

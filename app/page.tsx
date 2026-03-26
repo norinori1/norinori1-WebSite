@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 type WorkItem = {
@@ -162,29 +163,14 @@ export default function Home() {
       <header className="site-header">
         <div className="container header-inner">
           <a href="#top" className="brand" aria-label="norinori1 top">
-            <svg className="brand-icon" viewBox="0 0 40 40" aria-hidden="true">
-              <defs>
-                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B8FD9" />
-                  <stop offset="100%" stopColor="#1F5BA6" />
-                </linearGradient>
-              </defs>
-              <g
-                stroke="url(#logoGradient)"
-                strokeWidth="1.5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="8" y="12" width="12" height="12" />
-                <polyline points="8,12 14,6 26,6 20,12" />
-                <polyline points="20,12 26,6" />
-                <polyline points="20,12 20,24" />
-                <polyline points="20,24 26,18" />
-                <polyline points="26,6 26,18" />
-              </g>
-            </svg>
-            <span className="brand-text">norinori1</span>
+            <Image
+              src="/norinori1-splash.svg"
+              alt="norinori1 splash logo"
+              className="brand-splash"
+              width={420}
+              height={42}
+              priority
+            />
           </a>
 
           <button
@@ -232,12 +218,21 @@ export default function Home() {
 
       <section id="top" className="hero" aria-label="Hero">
         <div className="container hero-content">
-          <h1>norinori1</h1>
-          <p className="hero-subtitle">Game Developer & Creator</p>
-          <p>
-            Unity、Roblox、Scratchなど複数プラットフォームで、
-            ユニークなゲーム体験と開発ツールを継続的に制作しています。
-          </p>
+          <Image
+            src="/norinori1-splash.svg"
+            alt="norinori1 splash image"
+            className="hero-splash"
+            width={560}
+            height={120}
+            priority
+          />
+          <div className="hero-copy">
+            <p className="hero-subtitle">Game Developer & Creator</p>
+            <p>
+              Unity、Roblox、Scratchなど複数プラットフォームで、
+              ユニークなゲーム体験と開発ツールを継続的に制作しています。
+            </p>
+          </div>
           <div className="hero-cta">
             <a className="btn btn-primary" href="#works">
               作品を見る
