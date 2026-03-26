@@ -75,7 +75,7 @@ const platforms = [
   { name: "X (Twitter)", url: "https://x.com/norinori1_" },
   { name: "GitHub", url: "https://github.com/norinori1" },
   { name: "Scratch", url: "https://scratch.mit.edu/users/norinori1/" },
-  { name: "Discord", url: "https://discord.com" },
+  { name: "Discord", url: "https://discord.gg/norinori1" },
   { name: "unityroom", url: "https://unityroom.com" },
 ];
 
