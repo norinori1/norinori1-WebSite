@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="norinori1 - ゲーム開発者・クリエイター。Unity、Roblox、Scratchでユニークなゲーム体験を創造。">
+    <meta name="og:title" content="norinori1 - Game Developer Portfolio">
+    <meta name="og:description" content="複数のゲーム開発プラットフォームで活動するゲーム開発者のポートフォリオサイト">
+    <meta name="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:creator" content="@norinori1_">
+    
+    <title>norinori1 - Game Developer Portfolio</title>
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX', {
+        'anonymize_ip': true
+      });
+    </script>
+    
+    <!-- Styles -->
+    <style>
+        /* ========================================
+           変数定義
+           ======================================== */
+        :root {
+            /* Colors */
+            --color-primary-dark: #1F5BA6;
+            --color-primary: #3B8FD9;
+            --color-primary-light: #5BA3D0;
+            --color-primary-lighter: #A7D8E8;
+            --color-secondary: #0099FF;
+            
+            --color-neutral-50: #FFFFFF;
+            --color-neutral-100: #F8FAFC;
+            --color-neutral-200: #E2E8F0;
+            --color-neutral-300: #CBD5E1;
+            --color-neutral-500: #64748B;
+            --color-neutral-700: #334155;
+            --color-neutral-900: #0F172A;
+            
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-danger: #EF4444;
+            
+            /* Sizing */
+            --header-height: 64px;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --spacing-3xl: 4rem;
+            
+            /* Typography */
+            --font-mono: 'Geist Mono', 'JetBrains Mono', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --radius-full: 9999px;
+            
+            /* Transitions */
+            --transition: all 0.3s ease;
+        }
+        
+        /* ========================================
+           リセット
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-neutral-900);
+            background: var(--color-neutral-50);
+            line-height: 1.6;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* ========================================
+           ユーティリティ
+           ======================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xl);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-3xl);
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-neutral-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--color-neutral-500);
+        }
+        
+        /* ========================================
+           ヘッダー
+           ======================================== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            background-color: var(--color-neutral-50);
+            border-bottom: 1px solid var(--color-neutral-200);
+            transition: var(--transition);
+        }
+        
+        .header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .header__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-xl);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header__logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        
+        .header__logo:hover {
+            opacity: 0.8;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            color: var(--color-primary-dark);
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-list {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-neutral-500);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--color-primary);
+        }
+        
+        /* ========================================
+           ヒーロー
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            padding-top: var(--header-height);
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary-lighter) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero__container {
+            max-width: 800px;
+            padding: 0 var(--spacing-xl);
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero__logo-large {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+        }
+        
+        .hero__title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero__subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero__description {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+        
+        .hero__cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* ========================================
+           ボタン
+           ======================================== */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 2rem;
+            border-radius: var(--radius-lg);
+            border: 2px solid transparent;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .button--primary {
+            background-color: #FFFFFF;
+            color: var(--color-primary-dark);
+        }
+        
+        .button--primary:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .button--secondary {
+            background-color: transparent;
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+        
+        .button--secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* ========================================
+           セクション
+           ======================================== */
+        section {
+            padding: var(--spacing-3xl) 0;
+            background: var(--color-neutral-50);
+        }
+        
+        section:nth-child(even) {
+            background: var(--color-neutral-100);
+        }
+        
+        /* ========================================
+           ゲームグリッド
+           ======================================== */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-2xl);
+            margin: var(--spacing-3xl) 0;
+        }
+        
+        .game-card {
+            background: #FFFFFF;
+            border: 1px solid var(--color-neutral-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: 0 12px 24px rgba(59, 143, 217, 0.15);
+        }
+        
+        .game-card__image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--color-neutral-200);
+        }
+        
+        .game-card__content {
+            padding: var(--spacing-lg);
+        }
+        
+        .game-card__title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-neutral-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .game-card__description {
+            font-size: 0.9rem;
+            color: var(--color-neutral-500);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .game-card__link {
+            display: inline-block;
+            color: var(--color-primary);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .game-card__link:hover {
+            color: var(--color-primary-dark);
+        }
+        
+        /* ========================================
+           アニメーション
+           ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* ========================================
+           レスポンシブ
+           ======================================== */
+        @media (max-width: 768px) {
+            .hero__title {
+                font-size: 2.5rem;
+            }
+            
+            .hero__subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .hero__cta {
+                flex-direction: column;
+            }
+            
+            .button {
+                width: 100%;
+            }
+            
+            .nav-list {
+                gap: 1rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         ヘッダー
+         ======================================== -->
+    <header class="header" id="mainHeader">
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <svg class="logo-icon" viewBox="0 0 40 40">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3B8FD9;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#1F5BA6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g stroke="url(#logoGradient)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="8" y="12" width="12" height="12" />
+                        <polyline points="8,12 14,6 26,6 20,12" />
+                        <polyline points="20,12 26,6" />
+                        <polyline points="20,12 20,24" />
+                        <polyline points="20,24 26,18" />
+                        <polyline points="26,6 26,18" />
+                    </g>
+                </svg>
+                <span class="logo-text">norinori1</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="/about" class="nav-link">About</a></li>
+                    <li><a href="/works" class="nav-link">Works</a></li>
+                    <li><a href="/news" class="nav-link">News</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- ========================================
+         ヒーロー
+         ======================================== -->
+    <section class="hero">
+        <div class="hero__container">
+            <svg class="hero__logo-large" viewBox="0 0 40 40">
+                <defs>
+                    <linearGradient id="logoGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3B8FD9;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#1F5BA6;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g stroke="url(#logoGradient2)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="8" y="12" width="12" height="12" />
+                    <polyline points="8,12 14,6 26,6 20,12" />
+                    <polyline points="20,12 26,6" />
+                    <polyline points="20,12 20,24" />
+                    <polyline points="20,24 26,18" />
+                    <polyline points="26,6 26,18" />
+                </g>
+            </svg>
+            
+            <h1 class="hero__title">norinori1</h1>
+            <p class="hero__subtitle">Game Developer & Creator</p>
+            
+            <p class="hero__description">
+                複数のゲーム開発プラットフォーム（Unity、Roblox、Scratch）で
+                ユニークなゲーム体験を創造しています。
+                最新の技術（Unity × TensorFlow）にも取り組み中。
+            </p>
+            
+            <div class="hero__cta">
+                <a href="#featured-games" class="button button--primary">
+                    作品を見る
+                </a>
+                <a href="/about" class="button button--secondary">
+                    プロフィール
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         フィーチャーゲーム
+         ======================================== -->
+    <section id="featured-games">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Games</h2>
+                <p>最新作と注目ゲームをピックアップ</p>
+            </div>
+            
+            <div class="games-grid" id="gameGrid">
+                <!-- ゲームカードはJSで動的生成 -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="/works" class="button button--secondary">
+                    すべてのゲームを見る →
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ========================================
+         フッター
+         ======================================== -->
+    <footer style="background: var(--color-neutral-900); color: #F1F5F9; padding: 4rem 0 2rem; margin-top: 4rem;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">
+                        <svg style="width: 28px; height: 28px;" viewBox="0 0 40 40">
+                            <linearGradient id="logoGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3B8FD9;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1F5BA6;stop-opacity:1" />
+                            </linearGradient>
+                            <g stroke="url(#logoGradient3)" stroke-width="1.5" fill="none">
+                                <rect x="8" y="12" width="12" height="12" />
+                                <polyline points="8,12 14,6 26,6 20,12" />
+                            </g>
+                        </svg>
+                        <span>norinori1</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 1rem;">
+                        ゲーム開発者・クリエイター。複数プラットフォームでユニークなゲーム体験を創造。
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Navigation</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="/" style="color: rgba(255, 255, 255, 0.7); transition: var(--transition);">Home</a></li>
+                        <li><a href="/about" style="color: rgba(255, 255, 255, 0.7); transition: var(--transition);">About</a></li>
+                        <li><a href="/works" style="color: rgba(255, 255, 255, 0.7); transition: var(--transition);">Works</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">Follow</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><a href="https://x.com/norinori1_" target="_blank" style="color: rgba(255, 255, 255, 0.7); transition: var(--transition);">Twitter/X</a></li>
+                        <li><a href="https://github.com/norinori1" target="_blank" style="color: rgba(255, 255, 255, 0.7); transition: var(--transition);">GitHub</a></li>
+                        <li><a href="https://norinori1.itch.io" target="_blank" style="color: rgba(255, 255, 255, 0.7); transition: var(--transition);">itch.io</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.6); margin-bottom: 0.5rem;">
+                    &copy; 2025 norinori1. All rights reserved.
+                </p>
+                <p style="font-size: 0.85rem; color: rgba(255, 255, 255, 0.5);">
+                    Built with ❤️ using HTML, CSS, JavaScript & GA4
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+        // ========================================
+        // ヘッダースクロール検出
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // ========================================
+        // ゲーム情報をJSONから取得（GAMES.mdのデータを使用）
+        // ========================================
+        const games = [
+            {
+                id: 'zintoroad',
+                title: 'ZINTOROAD',
+                description: 'Survivor-like Rogue-lite × Real-Time Resource Management',
+                link: 'https://norinori1.itch.io/zintoroad-beta',
+                status: 'Latest'
+            },
+            {
+                id: 'rogue-lycan',
+                title: 'ROGUE LYCAN',
+                description: 'Discord Activity Rogue-like Game',
+                link: 'https://norinori1.github.io/Rogue-Lycan-Discord-Activity/',
+                status: 'Featured'
+            },
+            {
+                id: 'polarity-under',
+                title: 'POLARITY UNDER',
+                description: 'Puzzle-based Action Game',
+                link: 'https://unityroom.com/games/polarity_under',
+                status: 'Released'
+            },
+            {
+                id: 'puzzle-ball-stage-maker',
+                title: 'Puzzle Ball Stage Maker',
+                description: 'Creative puzzle game stage editor',
+                link: 'https://norinori1.itch.io',
+                status: 'Featured'
+            },
+            {
+                id: 'block-crushing-game',
+                title: 'Block Crushing Game',
+                description: 'Classic block-crushing puzzle mechanics',
+                link: 'https://norinori1.itch.io',
+                status: 'Released'
+            },
+            {
+                id: 'puzzle-ball-3',
+                title: 'Puzzle Ball 3!',
+                description: 'Advanced puzzle ball mechanics',
+                link: 'https://norinori1.itch.io',
+                status: 'Released'
+            }
+        ];
+        
+        // ========================================
+        // ゲームカードをレンダリング
+        // ========================================
+        function renderGames() {
+            const gameGrid = document.getElementById('gameGrid');
+            gameGrid.innerHTML = games.map(game => `
+                <article class="game-card" data-game-id="${game.id}">
+                    <div style="width: 100%; height: 200px; background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-lighter) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1rem; font-weight: 600;">
+                        ${game.title}
+                    </div>
+                    <div class="game-card__content">
+                        <h3 class="game-card__title">${game.title}</h3>
+                        <p class="game-card__description">${game.description}</p>
+                        <a href="${game.link}" target="_blank" rel="noopener noreferrer" class="game-card__link">
+                            Play Now →
+                        </a>
+                    </div>
+                </article>
+            `).join('');
+            
+            // GA4トラッキングを追加
+            setupGameTracking();
+        }
+        
+        // ========================================
+        // ゲームカードクリック追跡
+        // ========================================
+        function setupGameTracking() {
+            document.querySelectorAll('.game-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const gameId = card.dataset.gameId;
+                    const gameTitle = card.querySelector('.game-card__title').textContent;
+                    
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'game_card_click', {
+                            'game_id': gameId,
+                            'game_title': gameTitle,
+                            'event_category': 'engagement'
+                        });
+                    }
+                });
+                
+                const link = card.querySelector('.game-card__link');
+                if (link) {
+                    link.addEventListener('click', (e) => {
+                        const gameId = card.dataset.gameId;
+                        const url = link.getAttribute('href');
+                        
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'game_link_click', {
+                                'game_id': gameId,
+                                'destination_url': url,
+                                'event_category': 'outbound'
+                            });
+                        }
+                    });
+                }
+            });
+        }
+        
+        // ========================================
+        // ページロード時に初期化
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            renderGames();
+        });
+        
+        // ========================================
+        // セクション表示トラッキング
+        // ======================================== 
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id || 'unnamed-section';
+                    const sectionName = entry.target.querySelector('h2')?.textContent || sectionId;
+                    
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'section_view', {
+                            'section_id': sectionId,
+                            'section_name': sectionName,
+                            'event_category': 'engagement'
+                        });
+                    }
+                }
+            });
+        }, { threshold: 0.25 });
+        
+        document.querySelectorAll('section').forEach(section => {
+            sectionObserver.observe(section);
+        });
+    </script>
+</body>
+</html>

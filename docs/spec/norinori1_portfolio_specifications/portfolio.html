@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>norinori1 - Game Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #f1f5f9;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366F1, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav a {
+            color: #cbd5e1;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #6366F1;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #6366F1, #3B82F6, #10B981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideDown 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #cbd5e1;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366F1, #3B82F6);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #6366F1;
+            border: 2px solid #6366F1;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(99, 102, 241, 0.5);
+            display: inline-block;
+        }
+
+        /* Game Grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .game-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(30, 41, 59, 0.95);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.1);
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #6366F1, #3B82F6);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .game-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .game-card p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .tag-container {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5f3fc;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .game-card a {
+            color: #6366F1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .game-card a:hover {
+            color: #3B82F6;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-left: 4px solid #6366F1;
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: #f1f5f9;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-item .name {
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 0.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-level {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5f3fc;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .skill-item .desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        .research-box {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .research-box h3 {
+            margin-bottom: 1rem;
+        }
+
+        .research-box p {
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .research-box strong {
+            color: #f1f5f9;
+        }
+
+        /* Platform Grid */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .platform-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(30, 41, 59, 0.95);
+        }
+
+        .platform-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .platform-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #f1f5f9;
+        }
+
+        .platform-card p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .platform-card span {
+            color: #6366F1;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #94a3b8;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        footer p:last-child {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <div class="logo">norinori1</div>
+            <div>
+                <a href="#profile">Profile</a>
+                <a href="#games">Games</a>
+                <a href="#skills">Skills</a>
+                <a href="#platforms">Connect</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="profile" class="hero">
+        <h1>Game Developer</h1>
+        <p>Crafting experiences across Unity, Roblox, and Scratch. Focused on tactical gameplay and innovative mechanics.</p>
+        <div class="button-group">
+            <button class="btn-primary" onclick="document.getElementById('games').scrollIntoView()">Explore Games</button>
+            <button class="btn-secondary" onclick="document.getElementById('platforms').scrollIntoView()">Connect</button>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games">
+        <h2>Featured Games</h2>
+        <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills & Expertise</h2>
+        <div class="skills-container" id="skillsContainer"></div>
+        
+        <div class="research-box">
+            <h3>🔬 Currently Exploring</h3>
+            <p>Researching the intersection of machine learning and game development through <strong>Unity × TensorFlow</strong> integration. Interested in creating adaptive gameplay systems and intelligent NPC behavior.</p>
+            <p>Also expanding knowledge in <strong>Python</strong> for tool development and engine integration workflows.</p>
+        </div>
+    </section>
+
+    <!-- Platforms Section -->
+    <section id="platforms">
+        <h2>Find Me Online</h2>
+        <div class="platform-grid" id="platformGrid"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 norinori1. Game developer based on passion and creativity.</p>
+        <p>Built with care. Deployed everywhere games are made.</p>
+    </footer>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Games Data
+        const games = [
+            {
+                title: 'ZINTOROAD[beta]',
+                description: 'Survivor-like Rogue-lite × Real-Time Resource Management',
+                status: 'Latest',
+                platforms: ['PC', 'Web'],
+                link: 'https://norinori1.itch.io/zintoroad-beta',
+                tags: ['Unity', 'Strategic', 'Resource Management']
+            },
+            {
+                title: 'Puzzle Ball Stage Maker',
+                description: 'Creative puzzle game stage editor',
+                platforms: ['Web'],
+                link: 'https://norinori1.itch.io',
+                tags: ['Puzzle', 'Creative']
+            },
+            {
+                title: 'Block Crushing Game',
+                description: 'Classic block-crushing puzzle mechanics',
+                platforms: ['Web', 'Download'],
+                link: 'https://norinori1.itch.io',
+                tags: ['Puzzle', 'Casual']
+            },
+            {
+                title: 'Block Crush [Scratch]',
+                description: 'Scratch version of block-crushing gameplay',
+                platforms: ['Web'],
+                link: 'https://scratch.mit.edu/users/norinori1/',
+                tags: ['Scratch', 'Puzzle']
+            },
+            {
+                title: 'Puzzle Ball 3!',
+                description: 'Advanced puzzle ball mechanics',
+                platforms: ['Web'],
+                link: 'https://norinori1.itch.io',
+                tags: ['Puzzle', 'Physics']
+            }
+        ];
+
+        // Render Games
+        const gameGrid = document.getElementById('gameGrid');
+        games.forEach(game => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                ${game.status ? `<div class="status-badge">${game.status}</div>` : ''}
+                <h3>${game.title}</h3>
+                <p>${game.description}</p>
+                <div class="tag-container">
+                    ${game.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem;">📱 ${game.platforms.join(' • ')}</p>
+                <a href="${game.link}" target="_blank">Play Now →</a>
+            `;
+            gameGrid.appendChild(card);
+        });
+
+        // Skills Data
+        const skills = [
+            {
+                category: 'Engines & Platforms',
+                items: [
+                    { name: 'C# + Unity', level: 'Expert', description: 'Primary development environment' },
+                    { name: 'Roblox / Luau', level: 'Advanced', description: 'Prototype development' },
+                    { name: 'Scratch', level: 'Advanced', description: 'Visual programming' }
+                ]
+            },
+            {
+                category: 'Current Research',
+                items: [
+                    { name: 'Unity × TensorFlow', level: 'Learning', description: 'ML game development' },
+                    { name: 'Python', level: 'Learning', description: 'Tool integration' }
+                ]
+            }
+        ];
+
+        // Render Skills
+        const skillsContainer = document.getElementById('skillsContainer');
+        skills.forEach(skillGroup => {
+            const card = document.createElement('div');
+            card.className = 'skill-card';
+            card.innerHTML = `
+                <h3>${skillGroup.category}</h3>
+                ${skillGroup.items.map(item => `
+                    <div class="skill-item">
+                        <div class="name">
+                            <span>${item.name}</span>
+                            <span class="skill-level">${item.level}</span>
+                        </div>
+                        <p class="desc">${item.description}</p>
+                    </div>
+                `).join('')}
+            `;
+            skillsContainer.appendChild(card);
+        });
+
+        // Platforms Data
+        const platforms = [
+            {
+                name: 'itch.io',
+                url: 'https://norinori1.itch.io',
+                icon: '🎮',
+                description: 'Game distribution & showcase'
+            },
+            {
+                name: 'Scratch',
+                url: 'https://scratch.mit.edu/users/norinori1/',
+                icon: '🧩',
+                description: 'Visual programming projects'
+            },
+            {
+                name: 'X (Twitter)',
+                url: 'https://x.com/norinori1_',
+                icon: '𝕏',
+                description: 'Development updates'
+            }
+        ];
+
+        // Render Platforms
+        const platformGrid = document.getElementById('platformGrid');
+        platforms.forEach(platform => {
+            const card = document.createElement('a');
+            card.className = 'platform-card';
+            card.href = platform.url;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+            card.innerHTML = `
+                <div class="platform-icon">${platform.icon}</div>
+                <h4>${platform.name}</h4>
+                <p>${platform.description}</p>
+                <span>Visit →</span>
+            `;
+            platformGrid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
