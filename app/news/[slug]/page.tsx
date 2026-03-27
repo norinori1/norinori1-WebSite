@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import { getNewsBySlug, listNewsSlugs } from "@/lib/notion/news";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
 
 export const revalidate = 3600;
 
@@ -26,9 +30,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const result = await getNewsBySlug(slug);
     if (!result) return {};
+    const { news } = result;
+    const canonicalUrl = `/news/${slug}`;
+    const ogImages = news.coverImageUrl
+      ? [{ url: news.coverImageUrl, alt: news.title }]
+      : undefined;
     return {
-      title: `${result.news.title} – norinori1`,
-      description: result.news.excerpt,
+      title: `${news.title} – norinori1`,
+      description: news.excerpt,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title: news.title,
+        description: news.excerpt ?? undefined,
+        url: canonicalUrl,
+        type: "article",
+        images: ogImages,
+        ...(news.date && { publishedTime: news.date }),
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: news.title,
+        description: news.excerpt ?? undefined,
+        images: news.coverImageUrl ? [news.coverImageUrl] : undefined,
+      },
     };
   } catch {
     return {};
@@ -61,8 +85,28 @@ export default async function NewsDetailPage({ params }: Props) {
 
   const { news, blocks } = result;
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: news.title,
+    url: `${siteUrl}/news/${slug}`,
+    ...(news.coverImageUrl && { image: news.coverImageUrl }),
+    ...(news.excerpt && { description: news.excerpt }),
+    ...(news.date && { datePublished: news.date }),
+    author: {
+      "@type": "Person",
+      name: "norinori1",
+      url: siteUrl,
+    },
+  };
+
   return (
     <main className="site-root">
+      <Script
+        id="schema-news"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <SiteHeader />
 
       <div style={{ paddingTop: "64px" }}>
