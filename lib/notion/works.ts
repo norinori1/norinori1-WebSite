@@ -1,7 +1,7 @@
 import type {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { getNotionClient } from "./client";
+import { getNotionClient, resolveDataSourceId } from "./client";
 import { getPageBlocks, type NotionBlock } from "./blocks";
 import type { Work } from "@/types/notion";
 
@@ -89,9 +89,10 @@ function pageToWork(page: PageObjectResponse): Work {
 export async function listWorks(): Promise<Work[]> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
 
   const response = await notion.dataSources.query({
-    data_source_id: dbId,
+    data_source_id: dataSourceId,
     filter: {
       property: "Status",
       select: { is_not_empty: true },
@@ -113,9 +114,10 @@ export async function getWorkBySlug(
 ): Promise<{ work: Work; blocks: NotionBlock[] } | null> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
 
   const response = await notion.dataSources.query({
-    data_source_id: dbId,
+    data_source_id: dataSourceId,
     filter: {
       property: "Slug",
       rich_text: { equals: slug },
