@@ -1,7 +1,7 @@
 import type {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { getNotionClient } from "./client";
+import { getNotionClient, resolveDataSourceId } from "./client";
 import { getPageBlocks, type NotionBlock } from "./blocks";
 import type { NewsItem } from "@/types/notion";
 
@@ -88,9 +88,10 @@ function pageToNewsItem(page: PageObjectResponse): NewsItem {
 export async function listNews(): Promise<NewsItem[]> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
 
-  const response = await notion.databases.query({
-    database_id: dbId,
+  const response = await notion.dataSources.query({
+    data_source_id: dataSourceId,
     filter: {
       property: "Status",
       select: { equals: "Published" },
@@ -109,9 +110,10 @@ export async function getNewsBySlug(
 ): Promise<{ news: NewsItem; blocks: NotionBlock[] } | null> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
 
-  const response = await notion.databases.query({
-    database_id: dbId,
+  const response = await notion.dataSources.query({
+    data_source_id: dataSourceId,
     filter: {
       property: "Slug",
       rich_text: { equals: slug },
