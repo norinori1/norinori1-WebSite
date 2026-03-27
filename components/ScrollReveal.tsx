@@ -15,6 +15,12 @@ export default function ScrollReveal({ children, delay = 0, className = "" }: Sc
     const el = ref.current;
     if (!el) return;
 
+    // Respect prefers-reduced-motion: immediately reveal without animation
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      el.classList.add("visible");
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

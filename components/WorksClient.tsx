@@ -330,8 +330,8 @@ export default function WorksClient({ works }: WorksClientProps) {
                     src={work.thumbnailUrl}
                     alt={`${work.title} thumbnail`}
                     fill
+                    sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
                     style={{ objectFit: "cover" }}
-                    unoptimized
                   />
                 </div>
               )}
