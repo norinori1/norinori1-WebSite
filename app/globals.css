@@ -535,6 +535,20 @@ body {
   white-space: nowrap;
 }
 
+.notion-content a {
+  color: #1a0dab;
+  text-decoration: underline;
+}
+
+.notion-content a:visited {
+  color: #681da8;
+}
+
+.notion-content a:hover {
+  text-decoration: underline;
+  color: #1558d6;
+}
+
 .notion-bookmark a {
   color: var(--color-primary-dark);
   text-decoration: none;
