@@ -85,6 +85,26 @@ function pageToWork(page: PageObjectResponse): Work {
   };
 }
 
+/** Return only works with Status "Featured" from the Games DB, ordered by title. */
+export async function listFeaturedWorks(): Promise<Work[]> {
+  const notion = getNotionClient();
+  const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
+
+  const response = await notion.dataSources.query({
+    data_source_id: dataSourceId,
+    filter: {
+      property: "Status",
+      select: { equals: "Featured" },
+    },
+    sorts: [{ property: "Title", direction: "ascending" }],
+  });
+
+  return (response.results as PageObjectResponse[])
+    .map(pageToWork)
+    .filter((w) => w.slug);
+}
+
 /** Return all published works from the Games DB, ordered by Featured then title. */
 export async function listWorks(): Promise<Work[]> {
   const notion = getNotionClient();
