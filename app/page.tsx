@@ -83,22 +83,38 @@ const platforms: { name: string; url: string; icon: IconName }[] = [
   { name: "unityroom", url: "https://unityroom.com", icon: "unity" },
 ];
 
-const skills = [
+const skills: { category: string; items: { label: string; icon: IconName | null }[] }[] = [
   {
     category: "Game Engines",
-    items: ["Unity", "Roblox", "Scratch"],
+    items: [
+      { label: "Unity", icon: "unity" },
+      { label: "Roblox", icon: "roblox" },
+      { label: "Scratch", icon: "scratch" },
+    ],
   },
   {
     category: "Languages",
-    items: ["C#", "Luau", "JavaScript"],
+    items: [
+      { label: "C#", icon: null },
+      { label: "Luau", icon: "luau" },
+      { label: "JavaScript", icon: "javascript" },
+    ],
   },
   {
     category: "Research",
-    items: ["TensorFlow", "Game AI", "Gameplay Analytics"],
+    items: [
+      { label: "TensorFlow", icon: "tensorflow" },
+      { label: "Game AI", icon: null },
+      { label: "Gameplay Analytics", icon: null },
+    ],
   },
   {
     category: "Tools & Workflow",
-    items: ["GitHub", "VS Code", "Node.js"],
+    items: [
+      { label: "GitHub", icon: "github" },
+      { label: "VS Code", icon: null },
+      { label: "Node.js", icon: "nodejs" },
+    ],
   },
 ];
 
@@ -253,11 +269,14 @@ export default function Home() {
             {skills.map((skill) => (
               <article key={skill.category} className="skill-card">
                 <h3>{skill.category}</h3>
-                <ul>
-                  {skill.items.map((item) => (
-                    <li key={item}>{item}</li>
+                <div className="skill-badges">
+                  {skill.items.map(({ label, icon }) => (
+                    <span key={label} className="skill-badge">
+                      {icon && <PlatformIcon name={icon} size={15} />}
+                      {label}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </article>
             ))}
           </div>
