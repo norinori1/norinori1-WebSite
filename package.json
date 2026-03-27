@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@notionhq/client": "^5.15.0",
+    "@tailwindcss/typography": "^0.5.19",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
