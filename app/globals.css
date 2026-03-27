@@ -108,11 +108,15 @@ body {
   padding-top: 64px;
   padding-bottom: 2rem;
   background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-lighter));
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-content {
   text-align: center;
   color: #fff;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-splash {
@@ -526,4 +530,146 @@ body {
 
 .notion-toggle[open] summary::before {
   content: "▼ ";
+}
+
+/* =====================
+   Hero entrance animations
+   ===================== */
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-animate {
+  animation: hero-fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-animate-logo { animation-delay: 0s; }
+.hero-animate-sub  { animation-delay: 0.3s; }
+.hero-animate-desc { animation-delay: 0.6s; }
+.hero-animate-cta  { animation-delay: 0.9s; }
+
+/* =====================
+   Hero particle background
+   ===================== */
+
+@keyframes particle-float {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  33%  { transform: translateY(-12px) rotate(15deg); }
+  66%  { transform: translateY(6px) rotate(-8deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.08);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  animation: particle-float linear infinite;
+}
+
+.hero-particle--sm  { width: 24px;  height: 24px; }
+.hero-particle--md  { width: 42px;  height: 42px; }
+.hero-particle--lg  { width: 64px;  height: 64px; }
+
+.hero-particle--slow   { animation-duration: 9s; }
+.hero-particle--medium { animation-duration: 6s; }
+.hero-particle--fast   { animation-duration: 4s; }
+
+.hero-particle:nth-child(1) { animation-delay: 0s;    }
+.hero-particle:nth-child(2) { animation-delay: -2.1s; }
+.hero-particle:nth-child(3) { animation-delay: -1.4s; }
+.hero-particle:nth-child(4) { animation-delay: -3.7s; }
+.hero-particle:nth-child(5) { animation-delay: -0.8s; }
+.hero-particle:nth-child(6) { animation-delay: -2.9s; }
+.hero-particle:nth-child(7) { animation-delay: -1.7s; }
+.hero-particle:nth-child(8) { animation-delay: -4.3s; }
+
+/* =====================
+   CTA Button glow + ripple
+   ===================== */
+
+@keyframes btn-glow-pulse {
+  0%   { box-shadow: 0 0 0px  0px  rgba(255, 255, 255, 0);    }
+  50%  { box-shadow: 0 0 14px 4px  rgba(255, 255, 255, 0.22); }
+  100% { box-shadow: 0 0 0px  0px  rgba(255, 255, 255, 0);    }
+}
+
+@keyframes btn-ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.hero-cta .btn {
+  position: relative;
+  overflow: hidden;
+  animation: btn-glow-pulse 2.8s ease-in-out infinite;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.hero-cta .btn:nth-child(2) {
+  animation-delay: -1.4s;
+}
+
+.hero-cta .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.3);
+  animation-play-state: paused;
+}
+
+.hero-cta .btn:active {
+  transform: translateY(0px);
+}
+
+.btn-ripple-wave {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  pointer-events: none;
+  animation: btn-ripple 0.55s linear forwards;
+}
+
+/* =====================
+   Accessibility: prefers-reduced-motion
+   ===================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-particles {
+    display: none;
+  }
+  .hero-cta .btn {
+    animation: none;
+  }
+  .btn-ripple-wave {
+    display: none;
+  }
 }
