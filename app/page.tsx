@@ -168,7 +168,7 @@ export default function Home() {
       <section id="top" className="hero" aria-label="Hero">
         <div className="container hero-content">
           <Image
-            src={`${basePath}/norinori1-splash.svg`}
+            src={`${basePath}/norinori1-splash-white.svg`}
             alt="norinori1 logo with Game Developer & Creator branding"
             className="hero-splash"
             width={560}
