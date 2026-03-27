@@ -5,6 +5,7 @@ import Image from "next/image";
 import { getWorkBySlug, listWorkSlugs } from "@/lib/notion/works";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
+import ShareButtons from "@/components/ShareButtons";
 
 export const revalidate = 3600;
 
@@ -132,6 +133,11 @@ export default async function WorkDetailPage({ params }: Props) {
                   </span>
                 ))}
               </div>
+
+              <ShareButtons
+                title={work.title}
+                url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app"}/works/${slug}`}
+              />
 
               {work.link && (
                 <a

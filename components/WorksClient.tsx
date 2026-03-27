@@ -91,6 +91,16 @@ function TagIcon({ tag, size = 12 }: { tag: string; size?: number }) {
   );
 }
 
+// Platform names that map to SVG icons
+const PLATFORM_SVG_ICONS: Record<string, IconName> = {
+  Unity: "unity",
+  Roblox: "roblox",
+  Scratch: "scratch",
+  Discord: "discord",
+  GitHub: "github",
+  Web: "web",
+};
+
 type SortOption = "default" | "title-asc" | "title-desc" | "status";
 
 interface WorksClientProps {
@@ -100,6 +110,7 @@ interface WorksClientProps {
 export default function WorksClient({ works }: WorksClientProps) {
   const [search, setSearch] = useState("");
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
+  const [activePlatforms, setActivePlatforms] = useState<Set<string>>(new Set());
   const [sort, setSort] = useState<SortOption>("default");
 
   // Collect all unique tags from all works
@@ -109,6 +120,13 @@ export default function WorksClient({ works }: WorksClientProps) {
     return Array.from(tagSet).sort((a, b) => a.localeCompare(b, "ja"));
   }, [works]);
 
+  // Collect all unique platforms from all works
+  const allPlatforms = useMemo(() => {
+    const platformSet = new Set<string>();
+    works.forEach((w) => w.platforms.forEach((p) => platformSet.add(p)));
+    return Array.from(platformSet).sort((a, b) => a.localeCompare(b, "ja"));
+  }, [works]);
+
   const toggleTag = (tag: string) => {
     setActiveTags((prev) => {
       const next = new Set(prev);
@@ -116,6 +134,18 @@ export default function WorksClient({ works }: WorksClientProps) {
         next.delete(tag);
       } else {
         next.add(tag);
+      }
+      return next;
+    });
+  };
+
+  const togglePlatform = (platform: string) => {
+    setActivePlatforms((prev) => {
+      const next = new Set(prev);
+      if (next.has(platform)) {
+        next.delete(platform);
+      } else {
+        next.add(platform);
       }
       return next;
     });
@@ -138,6 +168,13 @@ export default function WorksClient({ works }: WorksClientProps) {
     if (activeTags.size > 0) {
       result = result.filter((w) =>
         Array.from(activeTags).every((t) => w.tags.includes(t)),
+      );
+    }
+
+    // Platform filter (OR logic: at least one selected platform must be present)
+    if (activePlatforms.size > 0) {
+      result = result.filter((w) =>
+        Array.from(activePlatforms).some((p) => w.platforms.includes(p)),
       );
     }
 
@@ -164,7 +201,7 @@ export default function WorksClient({ works }: WorksClientProps) {
     // "default": keep server order (Featured first, then title)
 
     return result;
-  }, [works, search, activeTags, sort]);
+  }, [works, search, activeTags, activePlatforms, sort]);
 
   return (
     <div>
@@ -195,6 +232,43 @@ export default function WorksClient({ works }: WorksClientProps) {
           <option value="status">ステータス順</option>
         </select>
       </div>
+
+      {/* Platform Filter Buttons */}
+      {allPlatforms.length > 0 && (
+        <div className="works-tag-filters" role="group" aria-label="プラットフォームで絞り込む">
+          {allPlatforms.map((platform) => {
+            const iconName = PLATFORM_SVG_ICONS[platform];
+            return (
+              <button
+                key={platform}
+                type="button"
+                className={`works-tag-btn${activePlatforms.has(platform) ? " active" : ""}`}
+                onClick={() => togglePlatform(platform)}
+                aria-pressed={activePlatforms.has(platform)}
+              >
+                <span className="works-tag-icon" aria-hidden="true">
+                  {iconName ? (
+                    <PlatformIcon name={iconName} size={13} />
+                  ) : (
+                    <span className="chip-icon">💻</span>
+                  )}
+                </span>
+                {platform}
+              </button>
+            );
+          })}
+          {activePlatforms.size > 0 && (
+            <button
+              type="button"
+              className="works-tag-clear"
+              onClick={() => setActivePlatforms(new Set())}
+              aria-label="プラットフォームフィルターをクリア"
+            >
+              ✕ クリア
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Tag Filter Buttons */}
       {allTags.length > 0 && (
@@ -227,7 +301,7 @@ export default function WorksClient({ works }: WorksClientProps) {
       )}
 
       {/* Results count when filtered */}
-      {(search.trim() || activeTags.size > 0) && (
+      {(search.trim() || activeTags.size > 0 || activePlatforms.size > 0) && (
         <p className="works-result-count">
           {filteredWorks.length} 件の作品が見つかりました
         </p>
@@ -290,9 +364,16 @@ export default function WorksClient({ works }: WorksClientProps) {
               )}
               <div className="chips chips-platform">
                 {work.platforms.map((platform) => (
-                  <span key={platform} className="chip platform-chip">
+                  <button
+                    key={platform}
+                    type="button"
+                    className={`chip platform-chip${activePlatforms.has(platform) ? " chip-tag-active" : ""}`}
+                    onClick={() => togglePlatform(platform)}
+                    title={`"${platform}" で絞り込む`}
+                    aria-pressed={activePlatforms.has(platform)}
+                  >
                     {platform}
-                  </span>
+                  </button>
                 ))}
               </div>
               <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem" }}>

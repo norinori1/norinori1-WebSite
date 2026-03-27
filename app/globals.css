@@ -819,6 +819,63 @@ body {
 }
 
 /* =====================
+   Scroll Reveal Animation
+   ===================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================
+   Skill Level Dots
+   ===================== */
+
+.skill-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 0.4rem;
+}
+
+.skill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-neutral-200);
+  transition: background 0.2s;
+}
+
+.skill-dot.filled {
+  background: var(--color-primary);
+}
+
+/* =====================
+   Page Transition
+   ===================== */
+
+.page-transition {
+  animation: page-fade-in 0.35s ease;
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =====================
    Accessibility: prefers-reduced-motion
    ===================== */
 
@@ -836,5 +893,13 @@ body {
   }
   .btn-ripple-wave {
     display: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .page-transition {
+    animation: none;
   }
 }
