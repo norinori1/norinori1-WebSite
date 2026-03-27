@@ -19,6 +19,12 @@ const TAG_SVG_ICONS: Record<string, IconName> = {
   NodeJS: "nodejs",
   GitHub: "github",
   "itch.io": "itchio",
+  Discord: "discord",
+  ディスコード: "discord",
+  Web: "web",
+  ウェブ: "web",
+  Website: "web",
+  Webサイト: "web",
 };
 
 // Emoji icon mapping for non-tech tag names (Japanese and English)
