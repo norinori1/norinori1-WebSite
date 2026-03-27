@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getWorkBySlug, listWorkSlugs } from "@/lib/notion/works";
 import NotionBlocks from "@/components/NotionBlocks";
+import SiteHeader from "@/components/SiteHeader";
 
 export const revalidate = 3600;
 
@@ -52,18 +53,7 @@ export default async function WorkDetailPage({ params }: Props) {
 
   return (
     <main className="site-root">
-      <header className="site-header">
-        <div className="container header-inner">
-          <Link href="/" className="brand" aria-label="norinori1 top">
-            <span style={{ fontWeight: 700, fontSize: "1.2rem" }}>norinori1</span>
-          </Link>
-          <nav className="site-nav">
-            <Link href="/about">About</Link>
-            <Link href="/works">Works</Link>
-            <Link href="/news">News</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <div style={{ paddingTop: "64px" }}>
         <section className="section">

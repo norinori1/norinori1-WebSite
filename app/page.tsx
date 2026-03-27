@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import SiteHeader from "@/components/SiteHeader";
+import { trackEvent } from "@/lib/analytics";
 
 type WorkItem = {
   id: string;
@@ -106,27 +108,9 @@ const socialLinks = [
   { name: "itch.io", url: "https://norinori1.itch.io" },
 ];
 
-declare global {
-  interface Window {
-    gtag?: (
-      command: "event",
-      eventName: string,
-      params?: Record<string, unknown>,
-    ) => void;
-  }
-}
-
-function trackEvent(eventName: string, params: Record<string, unknown>) {
-  if (typeof window.gtag === "function") {
-    window.gtag("event", eventName, params);
-  }
-}
-
 const basePath = "";
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
     const seen = new Set<string>();
@@ -163,61 +147,7 @@ export default function Home() {
 
   return (
     <main className="site-root">
-      <header className="site-header">
-        <div className="container header-inner">
-          <a href="#top" className="brand" aria-label="norinori1 top">
-            <Image
-              src={`${basePath}/norinori1-splash.svg`}
-              alt="norinori1 - Game Developer & Creator logo"
-              className="brand-splash"
-              width={520}
-              height={52}
-              priority
-            />
-          </a>
-
-          <button
-            className="menu-toggle"
-            type="button"
-            aria-expanded={isMenuOpen}
-            aria-controls="site-nav"
-            aria-label="ナビゲーションを開閉"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-          >
-            ☰
-          </button>
-
-          <nav id="site-nav" className={`site-nav ${isMenuOpen ? "open" : ""}`}>
-            <Link
-              href="/about"
-              onClick={() => {
-                setIsMenuOpen(false);
-                trackEvent("header_nav_click", { nav_item: "about" });
-              }}
-            >
-              About
-            </Link>
-            <Link
-              href="/works"
-              onClick={() => {
-                setIsMenuOpen(false);
-                trackEvent("header_nav_click", { nav_item: "works" });
-              }}
-            >
-              Works
-            </Link>
-            <Link
-              href="/news"
-              onClick={() => {
-                setIsMenuOpen(false);
-                trackEvent("header_nav_click", { nav_item: "news" });
-              }}
-            >
-              News
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <section id="top" className="hero" aria-label="Hero">
         <div className="container hero-content">

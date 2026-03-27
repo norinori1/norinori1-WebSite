@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SiteHeader from "@/components/SiteHeader";
 
 export const metadata: Metadata = {
   title: "About – norinori1",
@@ -10,18 +11,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main className="site-root">
-      <header className="site-header">
-        <div className="container header-inner">
-          <Link href="/" className="brand" aria-label="norinori1 top">
-            <span style={{ fontWeight: 700, fontSize: "1.2rem" }}>norinori1</span>
-          </Link>
-          <nav className="site-nav">
-            <Link href="/about">About</Link>
-            <Link href="/works">Works</Link>
-            <Link href="/news">News</Link>
-          </nav>
-        </div>
-      </header>
+      <SiteHeader />
 
       <div style={{ paddingTop: "64px" }}>
         <section className="section">
