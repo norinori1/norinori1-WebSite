@@ -121,6 +121,8 @@ function trackEvent(eventName: string, params: Record<string, unknown>) {
   }
 }
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -164,7 +166,7 @@ export default function Home() {
         <div className="container header-inner">
           <a href="#top" className="brand" aria-label="norinori1 top">
             <Image
-              src="/norinori1-splash.svg"
+              src={`${basePath}/norinori1-splash.svg`}
               alt="norinori1 - Game Developer & Creator logo"
               className="brand-splash"
               width={520}
@@ -219,7 +221,7 @@ export default function Home() {
       <section id="top" className="hero" aria-label="Hero">
         <div className="container hero-content">
           <Image
-            src="/norinori1-splash.svg"
+            src={`${basePath}/norinori1-splash.svg`}
             alt="norinori1 logo with Game Developer & Creator branding"
             className="hero-splash"
             width={560}
