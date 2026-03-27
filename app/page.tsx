@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type WorkItem = {
@@ -121,7 +122,7 @@ function trackEvent(eventName: string, params: Record<string, unknown>) {
   }
 }
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const basePath = "";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -187,33 +188,33 @@ export default function Home() {
           </button>
 
           <nav id="site-nav" className={`site-nav ${isMenuOpen ? "open" : ""}`}>
-            <a
-              href="#about"
+            <Link
+              href="/about"
               onClick={() => {
                 setIsMenuOpen(false);
                 trackEvent("header_nav_click", { nav_item: "about" });
               }}
             >
               About
-            </a>
-            <a
-              href="#works"
+            </Link>
+            <Link
+              href="/works"
               onClick={() => {
                 setIsMenuOpen(false);
                 trackEvent("header_nav_click", { nav_item: "works" });
               }}
             >
               Works
-            </a>
-            <a
-              href="#news"
+            </Link>
+            <Link
+              href="/news"
               onClick={() => {
                 setIsMenuOpen(false);
                 trackEvent("header_nav_click", { nav_item: "news" });
               }}
             >
               News
-            </a>
+            </Link>
           </nav>
         </div>
       </header>
@@ -378,34 +379,34 @@ export default function Home() {
             <h3>Navigation</h3>
             <ul>
               <li>
-                <a
-                  href="#about"
+                <Link
+                  href="/about"
                   onClick={() =>
                     trackEvent("footer_link_click", { link_text: "about" })
                   }
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#works"
+                <Link
+                  href="/works"
                   onClick={() =>
                     trackEvent("footer_link_click", { link_text: "works" })
                   }
                 >
                   Works
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="#news"
+                <Link
+                  href="/news"
                   onClick={() =>
                     trackEvent("footer_link_click", { link_text: "news" })
                   }
                 >
                   News
-                </a>
+                </Link>
               </li>
             </ul>
           </section>
