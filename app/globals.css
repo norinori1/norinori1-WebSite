@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --color-primary-dark: #1f5ba6;
@@ -425,55 +426,24 @@ body {
 /* =====================
    Notion block renderer
    ===================== */
+
+/* Prose color customization to match site theme */
 .notion-content {
-  line-height: 1.85;
-  color: var(--color-neutral-900);
-}
-
-.notion-content > * + * {
-  margin-top: 1rem;
-}
-
-.notion-paragraph {
-  margin: 0;
-}
-
-.notion-h1 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  margin: 2rem 0 0.5rem;
-  font-weight: 700;
-}
-
-.notion-h2 {
-  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
-  margin: 1.75rem 0 0.5rem;
-  font-weight: 700;
-}
-
-.notion-h3 {
-  font-size: clamp(1.1rem, 2vw, 1.3rem);
-  margin: 1.5rem 0 0.4rem;
-  font-weight: 700;
-}
-
-.notion-ul,
-.notion-ol {
-  padding-left: 1.5rem;
-  margin: 0.5rem 0;
-}
-
-.notion-list-item {
-  margin: 0.3rem 0;
-}
-
-.notion-code {
-  background: var(--color-neutral-100);
-  border: 1px solid var(--color-neutral-200);
-  border-radius: 8px;
-  padding: 1rem;
-  overflow-x: auto;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.9rem;
+  --tw-prose-body: var(--color-neutral-900);
+  --tw-prose-headings: var(--color-neutral-900);
+  --tw-prose-links: var(--color-primary-dark);
+  --tw-prose-bold: var(--color-neutral-900);
+  --tw-prose-counters: var(--color-neutral-500);
+  --tw-prose-bullets: var(--color-neutral-500);
+  --tw-prose-hr: var(--color-neutral-200);
+  --tw-prose-quotes: var(--color-neutral-700);
+  --tw-prose-quote-borders: var(--color-primary);
+  --tw-prose-captions: var(--color-neutral-500);
+  --tw-prose-code: var(--color-neutral-900);
+  --tw-prose-pre-code: var(--color-neutral-900);
+  --tw-prose-pre-bg: var(--color-neutral-100);
+  --tw-prose-th-borders: var(--color-neutral-200);
+  --tw-prose-td-borders: var(--color-neutral-200);
 }
 
 .notion-inline-code {
@@ -481,16 +451,12 @@ body {
   border: 1px solid var(--color-neutral-200);
   border-radius: 4px;
   padding: 0.1em 0.35em;
-  font-family: "Courier New", Courier, monospace;
   font-size: 0.9em;
 }
 
-.notion-quote {
-  border-left: 4px solid var(--color-primary);
-  padding: 0.5rem 1rem;
-  margin: 0;
-  color: var(--color-neutral-700);
-  font-style: italic;
+.notion-code {
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 8px;
 }
 
 .notion-callout {
@@ -501,22 +467,13 @@ body {
   border-radius: 8px;
   padding: 1rem;
   align-items: flex-start;
+  margin: 1rem 0;
 }
 
 .notion-callout-icon {
   font-size: 1.25rem;
   line-height: 1;
   flex-shrink: 0;
-}
-
-.notion-divider {
-  border: none;
-  border-top: 1px solid var(--color-neutral-200);
-  margin: 1.5rem 0;
-}
-
-.notion-image {
-  margin: 1rem 0;
 }
 
 .notion-image-caption {
@@ -533,20 +490,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.notion-content a {
-  color: #1a0dab;
-  text-decoration: underline;
-}
-
-.notion-content a:visited {
-  color: #681da8;
-}
-
-.notion-content a:hover {
-  text-decoration: underline;
-  color: #1558d6;
+  margin: 1rem 0;
 }
 
 .notion-bookmark a {
@@ -562,6 +506,7 @@ body {
   border: 1px solid var(--color-neutral-200);
   border-radius: 8px;
   padding: 0.75rem 1rem;
+  margin: 1rem 0;
 }
 
 .notion-toggle summary {
