@@ -89,8 +89,8 @@ export async function listNews(): Promise<NewsItem[]> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
 
-  const response = await notion.dataSources.query({
-    data_source_id: dbId,
+  const response = await notion.databases.query({
+    database_id: dbId,
     filter: {
       property: "Status",
       select: { equals: "Published" },
@@ -110,8 +110,8 @@ export async function getNewsBySlug(
   const notion = getNotionClient();
   const dbId = getDatabaseId();
 
-  const response = await notion.dataSources.query({
-    data_source_id: dbId,
+  const response = await notion.databases.query({
+    database_id: dbId,
     filter: {
       property: "Slug",
       rich_text: { equals: slug },

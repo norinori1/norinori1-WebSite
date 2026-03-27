@@ -90,8 +90,8 @@ export async function listWorks(): Promise<Work[]> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
 
-  const response = await notion.dataSources.query({
-    data_source_id: dbId,
+  const response = await notion.databases.query({
+    database_id: dbId,
     filter: {
       property: "Status",
       select: { is_not_empty: true },
@@ -114,8 +114,8 @@ export async function getWorkBySlug(
   const notion = getNotionClient();
   const dbId = getDatabaseId();
 
-  const response = await notion.dataSources.query({
-    data_source_id: dbId,
+  const response = await notion.databases.query({
+    database_id: dbId,
     filter: {
       property: "Slug",
       rich_text: { equals: slug },
