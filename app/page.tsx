@@ -161,28 +161,57 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const buttons = document.querySelectorAll<HTMLElement>(".hero-cta .btn");
+
+    function handleRipple(event: MouseEvent) {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const button = event.currentTarget as HTMLElement;
+      const rect = button.getBoundingClientRect();
+      const ripple = document.createElement("span");
+      ripple.className = "btn-ripple-wave";
+      ripple.style.left = `${event.clientX - rect.left}px`;
+      ripple.style.top = `${event.clientY - rect.top}px`;
+      button.appendChild(ripple);
+      ripple.addEventListener("animationend", () => ripple.remove(), { once: true });
+    }
+
+    buttons.forEach((btn) => btn.addEventListener("click", handleRipple));
+    return () => buttons.forEach((btn) => btn.removeEventListener("click", handleRipple));
+  }, []);
+
   return (
     <main className="site-root">
       <SiteHeader />
 
       <section id="top" className="hero" aria-label="Hero">
+        <div className="hero-particles" aria-hidden="true">
+          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "10%", left: "8%"  }} />
+          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "20%", left: "88%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "60%", left: "15%" }} />
+          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "75%", left: "75%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "35%", left: "50%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "85%", left: "30%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--medium" style={{ top: "15%", left: "65%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--slow"   style={{ top: "50%", left: "92%" }} />
+        </div>
         <div className="container hero-content">
           <Image
             src={`${basePath}/norinori1-splash-white.svg`}
             alt="norinori1 logo with Game Developer & Creator branding"
-            className="hero-splash"
+            className="hero-splash hero-animate hero-animate-logo"
             width={560}
             height={120}
             priority
           />
           <div className="hero-copy">
-            <p className="hero-subtitle">Game Developer & Creator</p>
-            <p>
+            <p className="hero-subtitle hero-animate hero-animate-sub">Game Developer & Creator</p>
+            <p className="hero-animate hero-animate-desc">
               Unity、Roblox、Scratchなど複数プラットフォームで、
               ユニークなゲーム体験と開発ツールを継続的に制作しています。
             </p>
           </div>
-          <div className="hero-cta">
+          <div className="hero-cta hero-animate hero-animate-cta">
             <a className="btn btn-primary" href="#works">
               作品を見る
             </a>
