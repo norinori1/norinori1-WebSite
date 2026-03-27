@@ -262,6 +262,171 @@ body {
   background: #f8fafc;
 }
 
+/* ── Works page controls (search / sort / tag filters) ── */
+.works-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.works-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.works-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  pointer-events: none;
+  user-select: none;
+}
+
+.works-search {
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  background: #fff;
+  color: var(--color-neutral-900);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.works-search:focus {
+  border-color: var(--color-primary-dark);
+}
+
+.works-sort {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  background: #fff;
+  color: var(--color-neutral-700);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.works-sort:focus {
+  border-color: var(--color-primary-dark);
+}
+
+/* Tag filter button row */
+.works-tag-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.works-tag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-neutral-700);
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.works-tag-btn:hover {
+  border-color: var(--color-primary-dark);
+  background: #eff6ff;
+}
+
+.works-tag-btn.active {
+  border-color: var(--color-primary-dark);
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.works-tag-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* SVG icons inside active tag buttons should be white */
+.works-tag-btn.active svg {
+  fill: #fff;
+}
+
+.works-tag-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid #fca5a5;
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  color: #dc2626;
+  background: #fff5f5;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.works-tag-clear:hover {
+  background: #fee2e2;
+}
+
+/* Results count */
+.works-result-count {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--color-neutral-500);
+}
+
+/* Clickable tag chips inside work cards */
+.chip-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  color: var(--color-neutral-700);
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.chip-tag:hover {
+  background: #eff6ff;
+  border-color: var(--color-primary-dark);
+}
+
+.chip-tag-active {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
+/* SVG icons inside active card chips should be white */
+.chip-tag-active svg {
+  fill: #fff;
+}
+
+.chip-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
 .work-link {
   display: inline-block;
   margin-top: 1rem;
