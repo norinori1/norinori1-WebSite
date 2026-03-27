@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
+import ScrollReveal from "@/components/ScrollReveal";
 import { trackEvent } from "@/lib/analytics";
 import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
 
@@ -83,37 +84,37 @@ const platforms: { name: string; url: string; icon: IconName }[] = [
   { name: "unityroom", url: "https://unityroom.com", icon: "unity" },
 ];
 
-const skills: { category: string; items: { label: string; icon: IconName | null }[] }[] = [
+const skills: { category: string; items: { label: string; icon: IconName | null; level: number }[] }[] = [
   {
     category: "Game Engines",
     items: [
-      { label: "Unity", icon: "unity" },
-      { label: "Roblox", icon: "roblox" },
-      { label: "Scratch", icon: "scratch" },
+      { label: "Unity", icon: "unity", level: 4 },
+      { label: "Roblox", icon: "roblox", level: 1 },
+      { label: "Scratch", icon: "scratch", level: 5 },
     ],
   },
   {
     category: "Languages",
     items: [
-      { label: "C#", icon: null },
-      { label: "Luau", icon: "luau" },
-      { label: "JavaScript", icon: "javascript" },
+      { label: "C#", icon: null, level: 4 },
+      { label: "Luau", icon: "luau", level: 1 },
+      { label: "JavaScript", icon: "javascript", level: 1 },
     ],
   },
   {
     category: "Research",
     items: [
-      { label: "TensorFlow", icon: "tensorflow" },
-      { label: "Game AI", icon: null },
-      { label: "Gameplay Analytics", icon: null },
+      { label: "TensorFlow", icon: "tensorflow", level: 1 },
+      { label: "Game AI", icon: null, level: 3 },
+      { label: "Gameplay Analytics", icon: null, level: 2 },
     ],
   },
   {
     category: "Tools & Workflow",
     items: [
-      { label: "GitHub", icon: "github" },
-      { label: "VS Code", icon: null },
-      { label: "Node.js", icon: "nodejs" },
+      { label: "GitHub", icon: "github", level: 5 },
+      { label: "VS Code", icon: null, level: 5 },
+      { label: "Node.js", icon: "nodejs", level: 1 },
     ],
   },
 ];
@@ -224,22 +225,26 @@ export default function Home() {
 
       <section id="about" className="section">
         <div className="container">
-          <h2>About</h2>
-          <p className="section-lead">
-            ゲーム開発者として、戦略・パズル・ローグライクを中心に開発しています。
-            最新技術の実験やコミュニティ向けツール開発にも注力しています。
-          </p>
+          <ScrollReveal>
+            <h2>About</h2>
+            <p className="section-lead">
+              ゲーム開発者として、戦略・パズル・ローグライクを中心に開発しています。
+              最新技術の実験やコミュニティ向けツール開発にも注力しています。
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
       <section id="works" className="section section-alt">
         <div className="container">
-          <h2>Works</h2>
-          <p className="section-lead">6つのゲーム作品をピックアップしています。</p>
+          <ScrollReveal>
+            <h2>Works</h2>
+            <p className="section-lead">6つのゲーム作品をピックアップしています。</p>
+          </ScrollReveal>
           <div className="works-grid">
-            {works.map((work) => (
+            {works.map((work, i) => (
+              <ScrollReveal key={work.id} delay={i * 80}>
               <article
-                key={work.id}
                 className="work-card"
                 onClick={() =>
                   trackEvent("game_card_click", {
@@ -286,6 +291,7 @@ export default function Home() {
                   Visit →
                 </a>
               </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -293,20 +299,29 @@ export default function Home() {
 
       <section id="skills" className="section">
         <div className="container">
-          <h2>Skills</h2>
+          <ScrollReveal>
+            <h2>Skills</h2>
+          </ScrollReveal>
           <div className="skills-grid">
             {skills.map((skill) => (
-              <article key={skill.category} className="skill-card">
-                <h3>{skill.category}</h3>
-                <div className="skill-badges">
-                  {skill.items.map(({ label, icon }) => (
-                    <span key={label} className="skill-badge">
-                      {icon && <PlatformIcon name={icon} size={15} />}
-                      {label}
-                    </span>
-                  ))}
-                </div>
-              </article>
+              <ScrollReveal key={skill.category}>
+                <article className="skill-card">
+                  <h3>{skill.category}</h3>
+                  <div className="skill-badges">
+                    {skill.items.map(({ label, icon, level }) => (
+                      <span key={label} className="skill-badge">
+                        {icon && <PlatformIcon name={icon} size={15} />}
+                        {label}
+                        <span className="skill-dots" aria-label={`レベル ${level}/5`}>
+                          {[1, 2, 3, 4, 5].map((n) => (
+                            <span key={n} className={`skill-dot${n <= level ? " filled" : ""}`} />
+                          ))}
+                        </span>
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -314,26 +329,29 @@ export default function Home() {
 
       <section id="platforms" className="section section-alt">
         <div className="container">
-          <h2>Platforms</h2>
+          <ScrollReveal>
+            <h2>Platforms</h2>
+          </ScrollReveal>
           <div className="platform-grid">
-            {platforms.map((platform) => (
-              <a
-                key={platform.name}
-                className="platform-card"
-                href={platform.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() =>
-                  trackEvent("platform_link_click", {
-                    platform_name: platform.name,
-                    event_category: "outbound",
-                  })
-                }
-              >
-                <PlatformIcon name={platform.icon} size={32} className="platform-card-icon" />
-                <h3>{platform.name}</h3>
-                <span>Visit →</span>
-              </a>
+            {platforms.map((platform, i) => (
+              <ScrollReveal key={platform.name} delay={i * 60}>
+                <a
+                  className="platform-card"
+                  href={platform.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    trackEvent("platform_link_click", {
+                      platform_name: platform.name,
+                      event_category: "outbound",
+                    })
+                  }
+                >
+                  <PlatformIcon name={platform.icon} size={32} className="platform-card-icon" />
+                  <h3>{platform.name}</h3>
+                  <span>Visit →</span>
+                </a>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -341,10 +359,12 @@ export default function Home() {
 
       <section id="news" className="section">
         <div className="container">
-          <h2>News</h2>
-          <p className="section-lead">
-            新作の進捗、公開情報、アップデート情報をこのセクションで発信していきます。
-          </p>
+          <ScrollReveal>
+            <h2>News</h2>
+            <p className="section-lead">
+              新作の進捗、公開情報、アップデート情報をこのセクションで発信していきます。
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
