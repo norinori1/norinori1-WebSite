@@ -196,6 +196,25 @@ export default function HomeContent({ featuredWorks }: HomeContentProps) {
                       })
                     }
                   >
+                    {work.thumbnailUrl && (
+                      <div
+                        style={{
+                          marginBottom: "0.75rem",
+                          borderRadius: "8px",
+                          overflow: "hidden",
+                          aspectRatio: "16/9",
+                          position: "relative",
+                        }}
+                      >
+                        <Image
+                          src={work.thumbnailUrl}
+                          alt={`${work.title} thumbnail`}
+                          fill
+                          style={{ objectFit: "cover" }}
+                          unoptimized
+                        />
+                      </div>
+                    )}
                     <div className="work-head">
                       <h3>{work.title}</h3>
                       <span className={`badge badge-${work.status.toLowerCase()}`}>
