@@ -283,9 +283,21 @@ body {
   margin-top: 0;
 }
 
-.skill-card ul {
-  margin: 0;
-  padding-left: 1.1rem;
+.skill-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.875rem;
   color: var(--color-neutral-700);
 }
 
