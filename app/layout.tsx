@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 
-const siteUrl = "https://norinori1.github.io/norinori1-WebSite";
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
 const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export const metadata: Metadata = {
