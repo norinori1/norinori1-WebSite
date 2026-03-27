@@ -4,9 +4,25 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Work } from "@/types/notion";
+import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
 
-// Emoji icon mapping for known tag names (Japanese and English)
-const TAG_ICONS: Record<string, string> = {
+// Tags that map to SVG icons from PlatformIcon (tech/platform tags)
+const TAG_SVG_ICONS: Record<string, IconName> = {
+  Unity: "unity",
+  Roblox: "roblox",
+  Scratch: "scratch",
+  Luau: "luau",
+  JavaScript: "javascript",
+  TypeScript: "typescript",
+  TensorFlow: "tensorflow",
+  "Node.js": "nodejs",
+  NodeJS: "nodejs",
+  GitHub: "github",
+  "itch.io": "itchio",
+};
+
+// Emoji icon mapping for non-tech tag names (Japanese and English)
+const TAG_EMOJI_ICONS: Record<string, string> = {
   Game: "🎮",
   ゲーム: "🎮",
   "2D": "📐",
@@ -44,14 +60,29 @@ const TAG_ICONS: Record<string, string> = {
   Jam: "🏆",
   GameJam: "🏆",
   ゲームジャム: "🏆",
-  Unity: "🔵",
-  Roblox: "🟥",
-  Scratch: "🐱",
   WIP: "🔧",
 };
 
-function getTagIcon(tag: string): string {
-  return TAG_ICONS[tag] ?? "🏷️";
+type TagIconResult =
+  | { type: "svg"; name: IconName }
+  | { type: "emoji"; icon: string };
+
+function getTagIcon(tag: string): TagIconResult {
+  const svgName = TAG_SVG_ICONS[tag];
+  if (svgName) return { type: "svg", name: svgName };
+  return { type: "emoji", icon: TAG_EMOJI_ICONS[tag] ?? "🏷️" };
+}
+
+function TagIcon({ tag, size = 12 }: { tag: string; size?: number }) {
+  const icon = getTagIcon(tag);
+  if (icon.type === "svg") {
+    return <PlatformIcon name={icon.name} size={size} />;
+  }
+  return (
+    <span className="chip-icon" aria-hidden="true">
+      {icon.icon}
+    </span>
+  );
 }
 
 type SortOption = "default" | "title-asc" | "title-desc" | "status";
@@ -171,7 +202,7 @@ export default function WorksClient({ works }: WorksClientProps) {
               aria-pressed={activeTags.has(tag)}
             >
               <span className="works-tag-icon" aria-hidden="true">
-                {getTagIcon(tag)}
+                <TagIcon tag={tag} size={13} />
               </span>
               {tag}
             </button>
@@ -245,9 +276,7 @@ export default function WorksClient({ works }: WorksClientProps) {
                       title={`"${tag}" で絞り込む`}
                       aria-pressed={activeTags.has(tag)}
                     >
-                      <span className="chip-icon" aria-hidden="true">
-                        {getTagIcon(tag)}
-                      </span>
+                      <TagIcon tag={tag} size={12} />
                       {tag}
                     </button>
                   ))}

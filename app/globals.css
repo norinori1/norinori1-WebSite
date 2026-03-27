@@ -355,6 +355,13 @@ body {
 .works-tag-icon {
   font-size: 0.9rem;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* SVG icons inside active tag buttons should be white */
+.works-tag-btn.active svg {
+  fill: #fff;
 }
 
 .works-tag-clear {
@@ -408,9 +415,16 @@ body {
   color: #fff;
 }
 
+/* SVG icons inside active card chips should be white */
+.chip-tag-active svg {
+  fill: #fff;
+}
+
 .chip-icon {
   font-size: 0.9rem;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .work-link {
