@@ -63,7 +63,7 @@ export default async function NewsPage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
                   gap: "1.5rem",
                   marginTop: "2rem",
                 }}
