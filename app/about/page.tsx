@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import PlatformIcon from "@/components/PlatformIcon";
 
 export const metadata: Metadata = {
   title: "About – norinori1",
@@ -49,7 +50,9 @@ export default function AboutPage() {
                     href="https://github.com/norinori1"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                   >
+                    <PlatformIcon name="github" size={18} />
                     GitHub
                   </a>
                 </li>
@@ -58,7 +61,9 @@ export default function AboutPage() {
                     href="https://x.com/norinori1_"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                   >
+                    <PlatformIcon name="x" size={18} />
                     X (Twitter)
                   </a>
                 </li>
@@ -67,7 +72,9 @@ export default function AboutPage() {
                     href="https://norinori1.itch.io"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                   >
+                    <PlatformIcon name="itchio" size={18} />
                     itch.io
                   </a>
                 </li>
@@ -76,7 +83,9 @@ export default function AboutPage() {
                     href="https://scratch.mit.edu/users/norinori1/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                   >
+                    <PlatformIcon name="scratch" size={18} />
                     Scratch
                   </a>
                 </li>
