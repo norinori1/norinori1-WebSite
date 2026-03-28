@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import { getWorkBySlug, listWorkSlugs } from "@/lib/notion/works";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
 import ShareButtons from "@/components/ShareButtons";
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
 
 export const revalidate = 3600;
 
@@ -27,9 +31,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   try {
     const result = await getWorkBySlug(slug);
     if (!result) return {};
+    const { work } = result;
+    const canonicalUrl = `/works/${slug}`;
+    const ogImages = work.thumbnailUrl
+      ? [{ url: work.thumbnailUrl, alt: work.title }]
+      : undefined;
     return {
-      title: `${result.work.title} – norinori1`,
-      description: result.work.description,
+      title: `${work.title} – norinori1`,
+      description: work.description,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title: work.title,
+        description: work.description ?? undefined,
+        url: canonicalUrl,
+        type: "article",
+        images: ogImages,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: work.title,
+        description: work.description ?? undefined,
+        images: work.thumbnailUrl ? [work.thumbnailUrl] : undefined,
+      },
     };
   } catch {
     return {};
@@ -52,8 +75,29 @@ export default async function WorkDetailPage({ params }: Props) {
 
   const { work, blocks } = result;
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: work.title,
+    url: `${siteUrl}/works/${slug}`,
+    ...(work.thumbnailUrl && { image: work.thumbnailUrl }),
+    ...(work.description && { description: work.description }),
+    author: {
+      "@type": "Person",
+      name: "norinori1",
+      url: siteUrl,
+    },
+    ...(work.link && { sameAs: work.link }),
+    applicationCategory: "Game",
+  };
+
   return (
     <main className="site-root">
+      <Script
+        id="schema-work"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <SiteHeader />
 
       <div style={{ paddingTop: "64px" }}>
