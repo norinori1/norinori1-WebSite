@@ -40,7 +40,8 @@ export default async function NewsPage() {
       <div style={{ paddingTop: "64px" }}>
         <section className="section">
           <div className="container">
-            <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "0.5rem" }}>
+            <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <Image src="/news-icon.svg" alt="" width={40} height={40} aria-hidden="true" />
               News
             </h1>
             <p className="section-lead">

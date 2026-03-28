@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { listWorks } from "@/lib/notion/works";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -29,7 +30,8 @@ export default async function WorksPage() {
       <div style={{ paddingTop: "64px" }}>
         <section className="section">
           <div className="container">
-            <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "0.5rem" }}>
+            <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <Image src="/works-icon.svg" alt="" width={40} height={40} aria-hidden="true" />
               Works
             </h1>
             <p className="section-lead">制作したゲーム作品の一覧です。</p>
