@@ -27,6 +27,9 @@
   --color-tag-clear-hover-bg: #fee2e2;
   --color-tag-clear-border: #fca5a5;
   --color-tag-clear-text: #dc2626;
+
+  --color-hero-from: #1f5ba6;
+  --color-hero-to: #a7d8e8;
 }
 
 .dark {
@@ -55,6 +58,9 @@
   --color-tag-clear-hover-bg: #3d1a1a;
   --color-tag-clear-border: #dc2626;
   --color-tag-clear-text: #fca5a5;
+
+  --color-hero-from: #0d1b2e;
+  --color-hero-to: #1e3a5f;
 }
 
 * {
@@ -194,7 +200,7 @@ body {
   place-items: center;
   padding-top: 64px;
   padding-bottom: 2rem;
-  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-lighter));
+  background: linear-gradient(135deg, var(--color-hero-from), var(--color-hero-to));
   position: relative;
   overflow: hidden;
 }
