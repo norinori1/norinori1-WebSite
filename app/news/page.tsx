@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { listNews } from "@/lib/notion/news";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 export const revalidate = 3600;
 
@@ -63,7 +64,7 @@ export default async function NewsPage() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
                   gap: "1.5rem",
                   marginTop: "2rem",
                 }}
@@ -84,8 +85,8 @@ export default async function NewsPage() {
                           src={item.coverImageUrl}
                           alt={`${item.title} cover`}
                           fill
+                          sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
                           style={{ objectFit: "cover" }}
-                          unoptimized
                         />
                       </div>
                     )}
@@ -130,29 +131,7 @@ export default async function NewsPage() {
         </section>
       </div>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <section>
-            <h3>norinori1</h3>
-            <p>ゲーム開発者・クリエイター</p>
-          </section>
-          <section>
-            <h3>Navigation</h3>
-            <ul>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/works">Works</Link>
-              </li>
-              <li>
-                <Link href="/news">News</Link>
-              </li>
-            </ul>
-          </section>
-        </div>
-        <p className="copyright">© 2026 norinori1</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

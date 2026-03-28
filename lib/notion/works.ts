@@ -1,7 +1,7 @@
 import type {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
-import { getNotionClient } from "./client";
+import { getNotionClient, resolveDataSourceId } from "./client";
 import { getPageBlocks, type NotionBlock } from "./blocks";
 import type { Work } from "@/types/notion";
 
@@ -85,13 +85,34 @@ function pageToWork(page: PageObjectResponse): Work {
   };
 }
 
+/** Return only works with Status "Featured" from the Games DB, ordered by title. */
+export async function listFeaturedWorks(): Promise<Work[]> {
+  const notion = getNotionClient();
+  const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
+
+  const response = await notion.dataSources.query({
+    data_source_id: dataSourceId,
+    filter: {
+      property: "Status",
+      select: { equals: "Featured" },
+    },
+    sorts: [{ property: "Title", direction: "ascending" }],
+  });
+
+  return (response.results as PageObjectResponse[])
+    .map(pageToWork)
+    .filter((w) => w.slug);
+}
+
 /** Return all published works from the Games DB, ordered by Featured then title. */
 export async function listWorks(): Promise<Work[]> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
 
   const response = await notion.dataSources.query({
-    data_source_id: dbId,
+    data_source_id: dataSourceId,
     filter: {
       property: "Status",
       select: { is_not_empty: true },
@@ -113,9 +134,10 @@ export async function getWorkBySlug(
 ): Promise<{ work: Work; blocks: NotionBlock[] } | null> {
   const notion = getNotionClient();
   const dbId = getDatabaseId();
+  const dataSourceId = await resolveDataSourceId(dbId);
 
   const response = await notion.dataSources.query({
-    data_source_id: dbId,
+    data_source_id: dataSourceId,
     filter: {
       property: "Slug",
       rich_text: { equals: slug },

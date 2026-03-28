@@ -48,42 +48,42 @@ function NotionBlock({ block }: { block: NotionBlock }) {
   switch (block.type) {
     case "paragraph":
       return (
-        <p className="notion-paragraph">
+        <p>
           <RichText items={block.paragraph.rich_text} />
         </p>
       );
 
     case "heading_1":
       return (
-        <h2 className="notion-h1">
+        <h2>
           <RichText items={block.heading_1.rich_text} />
         </h2>
       );
 
     case "heading_2":
       return (
-        <h3 className="notion-h2">
+        <h3>
           <RichText items={block.heading_2.rich_text} />
         </h3>
       );
 
     case "heading_3":
       return (
-        <h4 className="notion-h3">
+        <h4>
           <RichText items={block.heading_3.rich_text} />
         </h4>
       );
 
     case "bulleted_list_item":
       return (
-        <li className="notion-list-item">
+        <li>
           <RichText items={block.bulleted_list_item.rich_text} />
         </li>
       );
 
     case "numbered_list_item":
       return (
-        <li className="notion-list-item">
+        <li>
           <RichText items={block.numbered_list_item.rich_text} />
         </li>
       );
@@ -99,7 +99,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
 
     case "quote":
       return (
-        <blockquote className="notion-quote">
+        <blockquote>
           <RichText items={block.quote.rich_text} />
         </blockquote>
       );
@@ -119,7 +119,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
     }
 
     case "divider":
-      return <hr className="notion-divider" />;
+      return <hr />;
 
     case "image": {
       const src =
@@ -131,7 +131,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
           ? block.image.caption.map((t) => t.plain_text).join("")
           : undefined;
       return (
-        <figure className="notion-image">
+        <figure>
           <Image
             src={src}
             alt={caption ?? ""}
@@ -197,7 +197,7 @@ export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
         }
       }
       elements.push(
-        <ul key={`ul-${i}`} className="notion-ul">
+        <ul key={`ul-${i}`}>
           {items.map((b) => (
             <NotionBlock key={(b as FullBlock).id} block={b} />
           ))}
@@ -218,7 +218,7 @@ export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
         }
       }
       elements.push(
-        <ol key={`ol-${i}`} className="notion-ol">
+        <ol key={`ol-${i}`}>
           {items.map((b) => (
             <NotionBlock key={(b as FullBlock).id} block={b} />
           ))}
@@ -231,5 +231,5 @@ export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
     i++;
   }
 
-  return <div className="notion-content">{elements}</div>;
+  return <div className="prose prose-slate max-w-none notion-content">{elements}</div>;
 }
