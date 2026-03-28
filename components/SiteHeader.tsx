@@ -44,6 +44,7 @@ export default function SiteHeader() {
               trackEvent("header_nav_click", { nav_item: "about" });
             }}
           >
+            <Image src="/about-icon.svg" alt="" width={20} height={20} aria-hidden="true" />
             About
           </Link>
           <Link
@@ -53,6 +54,7 @@ export default function SiteHeader() {
               trackEvent("header_nav_click", { nav_item: "works" });
             }}
           >
+            <Image src="/works-icon.svg" alt="" width={20} height={20} aria-hidden="true" />
             Works
           </Link>
           <Link
@@ -62,6 +64,7 @@ export default function SiteHeader() {
               trackEvent("header_nav_click", { nav_item: "news" });
             }}
           >
+            <Image src="/news-icon.svg" alt="" width={20} height={20} aria-hidden="true" />
             News
           </Link>
         </nav>
