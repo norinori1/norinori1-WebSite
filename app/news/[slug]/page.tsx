@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
-import { getNewsBySlug, listNewsSlugs } from "@/lib/notion/news";
+import { getNewsBySlug, listNewsSlugs, listNews } from "@/lib/notion/news";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -86,6 +86,14 @@ export default async function NewsDetailPage({ params }: Props) {
   }
 
   const { news, blocks } = result;
+
+  let otherNews: Awaited<ReturnType<typeof listNews>> = [];
+  try {
+    const allNews = await listNews();
+    otherNews = allNews.filter((n) => n.slug !== slug).slice(0, 3);
+  } catch {
+    // otherNews stays empty
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -202,6 +210,80 @@ export default async function NewsDetailPage({ params }: Props) {
             )}
           </div>
         </section>
+
+        {otherNews.length > 0 && (
+          <section className="section section-alt">
+            <div className="container">
+              <h2 style={{ fontSize: "1.5rem", marginBottom: "1.5rem" }}>Other News</h2>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+                  gap: "1.25rem",
+                }}
+              >
+                {otherNews.map((n) => (
+                  <Link
+                    key={n.id}
+                    href={`/news/${n.slug}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <article className="work-card" style={{ height: "100%" }}>
+                      {n.coverImageUrl && (
+                        <div
+                          style={{
+                            marginBottom: "0.75rem",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            aspectRatio: "16/9",
+                            position: "relative",
+                          }}
+                        >
+                          <Image
+                            src={n.coverImageUrl}
+                            alt={`${n.title} cover`}
+                            fill
+                            sizes="(max-width: 640px) calc(50vw - 1.5rem), 280px"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      )}
+                      <h3 style={{ fontSize: "0.95rem", margin: 0 }}>{n.title}</h3>
+                      {n.date && (
+                        <p style={{ margin: "0.35rem 0 0", fontSize: "0.8rem", color: "var(--color-neutral-500)" }}>
+                          {formatDate(n.date)}
+                        </p>
+                      )}
+                      {n.excerpt && (
+                        <p
+                          style={{
+                            margin: "0.4rem 0 0",
+                            fontSize: "0.85rem",
+                            color: "var(--color-neutral-600)",
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                          }}
+                        >
+                          {n.excerpt}
+                        </p>
+                      )}
+                    </article>
+                  </Link>
+                ))}
+              </div>
+              <div style={{ marginTop: "1.5rem" }}>
+                <Link
+                  href="/news"
+                  style={{ color: "var(--color-primary)", textDecoration: "none", fontSize: "0.95rem" }}
+                >
+                  ← News 一覧をすべて見る
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
 
       <SiteFooter />

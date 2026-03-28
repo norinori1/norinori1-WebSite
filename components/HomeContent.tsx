@@ -1,16 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { trackEvent } from "@/lib/analytics";
 import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
-import type { Work } from "@/types/notion";
+import type { Work, NewsItem } from "@/types/notion";
 
 interface HomeContentProps {
   featuredWorks: Work[];
+  recentNews: NewsItem[];
   fetchError?: boolean;
 }
 
@@ -59,7 +61,17 @@ const skills: { category: string; items: { label: string; icon: IconName | null;
 
 const basePath = "";
 
-export default function HomeContent({ featuredWorks, fetchError }: HomeContentProps) {
+function formatDate(dateStr: string): string {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+export default function HomeContent({ featuredWorks, recentNews, fetchError }: HomeContentProps) {
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
     const seen = new Set<string>();
@@ -237,23 +249,38 @@ export default function HomeContent({ featuredWorks, fetchError }: HomeContentPr
                         </span>
                       ))}
                     </div>
-                    {work.link && (
-                      <a
+                    <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                      <Link
+                        href={`/works/${work.slug}`}
                         className="work-link"
-                        href={work.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         onClick={() =>
-                          trackEvent("game_link_click", {
+                          trackEvent("game_card_detail_click", {
                             game_id: work.id,
-                            destination_url: work.link,
-                            event_category: "outbound",
+                            game_title: work.title,
+                            event_category: "engagement",
                           })
                         }
                       >
-                        Visit →
-                      </a>
-                    )}
+                        詳細を見る →
+                      </Link>
+                      {work.link && (
+                        <a
+                          className="work-link"
+                          href={work.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() =>
+                            trackEvent("game_link_click", {
+                              game_id: work.id,
+                              destination_url: work.link,
+                              event_category: "outbound",
+                            })
+                          }
+                        >
+                          Visit ↗
+                        </a>
+                      )}
+                    </div>
                   </article>
                 </ScrollReveal>
               ))}
@@ -330,6 +357,76 @@ export default function HomeContent({ featuredWorks, fetchError }: HomeContentPr
               新作の進捗、公開情報、アップデート情報をこのセクションで発信していきます。
             </p>
           </ScrollReveal>
+          {recentNews.length > 0 && (
+            <>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                  gap: "1.25rem",
+                  marginTop: "2rem",
+                }}
+              >
+                {recentNews.map((item, i) => (
+                  <ScrollReveal key={item.id} delay={i * 80}>
+                    <article className="work-card">
+                      {item.coverImageUrl && (
+                        <div
+                          style={{
+                            marginBottom: "0.75rem",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            aspectRatio: "16/9",
+                            position: "relative",
+                          }}
+                        >
+                          <Image
+                            src={item.coverImageUrl}
+                            alt={`${item.title} cover`}
+                            fill
+                            sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      )}
+                      <h3 style={{ margin: 0, fontSize: "1rem" }}>{item.title}</h3>
+                      {item.date && (
+                        <p style={{ margin: "0.35rem 0 0", fontSize: "0.8rem", color: "var(--color-neutral-500)" }}>
+                          {formatDate(item.date)}
+                        </p>
+                      )}
+                      {item.excerpt && (
+                        <p style={{ margin: "0.5rem 0", fontSize: "0.9rem", color: "var(--color-neutral-700)", lineHeight: "1.6" }}>
+                          {item.excerpt}
+                        </p>
+                      )}
+                      <Link
+                        href={`/news/${item.slug}`}
+                        className="work-link"
+                        style={{ display: "inline-block", marginTop: "0.75rem" }}
+                        onClick={() =>
+                          trackEvent("news_card_click", {
+                            news_id: item.id,
+                            news_title: item.title,
+                            event_category: "engagement",
+                          })
+                        }
+                      >
+                        続きを読む →
+                      </Link>
+                    </article>
+                  </ScrollReveal>
+                ))}
+              </div>
+              <ScrollReveal>
+                <div style={{ marginTop: "2rem", textAlign: "center" }}>
+                  <Link href="/news" className="btn btn-secondary">
+                    News 一覧を見る →
+                  </Link>
+                </div>
+              </ScrollReveal>
+            </>
+          )}
         </div>
       </section>
 

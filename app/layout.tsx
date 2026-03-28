@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import Analytics from "@/components/Analytics";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
@@ -68,11 +69,11 @@ export default function RootLayout({
                   window.gtag = gtag;
                   gtag('js', new Date());
                   gtag('config', '${gaMeasurementId}', {
-                    page_path: window.location.pathname,
-                    anonymize_ip: true
+                    send_page_view: false
                   });
                 `}
               </Script>
+              <Analytics />
             </>
           ) : null}
 

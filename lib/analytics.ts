@@ -1,10 +1,10 @@
 declare global {
   interface Window {
-    gtag?: (
-      command: "event",
-      eventName: string,
-      params?: Record<string, unknown>,
-    ) => void;
+    gtag?: {
+      (command: "event", eventName: string, params?: Record<string, unknown>): void;
+      (command: "config", targetId: string, params?: Record<string, unknown>): void;
+      (command: "js", date: Date): void;
+    };
   }
 }
 
