@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import PlatformIcon from "@/components/PlatformIcon";
@@ -19,7 +20,8 @@ export default function AboutPage() {
         <section className="section">
           <div className="container">
             <ScrollReveal>
-              <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "1.5rem" }}>
+              <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "1.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <Image src="/about-icon.svg" alt="" width={40} height={40} aria-hidden="true" />
                 About
               </h1>
             </ScrollReveal>

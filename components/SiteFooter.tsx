@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
 
@@ -14,6 +15,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <section>
+          <Image src="/norinori1-icon.svg" alt="norinori1 icon" width={64} height={64} />
           <h3>norinori1</h3>
           <p>ゲーム開発者・クリエイター</p>
         </section>

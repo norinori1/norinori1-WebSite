@@ -39,30 +39,36 @@ export default function SiteHeader() {
         <nav id="site-nav" className={`site-nav ${isMenuOpen ? "open" : ""}`}>
           <Link
             href="/about"
+            className="nav-link-icon"
             onClick={() => {
               setIsMenuOpen(false);
               trackEvent("header_nav_click", { nav_item: "about" });
             }}
           >
-            About
+            <Image src="/about-icon.svg" alt="" width={36} height={36} aria-hidden="true" />
+            <span className="nav-link-label">About</span>
           </Link>
           <Link
             href="/works"
+            className="nav-link-icon"
             onClick={() => {
               setIsMenuOpen(false);
               trackEvent("header_nav_click", { nav_item: "works" });
             }}
           >
-            Works
+            <Image src="/works-icon.svg" alt="" width={36} height={36} aria-hidden="true" />
+            <span className="nav-link-label">Works</span>
           </Link>
           <Link
             href="/news"
+            className="nav-link-icon"
             onClick={() => {
               setIsMenuOpen(false);
               trackEvent("header_nav_click", { nav_item: "news" });
             }}
           >
-            News
+            <Image src="/news-icon.svg" alt="" width={36} height={36} aria-hidden="true" />
+            <span className="nav-link-label">News</span>
           </Link>
         </nav>
       </div>
