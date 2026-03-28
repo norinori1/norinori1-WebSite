@@ -88,7 +88,7 @@ type: game
 title: POLARITY UNDER
 description: "Puzzle-based Action Game"
 thumbnail: "assets/images/games/polarity-under-thumbnail.png"
-link: "https://unityroom.com/games/polarity_under"
+link: "https://unityroom.com/games/polarity-under"
 tags:
   - Unity
   - Puzzle
@@ -114,7 +114,7 @@ type: game
 title: "Puzzle Ball Stage Maker"
 description: "Creative puzzle game stage editor"
 thumbnail: "assets/images/games/puzzle-ball-stage-maker-thumbnail.png"
-link: "https://norinori1.itch.io"
+link: "https://norinori1.itch.io/puzzle-ball-stage-maker"
 tags:
   - Puzzle
   - Creative
@@ -138,7 +138,7 @@ type: game
 title: "Block Crushing Game"
 description: "Classic block-crushing puzzle mechanics"
 thumbnail: "assets/images/games/block-crushing-thumbnail.png"
-link: "https://norinori1.itch.io"
+link: "https://norinori1.itch.io/block-crushing-game"
 tags:
   - Puzzle
   - Casual
@@ -163,7 +163,7 @@ type: game
 title: "Block Crush Game [Scratch Edition]"
 description: "Scratch version of block-crushing gameplay"
 thumbnail: "assets/images/games/block-crush-scratch-thumbnail.png"
-link: "https://scratch.mit.edu/users/norinori1/"
+link: "https://norinori1.itch.io/block-crush-game-scratch-edition"
 tags:
   - Scratch
   - Puzzle
@@ -186,7 +186,7 @@ type: game
 title: "Puzzle Ball 3!"
 description: "Advanced puzzle ball mechanics"
 thumbnail: "assets/images/games/puzzle-ball-3-thumbnail.png"
-link: "https://norinori1.itch.io"
+link: "https://norinori1.itch.io/puzzle-ball-3"
 tags:
   - Puzzle
   - Physics
