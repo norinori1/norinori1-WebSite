@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 interface ShareButtonsProps {
   title: string;
@@ -20,6 +21,12 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
+      trackEvent("share", {
+        method: "copy_link",
+        content_type: "page",
+        item_id: url,
+        event_category: "engagement",
+      });
     } catch {
       // clipboard unavailable (non-secure context etc.)
     }
@@ -41,6 +48,14 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
         rel="noopener noreferrer"
         onMouseEnter={() => setXHovered(true)}
         onMouseLeave={() => setXHovered(false)}
+        onClick={() =>
+          trackEvent("share", {
+            method: "twitter",
+            content_type: "page",
+            item_id: url,
+            event_category: "engagement",
+          })
+        }
         style={{
           display: "inline-flex",
           alignItems: "center",
