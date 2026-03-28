@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import PlatformIcon from "@/components/PlatformIcon";
 import ScrollReveal from "@/components/ScrollReveal";
 
@@ -168,29 +168,7 @@ export default function AboutPage() {
         </section>
       </div>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <section>
-            <h3>norinori1</h3>
-            <p>ゲーム開発者・クリエイター</p>
-          </section>
-          <section>
-            <h3>Navigation</h3>
-            <ul>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/works">Works</Link>
-              </li>
-              <li>
-                <Link href="/news">News</Link>
-              </li>
-            </ul>
-          </section>
-        </div>
-        <p className="copyright">© 2026 norinori1</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
