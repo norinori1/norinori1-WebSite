@@ -7,6 +7,7 @@ import { getNewsBySlug, listNewsSlugs } from "@/lib/notion/news";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ShareButtons from "@/components/ShareButtons";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
@@ -187,6 +188,11 @@ export default async function NewsDetailPage({ params }: Props) {
                   </span>
                 ))}
               </div>
+
+              <ShareButtons
+                title={news.title}
+                url={`${siteUrl}/news/${slug}`}
+              />
             </div>
 
             {blocks.length > 0 && (
