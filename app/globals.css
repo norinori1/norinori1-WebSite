@@ -13,6 +13,48 @@
   --color-neutral-500: #64748b;
   --color-neutral-700: #334155;
   --color-neutral-900: #0f172a;
+
+  --color-surface: #ffffff;
+  --color-footer-bg: #0f172a;
+  --color-badge-latest-bg: #dbeafe;
+  --color-badge-latest-text: #1e40af;
+  --color-badge-featured-bg: #fef3c7;
+  --color-badge-featured-text: #92400e;
+  --color-badge-released-bg: #dcfce7;
+  --color-badge-released-text: #166534;
+  --color-tag-hover-bg: #eff6ff;
+  --color-tag-clear-bg: #fff5f5;
+  --color-tag-clear-hover-bg: #fee2e2;
+  --color-tag-clear-border: #fca5a5;
+  --color-tag-clear-text: #dc2626;
+}
+
+.dark {
+  --color-primary-dark: #60a5fa;
+  --color-primary: #93c5fd;
+  --color-primary-light: #7dd3fc;
+  --color-primary-lighter: #bae6fd;
+
+  --color-neutral-50: #0f172a;
+  --color-neutral-100: #1e293b;
+  --color-neutral-200: #334155;
+  --color-neutral-500: #94a3b8;
+  --color-neutral-700: #cbd5e1;
+  --color-neutral-900: #f1f5f9;
+
+  --color-surface: #1e293b;
+  --color-footer-bg: #020617;
+  --color-badge-latest-bg: #1e3a5f;
+  --color-badge-latest-text: #93c5fd;
+  --color-badge-featured-bg: #451a03;
+  --color-badge-featured-text: #fcd34d;
+  --color-badge-released-bg: #052e16;
+  --color-badge-released-text: #86efac;
+  --color-tag-hover-bg: #1e3a5f;
+  --color-tag-clear-bg: #2d1515;
+  --color-tag-clear-hover-bg: #3d1a1a;
+  --color-tag-clear-border: #dc2626;
+  --color-tag-clear-text: #fca5a5;
 }
 
 * {
@@ -76,11 +118,45 @@ body {
   display: block;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-neutral-200);
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-700);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--color-neutral-100);
+  border-color: var(--color-primary);
+}
+
 .menu-toggle {
   display: none;
   font-size: 1.25rem;
   border: 1px solid var(--color-neutral-200);
   background: var(--color-neutral-50);
+  color: var(--color-neutral-900);
   border-radius: 8px;
   padding: 0.25rem 0.5rem;
 }
@@ -207,7 +283,7 @@ body {
 }
 
 .work-card {
-  background: #fff;
+  background: var(--color-surface);
   border: 1px solid var(--color-neutral-200);
   border-radius: 12px;
   padding: 1.25rem;
@@ -240,18 +316,18 @@ body {
 }
 
 .badge-latest {
-  background: #dbeafe;
-  color: #1e40af;
+  background: var(--color-badge-latest-bg);
+  color: var(--color-badge-latest-text);
 }
 
 .badge-featured {
-  background: #fef3c7;
-  color: #92400e;
+  background: var(--color-badge-featured-bg);
+  color: var(--color-badge-featured-text);
 }
 
 .badge-released {
-  background: #dcfce7;
-  color: #166534;
+  background: var(--color-badge-released-bg);
+  color: var(--color-badge-released-text);
 }
 
 .chips {
@@ -270,7 +346,7 @@ body {
 }
 
 .platform-chip {
-  background: #f8fafc;
+  background: var(--color-neutral-100);
 }
 
 /* ── Works page controls (search / sort / tag filters) ── */
@@ -304,7 +380,7 @@ body {
   border: 1px solid var(--color-neutral-200);
   border-radius: 999px;
   font-size: 0.875rem;
-  background: #fff;
+  background: var(--color-surface);
   color: var(--color-neutral-900);
   outline: none;
   transition: border-color 0.2s;
@@ -319,7 +395,7 @@ body {
   border: 1px solid var(--color-neutral-200);
   border-radius: 999px;
   font-size: 0.875rem;
-  background: #fff;
+  background: var(--color-surface);
   color: var(--color-neutral-700);
   cursor: pointer;
   outline: none;
@@ -347,14 +423,14 @@ body {
   padding: 0.3rem 0.75rem;
   font-size: 0.8rem;
   color: var(--color-neutral-700);
-  background: #fff;
+  background: var(--color-surface);
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
 
 .works-tag-btn:hover {
   border-color: var(--color-primary-dark);
-  background: #eff6ff;
+  background: var(--color-tag-hover-bg);
 }
 
 .works-tag-btn.active {
@@ -379,18 +455,18 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  border: 1px solid #fca5a5;
+  border: 1px solid var(--color-tag-clear-border);
   border-radius: 999px;
   padding: 0.3rem 0.75rem;
   font-size: 0.8rem;
-  color: #dc2626;
-  background: #fff5f5;
+  color: var(--color-tag-clear-text);
+  background: var(--color-tag-clear-bg);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .works-tag-clear:hover {
-  background: #fee2e2;
+  background: var(--color-tag-clear-hover-bg);
 }
 
 /* Results count */
@@ -416,7 +492,7 @@ body {
 }
 
 .chip-tag:hover {
-  background: #eff6ff;
+  background: var(--color-tag-hover-bg);
   border-color: var(--color-primary-dark);
 }
 
@@ -455,7 +531,7 @@ body {
 
 .skill-card {
   border: 1px solid var(--color-neutral-200);
-  background: #fff;
+  background: var(--color-surface);
   border-radius: 12px;
   padding: 1rem;
 }
@@ -491,7 +567,7 @@ body {
 
 .platform-card {
   border: 2px solid var(--color-neutral-200);
-  background: linear-gradient(135deg, #fff 0%, var(--color-neutral-100) 100%);
+  background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-neutral-100) 100%);
   border-radius: 12px;
   padding: 1rem 1.25rem;
   color: inherit;
@@ -517,7 +593,7 @@ body {
 }
 
 .site-footer {
-  background: var(--color-neutral-900);
+  background: var(--color-footer-bg);
   color: #f1f5f9;
   padding: 4rem 0 2rem;
 }
@@ -568,7 +644,7 @@ body {
     right: 1rem;
     left: 1rem;
     border: 1px solid var(--color-neutral-200);
-    background: #fff;
+    background: var(--color-neutral-50);
     border-radius: 12px;
     padding: 0.75rem;
     display: none;
