@@ -9,6 +9,7 @@ interface ShareButtonsProps {
 
 export default function ShareButtons({ title, url }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  const [xHovered, setXHovered] = useState(false);
 
   const tweetText = encodeURIComponent(`${title} – norinori1`);
   const tweetUrl = encodeURIComponent(url);
@@ -38,17 +39,22 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
         href={twitterHref}
         target="_blank"
         rel="noopener noreferrer"
+        onMouseEnter={() => setXHovered(true)}
+        onMouseLeave={() => setXHovered(false)}
         style={{
           display: "inline-flex",
           alignItems: "center",
           gap: "0.4rem",
-          padding: "0.35rem 0.8rem",
-          border: "1px solid var(--color-neutral-200)",
+          padding: "0.4rem 1rem",
+          background: "var(--color-neutral-900)",
+          border: "1px solid var(--color-neutral-900)",
           borderRadius: "999px",
           fontSize: "0.85rem",
-          color: "var(--color-neutral-700)",
+          color: "var(--color-neutral-50)",
           textDecoration: "none",
-          transition: "border-color 0.2s, color 0.2s",
+          fontWeight: 600,
+          opacity: xHovered ? 0.75 : 1,
+          transition: "opacity 0.2s",
         }}
         aria-label="X (Twitter) でシェア"
       >
@@ -66,13 +72,14 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
           display: "inline-flex",
           alignItems: "center",
           gap: "0.4rem",
-          padding: "0.35rem 0.8rem",
-          border: "1px solid var(--color-neutral-200)",
+          padding: "0.4rem 1rem",
+          border: "1px solid var(--color-neutral-500)",
           borderRadius: "999px",
           fontSize: "0.85rem",
           color: copied ? "var(--color-primary)" : "var(--color-neutral-700)",
           background: "transparent",
           cursor: "pointer",
+          fontWeight: 600,
           transition: "border-color 0.2s, color 0.2s",
         }}
         aria-label="リンクをコピー"
