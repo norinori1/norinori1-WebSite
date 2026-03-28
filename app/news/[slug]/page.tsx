@@ -6,6 +6,7 @@ import Script from "next/script";
 import { getNewsBySlug, listNewsSlugs } from "@/lib/notion/news";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
@@ -138,9 +139,9 @@ export default async function NewsDetailPage({ params }: Props) {
                   src={news.coverImageUrl}
                   alt={`${news.title} cover`}
                   fill
+                  sizes="(max-width: 860px) calc(100vw - 2rem), 860px"
                   style={{ objectFit: "cover" }}
                   priority
-                  unoptimized
                 />
               </div>
             )}
@@ -197,29 +198,7 @@ export default async function NewsDetailPage({ params }: Props) {
         </section>
       </div>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <section>
-            <h3>norinori1</h3>
-            <p>ゲーム開発者・クリエイター</p>
-          </section>
-          <section>
-            <h3>Navigation</h3>
-            <ul>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/works">Works</Link>
-              </li>
-              <li>
-                <Link href="/news">News</Link>
-              </li>
-            </ul>
-          </section>
-        </div>
-        <p className="copyright">© 2026 norinori1</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

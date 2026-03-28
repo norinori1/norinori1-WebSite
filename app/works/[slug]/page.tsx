@@ -6,6 +6,7 @@ import Script from "next/script";
 import { getWorkBySlug, listWorkSlugs } from "@/lib/notion/works";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import ShareButtons from "@/components/ShareButtons";
 
 const siteUrl =
@@ -129,9 +130,9 @@ export default async function WorkDetailPage({ params }: Props) {
                   src={work.thumbnailUrl}
                   alt={`${work.title} thumbnail`}
                   fill
+                  sizes="(max-width: 860px) calc(100vw - 2rem), 860px"
                   style={{ objectFit: "cover" }}
                   priority
-                  unoptimized
                 />
               </div>
             )}
@@ -211,29 +212,7 @@ export default async function WorkDetailPage({ params }: Props) {
         </section>
       </div>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <section>
-            <h3>norinori1</h3>
-            <p>ゲーム開発者・クリエイター</p>
-          </section>
-          <section>
-            <h3>Navigation</h3>
-            <ul>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/works">Works</Link>
-              </li>
-              <li>
-                <Link href="/news">News</Link>
-              </li>
-            </ul>
-          </section>
-        </div>
-        <p className="copyright">© 2026 norinori1</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

@@ -5,12 +5,13 @@ export const revalidate = 3600;
 
 export default async function Home() {
   let featuredWorks: Awaited<ReturnType<typeof listFeaturedWorks>> = [];
+  let fetchError = false;
 
   try {
     featuredWorks = await listFeaturedWorks();
   } catch {
-    // Silently fall back to empty list on the home page
+    fetchError = true;
   }
 
-  return <HomeContent featuredWorks={featuredWorks} />;
+  return <HomeContent featuredWorks={featuredWorks} fetchError={fetchError} />;
 }

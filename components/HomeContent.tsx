@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { trackEvent } from "@/lib/analytics";
 import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
@@ -11,6 +11,7 @@ import type { Work } from "@/types/notion";
 
 interface HomeContentProps {
   featuredWorks: Work[];
+  fetchError?: boolean;
 }
 
 const platforms: { name: string; url: string; icon: IconName }[] = [
@@ -56,15 +57,9 @@ const skills: { category: string; items: { label: string; icon: IconName | null;
   },
 ];
 
-const socialLinks = [
-  { name: "Twitter/X", url: "https://x.com/norinori1_" },
-  { name: "GitHub", url: "https://github.com/norinori1" },
-  { name: "itch.io", url: "https://norinori1.itch.io" },
-];
-
 const basePath = "";
 
-export default function HomeContent({ featuredWorks }: HomeContentProps) {
+export default function HomeContent({ featuredWorks, fetchError }: HomeContentProps) {
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>("section[id]");
     const seen = new Set<string>();
@@ -178,7 +173,13 @@ export default function HomeContent({ featuredWorks }: HomeContentProps) {
             <h2>Works</h2>
             <p className="section-lead">Featuredに設定されたゲーム作品です。</p>
           </ScrollReveal>
-          {featuredWorks.length === 0 ? (
+          {fetchError ? (
+            <div className="notion-callout" style={{ marginTop: "2rem" }}>
+              <p>
+                作品情報の取得に失敗しました。しばらく待ってから再度アクセスしてください。
+              </p>
+            </div>
+          ) : featuredWorks.length === 0 ? (
             <p style={{ marginTop: "2rem", color: "var(--color-neutral-500)" }}>
               作品情報を準備中です。
             </p>
@@ -210,8 +211,8 @@ export default function HomeContent({ featuredWorks }: HomeContentProps) {
                           src={work.thumbnailUrl}
                           alt={`${work.title} thumbnail`}
                           fill
+                          sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
                           style={{ objectFit: "cover" }}
-                          unoptimized
                         />
                       </div>
                     )}
@@ -332,72 +333,7 @@ export default function HomeContent({ featuredWorks }: HomeContentProps) {
         </div>
       </section>
 
-      <footer className="site-footer">
-        <div className="container footer-grid">
-          <section>
-            <h3>norinori1</h3>
-            <p>ゲーム開発者・クリエイター</p>
-          </section>
-          <section>
-            <h3>Navigation</h3>
-            <ul>
-              <li>
-                <Link
-                  href="/about"
-                  onClick={() =>
-                    trackEvent("footer_link_click", { link_text: "about" })
-                  }
-                >
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/works"
-                  onClick={() =>
-                    trackEvent("footer_link_click", { link_text: "works" })
-                  }
-                >
-                  Works
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/news"
-                  onClick={() =>
-                    trackEvent("footer_link_click", { link_text: "news" })
-                  }
-                >
-                  News
-                </Link>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <h3>Follow</h3>
-            <ul>
-              {socialLinks.map((item) => (
-                <li key={item.name}>
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() =>
-                      trackEvent("social_link_click", {
-                        platform: item.name,
-                        event_category: "outbound",
-                      })
-                    }
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-        <p className="copyright">© 2026 norinori1</p>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
