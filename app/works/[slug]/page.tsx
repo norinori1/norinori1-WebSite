@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
-import { getWorkBySlug, listWorkSlugs } from "@/lib/notion/works";
+import { getWorkBySlug, listWorkSlugs, listWorks } from "@/lib/notion/works";
 import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -75,6 +75,14 @@ export default async function WorkDetailPage({ params }: Props) {
   }
 
   const { work, blocks } = result;
+
+  let otherWorks: Awaited<ReturnType<typeof listWorks>> = [];
+  try {
+    const allWorks = await listWorks();
+    otherWorks = allWorks.filter((w) => w.slug !== slug).slice(0, 4);
+  } catch {
+    // otherWorks stays empty
+  }
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -210,6 +218,80 @@ export default async function WorkDetailPage({ params }: Props) {
             )}
           </div>
         </section>
+
+        {otherWorks.length > 0 && (
+          <section className="section section-alt">
+            <div className="container">
+              <h2 style={{ fontSize: "1.5rem", marginBottom: "1.5rem" }}>Other Works</h2>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+                  gap: "1.25rem",
+                }}
+              >
+                {otherWorks.map((w) => (
+                  <Link
+                    key={w.id}
+                    href={`/works/${w.slug}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <article className="work-card" style={{ height: "100%" }}>
+                      {w.thumbnailUrl && (
+                        <div
+                          style={{
+                            marginBottom: "0.75rem",
+                            borderRadius: "8px",
+                            overflow: "hidden",
+                            aspectRatio: "16/9",
+                            position: "relative",
+                          }}
+                        >
+                          <Image
+                            src={w.thumbnailUrl}
+                            alt={`${w.title} thumbnail`}
+                            fill
+                            sizes="(max-width: 640px) calc(50vw - 1.5rem), 220px"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                      )}
+                      <div className="work-head">
+                        <h3 style={{ fontSize: "0.95rem", margin: 0 }}>{w.title}</h3>
+                        <span className={`badge badge-${w.status.toLowerCase()}`}>
+                          {w.status}
+                        </span>
+                      </div>
+                      {w.description && (
+                        <p
+                          style={{
+                            margin: "0.4rem 0 0",
+                            fontSize: "0.85rem",
+                            color: "var(--color-neutral-600)",
+                            overflow: "hidden",
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                          }}
+                        >
+                          {w.description}
+                        </p>
+                      )}
+                    </article>
+                  </Link>
+                ))}
+              </div>
+              <div style={{ marginTop: "1.5rem" }}>
+                <Link
+                  href="/works"
+                  style={{ color: "var(--color-primary)", textDecoration: "none", fontSize: "0.95rem" }}
+                >
+                  ← Works 一覧をすべて見る
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
 
       <SiteFooter />
