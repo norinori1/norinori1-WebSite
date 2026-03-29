@@ -324,6 +324,7 @@ export default function WorksClient({ works }: WorksClientProps) {
                     overflow: "hidden",
                     aspectRatio: "16/9",
                     position: "relative",
+                    background: "var(--color-neutral-100)",
                   }}
                 >
                   <Image
@@ -331,7 +332,7 @@ export default function WorksClient({ works }: WorksClientProps) {
                     alt={`${work.title} thumbnail`}
                     fill
                     sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "contain" }}
                   />
                 </div>
               )}
