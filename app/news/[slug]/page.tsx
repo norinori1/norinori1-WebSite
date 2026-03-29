@@ -34,8 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!result) return {};
     const { news } = result;
     const canonicalUrl = `/news/${slug}`;
-    const ogImages = news.coverImageUrl
-      ? [{ url: news.coverImageUrl, alt: news.title }]
+    // Use the proxy URL for OG/Twitter images so they never hit an expired S3 URL.
+    const coverProxyUrl = news.coverImageUrl
+      ? `${siteUrl}/api/notion-image?pageId=${news.id}&prop=CoverImage`
+      : undefined;
+    const ogImages = coverProxyUrl
+      ? [{ url: coverProxyUrl, alt: news.title }]
       : undefined;
     return {
       title: `${news.title} – norinori1`,
@@ -53,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: "summary_large_image",
         title: news.title,
         description: news.excerpt ?? undefined,
-        images: news.coverImageUrl ? [news.coverImageUrl] : undefined,
+        images: coverProxyUrl ? [coverProxyUrl] : undefined,
       },
     };
   } catch {
@@ -100,7 +104,9 @@ export default async function NewsDetailPage({ params }: Props) {
     "@type": "BlogPosting",
     headline: news.title,
     url: `${siteUrl}/news/${slug}`,
-    ...(news.coverImageUrl && { image: news.coverImageUrl }),
+    ...(news.coverImageUrl && {
+      image: `${siteUrl}/api/notion-image?pageId=${news.id}&prop=CoverImage`,
+    }),
     ...(news.excerpt && { description: news.excerpt }),
     ...(news.date && { datePublished: news.date }),
     author: {
@@ -145,12 +151,13 @@ export default async function NewsDetailPage({ params }: Props) {
                 }}
               >
                 <Image
-                  src={news.coverImageUrl}
+                  src={`/api/notion-image?pageId=${news.id}&prop=CoverImage`}
                   alt={`${news.title} cover`}
                   fill
                   sizes="(max-width: 860px) calc(100vw - 2rem), 860px"
                   style={{ objectFit: "cover" }}
                   priority
+                  unoptimized
                 />
               </div>
             )}
@@ -240,11 +247,12 @@ export default async function NewsDetailPage({ params }: Props) {
                           }}
                         >
                           <Image
-                            src={n.coverImageUrl}
+                            src={`/api/notion-image?pageId=${n.id}&prop=CoverImage`}
                             alt={`${n.title} cover`}
                             fill
                             sizes="(max-width: 640px) calc(50vw - 1.5rem), 280px"
                             style={{ objectFit: "cover" }}
+                            unoptimized
                           />
                         </div>
                       )}

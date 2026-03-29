@@ -122,9 +122,11 @@ function NotionBlock({ block }: { block: NotionBlock }) {
       return <hr />;
 
     case "image": {
+      // Use the proxy for Notion-hosted (signed S3) URLs so they never expire.
+      // External URLs are stable and can be used directly.
       const src =
         block.image.type === "file"
-          ? block.image.file.url
+          ? `/api/notion-image?blockId=${block.id}`
           : block.image.external.url;
       const caption =
         block.image.caption.length > 0
