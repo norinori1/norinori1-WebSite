@@ -34,8 +34,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     if (!result) return {};
     const { work } = result;
     const canonicalUrl = `/works/${slug}`;
-    const ogImages = work.thumbnailUrl
-      ? [{ url: work.thumbnailUrl, alt: work.title }]
+    // Use the proxy URL for OG/Twitter images so they never hit an expired S3 URL.
+    const thumbnailProxyUrl = work.thumbnailUrl
+      ? `${siteUrl}/api/notion-image?pageId=${work.id}&prop=Thumbnail`
+      : undefined;
+    const ogImages = thumbnailProxyUrl
+      ? [{ url: thumbnailProxyUrl, alt: work.title }]
       : undefined;
     return {
       title: `${work.title} – norinori1`,
@@ -52,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: "summary_large_image",
         title: work.title,
         description: work.description ?? undefined,
-        images: work.thumbnailUrl ? [work.thumbnailUrl] : undefined,
+        images: thumbnailProxyUrl ? [thumbnailProxyUrl] : undefined,
       },
     };
   } catch {
@@ -89,7 +93,9 @@ export default async function WorkDetailPage({ params }: Props) {
     "@type": "SoftwareApplication",
     name: work.title,
     url: `${siteUrl}/works/${slug}`,
-    ...(work.thumbnailUrl && { image: work.thumbnailUrl }),
+    ...(work.thumbnailUrl && {
+      image: `${siteUrl}/api/notion-image?pageId=${work.id}&prop=Thumbnail`,
+    }),
     ...(work.description && { description: work.description }),
     author: {
       "@type": "Person",
@@ -135,12 +141,13 @@ export default async function WorkDetailPage({ params }: Props) {
                 }}
               >
                 <Image
-                  src={work.thumbnailUrl}
+                  src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
                   alt={`${work.title} thumbnail`}
                   fill
                   sizes="(max-width: 860px) calc(100vw - 2rem), 860px"
                   style={{ objectFit: "cover" }}
                   priority
+                  unoptimized
                 />
               </div>
             )}
@@ -248,11 +255,12 @@ export default async function WorkDetailPage({ params }: Props) {
                           }}
                         >
                           <Image
-                            src={w.thumbnailUrl}
+                            src={`/api/notion-image?pageId=${w.id}&prop=Thumbnail`}
                             alt={`${w.title} thumbnail`}
                             fill
                             sizes="(max-width: 640px) calc(50vw - 1.5rem), 220px"
                             style={{ objectFit: "cover" }}
+                            unoptimized
                           />
                         </div>
                       )}

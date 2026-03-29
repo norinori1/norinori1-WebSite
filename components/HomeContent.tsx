@@ -220,11 +220,12 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                         }}
                       >
                         <Image
-                          src={work.thumbnailUrl}
+                          src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
                           alt={`${work.title} thumbnail`}
                           fill
                           sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
                           style={{ objectFit: "cover" }}
+                          unoptimized
                         />
                       </div>
                     )}
@@ -381,11 +382,12 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                           }}
                         >
                           <Image
-                            src={item.coverImageUrl}
+                            src={`/api/notion-image?pageId=${item.id}&prop=CoverImage`}
                             alt={`${item.title} cover`}
                             fill
                             sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
                             style={{ objectFit: "cover" }}
+                            unoptimized
                           />
                         </div>
                       )}
