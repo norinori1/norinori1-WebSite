@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 :root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-display: 'Poppins', var(--font-sans);
+  --space-base: 8px;
+  --color-accent: #FF7A59; /* coral accent for CTAs */
+
   --color-primary-dark: #1f5ba6;
   --color-primary: #3b8fd9;
   --color-primary-light: #5ba3d0;
@@ -33,6 +39,8 @@
 }
 
 .dark {
+  --color-accent: #FF9A7A;
+
   --color-primary-dark: #60a5fa;
   --color-primary: #93c5fd;
   --color-primary-light: #7dd3fc;
@@ -75,7 +83,9 @@ body {
   margin: 0;
   background: var(--color-neutral-50);
   color: var(--color-neutral-900);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .site-root {
@@ -253,13 +263,27 @@ body {
 }
 
 .btn-primary {
-  background: #fff;
-  color: var(--color-primary-dark);
+  background: var(--color-accent);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  filter: brightness(.98);
 }
 
 .btn-secondary {
   border-color: #fff;
   color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 .section {
@@ -994,5 +1018,12 @@ body {
   }
   .page-transition {
     animation: none;
+  }
+  .btn-primary {
+    transition: none;
+  }
+  .btn-primary:hover {
+    transform: none;
+    filter: none;
   }
 }
