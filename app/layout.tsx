@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  verification: {
+    google: "7izBKgNjfv2fnCsxV4yAybuEfLM0VSu_W0WevtUl4_s",
+  },
   openGraph: {
     title: "norinori1 - Game Developer Portfolio",
     description:
