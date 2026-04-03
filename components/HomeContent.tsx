@@ -130,6 +130,16 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
       <SiteHeader />
 
       <section id="top" className="hero" aria-label="Hero">
+        <div className="hero-particles" aria-hidden="true">
+          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "10%", left: "8%"  }} />
+          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "20%", left: "88%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "60%", left: "15%" }} />
+          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "75%", left: "75%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "35%", left: "50%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "85%", left: "30%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--medium" style={{ top: "15%", left: "65%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--slow"   style={{ top: "50%", left: "92%" }} />
+        </div>
         <div className="container hero-content">
           <Image
             src={`${basePath}/norinori1-splash-white.svg`}
