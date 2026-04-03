@@ -150,7 +150,7 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
             priority
           />
           <div className="hero-copy">
-            <p className="hero-subtitle hero-animate hero-animate-sub">Game Developer & Creator</p>
+            <p className="hero-subtitle hero-animate hero-animate-sub mono">Game Developer & Creator</p>
             <p className="hero-animate hero-animate-desc">
               Unity、Roblox、Scratchなど複数プラットフォームで、
               ユニークなゲーム体験と開発ツールを継続的に制作しています。

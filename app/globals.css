@@ -1,12 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&family=JetBrains+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 :root {
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   --font-display: 'Poppins', var(--font-sans);
+  --font-mono: 'JetBrains Mono', monospace;
   --space-base: 8px;
-  --color-accent: #FF7A59; /* coral accent for CTAs */
+  --color-accent: #3b82f6; /* bright blue for tech feel */
 
   --color-primary-dark: #1f5ba6;
   --color-primary: #3b8fd9;
@@ -36,25 +37,28 @@
 
   --color-hero-from: #1f5ba6;
   --color-hero-to: #a7d8e8;
+  
+  --color-grid-line: rgba(59, 130, 246, 0.1);
+  --color-glow: rgba(59, 130, 246, 0.4);
 }
 
 .dark {
-  --color-accent: #FF9A7A;
+  --color-accent: #60a5fa;
 
   --color-primary-dark: #60a5fa;
   --color-primary: #93c5fd;
   --color-primary-light: #7dd3fc;
   --color-primary-lighter: #bae6fd;
 
-  --color-neutral-50: #0f172a;
-  --color-neutral-100: #1e293b;
-  --color-neutral-200: #334155;
+  --color-neutral-50: #020617;
+  --color-neutral-100: #0f172a;
+  --color-neutral-200: #1e293b;
   --color-neutral-500: #94a3b8;
   --color-neutral-700: #cbd5e1;
   --color-neutral-900: #f1f5f9;
 
-  --color-surface: #1e293b;
-  --color-footer-bg: #020617;
+  --color-surface: #0f172a;
+  --color-footer-bg: #010409;
   --color-badge-latest-bg: #1e3a5f;
   --color-badge-latest-text: #93c5fd;
   --color-badge-featured-bg: #451a03;
@@ -69,7 +73,28 @@
 
   --color-hero-from: #0d1b2e;
   --color-hero-to: #1e3a5f;
+  
+  --color-grid-line: rgba(59, 130, 246, 0.15);
+  --color-glow: rgba(96, 165, 250, 0.5);
 }
+
+/* Glassmorphism */
+.glass {
+  background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
 
 * {
   box-sizing: border-box;
@@ -266,18 +291,27 @@ body {
   background: var(--color-accent);
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  box-shadow: 0 4px 14px 0 var(--color-glow);
+  transition: all 0.2s ease;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  filter: brightness(.98);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  filter: brightness(1.1);
 }
 
 .btn-secondary {
-  border-color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
   color: #fff;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
 }
 
 :focus-visible {
@@ -291,7 +325,8 @@ body {
 }
 
 .section-alt {
-  background: var(--color-neutral-100);
+  background: color-mix(in srgb, var(--color-neutral-100) 94%, transparent);
+  backdrop-filter: blur(4px);
 }
 
 .section h2 {
@@ -317,14 +352,15 @@ body {
   border: 1px solid var(--color-neutral-200);
   border-radius: 12px;
   padding: 1.25rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .work-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--color-primary);
-  box-shadow: 0 12px 24px rgba(59, 143, 217, 0.15);
+  transform: translateY(-8px) scale(1.01);
+  border-color: var(--color-accent);
+  box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
 }
+
 
 .work-head {
   display: flex;
