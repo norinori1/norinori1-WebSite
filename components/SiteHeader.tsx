@@ -18,7 +18,7 @@ export default function SiteHeader() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <header className="site-header">
+    <header className="site-header glass">
       <div className="container header-inner">
         <Link href={brandHref} className="brand" aria-label="norinori1 top">
           <Image
@@ -28,6 +28,7 @@ export default function SiteHeader() {
             width={520}
             height={52}
             priority
+            style={{ filter: isDark ? "invert(0)" : "invert(1)" }}
           />
         </Link>
 
