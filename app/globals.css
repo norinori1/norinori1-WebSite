@@ -325,7 +325,8 @@ body {
 }
 
 .section-alt {
-  background: var(--color-neutral-100);
+  background: color-mix(in srgb, var(--color-neutral-100) 94%, transparent);
+  backdrop-filter: blur(4px);
 }
 
 .section h2 {

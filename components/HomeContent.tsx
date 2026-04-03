@@ -129,9 +129,9 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
   return (
     <main className="site-root">
       <SiteHeader />
+      <HeroBackground />
 
       <section id="top" className="hero" aria-label="Hero">
-        <HeroBackground />
         <div className="container hero-content">
           <Image
             src={`${basePath}/norinori1-splash-white.svg`}
@@ -142,21 +142,18 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
             priority
           />
           <div className="hero-copy">
-            <p className="hero-subtitle hero-animate hero-animate-sub mono tracking-widest uppercase opacity-80">
-              Game Developer & Creator
-            </p>
-            <p className="hero-animate hero-animate-desc text-lg font-medium leading-relaxed">
+            <p className="hero-subtitle hero-animate hero-animate-sub mono">Game Developer & Creator</p>
+            <p className="hero-animate hero-animate-desc">
               Unity、Roblox、Scratchなど複数プラットフォームで、
-              <br />
               ユニークなゲーム体験と開発ツールを継続的に制作しています。
             </p>
           </div>
           <div className="hero-cta hero-animate hero-animate-cta">
-            <a className="btn btn-primary px-10 py-4 text-lg shadow-blue-500/20" href="#works">
-              Explore Works
+            <a className="btn btn-primary" href="#works">
+              作品を見る
             </a>
-            <a className="btn btn-secondary px-10 py-4 text-lg backdrop-blur-sm bg-white/5" href="#about">
-              Profile
+            <a className="btn btn-secondary" href="#about">
+              プロフィール
             </a>
           </div>
         </div>
