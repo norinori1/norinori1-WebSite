@@ -131,16 +131,7 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
       <SiteHeader />
 
       <section id="top" className="hero" aria-label="Hero">
-        <div className="hero-particles" aria-hidden="true">
-          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "10%", left: "8%"  }} />
-          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "20%", left: "88%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "60%", left: "15%" }} />
-          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "75%", left: "75%" }} />
-          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "35%", left: "50%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "85%", left: "30%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--medium" style={{ top: "15%", left: "65%" }} />
-          <span className="hero-particle hero-particle--md hero-particle--slow"   style={{ top: "50%", left: "92%" }} />
-        </div>
+        <HeroBackground />
         <div className="container hero-content">
           <Image
             src={`${basePath}/norinori1-splash-white.svg`}
@@ -151,18 +142,21 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
             priority
           />
           <div className="hero-copy">
-            <p className="hero-subtitle hero-animate hero-animate-sub">Game Developer & Creator</p>
-            <p className="hero-animate hero-animate-desc">
+            <p className="hero-subtitle hero-animate hero-animate-sub mono tracking-widest uppercase opacity-80">
+              Game Developer & Creator
+            </p>
+            <p className="hero-animate hero-animate-desc text-lg font-medium leading-relaxed">
               Unity、Roblox、Scratchなど複数プラットフォームで、
+              <br />
               ユニークなゲーム体験と開発ツールを継続的に制作しています。
             </p>
           </div>
           <div className="hero-cta hero-animate hero-animate-cta">
-            <a className="btn btn-primary" href="#works">
-              作品を見る
+            <a className="btn btn-primary px-10 py-4 text-lg shadow-blue-500/20" href="#works">
+              Explore Works
             </a>
-            <a className="btn btn-secondary" href="#about">
-              プロフィール
+            <a className="btn btn-secondary px-10 py-4 text-lg backdrop-blur-sm bg-white/5" href="#about">
+              Profile
             </a>
           </div>
         </div>

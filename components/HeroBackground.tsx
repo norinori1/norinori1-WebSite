@@ -126,7 +126,7 @@ export default function HeroBackground() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ z-index: 0 }}
+      style={{ zIndex: 0 }}
     />
   );
 }
