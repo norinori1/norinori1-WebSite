@@ -28,7 +28,6 @@ export default function SiteHeader() {
             width={520}
             height={52}
             priority
-            style={{ filter: isDark ? "none" : "invert(1)" }}
           />
         </Link>
 

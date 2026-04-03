@@ -56,6 +56,7 @@ export default function RootLayout({
     <html lang="ja" suppressHydrationWarning>
       <body className="antialiased">
         <ThemeProvider>
+          <HeroBackground />
           {gaMeasurementId ? (
             <>
               <Script

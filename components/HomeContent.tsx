@@ -129,7 +129,6 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
   return (
     <main className="site-root">
       <SiteHeader />
-      <HeroBackground />
 
       <section id="top" className="hero" aria-label="Hero">
         <div className="container hero-content">
