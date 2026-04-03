@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Analytics from "@/components/Analytics";
+import HeroBackground from "@/components/HeroBackground";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";

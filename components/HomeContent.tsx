@@ -9,7 +9,6 @@ import ScrollReveal from "@/components/ScrollReveal";
 import { trackEvent } from "@/lib/analytics";
 import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
 import type { Work, NewsItem } from "@/types/notion";
-import HeroBackground from "@/components/HeroBackground";
 
 interface HomeContentProps {
   featuredWorks: Work[];
