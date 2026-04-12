@@ -5,6 +5,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { getWorkBySlug, listWorkSlugs, listWorks } from "@/lib/notion/works";
 import NotionBlocks from "@/components/NotionBlocks";
+import { sanitizeUrl } from "@/lib/security";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ShareButtons from "@/components/ShareButtons";
@@ -203,7 +204,7 @@ export default async function WorkDetailPage({ params }: Props) {
 
               {work.link && (
                 <a
-                  href={work.link}
+                  href={sanitizeUrl(work.link)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary"
