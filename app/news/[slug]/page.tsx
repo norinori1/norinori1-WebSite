@@ -121,7 +121,9 @@ export default async function NewsDetailPage({ params }: Props) {
       <Script
         id="schema-news"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
       />
       <SiteHeader />
 

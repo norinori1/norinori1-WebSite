@@ -85,7 +85,9 @@ export default function RootLayout({
           <Script
             id="schema-person"
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData) }}
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personStructuredData).replace(/</g, "\\u003c"),
+            }}
           />
           {children}
         </ThemeProvider>
