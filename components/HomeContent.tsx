@@ -7,6 +7,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { trackEvent } from "@/lib/analytics";
+import { sanitizeUrl } from "@/lib/security";
 import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
 import type { Work, NewsItem } from "@/types/notion";
 
@@ -268,7 +269,7 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                       {work.link && (
                         <a
                           className="work-link"
-                          href={work.link}
+                          href={sanitizeUrl(work.link)}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={() =>

@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Work } from "@/types/notion";
+import { sanitizeUrl } from "@/lib/security";
 import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
 
 // Tags that map to SVG icons from PlatformIcon (tech/platform tags)
@@ -384,7 +385,7 @@ export default function WorksClient({ works }: WorksClientProps) {
                 </Link>
                 {work.link && (
                   <a
-                    href={work.link}
+                    href={sanitizeUrl(work.link)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="work-link"

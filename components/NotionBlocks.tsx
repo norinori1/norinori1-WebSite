@@ -4,6 +4,7 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 import type { NotionBlock } from "@/lib/notion/blocks";
 import Image from "next/image";
+import { sanitizeUrl } from "@/lib/security";
 
 /** Render Notion rich text with inline formatting preserved. */
 function RichText({ items }: { items: RichTextItemResponse[] }) {
@@ -23,7 +24,7 @@ function RichText({ items }: { items: RichTextItemResponse[] }) {
 
         if (href) {
           node = (
-            <a href={href} target="_blank" rel="noopener noreferrer">
+            <a href={sanitizeUrl(href)} target="_blank" rel="noopener noreferrer">
               {node}
             </a>
           );
@@ -152,7 +153,11 @@ function NotionBlock({ block }: { block: NotionBlock }) {
     case "bookmark":
       return (
         <div className="notion-bookmark">
-          <a href={block.bookmark.url} target="_blank" rel="noopener noreferrer">
+          <a
+            href={sanitizeUrl(block.bookmark.url)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {block.bookmark.url}
           </a>
         </div>
