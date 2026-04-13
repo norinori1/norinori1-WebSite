@@ -73,7 +73,7 @@ export default function RootLayout({
                   function gtag(){dataLayer.push(arguments);}
                   window.gtag = gtag;
                   gtag('js', new Date());
-                  gtag('config', '${gaMeasurementId}', {
+                  gtag('config', ${JSON.stringify(gaMeasurementId)}, {
                     send_page_view: false
                   });
                 `}
