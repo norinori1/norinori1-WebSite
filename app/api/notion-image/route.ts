@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getNotionClient } from "@/lib/notion/client";
 import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { sanitizeUrl } from "@/lib/security";
 
 /**
  * In-process cache to avoid redundant Notion API calls.
@@ -9,6 +10,7 @@ import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoin
  */
 const urlCache = new Map<string, { url: string; cachedAt: number }>();
 const CACHE_TTL_MS = 45 * 60 * 1000;
+const MAX_CACHE_SIZE = 1000;
 
 function getCached(key: string): string | null {
   const entry = urlCache.get(key);
@@ -19,6 +21,13 @@ function getCached(key: string): string | null {
 }
 
 function setCached(key: string, url: string): void {
+  // Simple DoS protection: if cache is too large, clear oldest entries (FIFO-ish)
+  if (urlCache.size >= MAX_CACHE_SIZE) {
+    const firstKey = urlCache.keys().next().value;
+    if (firstKey !== undefined) {
+      urlCache.delete(firstKey);
+    }
+  }
   urlCache.set(key, { url, cachedAt: Date.now() });
 }
 
@@ -91,7 +100,12 @@ export async function GET(request: Request) {
       return new NextResponse("Image not found", { status: 404 });
     }
 
-    const response = NextResponse.redirect(imageUrl, { status: 307 });
+    const sanitizedUrl = sanitizeUrl(imageUrl);
+    if (sanitizedUrl === "about:blank" || sanitizedUrl === "") {
+      return new NextResponse("Unsafe image URL", { status: 403 });
+    }
+
+    const response = NextResponse.redirect(sanitizedUrl, { status: 307 });
     // Cache the redirect for 30 min; Notion URLs expire in ~1h, so this is safe.
     response.headers.set(
       "Cache-Control",
