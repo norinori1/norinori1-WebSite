@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { getNotionClient } from "@/lib/notion/client";
 import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { sanitizeUrl } from "@/lib/security";
+import { sanitizeUrl, isTrustedImageHost } from "@/lib/security";
 
 /**
  * In-process cache to avoid redundant Notion API calls.
@@ -101,7 +101,11 @@ export async function GET(request: Request) {
     }
 
     const sanitizedUrl = sanitizeUrl(imageUrl);
-    if (sanitizedUrl === "about:blank" || sanitizedUrl === "") {
+    if (
+      sanitizedUrl === "about:blank" ||
+      sanitizedUrl === "" ||
+      !isTrustedImageHost(sanitizedUrl)
+    ) {
       return new NextResponse("Unsafe image URL", { status: 403 });
     }
 
