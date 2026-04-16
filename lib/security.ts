@@ -23,3 +23,25 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // Note: We return 'about:blank' to safely neutralize the link.
   return "about:blank";
 }
+
+const ALLOWED_IMAGE_HOSTS = [
+  "prod-files-secure.s3.us-west-2.amazonaws.com",
+  "secure.notion-static.com",
+  "www.notion.so",
+  "s3.us-west-2.amazonaws.com",
+  "s3-us-west-2.amazonaws.com",
+  "notion.so",
+];
+
+/**
+ * Validates that a URL belongs to a trusted image host (e.g., Notion or S3).
+ * Prevents the image proxy from being used as a generic open redirect.
+ */
+export function isTrustedImageHost(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return ALLOWED_IMAGE_HOSTS.includes(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
