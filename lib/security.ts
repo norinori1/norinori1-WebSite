@@ -36,12 +36,25 @@ const ALLOWED_IMAGE_HOSTS = [
 /**
  * Validates that a URL belongs to a trusted image host (e.g., Notion or S3).
  * Prevents the image proxy from being used as a generic open redirect.
+ * Strictly enforces HTTPS to prevent man-in-the-middle attacks.
  */
 export function isTrustedImageHost(url: string): boolean {
   try {
     const parsed = new URL(url);
-    return ALLOWED_IMAGE_HOSTS.includes(parsed.hostname);
+    return (
+      parsed.protocol === "https:" && ALLOWED_IMAGE_HOSTS.includes(parsed.hostname)
+    );
   } catch {
     return false;
   }
+}
+
+const ALLOWED_IMAGE_PROPERTIES = ["Thumbnail", "CoverImage"];
+
+/**
+ * Validates that the requested Notion property name is on the allowlist.
+ * Prevents probing for sensitive page properties via the image proxy.
+ */
+export function isAllowedImageProperty(prop: string | null): boolean {
+  return !!prop && ALLOWED_IMAGE_PROPERTIES.includes(prop);
 }

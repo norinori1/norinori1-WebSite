@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { getNotionClient } from "@/lib/notion/client";
 import type { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { sanitizeUrl, isTrustedImageHost } from "@/lib/security";
+import {
+  sanitizeUrl,
+  isTrustedImageHost,
+  isAllowedImageProperty,
+} from "@/lib/security";
 
 /**
  * In-process cache to avoid redundant Notion API calls.
@@ -86,7 +90,17 @@ export async function GET(request: Request) {
   const prop = searchParams.get("prop");
 
   if (!blockId && (!pageId || !prop)) {
-    return new NextResponse("Missing required parameters: blockId or (pageId + prop)", {
+    return new NextResponse(
+      "Missing required parameters: blockId or (pageId + prop)",
+      {
+        status: 400,
+      },
+    );
+  }
+
+  // Security Hardening: Validate property name to prevent probing other page properties.
+  if (pageId && !isAllowedImageProperty(prop)) {
+    return new NextResponse("Invalid or restricted property name", {
       status: 400,
     });
   }
