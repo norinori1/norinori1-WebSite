@@ -42,7 +42,9 @@ export function isTrustedImageHost(url: string): boolean {
   try {
     const parsed = new URL(url);
     return (
-      parsed.protocol === "https:" && ALLOWED_IMAGE_HOSTS.includes(parsed.hostname)
+      parsed.protocol === "https:" &&
+      ALLOWED_IMAGE_HOSTS.includes(parsed.hostname) &&
+      (parsed.port === "" || parsed.port === "443")
     );
   } catch {
     return false;
