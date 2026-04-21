@@ -8,7 +8,11 @@ export function sanitizeUrl(url: string | undefined | null): string {
   const trimmedUrl = url.trim();
 
   // Allow relative paths and anchor links
-  if (trimmedUrl.startsWith("/") || trimmedUrl.startsWith("#")) {
+  // We block protocol-relative URLs (starting with //) to prevent open redirects.
+  if (
+    (trimmedUrl.startsWith("/") && !trimmedUrl.startsWith("//")) ||
+    trimmedUrl.startsWith("#")
+  ) {
     return trimmedUrl;
   }
 
@@ -44,7 +48,9 @@ export function isTrustedImageHost(url: string): boolean {
     return (
       parsed.protocol === "https:" &&
       ALLOWED_IMAGE_HOSTS.includes(parsed.hostname) &&
-      (parsed.port === "" || parsed.port === "443")
+      (parsed.port === "" || parsed.port === "443") &&
+      parsed.username === "" &&
+      parsed.password === ""
     );
   } catch {
     return false;
