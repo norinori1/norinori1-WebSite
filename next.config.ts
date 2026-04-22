@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=(), fullscreen=(), midi=(), payment=(), sync-xhr=(), usb=()",
           },
           {
             key: "Strict-Transport-Security",

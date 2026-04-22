@@ -166,7 +166,8 @@ export async function GET(request: Request) {
     );
     return response;
   } catch (error) {
-    console.error("[notion-image] Failed to resolve image URL:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("[notion-image] Failed to resolve image URL:", message);
     return new NextResponse("Failed to fetch image from Notion", { status: 502 });
   }
 }
