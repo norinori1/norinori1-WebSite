@@ -12,3 +12,8 @@
 **Vulnerability:** Potential open redirect via URL normalization in browsers.
 **Learning:** Simply checking for `//` at the start of a URL is not enough to prevent open redirects. Some browsers normalize paths starting with `/\`, `/ ` (whitespace), or `/\t` (tabs) into protocol-relative URLs (e.g., `https://example.com/\attacker.com` might redirect to `attacker.com` on some platforms).
 **Prevention:** Path-based sanitizers should block any URL starting with `/` followed by another slash, a backslash, or whitespace/control characters.
+
+## 2025-05-21 - URL Sanitization Hardening against Newline Injection
+**Vulnerability:** Potential newline injection (CR/LF) in URLs.
+**Learning:** While `sanitizeUrl` blocked unsafe protocols, it didn't strip carriage returns (\r) or line feeds (\n). Attackers can sometimes use these characters to bypass string-based filters (e.g., `java\r\nscript:`) or, if the URL is ever reflected in an HTTP header, perform response splitting.
+**Prevention:** Always strip CR and LF characters from URLs during the sanitization process before any protocol or path validation.
