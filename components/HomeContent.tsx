@@ -21,8 +21,8 @@ const platforms: { name: string; url: string; icon: IconName }[] = [
   { name: "itch.io", url: "https://norinori1.itch.io", icon: "itchio" },
   { name: "X (Twitter)", url: "https://x.com/norinori1_", icon: "x" },
   { name: "GitHub", url: "https://github.com/norinori1", icon: "github" },
-  { name: "Qiita", url: "https://qiita.com/norinori1", icon: "web" },
-  { name: "Zenn", url: "https://zenn.dev/norinori1", icon: "web" },
+  { name: "Qiita", url: "https://qiita.com/norinori1", icon: "qiita" },
+  { name: "Zenn", url: "https://zenn.dev/norinori1", icon: "zenn" },
   { name: "Scratch", url: "https://scratch.mit.edu/users/norinori1/", icon: "scratch" },
   { name: "unityroom", url: "https://unityroom.com/users/csn31btru8plo50zijv4", icon: "unity" },
 ];
@@ -344,9 +344,8 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                     })
                   }
                 >
-                  <PlatformIcon name={platform.icon} size={32} className="platform-card-icon" />
+                  <PlatformIcon name={platform.icon} size={30} className="platform-card-icon" />
                   <h3>{platform.name}</h3>
-                  <span>Visit →</span>
                 </a>
               </ScrollReveal>
             ))}
