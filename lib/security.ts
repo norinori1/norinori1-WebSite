@@ -5,7 +5,7 @@
 export function sanitizeUrl(url: string | undefined | null): string {
   if (!url) return "";
 
-  const trimmedUrl = url.trim();
+  const trimmedUrl = url.trim().replace(/[\r\n]/g, "");
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
