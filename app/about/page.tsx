@@ -137,7 +137,7 @@ export default function AboutPage() {
                       rel="noopener noreferrer"
                       style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                     >
-                      <PlatformIcon name="web" size={18} />
+                      <PlatformIcon name="qiita" size={18} />
                       Qiita
                     </a>
                   </li>
@@ -148,7 +148,7 @@ export default function AboutPage() {
                       rel="noopener noreferrer"
                       style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
                     >
-                      <PlatformIcon name="web" size={18} />
+                      <PlatformIcon name="zenn" size={18} />
                       Zenn
                     </a>
                   </li>
