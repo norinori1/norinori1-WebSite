@@ -132,6 +132,28 @@ export default function AboutPage() {
                   </li>
                   <li>
                     <a
+                      href="https://qiita.com/norinori1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                    >
+                      <PlatformIcon name="web" size={18} />
+                      Qiita
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://zenn.dev/norinori1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                    >
+                      <PlatformIcon name="web" size={18} />
+                      Zenn
+                    </a>
+                  </li>
+                  <li>
+                    <a
                       href="https://x.com/norinori1_"
                       target="_blank"
                       rel="noopener noreferrer"
