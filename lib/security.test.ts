@@ -10,7 +10,7 @@ const testCases = {
     {
       url: "https://s3.us-west-2.amazonaws.com/attacker-bucket/malicious.png",
       expected: false,
-      description: "Path-style S3 URL on generic host (potential open redirect)",
+      description: "Generic S3 host (removed from allowlist)",
     },
     {
       url: "http://prod-files-secure.s3.us-west-2.amazonaws.com/uuid/image.png",
@@ -63,6 +63,16 @@ const testCases = {
       url: "https://example.com/\x08",
       expected: "https://example.com/",
       description: "URL with backspace control character",
+    },
+    {
+      url: "java\r\nscript:alert(1)",
+      expected: "about:blank",
+      description: "CRLF in protocol",
+    },
+    {
+      url: "https://exa mple.com",
+      expected: "https://example.com",
+      description: "Whitespace in hostname (stripped)",
     },
   ],
 };
