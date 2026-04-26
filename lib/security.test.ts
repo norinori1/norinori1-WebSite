@@ -74,6 +74,11 @@ const testCases = {
       expected: "https://example.com",
       description: "Whitespace in hostname (stripped)",
     },
+    {
+      url: "java\x80script:alert(1)",
+      expected: "about:blank",
+      description: "C1 control character in protocol",
+    },
   ],
 };
 

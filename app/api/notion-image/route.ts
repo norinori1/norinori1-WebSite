@@ -59,6 +59,14 @@ async function resolveBlockImageUrl(blockId: string): Promise<string | null> {
         ? imageBlock.image.file.url
         : imageBlock.image.external.url;
 
+    // Security Hardening: Validate URL before caching to prevent poisoning the cache
+    // with unsafe URLs if Notion ever returns one (though unlikely).
+    const sanitized = sanitizeUrl(url);
+    if (sanitized === "about:blank" || sanitized === "" || !isTrustedImageHost(sanitized)) {
+      setCached(`block:${blockId}`, null);
+      return null;
+    }
+
     setCached(`block:${blockId}`, url);
     return url;
   } catch {
@@ -88,6 +96,13 @@ async function resolvePagePropertyUrl(pageId: string, prop: string): Promise<str
 
     const file = property.files[0];
     const url = file.type === "file" ? file.file.url : file.external.url;
+
+    // Security Hardening: Validate URL before caching.
+    const sanitized = sanitizeUrl(url);
+    if (sanitized === "about:blank" || sanitized === "" || !isTrustedImageHost(sanitized)) {
+      setCached(cacheKey, null);
+      return null;
+    }
 
     setCached(cacheKey, url);
     return url;
@@ -121,6 +136,7 @@ export async function GET(request: Request) {
       "Missing required parameters: blockId or (pageId + prop)",
       {
         status: 400,
+        headers: { "X-Content-Type-Options": "nosniff" },
       },
     );
   }
@@ -129,15 +145,22 @@ export async function GET(request: Request) {
   if (pageId && !isAllowedImageProperty(prop)) {
     return new NextResponse("Invalid or restricted property name", {
       status: 400,
+      headers: { "X-Content-Type-Options": "nosniff" },
     });
   }
 
   // Security Hardening: Validate Notion IDs to prevent malformed/probing requests.
   if (blockId && !NOTION_ID_REGEX.test(blockId)) {
-    return new NextResponse("Invalid blockId format", { status: 400 });
+    return new NextResponse("Invalid blockId format", {
+      status: 400,
+      headers: { "X-Content-Type-Options": "nosniff" },
+    });
   }
   if (pageId && !NOTION_ID_REGEX.test(pageId)) {
-    return new NextResponse("Invalid pageId format", { status: 400 });
+    return new NextResponse("Invalid pageId format", {
+      status: 400,
+      headers: { "X-Content-Type-Options": "nosniff" },
+    });
   }
 
   try {
@@ -146,7 +169,10 @@ export async function GET(request: Request) {
       : await resolvePagePropertyUrl(pageId!, prop!);
 
     if (!imageUrl) {
-      return new NextResponse("Image not found", { status: 404 });
+      return new NextResponse("Image not found", {
+        status: 404,
+        headers: { "X-Content-Type-Options": "nosniff" },
+      });
     }
 
     const sanitizedUrl = sanitizeUrl(imageUrl);
@@ -155,7 +181,10 @@ export async function GET(request: Request) {
       sanitizedUrl === "" ||
       !isTrustedImageHost(sanitizedUrl)
     ) {
-      return new NextResponse("Unsafe image URL", { status: 403 });
+      return new NextResponse("Unsafe image URL", {
+        status: 403,
+        headers: { "X-Content-Type-Options": "nosniff" },
+      });
     }
 
     const response = NextResponse.redirect(sanitizedUrl, { status: 307 });
@@ -164,10 +193,14 @@ export async function GET(request: Request) {
       "Cache-Control",
       "public, max-age=1800, stale-while-revalidate=300",
     );
+    response.headers.set("X-Content-Type-Options", "nosniff");
     return response;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("[notion-image] Failed to resolve image URL:", message);
-    return new NextResponse("Failed to fetch image from Notion", { status: 502 });
+    return new NextResponse("Failed to fetch image from Notion", {
+      status: 502,
+      headers: { "X-Content-Type-Options": "nosniff" },
+    });
   }
 }

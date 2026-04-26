@@ -17,3 +17,8 @@
 **Vulnerability:** Potential newline injection (CR/LF) in URLs.
 **Learning:** While `sanitizeUrl` blocked unsafe protocols, it didn't strip carriage returns (\r) or line feeds (\n). Attackers can sometimes use these characters to bypass string-based filters (e.g., `java\r\nscript:`) or, if the URL is ever reflected in an HTTP header, perform response splitting.
 **Prevention:** Always strip CR and LF characters from URLs during the sanitization process before any protocol or path validation.
+
+## 2025-05-22 - Cache Poisoning Prevention in Image Proxy
+**Vulnerability:** Potential cache poisoning in the internal image URL proxy.
+**Learning:** Even if the final redirect is sanitized, caching unsanitized URLs from a CMS (like Notion) can lead to a "negative cache" bypass or potentially serve malicious payloads if sanitization logic changes or has edge cases. Validating the URL *before* it enters the cache (and caching a null/failure state for invalid URLs) prevents the cache from being used as a staging area for malformed data.
+**Prevention:** Implement URL validation (sanitization and host allowlisting) both at the point of ingestion (before caching) and at the point of consumption (before redirecting).
