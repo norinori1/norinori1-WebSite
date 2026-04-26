@@ -21,7 +21,15 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=(), interest-cohort=(), fullscreen=(), midi=(), payment=(), sync-xhr=(), usb=()",
+            value: "camera=(), microphone=(), geolocation=(), interest-cohort=(), browsing-topics=(), join-ad-interest-group=(), fullscreen=(), midi=(), payment=(), sync-xhr=(), usb=()",
+          },
+          {
+            key: "X-Download-Options",
+            value: "noopen",
+          },
+          {
+            key: "X-Permitted-Cross-Domain-Policies",
+            value: "none",
           },
           {
             key: "Strict-Transport-Security",

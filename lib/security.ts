@@ -5,9 +5,9 @@
 export function sanitizeUrl(url: string | undefined | null): string {
   if (!url) return "";
 
-  // Strip all control characters (0x00-0x1F and 0x7F) and whitespace
-  // to prevent protocol obfuscation (e.g., java\0script:).
-  const trimmedUrl = url.trim().replace(/[\x00-\x1F\x7F]/g, "");
+  // Strip all control characters (0x00-0x1F and 0x7F) and all whitespace
+  // to prevent protocol obfuscation (e.g., java\r\nscript:).
+  const trimmedUrl = url.replace(/[\x00-\x1F\x7F\s]/g, "");
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
@@ -35,14 +35,7 @@ const ALLOWED_IMAGE_HOSTS = [
   "prod-files-secure.s3.us-west-2.amazonaws.com",
   "secure.notion-static.com",
   "www.notion.so",
-  "s3.us-west-2.amazonaws.com",
-  "s3-us-west-2.amazonaws.com",
   "notion.so",
-];
-
-const GENERIC_S3_HOSTS = [
-  "s3.us-west-2.amazonaws.com",
-  "s3-us-west-2.amazonaws.com",
 ];
 
 /**
@@ -62,18 +55,6 @@ export function isTrustedImageHost(url: string): boolean {
       parsed.username !== "" ||
       parsed.password !== ""
     ) {
-      return false;
-    }
-
-    // Defense-in-depth: For generic S3 hostnames, block path-style access
-    // which could be used to proxy any public S3 bucket.
-    // Legitimate Notion URLs use virtual-host style (bucket name in hostname)
-    // or very specific paths on Notion's own domains.
-    if (GENERIC_S3_HOSTS.includes(parsed.hostname)) {
-      // If hostname is exactly the generic S3 endpoint, the path must NOT
-      // look like it's addressing a bucket (path-style).
-      // Notion typically doesn't use these generic endpoints for images anymore;
-      // it uses prod-files-secure.s3.us-west-2.amazonaws.com.
       return false;
     }
 
