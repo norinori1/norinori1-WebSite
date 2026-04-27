@@ -79,6 +79,21 @@ const testCases = {
       expected: "about:blank",
       description: "C1 control character in protocol",
     },
+    {
+      url: "https://example.com/safe.png\u202Egnp.evil",
+      expected: "https://example.com/safe.pnggnp.evil",
+      description: "URL with RTL override (stripped)",
+    },
+    {
+      url: "https://example.com/\u200Bzero-width",
+      expected: "https://example.com/zero-width",
+      description: "URL with zero-width space (stripped)",
+    },
+    {
+      url: "https://example.com/" + "a".repeat(8193),
+      expected: "about:blank",
+      description: "Overly long URL",
+    },
   ],
 };
 
