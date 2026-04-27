@@ -5,9 +5,9 @@
 export function sanitizeUrl(url: string | undefined | null): string {
   if (!url) return "";
 
-  // Strip all control characters (0x00-0x1F and 0x7F) and all whitespace
+  // Strip all control characters (0x00-0x1F, 0x7F-0x9F) and all whitespace
   // to prevent protocol obfuscation (e.g., java\r\nscript:).
-  const trimmedUrl = url.replace(/[\x00-\x1F\x7F\s]/g, "");
+  const trimmedUrl = url.replace(/[\x00-\x1F\x7F-\x9F\s]/g, "");
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
