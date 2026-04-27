@@ -1,13 +1,20 @@
+const MAX_URL_LENGTH = 8192;
+
 /**
  * Sanitizes a URL by whitelisting safe protocols to prevent XSS (e.g., javascript: URLs).
  * Returns 'about:blank' for unsafe URLs.
  */
 export function sanitizeUrl(url: string | undefined | null): string {
   if (!url) return "";
+  if (url.length > MAX_URL_LENGTH) return "about:blank";
 
-  // Strip all control characters (0x00-0x1F, 0x7F-0x9F) and all whitespace
-  // to prevent protocol obfuscation (e.g., java\r\nscript:).
-  const trimmedUrl = url.replace(/[\x00-\x1F\x7F-\x9F\s]/g, "");
+  // Strip all control characters (0x00-0x1F, 0x7F-0x9F), all whitespace,
+  // and dangerous Unicode characters (BiDi, zero-width) to prevent
+  // protocol obfuscation or UI spoofing.
+  const trimmedUrl = url.replace(
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u200B-\u200D\uFEFF]/gu,
+    "",
+  );
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
