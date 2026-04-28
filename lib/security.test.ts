@@ -31,7 +31,7 @@ const testCases = {
   sanitizeUrl: [
     {
       url: "https://example.com",
-      expected: "https://example.com",
+      expected: "https://example.com/",
       description: "Safe HTTPS URL",
     },
     {
@@ -71,7 +71,7 @@ const testCases = {
     },
     {
       url: "https://exa mple.com",
-      expected: "https://example.com",
+      expected: "https://example.com/",
       description: "Whitespace in hostname (stripped)",
     },
     {
@@ -93,6 +93,16 @@ const testCases = {
       url: "https://example.com/" + "a".repeat(8193),
       expected: "about:blank",
       description: "Overly long URL",
+    },
+    {
+      url: "https://notion.so\\attacker.com",
+      expected: "https://notion.so/attacker.com",
+      description: "Backslash normalization in authority",
+    },
+    {
+      url: "https://notion。so",
+      expected: "https://notion.so/",
+      description: "Full-width character normalization",
     },
   ],
 };
