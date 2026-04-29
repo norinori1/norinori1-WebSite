@@ -29,7 +29,14 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // Check for safe protocols
   const safeProtocols = /^(https?|mailto|tel):/i;
   if (safeProtocols.test(trimmedUrl)) {
-    return trimmedUrl;
+    try {
+      // Use URL constructor to normalize the URL (e.g., converting \ to / in host)
+      // and ensure it's a valid absolute URL.
+      return new URL(trimmedUrl).href;
+    } catch {
+      // Fallback for edge cases where the regex matched but URL parsing failed
+      return "about:blank";
+    }
   }
 
   // If it doesn't match a safe protocol and isn't a relative path,
