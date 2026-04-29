@@ -104,6 +104,26 @@ const testCases = {
       expected: "https://notion.so/",
       description: "Full-width character normalization",
     },
+    {
+      url: "https://user:pass@example.com",
+      expected: "https://example.com/",
+      description: "Credential stripping",
+    },
+    {
+      url: "https://example.com/\u2060word-joiner",
+      expected: "https://example.com/word-joiner",
+      description: "URL with Word Joiner (stripped)",
+    },
+    {
+      url: "https://example.com/\u2066BiDi-isolate",
+      expected: "https://example.com/BiDi-isolate",
+      description: "URL with BiDi Isolate (stripped)",
+    },
+    {
+      url: "https://example.com/\u2028line-sep",
+      expected: "https://example.com/line-sep",
+      description: "URL with Line Separator (stripped)",
+    },
   ],
 };
 

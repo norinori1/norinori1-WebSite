@@ -32,3 +32,8 @@
 **Vulnerability:** Potential open redirect or spoofing via non-standard authority characters.
 **Learning:** Even if protocols are whitelisted, characters like backslashes (`\`) or full-width dots (`。`) in the authority part of a URL can be interpreted differently by different browsers or libraries. For instance, `https://notion.so\attacker.com` might be normalized to `https://notion.so/attacker.com` by some, but could potentially lead to an open redirect if used raw in certain contexts.
 **Prevention:** Always normalize absolute URLs using the `URL` constructor (`new URL(url).href`) before use. This ensures a consistent, standard representation (e.g., backslashes converted to forward slashes, full-width characters normalized) and helps prevent bypasses of hostname-based security checks.
+
+## 2025-05-25 - URL Hardening via Credential Stripping and Invisible Character Removal
+**Vulnerability:** Phishing and secret leakage via embedded credentials; UI spoofing via invisible Unicode characters.
+**Learning:** URLs with credentials (`user:pass@host`) can be used in phishing attacks or cause accidental leakage of secrets in logs and analytics. Invisible characters like Word Joiners (`\u2060`), line/paragraph separators (`\u2028`, `\u2029`), and BiDi isolates (`\u2066-\u2069`) can further obfuscate URLs or bypass simple string-based filters.
+**Prevention:** Enhance `sanitizeUrl` to explicitly strip `username` and `password` using the `URL` constructor. Expand the character-stripping regex to include invisible separators and BiDi isolation characters to ensure the URL remains clean and predictable across different rendering contexts.

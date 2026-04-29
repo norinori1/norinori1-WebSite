@@ -9,10 +9,10 @@ export function sanitizeUrl(url: string | undefined | null): string {
   if (url.length > MAX_URL_LENGTH) return "about:blank";
 
   // Strip all control characters (0x00-0x1F, 0x7F-0x9F), all whitespace,
-  // and dangerous Unicode characters (BiDi, zero-width) to prevent
-  // protocol obfuscation or UI spoofing.
+  // and dangerous Unicode characters (BiDi, zero-width, invisible separators)
+  // to prevent protocol obfuscation or UI spoofing.
   const trimmedUrl = url.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u200B-\u200D\uFEFF]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u2028\u2029\u202A-\u202E\u2060\u2066-\u2069\u200B-\u200D\uFEFF]/gu,
     "",
   );
 
@@ -32,7 +32,11 @@ export function sanitizeUrl(url: string | undefined | null): string {
     try {
       // Use URL constructor to normalize the URL (e.g., converting \ to / in host)
       // and ensure it's a valid absolute URL.
-      return new URL(trimmedUrl).href;
+      const parsed = new URL(trimmedUrl);
+      // Security Hardening: Strip credentials to prevent phishing or accidental secret leakage.
+      parsed.username = "";
+      parsed.password = "";
+      return parsed.href;
     } catch {
       // Fallback for edge cases where the regex matched but URL parsing failed
       return "about:blank";
