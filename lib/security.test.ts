@@ -90,6 +90,16 @@ const testCases = {
       description: "URL with zero-width space (stripped)",
     },
     {
+      url: "https://example.com/\u2066BiDi-Isolate",
+      expected: "https://example.com/BiDi-Isolate",
+      description: "URL with BiDi isolate (stripped)",
+    },
+    {
+      url: "https://example.com/line\u2028separator",
+      expected: "https://example.com/lineseparator",
+      description: "URL with line separator (stripped)",
+    },
+    {
       url: "https://example.com/" + "a".repeat(8193),
       expected: "about:blank",
       description: "Overly long URL",

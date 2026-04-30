@@ -12,7 +12,7 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // and dangerous Unicode characters (BiDi, zero-width) to prevent
   // protocol obfuscation or UI spoofing.
   const trimmedUrl = url.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u200B-\u200D\uFEFF]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2066-\u2069\u2028\u2029\u200B-\u200D\uFEFF]/gu,
     "",
   );
 

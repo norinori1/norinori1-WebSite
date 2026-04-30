@@ -32,3 +32,8 @@
 **Vulnerability:** Potential open redirect or spoofing via non-standard authority characters.
 **Learning:** Even if protocols are whitelisted, characters like backslashes (`\`) or full-width dots (`。`) in the authority part of a URL can be interpreted differently by different browsers or libraries. For instance, `https://notion.so\attacker.com` might be normalized to `https://notion.so/attacker.com` by some, but could potentially lead to an open redirect if used raw in certain contexts.
 **Prevention:** Always normalize absolute URLs using the `URL` constructor (`new URL(url).href`) before use. This ensures a consistent, standard representation (e.g., backslashes converted to forward slashes, full-width characters normalized) and helps prevent bypasses of hostname-based security checks.
+
+## 2025-05-25 - Comprehensive Character Stripping and CSP Alignment
+**Vulnerability:** UI spoofing via BiDi isolates and overly permissive CSP for S3.
+**Learning:** BiDi isolate characters (U+2066-U+2069) and line/paragraph separators (U+2028, U+2029) can be used to obfuscate protocols or spoof UI elements in ways that standard BiDi overrides (U+202E) cannot. Furthermore, maintaining a broad CSP (e.g., generic S3 hosts) that contradicts application-level logic (e.g., an allowlist of specific S3 buckets) weakens the defense-in-depth posture.
+**Prevention:** Include BiDi isolates and line/paragraph separators in URL sanitization character stripping. Always align CSP directives and image `remotePatterns` with the most restrictive application-level allowlist to minimize the attack surface.
