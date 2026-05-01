@@ -32,3 +32,8 @@
 **Vulnerability:** Potential open redirect or spoofing via non-standard authority characters.
 **Learning:** Even if protocols are whitelisted, characters like backslashes (`\`) or full-width dots (`。`) in the authority part of a URL can be interpreted differently by different browsers or libraries. For instance, `https://notion.so\attacker.com` might be normalized to `https://notion.so/attacker.com` by some, but could potentially lead to an open redirect if used raw in certain contexts.
 **Prevention:** Always normalize absolute URLs using the `URL` constructor (`new URL(url).href`) before use. This ensures a consistent, standard representation (e.g., backslashes converted to forward slashes, full-width characters normalized) and helps prevent bypasses of hostname-based security checks.
+
+## 2025-05-25 - URL Hardening via Unicode Normalization and Hostname Canonicalization
+**Vulnerability:** Potential bypasses using equivalent Unicode sequences (e.g., NFD vs NFC) or absolute hostnames with trailing dots.
+**Learning:** Browsers and servers often treat `example.com` and `example.com.` identically, but simple string allowlists might not. Similarly, combined characters (like `a` + `\u0301`) can be used to obfuscate protocols or domains if they aren't normalized before regex matching.
+**Prevention:** Explicitly normalize input strings using `url.normalize("NFC")` before sanitization and strip all trailing dots from hostnames (`parsed.hostname.replace(/\.+$/, "")`) before validating against an allowlist. Ensure length checks happen *before* normalization to mitigate potential ReDoS/resource exhaustion from maliciously long Unicode strings.

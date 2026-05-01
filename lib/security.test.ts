@@ -27,6 +27,11 @@ const testCases = {
       expected: false,
       description: "URL with credentials",
     },
+    {
+      url: "https://prod-files-secure.s3.us-west-2.amazonaws.com./uuid/image.png",
+      expected: true,
+      description: "Hostname with trailing dot (should be normalized)",
+    },
   ],
   sanitizeUrl: [
     {
@@ -103,6 +108,11 @@ const testCases = {
       url: "https://notion。so",
       expected: "https://notion.so/",
       description: "Full-width character normalization",
+    },
+    {
+      url: "https://example.com/a\u0301",
+      expected: "https://example.com/%C3%A1",
+      description: "Unicode normalization (NFD to NFC in URL href)",
     },
   ],
 };

@@ -8,10 +8,14 @@ export function sanitizeUrl(url: string | undefined | null): string {
   if (!url) return "";
   if (url.length > MAX_URL_LENGTH) return "about:blank";
 
+  // Normalize Unicode to handle characters in different forms consistently
+  // and prevent bypasses using combined characters.
+  const normalizedUrl = url.normalize("NFC");
+
   // Strip all control characters (0x00-0x1F, 0x7F-0x9F), all whitespace,
   // and dangerous Unicode characters (BiDi, zero-width) to prevent
   // protocol obfuscation or UI spoofing.
-  const trimmedUrl = url.replace(
+  const trimmedUrl = normalizedUrl.replace(
     /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u200B-\u200D\uFEFF]/gu,
     "",
   );
@@ -60,11 +64,13 @@ const ALLOWED_IMAGE_HOSTS = [
 export function isTrustedImageHost(url: string): boolean {
   try {
     const parsed = new URL(url);
+    // Strip all trailing dots from hostname for consistent validation
+    const hostname = parsed.hostname.replace(/\.+$/, "");
 
     // Enforce HTTPS and basic origin validation
     if (
       parsed.protocol !== "https:" ||
-      !ALLOWED_IMAGE_HOSTS.includes(parsed.hostname) ||
+      !ALLOWED_IMAGE_HOSTS.includes(hostname) ||
       (parsed.port !== "" && parsed.port !== "443") ||
       parsed.username !== "" ||
       parsed.password !== ""
