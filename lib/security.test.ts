@@ -25,7 +25,12 @@ const testCases = {
     {
       url: "https://user:pass@prod-files-secure.s3.us-west-2.amazonaws.com/uuid/image.png",
       expected: false,
-      description: "URL with credentials",
+      description: "URL with credentials (rejected by isTrustedImageHost)",
+    },
+    {
+      url: "https://prod-files-secure.s3.us-west-2.amazonaws.com./uuid/image.png",
+      expected: true,
+      description: "S3 host with trailing dot (normalized)",
     },
   ],
   sanitizeUrl: [
@@ -103,6 +108,26 @@ const testCases = {
       url: "https://notion。so",
       expected: "https://notion.so/",
       description: "Full-width character normalization",
+    },
+    {
+      url: "https://user:pass@example.com",
+      expected: "https://example.com/",
+      description: "Strip credentials from absolute URL",
+    },
+    {
+      url: "https://example.com/safe\u2066evil.exe",
+      expected: "https://example.com/safeevil.exe",
+      description: "Strip BiDi isolate characters",
+    },
+    {
+      url: "https://example.com/line\u2028separator",
+      expected: "https://example.com/lineseparator",
+      description: "Strip line separator",
+    },
+    {
+      url: "https://example.com/a\u0301",
+      expected: "https://example.com/%C3%A1",
+      description: "NFC normalization (a + combining accent -> á)",
     },
   ],
 };
