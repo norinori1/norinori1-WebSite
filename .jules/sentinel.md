@@ -32,3 +32,8 @@
 **Vulnerability:** Potential open redirect or spoofing via non-standard authority characters.
 **Learning:** Even if protocols are whitelisted, characters like backslashes (`\`) or full-width dots (`。`) in the authority part of a URL can be interpreted differently by different browsers or libraries. For instance, `https://notion.so\attacker.com` might be normalized to `https://notion.so/attacker.com` by some, but could potentially lead to an open redirect if used raw in certain contexts.
 **Prevention:** Always normalize absolute URLs using the `URL` constructor (`new URL(url).href`) before use. This ensures a consistent, standard representation (e.g., backslashes converted to forward slashes, full-width characters normalized) and helps prevent bypasses of hostname-based security checks.
+
+## 2025-05-25 - Robust Hostname Validation and DoS Mitigation
+**Vulnerability:** Allowlist bypass via trailing dots and potential DoS via Unicode normalization.
+**Learning:** Browsers may treat `example.com.` and `example.com` identically, allowing an attacker to bypass simple string-based hostname allowlists by adding a trailing dot. Furthermore, performing Unicode normalization (NFC) on extremely long strings can be computationally expensive; checking length *before* and *after* normalization is necessary for robust DoS protection and ensuring canonical forms stay within limits.
+**Prevention:** Always strip trailing dots from hostnames before validation in `isTrustedImageHost`. In `sanitizeUrl`, apply a preliminary length check before `normalize("NFC")`, and a final check after normalization. Also, avoid allowing generic regional S3 hostnames (e.g., `s3.us-west-2.amazonaws.com`) in CSP as they can be abused via path-style access to other buckets.

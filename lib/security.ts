@@ -6,13 +6,20 @@ const MAX_URL_LENGTH = 8192;
  */
 export function sanitizeUrl(url: string | undefined | null): string {
   if (!url) return "";
+
+  // Preliminary length check to prevent DoS during normalization.
   if (url.length > MAX_URL_LENGTH) return "about:blank";
 
+  // Apply Unicode normalization (NFC) and check length again to ensure
+  // the limit is applied to the final canonical form.
+  const normalizedUrl = url.normalize("NFC");
+  if (normalizedUrl.length > MAX_URL_LENGTH) return "about:blank";
+
   // Strip all control characters (0x00-0x1F, 0x7F-0x9F), all whitespace,
-  // and dangerous Unicode characters (BiDi, zero-width) to prevent
-  // protocol obfuscation or UI spoofing.
-  const trimmedUrl = url.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u200B-\u200D\uFEFF]/gu,
+  // and dangerous Unicode characters (BiDi, zero-width, separators)
+  // to prevent protocol obfuscation or UI spoofing.
+  const trimmedUrl = normalizedUrl.replace(
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2066-\u2069\u200B-\u200D\u2060\uFEFF\u2028\u2029]/gu,
     "",
   );
 
@@ -60,11 +67,13 @@ const ALLOWED_IMAGE_HOSTS = [
 export function isTrustedImageHost(url: string): boolean {
   try {
     const parsed = new URL(url);
+    // Normalize hostname by stripping all trailing dots to prevent bypasses.
+    const normalizedHostname = parsed.hostname.replace(/\.+$/, "");
 
     // Enforce HTTPS and basic origin validation
     if (
       parsed.protocol !== "https:" ||
-      !ALLOWED_IMAGE_HOSTS.includes(parsed.hostname) ||
+      !ALLOWED_IMAGE_HOSTS.includes(normalizedHostname) ||
       (parsed.port !== "" && parsed.port !== "443") ||
       parsed.username !== "" ||
       parsed.password !== ""
