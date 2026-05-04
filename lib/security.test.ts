@@ -32,6 +32,11 @@ const testCases = {
       expected: true,
       description: "URL with trailing dot in hostname (normalized)",
     },
+    {
+      url: "https://prod-files-secure.s3.us-west-2.amazonaws.com/" + "a".repeat(8193),
+      expected: false,
+      description: "Overly long URL in isTrustedImageHost",
+    },
   ],
   sanitizeUrl: [
     {
@@ -123,6 +128,16 @@ const testCases = {
       url: "https://notion。so",
       expected: "https://notion.so/",
       description: "Full-width character normalization",
+    },
+    {
+      url: "https://user:pass@example.com",
+      expected: "https://example.com/",
+      description: "Strip credentials from absolute URL",
+    },
+    {
+      url: "https://example.com.",
+      expected: "https://example.com/",
+      description: "Strip trailing dots from hostname in sanitizeUrl",
     },
   ],
 };
