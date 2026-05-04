@@ -27,6 +27,11 @@ const testCases = {
       expected: false,
       description: "URL with credentials",
     },
+    {
+      url: "https://prod-files-secure.s3.us-west-2.amazonaws.com./uuid/image.png",
+      expected: true,
+      description: "URL with trailing dot in hostname (normalized)",
+    },
   ],
   sanitizeUrl: [
     {
@@ -88,6 +93,21 @@ const testCases = {
       url: "https://example.com/\u200Bzero-width",
       expected: "https://example.com/zero-width",
       description: "URL with zero-width space (stripped)",
+    },
+    {
+      url: "https://example.com/\u200D\u2060\uFEFFmore-stripped",
+      expected: "https://example.com/more-stripped",
+      description: "URL with ZWJ, word joiner, and BOM (stripped)",
+    },
+    {
+      url: "https://example.com/\u2066isolates\u2069",
+      expected: "https://example.com/isolates",
+      description: "URL with BiDi isolates (stripped)",
+    },
+    {
+      url: "https://example.com/line\u2028separator\u2029",
+      expected: "https://example.com/lineseparator",
+      description: "URL with line/paragraph separators (stripped)",
     },
     {
       url: "https://example.com/" + "a".repeat(8193),

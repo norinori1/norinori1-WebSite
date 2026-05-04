@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "upgrade-insecure-requests; default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://prod-files-secure.s3.us-west-2.amazonaws.com https://secure.notion-static.com https://www.notion.so https://s3.us-west-2.amazonaws.com https://s3-us-west-2.amazonaws.com https://notion.so https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';",
+            value: "upgrade-insecure-requests; default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://prod-files-secure.s3.us-west-2.amazonaws.com https://secure.notion-static.com https://www.notion.so https://notion.so https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';",
           },
         ],
       },
@@ -59,15 +59,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "www.notion.so",
-      },
-      // General S3 buckets used by Notion
-      {
-        protocol: "https",
-        hostname: "s3.us-west-2.amazonaws.com",
-      },
-      {
-        protocol: "https",
-        hostname: "s3-us-west-2.amazonaws.com",
       },
       // Notion emoji / icon CDN
       {
