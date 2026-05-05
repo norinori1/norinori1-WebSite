@@ -42,3 +42,8 @@
 **Vulnerability:** Potential phishing via embedded credentials and allowlist bypass via trailing dots in absolute URLs.
 **Learning:** The `URL` constructor preserves embedded credentials (`user:pass@`) and trailing dots in hostnames in its `.href` output. While useful for technical correctness, these can be exploited for phishing (making a URL look like it's on a trusted host) or to bypass security filters that expect a canonical hostname. Furthermore, third-party libraries or internal systems might not handle these variations consistently.
 **Prevention:** When sanitizing absolute URLs, explicitly strip `username` and `password` and normalize the `hostname` by removing any trailing dots before using the resulting `href`. Always apply a `MAX_URL_LENGTH` check before parsing to mitigate DoS risks.
+
+## 2025-05-27 - Strict ID Validation and Stealth Character Stripping
+**Vulnerability:** Potential bypasses via malformed IDs or obfuscated URLs.
+**Learning:** Loose regex for internal identifiers (like Notion IDs) can lead to data ambiguity or probing. Furthermore, attackers use "stealth" Unicode characters like the Mongolian Vowel Separator (`\u180E`), soft hyphens (`\u00AD`), and various filler characters (e.g., Hangul filler `\u3164`) to bypass URL filters or perform homograph/spoofing attacks that are not caught by standard control character or BiDi stripping.
+**Prevention:** Always use strict regex for internal IDs (e.g., enforcing exact UUID formats). In URL sanitizers, maintain a comprehensive strip list that includes not just common control characters, but also non-standard whitespace, invisible formatters, and regional filler characters used for obfuscation.

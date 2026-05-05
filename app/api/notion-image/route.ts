@@ -123,7 +123,8 @@ async function resolvePagePropertyUrl(pageId: string, prop: string): Promise<str
  *   ?blockId=<notionBlockId>              — for inline image blocks
  *   ?pageId=<notionPageId>&prop=<propName> — for database file properties
  */
-const NOTION_ID_REGEX = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
+const NOTION_ID_REGEX =
+  /^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[0-9a-f]{32})$/i;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
