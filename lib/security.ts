@@ -39,7 +39,12 @@ export function sanitizeUrl(url: string | undefined | null): string {
     try {
       // Use URL constructor to normalize the URL (e.g., converting \ to / in host)
       // and ensure it's a valid absolute URL.
-      return new URL(trimmedUrl).href;
+      const parsed = new URL(trimmedUrl);
+      // Strip credentials and trailing dots from hostname for consistent representation.
+      parsed.username = "";
+      parsed.password = "";
+      parsed.hostname = parsed.hostname.replace(/\.+$/, "");
+      return parsed.href;
     } catch {
       // Fallback for edge cases where the regex matched but URL parsing failed
       return "about:blank";
@@ -65,6 +70,8 @@ const ALLOWED_IMAGE_HOSTS = [
  * Strictly enforces HTTPS to prevent man-in-the-middle attacks.
  */
 export function isTrustedImageHost(url: string): boolean {
+  if (!url || url.length > MAX_URL_LENGTH) return false;
+
   try {
     const parsed = new URL(url);
     // Normalize hostname by stripping all trailing dots to prevent bypasses.
