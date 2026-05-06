@@ -135,6 +135,11 @@ const testCases = {
       description: "Strip credentials from absolute URL",
     },
     {
+      url: "https:example.com",
+      expected: "about:blank",
+      description: "Single colon bypass",
+    },
+    {
       url: "https://example.com.",
       expected: "https://example.com/",
       description: "Strip trailing dots from hostname in sanitizeUrl",

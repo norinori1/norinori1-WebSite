@@ -34,7 +34,8 @@ export function sanitizeUrl(url: string | undefined | null): string {
   }
 
   // Check for safe protocols
-  const safeProtocols = /^(https?|mailto|tel):/i;
+  // We require :// for http/https to prevent single-colon bypasses.
+  const safeProtocols = /^(?:(https?):\/\/|(mailto|tel):)/i;
   if (safeProtocols.test(trimmedUrl)) {
     try {
       // Use URL constructor to normalize the URL (e.g., converting \ to / in host)
