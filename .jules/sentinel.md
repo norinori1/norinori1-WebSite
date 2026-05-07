@@ -42,3 +42,8 @@
 **Vulnerability:** Potential phishing via embedded credentials and allowlist bypass via trailing dots in absolute URLs.
 **Learning:** The `URL` constructor preserves embedded credentials (`user:pass@`) and trailing dots in hostnames in its `.href` output. While useful for technical correctness, these can be exploited for phishing (making a URL look like it's on a trusted host) or to bypass security filters that expect a canonical hostname. Furthermore, third-party libraries or internal systems might not handle these variations consistently.
 **Prevention:** When sanitizing absolute URLs, explicitly strip `username` and `password` and normalize the `hostname` by removing any trailing dots before using the resulting `href`. Always apply a `MAX_URL_LENGTH` check before parsing to mitigate DoS risks.
+
+## 2025-05-27 - Enhanced URL Sanitization against Homograph and Obfuscation Characters
+**Vulnerability:** URL obfuscation via invisible formatting characters and fillers.
+**Learning:** Standard security filters often overlook specific non-printing characters like Soft Hyphens (`\u00AD`), Combining Grapheme Joiners (`\u034F`), and various language-specific fillers (e.g., Hangul Fillers `\u115F`, `\u1160`). These can be used to visually spoof trusted domains or subtly bypass protocol-matching regexes if not properly stripped before validation.
+**Prevention:** Extend URL sanitizers to explicitly strip a comprehensive set of dangerous Unicode categories including BiDi overrides, zero-width characters, separators, and known format/filler characters using a Unicode-aware regex (`/u` flag).

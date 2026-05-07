@@ -115,6 +115,26 @@ const testCases = {
       description: "URL with line/paragraph separators (stripped)",
     },
     {
+      url: "https://example.com/soft\u00ADhyphen",
+      expected: "https://example.com/softhyphen",
+      description: "URL with soft hyphen (stripped)",
+    },
+    {
+      url: "https://example.com/combining\u034Fgrapheme",
+      expected: "https://example.com/combininggrapheme",
+      description: "URL with combining grapheme joiner (stripped)",
+    },
+    {
+      url: "https://example.com/hangul\u115F\u1160\u3164\uFFA0fillers",
+      expected: "https://example.com/hangulfillers",
+      description: "URL with Hangul fillers (stripped)",
+    },
+    {
+      url: "https://example.com/vowel\u180Eseparator",
+      expected: "https://example.com/vowelseparator",
+      description: "URL with Mongolian vowel separator (stripped)",
+    },
+    {
       url: "https://example.com/" + "a".repeat(8193),
       expected: "about:blank",
       description: "Overly long URL",
