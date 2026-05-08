@@ -16,10 +16,10 @@ export function sanitizeUrl(url: string | undefined | null): string {
   if (normalizedUrl.length > MAX_URL_LENGTH) return "about:blank";
 
   // Strip all control characters (0x00-0x1F, 0x7F-0x9F), all whitespace,
-  // and dangerous Unicode characters (BiDi, zero-width, separators)
+  // and dangerous Unicode characters (BiDi, zero-width, separators, format/fillers)
   // to prevent protocol obfuscation or UI spoofing.
   const trimmedUrl = normalizedUrl.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2066-\u2069\u200B-\u200D\u2060\uFEFF\u2028\u2029]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2066-\u2069\u200B-\u200D\u2060\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E]/gu,
     "",
   );
 
@@ -34,7 +34,8 @@ export function sanitizeUrl(url: string | undefined | null): string {
   }
 
   // Check for safe protocols
-  const safeProtocols = /^(https?|mailto|tel):/i;
+  // We require :// for http/https to prevent single-colon bypasses (e.g., https:example.com)
+  const safeProtocols = /^(?:https?:\/\/|mailto:|tel:)/i;
   if (safeProtocols.test(trimmedUrl)) {
     try {
       // Use URL constructor to normalize the URL (e.g., converting \ to / in host)
