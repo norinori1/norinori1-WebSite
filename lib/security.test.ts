@@ -139,6 +139,31 @@ const testCases = {
       expected: "https://example.com/",
       description: "Strip trailing dots from hostname in sanitizeUrl",
     },
+    {
+      url: "https:example.com",
+      expected: "about:blank",
+      description: "Reject single-colon http/https",
+    },
+    {
+      url: "https\u00AD://example.com",
+      expected: "https://example.com/",
+      description: "Strip soft hyphen",
+    },
+    {
+      url: "https://example.com/\u034F",
+      expected: "https://example.com/",
+      description: "Strip combining grapheme joiner",
+    },
+    {
+      url: "https://example.com/\u115F\u1160\u3164\uFFA0",
+      expected: "https://example.com/",
+      description: "Strip Hangul fillers",
+    },
+    {
+      url: "https://example.com/\u180E",
+      expected: "https://example.com/",
+      description: "Strip Mongolian vowel separator",
+    },
   ],
 };
 
