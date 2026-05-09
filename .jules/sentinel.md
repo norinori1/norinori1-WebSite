@@ -47,3 +47,8 @@
 **Vulnerability:** Potential filter bypass or ambiguous parsing via single-colon http:/https: URLs.
 **Learning:** Browsers and many URL parsers often "fix" https:example.com by treating it as https://example.com/. However, some security filters or backend systems might only look for https:// or might treat https: as a relative path if not careful. Explicitly requiring the :// sequence for standard web protocols prevents this ambiguity and ensures consistent behavior across different parts of the application and external systems.
 **Prevention:** In URL sanitizers, always enforce the full :// delimiter for protocols that require it (like http and https), while allowing the standard : for others (like mailto: and tel:).
+
+## 2025-05-28 - API Hardening and Path Traversal Prevention
+**Vulnerability:** Potential path traversal in relative URLs and missing security headers in API responses.
+**Learning:** Even if an API primarily returns redirects or JSON, it should enforce strict security headers. `X-Frame-Options: DENY` and `Content-Security-Policy: default-src 'none'` provide defense-in-depth if a response is ever misinterpreted by a browser. Furthermore, sanitizing relative paths requires blocking not just `//` and `/\`, but also `/.` to prevent directory traversal (e.g., `/../etc/passwd`) when the URL is used in an `href`.
+**Prevention:** Always include a standard set of security headers in API responses. In `sanitizeUrl`, block relative paths that start with `/` followed by a dot, and strip invisible mathematical operators (U+2061-U+2064) to prevent obfuscation.

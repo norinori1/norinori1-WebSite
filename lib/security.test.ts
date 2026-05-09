@@ -164,6 +164,21 @@ const testCases = {
       expected: "https://example.com/",
       description: "Strip Mongolian vowel separator",
     },
+    {
+      url: "https://example.com/\u2061invisible",
+      expected: "https://example.com/invisible",
+      description: "Strip invisible mathematical operator",
+    },
+    {
+      url: "/../etc/passwd",
+      expected: "about:blank",
+      description: "Block path traversal /..",
+    },
+    {
+      url: "/./test",
+      expected: "about:blank",
+      description: "Block relative path /.",
+    },
   ],
 };
 

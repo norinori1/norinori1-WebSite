@@ -19,15 +19,16 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // and dangerous Unicode characters (BiDi, zero-width, separators, format/fillers)
   // to prevent protocol obfuscation or UI spoofing.
   const trimmedUrl = normalizedUrl.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2066-\u2069\u200B-\u200D\u2060\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2066-\u2069\u200B-\u200D\u2060\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2061-\u2064]/gu,
     "",
   );
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
   // that some browsers might normalize to cross-origin redirects.
+  // We also block paths starting with /. to prevent path traversal (e.g., /../).
   if (
-    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s)/.test(trimmedUrl)) ||
+    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s|\.)/.test(trimmedUrl)) ||
     trimmedUrl.startsWith("#")
   ) {
     return trimmedUrl;
