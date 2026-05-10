@@ -113,6 +113,24 @@ async function resolvePagePropertyUrl(pageId: string, prop: string): Promise<str
 }
 
 /**
+ * Common security headers applied to all proxy responses.
+ * These are consistent with the global headers in next.config.ts but
+ * explicitly applied here to ensure API safety even if global middleware is bypassed.
+ */
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none';",
+  "X-Download-Options": "noopen",
+  "X-Permitted-Cross-Domain-Policies": "none",
+};
+
+/** Error responses should not be cached by browsers or CDNs. */
+const NO_CACHE_HEADERS = {
+  "Cache-Control": "no-store, must-revalidate",
+};
+
+/**
  * GET /api/notion-image
  *
  * Fetches a fresh signed URL from the Notion API and returns a 307 redirect.
@@ -136,7 +154,7 @@ export async function GET(request: Request) {
       "Missing required parameters: blockId or (pageId + prop)",
       {
         status: 400,
-        headers: { "X-Content-Type-Options": "nosniff" },
+        headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
       },
     );
   }
@@ -145,7 +163,7 @@ export async function GET(request: Request) {
   if (pageId && !isAllowedImageProperty(prop)) {
     return new NextResponse("Invalid or restricted property name", {
       status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
     });
   }
 
@@ -153,13 +171,13 @@ export async function GET(request: Request) {
   if (blockId && !NOTION_ID_REGEX.test(blockId)) {
     return new NextResponse("Invalid blockId format", {
       status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
     });
   }
   if (pageId && !NOTION_ID_REGEX.test(pageId)) {
     return new NextResponse("Invalid pageId format", {
       status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
     });
   }
 
@@ -171,7 +189,7 @@ export async function GET(request: Request) {
     if (!imageUrl) {
       return new NextResponse("Image not found", {
         status: 404,
-        headers: { "X-Content-Type-Options": "nosniff" },
+        headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
       });
     }
 
@@ -183,7 +201,7 @@ export async function GET(request: Request) {
     ) {
       return new NextResponse("Unsafe image URL", {
         status: 403,
-        headers: { "X-Content-Type-Options": "nosniff" },
+        headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
       });
     }
 
@@ -193,14 +211,17 @@ export async function GET(request: Request) {
       "Cache-Control",
       "public, max-age=1800, stale-while-revalidate=300",
     );
-    response.headers.set("X-Content-Type-Options", "nosniff");
+    // Explicitly apply security headers to the redirect response.
+    Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
     return response;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("[notion-image] Failed to resolve image URL:", message);
     return new NextResponse("Failed to fetch image from Notion", {
       status: 502,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: { ...SECURITY_HEADERS, ...NO_CACHE_HEADERS },
     });
   }
 }
