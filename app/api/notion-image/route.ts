@@ -125,6 +125,14 @@ async function resolvePagePropertyUrl(pageId: string, prop: string): Promise<str
  */
 const NOTION_ID_REGEX = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
 
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Content-Security-Policy": "default-src 'none'; frame-ancestors 'none';",
+  "X-Download-Options": "noopen",
+  "X-Permitted-Cross-Domain-Policies": "none",
+};
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const blockId = searchParams.get("blockId");
@@ -136,7 +144,10 @@ export async function GET(request: Request) {
       "Missing required parameters: blockId or (pageId + prop)",
       {
         status: 400,
-        headers: { "X-Content-Type-Options": "nosniff" },
+        headers: {
+          ...SECURITY_HEADERS,
+          "Cache-Control": "no-store, must-revalidate",
+        },
       },
     );
   }
@@ -145,7 +156,10 @@ export async function GET(request: Request) {
   if (pageId && !isAllowedImageProperty(prop)) {
     return new NextResponse("Invalid or restricted property name", {
       status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: {
+        ...SECURITY_HEADERS,
+        "Cache-Control": "no-store, must-revalidate",
+      },
     });
   }
 
@@ -153,13 +167,19 @@ export async function GET(request: Request) {
   if (blockId && !NOTION_ID_REGEX.test(blockId)) {
     return new NextResponse("Invalid blockId format", {
       status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: {
+        ...SECURITY_HEADERS,
+        "Cache-Control": "no-store, must-revalidate",
+      },
     });
   }
   if (pageId && !NOTION_ID_REGEX.test(pageId)) {
     return new NextResponse("Invalid pageId format", {
       status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: {
+        ...SECURITY_HEADERS,
+        "Cache-Control": "no-store, must-revalidate",
+      },
     });
   }
 
@@ -171,7 +191,10 @@ export async function GET(request: Request) {
     if (!imageUrl) {
       return new NextResponse("Image not found", {
         status: 404,
-        headers: { "X-Content-Type-Options": "nosniff" },
+        headers: {
+          ...SECURITY_HEADERS,
+          "Cache-Control": "no-store, must-revalidate",
+        },
       });
     }
 
@@ -183,7 +206,10 @@ export async function GET(request: Request) {
     ) {
       return new NextResponse("Unsafe image URL", {
         status: 403,
-        headers: { "X-Content-Type-Options": "nosniff" },
+        headers: {
+          ...SECURITY_HEADERS,
+          "Cache-Control": "no-store, must-revalidate",
+        },
       });
     }
 
@@ -193,14 +219,20 @@ export async function GET(request: Request) {
       "Cache-Control",
       "public, max-age=1800, stale-while-revalidate=300",
     );
-    response.headers.set("X-Content-Type-Options", "nosniff");
+    // Apply standard security headers to the redirect response
+    Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+      response.headers.set(key, value);
+    });
     return response;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("[notion-image] Failed to resolve image URL:", message);
     return new NextResponse("Failed to fetch image from Notion", {
       status: 502,
-      headers: { "X-Content-Type-Options": "nosniff" },
+      headers: {
+        ...SECURITY_HEADERS,
+        "Cache-Control": "no-store, must-revalidate",
+      },
     });
   }
 }

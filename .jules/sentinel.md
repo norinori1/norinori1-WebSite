@@ -47,3 +47,8 @@
 **Vulnerability:** Potential filter bypass or ambiguous parsing via single-colon http:/https: URLs.
 **Learning:** Browsers and many URL parsers often "fix" https:example.com by treating it as https://example.com/. However, some security filters or backend systems might only look for https:// or might treat https: as a relative path if not careful. Explicitly requiring the :// sequence for standard web protocols prevents this ambiguity and ensures consistent behavior across different parts of the application and external systems.
 **Prevention:** In URL sanitizers, always enforce the full :// delimiter for protocols that require it (like http and https), while allowing the standard : for others (like mailto: and tel:).
+
+## 2025-05-28 - Hardening URL Sanitization against Path Traversal and Math Operator Obfuscation
+**Vulnerability:** Potential path traversal via `/.` and obfuscation via invisible mathematical operators.
+**Learning:** While `//` and `/ \` were blocked, relative paths starting with `/.` (e.g., `/../`) could still be used for path traversal or to confuse security filters. Additionally, Unicode characters like invisible mathematical operators (U+2061-U+2064) can be used to obfuscate protocols or hostnames in a similar way to zero-width characters.
+**Prevention:** Update `sanitizeUrl` to block relative paths starting with `/.` and expand the dangerous character removal list to include invisible mathematical operators (`\u2061-\u2064`).

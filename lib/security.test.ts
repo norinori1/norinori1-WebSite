@@ -120,6 +120,21 @@ const testCases = {
       description: "Overly long URL",
     },
     {
+      url: "/../etc/passwd",
+      expected: "about:blank",
+      description: "Block relative path with /..",
+    },
+    {
+      url: "/./secret",
+      expected: "about:blank",
+      description: "Block relative path with /.",
+    },
+    {
+      url: "https://example.com/\u2061\u2062\u2063\u2064math",
+      expected: "https://example.com/math",
+      description: "Strip invisible mathematical operators",
+    },
+    {
       url: "https://notion.so\\attacker.com",
       expected: "https://notion.so/attacker.com",
       description: "Backslash normalization in authority",
