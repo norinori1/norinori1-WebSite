@@ -125,6 +125,24 @@ async function resolvePagePropertyUrl(pageId: string, prop: string): Promise<str
  */
 const NOTION_ID_REGEX = /^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i;
 
+/**
+ * Applies a consistent set of security headers to all responses.
+ * Error responses are marked to prevent caching.
+ */
+function applySecurityHeaders(response: NextResponse, isError = false): NextResponse {
+  const { headers } = response;
+  headers.set("X-Content-Type-Options", "nosniff");
+  headers.set("X-Frame-Options", "DENY");
+  headers.set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none';");
+  headers.set("X-Download-Options", "noopen");
+  headers.set("X-Permitted-Cross-Domain-Policies", "none");
+
+  if (isError) {
+    headers.set("Cache-Control", "no-store, must-revalidate");
+  }
+  return response;
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const blockId = searchParams.get("blockId");
@@ -132,35 +150,34 @@ export async function GET(request: Request) {
   const prop = searchParams.get("prop");
 
   if (!blockId && (!pageId || !prop)) {
-    return new NextResponse(
-      "Missing required parameters: blockId or (pageId + prop)",
-      {
+    return applySecurityHeaders(
+      new NextResponse("Missing required parameters: blockId or (pageId + prop)", {
         status: 400,
-        headers: { "X-Content-Type-Options": "nosniff" },
-      },
+      }),
+      true,
     );
   }
 
   // Security Hardening: Validate property name to prevent probing other page properties.
   if (pageId && !isAllowedImageProperty(prop)) {
-    return new NextResponse("Invalid or restricted property name", {
-      status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
-    });
+    return applySecurityHeaders(
+      new NextResponse("Invalid or restricted property name", { status: 400 }),
+      true,
+    );
   }
 
   // Security Hardening: Validate Notion IDs to prevent malformed/probing requests.
   if (blockId && !NOTION_ID_REGEX.test(blockId)) {
-    return new NextResponse("Invalid blockId format", {
-      status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
-    });
+    return applySecurityHeaders(
+      new NextResponse("Invalid blockId format", { status: 400 }),
+      true,
+    );
   }
   if (pageId && !NOTION_ID_REGEX.test(pageId)) {
-    return new NextResponse("Invalid pageId format", {
-      status: 400,
-      headers: { "X-Content-Type-Options": "nosniff" },
-    });
+    return applySecurityHeaders(
+      new NextResponse("Invalid pageId format", { status: 400 }),
+      true,
+    );
   }
 
   try {
@@ -169,10 +186,10 @@ export async function GET(request: Request) {
       : await resolvePagePropertyUrl(pageId!, prop!);
 
     if (!imageUrl) {
-      return new NextResponse("Image not found", {
-        status: 404,
-        headers: { "X-Content-Type-Options": "nosniff" },
-      });
+      return applySecurityHeaders(
+        new NextResponse("Image not found", { status: 404 }),
+        true,
+      );
     }
 
     const sanitizedUrl = sanitizeUrl(imageUrl);
@@ -181,10 +198,10 @@ export async function GET(request: Request) {
       sanitizedUrl === "" ||
       !isTrustedImageHost(sanitizedUrl)
     ) {
-      return new NextResponse("Unsafe image URL", {
-        status: 403,
-        headers: { "X-Content-Type-Options": "nosniff" },
-      });
+      return applySecurityHeaders(
+        new NextResponse("Unsafe image URL", { status: 403 }),
+        true,
+      );
     }
 
     const response = NextResponse.redirect(sanitizedUrl, { status: 307 });
@@ -193,14 +210,13 @@ export async function GET(request: Request) {
       "Cache-Control",
       "public, max-age=1800, stale-while-revalidate=300",
     );
-    response.headers.set("X-Content-Type-Options", "nosniff");
-    return response;
+    return applySecurityHeaders(response);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("[notion-image] Failed to resolve image URL:", message);
-    return new NextResponse("Failed to fetch image from Notion", {
-      status: 502,
-      headers: { "X-Content-Type-Options": "nosniff" },
-    });
+    return applySecurityHeaders(
+      new NextResponse("Failed to fetch image from Notion", { status: 502 }),
+      true,
+    );
   }
 }

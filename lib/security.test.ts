@@ -120,6 +120,11 @@ const testCases = {
       description: "Overly long URL",
     },
     {
+      url: "java\u2061script:alert(1)",
+      expected: "about:blank",
+      description: "Invisible mathematical operator in protocol",
+    },
+    {
       url: "https://notion.so\\attacker.com",
       expected: "https://notion.so/attacker.com",
       description: "Backslash normalization in authority",
