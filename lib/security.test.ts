@@ -120,6 +120,11 @@ const testCases = {
       description: "Overly long URL",
     },
     {
+      url: "https://example.com/" + "\u3042".repeat(1000),
+      expected: "about:blank",
+      description: "URL that exceeds limit after URL encoding",
+    },
+    {
       url: "java\u2061script:alert(1)",
       expected: "about:blank",
       description: "Invisible mathematical operator in protocol",
@@ -168,6 +173,21 @@ const testCases = {
       url: "https://example.com/\u180E",
       expected: "https://example.com/",
       description: "Strip Mongolian vowel separator",
+    },
+    {
+      url: "https://example.com/\u2000\u202F\u3000",
+      expected: "https://example.com/",
+      description: "Strip additional Unicode spaces",
+    },
+    {
+      url: "https://example.com/\uFDD0\uFFFD\uFFFF",
+      expected: "https://example.com/",
+      description: "Strip non-characters and replacement character",
+    },
+    {
+      url: "https://example.com/\u{E0001}\u{E0020}",
+      expected: "https://example.com/",
+      description: "Strip Tag characters",
     },
   ],
 };
