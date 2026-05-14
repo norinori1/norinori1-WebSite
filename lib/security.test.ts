@@ -60,6 +60,16 @@ const testCases = {
       description: "Safe relative path",
     },
     {
+      url: "/../etc/passwd",
+      expected: "about:blank",
+      description: "Relative path with traversal",
+    },
+    {
+      url: "/./safe",
+      expected: "about:blank",
+      description: "Relative path starting with dot (neutralized for safety)",
+    },
+    {
       url: "//attacker.com",
       expected: "about:blank",
       description: "Protocol-relative URL",

@@ -35,7 +35,7 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
   // that some browsers might normalize to cross-origin redirects.
   if (
-    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s)/.test(trimmedUrl)) ||
+    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s|\.)/.test(trimmedUrl)) ||
     trimmedUrl.startsWith("#")
   ) {
     return trimmedUrl;
