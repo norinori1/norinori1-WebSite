@@ -47,3 +47,8 @@
 **Vulnerability:** Potential filter bypass or ambiguous parsing via single-colon http:/https: URLs.
 **Learning:** Browsers and many URL parsers often "fix" https:example.com by treating it as https://example.com/. However, some security filters or backend systems might only look for https:// or might treat https: as a relative path if not careful. Explicitly requiring the :// sequence for standard web protocols prevents this ambiguity and ensures consistent behavior across different parts of the application and external systems.
 **Prevention:** In URL sanitizers, always enforce the full :// delimiter for protocols that require it (like http and https), while allowing the standard : for others (like mailto: and tel:).
+
+## 2025-05-28 - Defense in Depth against Advanced Unicode Obfuscation
+**Vulnerability:** Potential filter bypass or UI spoofing via obscure Unicode characters and length expansion.
+**Learning:** Standard URL sanitization often misses advanced Unicode obfuscation vectors like Tag characters (U+E0000+), non-characters, and obscure whitespace. These can be used to hide malicious data from simple filters or cause inconsistent parsing. Furthermore, URLs that pass initial length checks might expand significantly after URL encoding (e.g., non-ASCII characters becoming %XX sequences), potentially leading to resource exhaustion or buffer overflows in downstream systems.
+**Prevention:** Harden URL sanitizers to strip Tag characters, non-characters, and all Unicode whitespace categories. Crucially, apply a final `MAX_URL_LENGTH` check *after* all normalization, stripping, and `new URL()` parsing to ensure the canonical, encoded form remains within safe bounds.
