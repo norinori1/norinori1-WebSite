@@ -22,12 +22,12 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // - BiDi overrides (U+200E, U+200F, U+202A-U+202E)
   // - Invisible operators and isolates (U+2060-U+206F)
   // - Zero-width characters (U+200B-U+200D, U+FEFF)
-  // - Separators and formatters (U+2028, U+2029, U+00AD, U+034F, U+115F, U+1160, U+3164, U+FFA0, U+180E)
+  // - Separators and formatters (U+2028, U+2029, U+00AD, U+034F, U+115F, U+1160, U+3164, U+FFA0, U+180E, U+17B4, U+17B5)
   // - Additional Unicode spaces (U+2000-U+200A, U+202F, U+205F, U+3000)
-  // - Non-characters and replacement (U+FDD0-U+FDEF, U+FFFD, U+FFFE, U+FFFF)
+  // - Non-characters, Specials, and replacement (U+FDD0-U+FDEF, U+FFF0-U+FFFF)
   // - Tag characters (U+E0000-U+E007F)
   const trimmedUrl = normalizedUrl.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u17B4\u17B5\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFF0-\uFFFF\u{E0000}-\u{E007F}]/gu,
     "",
   );
 

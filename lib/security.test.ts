@@ -204,6 +204,16 @@ const testCases = {
       expected: "https://example.com/",
       description: "Strip Tag characters",
     },
+    {
+      url: "https://example.com/\u17B4\u17B5",
+      expected: "https://example.com/",
+      description: "Strip Khmer invisible characters",
+    },
+    {
+      url: "https://example.com/\uFFF9\uFFFA\uFFFB",
+      expected: "https://example.com/",
+      description: "Strip Unicode Specials (interlinear annotation characters)",
+    },
   ],
 };
 
