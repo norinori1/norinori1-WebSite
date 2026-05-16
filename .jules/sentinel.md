@@ -48,6 +48,11 @@
 **Learning:** Browsers and many URL parsers often "fix" https:example.com by treating it as https://example.com/. However, some security filters or backend systems might only look for https:// or might treat https: as a relative path if not careful. Explicitly requiring the :// sequence for standard web protocols prevents this ambiguity and ensures consistent behavior across different parts of the application and external systems.
 **Prevention:** In URL sanitizers, always enforce the full :// delimiter for protocols that require it (like http and https), while allowing the standard : for others (like mailto: and tel:).
 
+## 2025-05-28 - Authority Bypass via Obfuscated Credentials
+**Vulnerability:** Authority bypass and phishing via embedded credentials in URLs.
+**Learning:** Simply stripping credentials (`user:pass@`) from absolute URLs in a sanitizer is insufficient and potentially dangerous. Characters like tabs, backslashes, or other whitespace can be used to obfuscate the authority part, causing parsers to see a "trusted" host as a username for a malicious host (e.g., `https://notion.so\t@attacker.com`). If the sanitizer merely strips what it thinks are credentials, it might inadvertently transform a malicious URL into a valid-looking one or fail to catch the bypass.
+**Prevention:** Instead of stripping credentials, URL sanitizers should explicitly reject any absolute URL that contains a non-empty username or password. This prevents authority bypass attacks and mitigates phishing by ensuring only standard, credential-free URLs are allowed.
+
 ## 2025-05-28 - Defense in Depth against Advanced Unicode Obfuscation
 **Vulnerability:** Potential filter bypass or UI spoofing via obscure Unicode characters and length expansion.
 **Learning:** Standard URL sanitization often misses advanced Unicode obfuscation vectors like Tag characters (U+E0000+), non-characters, and obscure whitespace. These can be used to hide malicious data from simple filters or cause inconsistent parsing. Furthermore, URLs that pass initial length checks might expand significantly after URL encoding (e.g., non-ASCII characters becoming %XX sequences), potentially leading to resource exhaustion or buffer overflows in downstream systems.

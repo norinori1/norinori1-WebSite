@@ -151,8 +151,13 @@ const testCases = {
     },
     {
       url: "https://user:pass@example.com",
-      expected: "https://example.com/",
-      description: "Strip credentials from absolute URL",
+      expected: "about:blank",
+      description: "Reject credentials in absolute URL",
+    },
+    {
+      url: "https://notion.so\t@attacker.com",
+      expected: "about:blank",
+      description: "Reject obfuscated credential bypass (tab)",
     },
     {
       url: "https://example.com.",

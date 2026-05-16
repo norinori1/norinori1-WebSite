@@ -49,9 +49,16 @@ export function sanitizeUrl(url: string | undefined | null): string {
       // Use URL constructor to normalize the URL (e.g., converting \ to / in host)
       // and ensure it's a valid absolute URL.
       const parsed = new URL(trimmedUrl);
-      // Strip credentials and trailing dots from hostname for consistent representation.
-      parsed.username = "";
-      parsed.password = "";
+
+      // Security Hardening: Reject URLs with credentials (user:pass@host).
+      // This prevents authority bypass vulnerabilities where an attacker
+      // hides their real host behind a trusted one (e.g., https://notion.so@attacker.com)
+      // and also mitigates phishing.
+      if (parsed.username !== "" || parsed.password !== "") {
+        return "about:blank";
+      }
+
+      // Normalize hostname by stripping trailing dots for consistent representation.
       parsed.hostname = parsed.hostname.replace(/\.+$/, "");
       const finalUrl = parsed.href;
 
