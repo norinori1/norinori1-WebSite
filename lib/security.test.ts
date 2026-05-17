@@ -80,6 +80,21 @@ const testCases = {
       description: "Normalization bypass /\\",
     },
     {
+      url: "/\uFF0Fattacker.com",
+      expected: "about:blank",
+      description: "Full-width solidus bypass /／",
+    },
+    {
+      url: "/\uFF3Cattacker.com",
+      expected: "about:blank",
+      description: "Full-width reverse solidus bypass /＼",
+    },
+    {
+      url: "/\uFF0E\uFF0E/etc/passwd",
+      expected: "about:blank",
+      description: "Full-width dot traversal bypass /．．/",
+    },
+    {
       url: "https://example.com/\x08",
       expected: "https://example.com/",
       description: "URL with backspace control character",

@@ -34,8 +34,9 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
   // that some browsers might normalize to cross-origin redirects.
+  // We also block full-width equivalents (／, ＼, ．) to prevent normalization bypasses.
   if (
-    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s|\.)/.test(trimmedUrl)) ||
+    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s|\.|\uFF0F|\uFF3C|\uFF0E)/.test(trimmedUrl)) ||
     trimmedUrl.startsWith("#")
   ) {
     return trimmedUrl;

@@ -57,3 +57,8 @@
 **Vulnerability:** Potential filter bypass or UI spoofing via obscure Unicode characters and length expansion.
 **Learning:** Standard URL sanitization often misses advanced Unicode obfuscation vectors like Tag characters (U+E0000+), non-characters, and obscure whitespace. These can be used to hide malicious data from simple filters or cause inconsistent parsing. Furthermore, URLs that pass initial length checks might expand significantly after URL encoding (e.g., non-ASCII characters becoming %XX sequences), potentially leading to resource exhaustion or buffer overflows in downstream systems.
 **Prevention:** Harden URL sanitizers to strip Tag characters, non-characters, and all Unicode whitespace categories. Crucially, apply a final `MAX_URL_LENGTH` check *after* all normalization, stripping, and `new URL()` parsing to ensure the canonical, encoded form remains within safe bounds.
+
+## 2025-05-30 - URL Normalization Bypass via Full-width Characters
+**Vulnerability:** Potential open redirect or path traversal via full-width Unicode characters in relative paths.
+**Learning:** Some browsers and libraries normalize full-width characters like U+FF0F (／), U+FF3C (＼), and U+FF0E (．) into their standard ASCII equivalents (/, \, .). If a sanitizer only checks for the standard ASCII characters when validating relative paths (e.g., checking for // to prevent protocol-relative redirects), an attacker can use full-width versions to bypass the filter while still achieving the malicious effect after browser normalization.
+**Prevention:** Always include full-width equivalents (U+FF0F, U+FF3C, U+FF0E) in regex-based blacklists for URL path prefixes.
