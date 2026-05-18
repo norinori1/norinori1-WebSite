@@ -204,6 +204,31 @@ const testCases = {
       expected: "https://example.com/",
       description: "Strip Tag characters",
     },
+    {
+      url: "java\u17B4script:alert(1)",
+      expected: "about:blank",
+      description: "Khmer invisible character U+17B4 in protocol",
+    },
+    {
+      url: "java\u17B5script:alert(1)",
+      expected: "about:blank",
+      description: "Khmer invisible character U+17B5 in protocol",
+    },
+    {
+      url: "/\uFF0Fattacker.com",
+      expected: "about:blank",
+      description: "Full-width slash bypass in relative path",
+    },
+    {
+      url: "/\uFF3Cattacker.com",
+      expected: "about:blank",
+      description: "Full-width backslash bypass in relative path",
+    },
+    {
+      url: "/\uFF0E\uFF0E/etc/passwd",
+      expected: "about:blank",
+      description: "Full-width dot bypass in relative path",
+    },
   ],
 };
 
