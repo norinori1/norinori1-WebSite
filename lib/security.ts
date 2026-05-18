@@ -26,16 +26,18 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // - Additional Unicode spaces (U+2000-U+200A, U+202F, U+205F, U+3000)
   // - Non-characters and replacement (U+FDD0-U+FDEF, U+FFFD, U+FFFE, U+FFFF)
   // - Tag characters (U+E0000-U+E007F)
+  // - Khmer invisible characters (U+17B4, U+17B5)
   const trimmedUrl = normalizedUrl.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}\u17B4\u17B5]/gu,
     "",
   );
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
-  // that some browsers might normalize to cross-origin redirects.
+  // including full-width equivalents that some browsers might normalize to cross-origin redirects.
   if (
-    (trimmedUrl.startsWith("/") && !/^\/([\\\/]|\s|\.)/.test(trimmedUrl)) ||
+    (trimmedUrl.startsWith("/") &&
+      !/^\/([\\\/]|\s|\.|\uFF0F|\uFF3C|\uFF0E)/.test(trimmedUrl)) ||
     trimmedUrl.startsWith("#")
   ) {
     return trimmedUrl;
