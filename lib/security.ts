@@ -34,10 +34,16 @@ export function sanitizeUrl(url: string | undefined | null): string {
 
   // Allow relative paths and anchor links
   // We block protocol-relative URLs (starting with //) and other variations (e.g., /\, / )
-  // including full-width equivalents that some browsers might normalize to cross-origin redirects.
+  // including full-width equivalents and other Unicode homoglyphs that some browsers
+  // might normalize to cross-origin redirects or use for path traversal.
+  // Homoglyphs included:
+  // - Slashes: / (U+002F), \ (U+005C), ⁄ (U+2044), ∕ (U+2215), ／ (U+FF0F), ＼ (U+FF3C)
+  // - Dots: . (U+002E), ․ (U+2024), 。 (U+3002), ． (U+FF0E)
   if (
     (trimmedUrl.startsWith("/") &&
-      !/^\/([\\\/]|\s|\.|\uFF0F|\uFF3C|\uFF0E)/.test(trimmedUrl)) ||
+      !/^\/([\\\/]|\s|\.|\u2044|\u2215|\u2024|\u3002|\uFF0F|\uFF3C|\uFF0E)/.test(
+        trimmedUrl,
+      )) ||
     trimmedUrl.startsWith("#")
   ) {
     return trimmedUrl;
