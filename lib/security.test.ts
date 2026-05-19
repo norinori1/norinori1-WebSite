@@ -229,6 +229,26 @@ const testCases = {
       expected: "about:blank",
       description: "Full-width dot bypass in relative path",
     },
+    {
+      url: "/\u2024\u2024/etc/passwd",
+      expected: "about:blank",
+      description: "One dot leader bypass in relative path",
+    },
+    {
+      url: "/\u3002\u3002/etc/passwd",
+      expected: "about:blank",
+      description: "Ideographic full stop bypass in relative path",
+    },
+    {
+      url: "/\u2044\u2044attacker.com",
+      expected: "about:blank",
+      description: "Fraction slash bypass in relative path",
+    },
+    {
+      url: "/\u2215\u2215attacker.com",
+      expected: "about:blank",
+      description: "Division slash bypass in relative path",
+    },
   ],
 };
 

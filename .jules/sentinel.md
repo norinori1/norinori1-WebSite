@@ -62,3 +62,8 @@
 **Vulnerability:** Open redirect and protocol-relative URL bypass via Unicode normalization.
 **Learning:** Browsers and some servers normalize full-width characters like `／` (U+FF0F), `＼` (U+FF3C), and `．` (U+FF0E) to their standard ASCII equivalents. Security filters that only check for standard characters (e.g., `startsWith("//")` or `startsWith("/\\")`) can be bypassed by using these full-width variants, which then get normalized to a malicious cross-origin redirect by the browser.
 **Prevention:** Relative path sanitizers must explicitly include full-width equivalents in their blocklists for characters like slashes, backslashes, and dots when they appear at the start of a path.
+
+## 2025-05-30 - Path Bypass via Unicode Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via non-full-width Unicode homoglyphs.
+**Learning:** Beyond full-width characters (U+FFxx), other Unicode characters like Fraction Slash (U+2044), Division Slash (U+2215), One Dot Leader (U+2024), and Ideographic Full Stop (U+3002) can be interpreted as slashes or dots by various components in the web stack (parsers, browsers, or downstream OS APIs). Sanitizers that only block ASCII or full-width variants remain vulnerable to these homoglyph-based bypasses.
+**Prevention:** Ensure relative path blocklists comprehensively include known Unicode homoglyphs for slashes and dots, especially in logic designed to prevent protocol-relative URLs (starting with `//`) or directory traversal (starting with `..`).
