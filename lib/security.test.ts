@@ -215,6 +215,31 @@ const testCases = {
       description: "Khmer invisible character U+17B5 in protocol",
     },
     {
+      url: "https://example.com/\uFE00variation\uFE0Fselector",
+      expected: "https://example.com/variationselector",
+      description: "URL with variation selectors (stripped)",
+    },
+    {
+      url: "https://example.com/\u{E0100}variant\u{E01EF}supp",
+      expected: "https://example.com/variantsupp",
+      description: "URL with variation selectors supplement (stripped)",
+    },
+    {
+      url: "https://example.com/ogham\u1680space",
+      expected: "https://example.com/oghamspace",
+      description: "URL with Ogham space mark (stripped)",
+    },
+    {
+      url: "https://example.com/braille\u2800blank",
+      expected: "https://example.com/brailleblank",
+      description: "URL with Braille pattern blank (stripped)",
+    },
+    {
+      url: "https://example.com/annotation\uFFF9text\uFFFC",
+      expected: "https://example.com/annotationtext",
+      description: "URL with interlinear annotation and object replacement (stripped)",
+    },
+    {
       url: "/\uFF0Fattacker.com",
       expected: "about:blank",
       description: "Full-width slash bypass in relative path",
