@@ -67,3 +67,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via non-full-width Unicode homoglyphs.
 **Learning:** Beyond full-width characters (U+FFxx), other Unicode characters like Fraction Slash (U+2044), Division Slash (U+2215), One Dot Leader (U+2024), and Ideographic Full Stop (U+3002) can be interpreted as slashes or dots by various components in the web stack (parsers, browsers, or downstream OS APIs). Sanitizers that only block ASCII or full-width variants remain vulnerable to these homoglyph-based bypasses.
 **Prevention:** Ensure relative path blocklists comprehensively include known Unicode homoglyphs for slashes and dots, especially in logic designed to prevent protocol-relative URLs (starting with `//`) or directory traversal (starting with `..`).
+
+## 2025-05-31 - Path Bypass via Advanced Unicode Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via obscure Unicode homoglyphs for slashes and dots.
+**Learning:** Beyond common full-width and slash-like characters, more obscure Unicode characters such as Set Minus (\u2216), Reverse Solidus Operator (\u29F5), Big Solidus (\u29F8), and Two Dot Leader (\u2025) can be interpreted as path delimiters or traversal tokens by various components.
+**Prevention:** Ensure relative path blocklists in URL sanitizers are comprehensive and include advanced Unicode homoglyphs (\u2216, \u29F5, \u29F8, \u29F9, \u2025, \u2026, \uFE52, \uFF61) specifically at the start of a path to prevent protocol-relative URL and traversal bypasses.
