@@ -274,6 +274,46 @@ const testCases = {
       expected: "about:blank",
       description: "Division slash bypass in relative path",
     },
+    {
+      url: "/\u2216\u2216attacker.com",
+      expected: "about:blank",
+      description: "Set minus (slash-like) bypass in relative path",
+    },
+    {
+      url: "/\u29F5\u29F5attacker.com",
+      expected: "about:blank",
+      description: "Reverse solidus operator bypass in relative path",
+    },
+    {
+      url: "/\u29F8\u29F8attacker.com",
+      expected: "about:blank",
+      description: "Big solidus bypass in relative path",
+    },
+    {
+      url: "/\u29F9\u29F9attacker.com",
+      expected: "about:blank",
+      description: "Big reverse solidus bypass in relative path",
+    },
+    {
+      url: "/\u2025\u2025/etc/passwd",
+      expected: "about:blank",
+      description: "Two dot leader bypass in relative path",
+    },
+    {
+      url: "/\u2026\u2026/etc/passwd",
+      expected: "about:blank",
+      description: "Horizontal ellipsis bypass in relative path",
+    },
+    {
+      url: "/\uFE52\uFE52/etc/passwd",
+      expected: "about:blank",
+      description: "Small full stop bypass in relative path",
+    },
+    {
+      url: "/\uFF61\uFF61/etc/passwd",
+      expected: "about:blank",
+      description: "Halfwidth ideographic full stop bypass in relative path",
+    },
   ],
 };
 

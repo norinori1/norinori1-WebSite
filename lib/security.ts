@@ -40,11 +40,11 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // including full-width equivalents and other Unicode homoglyphs that some browsers
   // might normalize to cross-origin redirects or use for path traversal.
   // Homoglyphs included:
-  // - Slashes: / (U+002F), \ (U+005C), ⁄ (U+2044), ∕ (U+2215), ／ (U+FF0F), ＼ (U+FF3C)
-  // - Dots: . (U+002E), ․ (U+2024), 。 (U+3002), ． (U+FF0E)
+  // - Slashes: / (U+002F), \ (U+005C), ⁄ (U+2044), ∕ (U+2215), ∖ (U+2216), ⧵ (U+29F5), ⧸ (U+29F8), ⧹ (U+29F9), ／ (U+FF0F), ＼ (U+FF3C)
+  // - Dots: . (U+002E), ․ (U+2024), ‥ (U+2025), … (U+2026), 。 (U+3002), ﹒ (U+FE52), ． (U+FF0E), ｡ (U+FF61)
   if (
     (trimmedUrl.startsWith("/") &&
-      !/^\/([\\\/]|\s|\.|\u2044|\u2215|\u2024|\u3002|\uFF0F|\uFF3C|\uFF0E)/.test(
+      !/^\/([\\\/]|\s|\.|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C)/.test(
         trimmedUrl,
       )) ||
     trimmedUrl.startsWith("#")
