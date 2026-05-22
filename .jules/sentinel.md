@@ -72,3 +72,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via obscure Unicode homoglyphs for slashes and dots.
 **Learning:** Beyond common full-width and slash-like characters, more obscure Unicode characters such as Set Minus (\u2216), Reverse Solidus Operator (\u29F5), Big Solidus (\u29F8), and Two Dot Leader (\u2025) can be interpreted as path delimiters or traversal tokens by various components.
 **Prevention:** Ensure relative path blocklists in URL sanitizers are comprehensive and include advanced Unicode homoglyphs (\u2216, \u29F5, \u29F8, \u29F9, \u2025, \u2026, \uFE52, \uFF61) specifically at the start of a path to prevent protocol-relative URL and traversal bypasses.
+
+## 2025-06-05 - DoS via Cache Exhaustion in Image Proxy
+**Vulnerability:** Denial of Service (DoS) via memory exhaustion in in-process caching.
+**Learning:** Using a single in-process cache for both successful lookups and failures (negative caching) allows an attacker to flood the cache with unique failed requests (e.g., random UUIDs), evicting legitimate data and forcing expensive upstream API calls.
+**Prevention:** Use separate caches for successes and failures (negative caching) with independent size limits. Ensure cache eviction (e.g., FIFO) is implemented to bound memory usage.

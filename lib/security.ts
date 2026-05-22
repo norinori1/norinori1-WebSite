@@ -5,7 +5,7 @@ const MAX_URL_LENGTH = 8192;
  * Returns 'about:blank' for unsafe URLs.
  */
 export function sanitizeUrl(url: string | undefined | null): string {
-  if (!url) return "";
+  if (!url || typeof url !== "string") return "";
 
   // Preliminary length check to prevent DoS during normalization.
   if (url.length > MAX_URL_LENGTH) return "about:blank";

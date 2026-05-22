@@ -13,43 +13,65 @@ import {
  * Notion signed URLs are valid for ~1 hour; we cache for 45 minutes.
  * Failed resolutions are cached for 5 minutes (negative caching) to prevent DoS.
  */
-const urlCache = new Map<string, { url: string | null; cachedAt: number }>();
+const urlCache = new Map<string, { url: string; cachedAt: number }>();
+const negativeUrlCache = new Map<string, { cachedAt: number }>();
 const CACHE_TTL_MS = 45 * 60 * 1000;
 const NEGATIVE_CACHE_TTL_MS = 5 * 60 * 1000;
 const MAX_CACHE_SIZE = 1000;
+const MAX_NEGATIVE_CACHE_SIZE = 500;
 
 /** Returns the cached URL, null (cached failure), or undefined (not in cache). */
 function getCached(key: string): string | null | undefined {
+  const negativeEntry = negativeUrlCache.get(key);
+  if (negativeEntry) {
+    if (Date.now() - negativeEntry.cachedAt < NEGATIVE_CACHE_TTL_MS) {
+      return null;
+    }
+    negativeUrlCache.delete(key);
+  }
+
   const entry = urlCache.get(key);
   if (!entry) return undefined;
 
-  const ttl = entry.url === null ? NEGATIVE_CACHE_TTL_MS : CACHE_TTL_MS;
-  if (Date.now() - entry.cachedAt < ttl) {
+  if (Date.now() - entry.cachedAt < CACHE_TTL_MS) {
     return entry.url;
   }
+  urlCache.delete(key);
   return undefined;
 }
 
 function setCached(key: string, url: string | null): void {
-  // Simple DoS protection: if cache is too large, clear oldest entries (FIFO-ish)
-  if (urlCache.size >= MAX_CACHE_SIZE) {
-    const firstKey = urlCache.keys().next().value;
-    if (firstKey !== undefined) {
-      urlCache.delete(firstKey);
+  if (url === null) {
+    // Simple DoS protection: if negative cache is too large, clear oldest entries
+    if (negativeUrlCache.size >= MAX_NEGATIVE_CACHE_SIZE) {
+      const firstKey = negativeUrlCache.keys().next().value;
+      if (firstKey !== undefined) {
+        negativeUrlCache.delete(firstKey);
+      }
     }
+    negativeUrlCache.set(key, { cachedAt: Date.now() });
+  } else {
+    // Simple DoS protection: if main cache is too large, clear oldest entries
+    if (urlCache.size >= MAX_CACHE_SIZE) {
+      const firstKey = urlCache.keys().next().value;
+      if (firstKey !== undefined) {
+        urlCache.delete(firstKey);
+      }
+    }
+    urlCache.set(key, { url, cachedAt: Date.now() });
   }
-  urlCache.set(key, { url, cachedAt: Date.now() });
 }
 
 async function resolveBlockImageUrl(blockId: string): Promise<string | null> {
-  const cached = getCached(`block:${blockId}`);
+  const cacheKey = `block:${blockId}`;
+  const cached = getCached(cacheKey);
   if (cached !== undefined) return cached;
 
   try {
     const notion = getNotionClient();
     const block = await notion.blocks.retrieve({ block_id: blockId });
     if (!("type" in block) || block.type !== "image") {
-      setCached(`block:${blockId}`, null);
+      setCached(cacheKey, null);
       return null;
     }
 
@@ -63,14 +85,14 @@ async function resolveBlockImageUrl(blockId: string): Promise<string | null> {
     // with unsafe URLs if Notion ever returns one (though unlikely).
     const sanitized = sanitizeUrl(url);
     if (sanitized === "about:blank" || sanitized === "" || !isTrustedImageHost(sanitized)) {
-      setCached(`block:${blockId}`, null);
+      setCached(cacheKey, null);
       return null;
     }
 
-    setCached(`block:${blockId}`, url);
+    setCached(cacheKey, url);
     return url;
   } catch {
-    setCached(`block:${blockId}`, null);
+    setCached(cacheKey, null);
     return null;
   }
 }
@@ -136,6 +158,8 @@ function applySecurityHeaders(response: NextResponse, isError = false): NextResp
   headers.set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none';");
   headers.set("X-Download-Options", "noopen");
   headers.set("X-Permitted-Cross-Domain-Policies", "none");
+  // Extra protection for signed URLs in redirects
+  headers.set("Referrer-Policy", "no-referrer");
 
   if (isError) {
     headers.set("Cache-Control", "no-store, must-revalidate");
