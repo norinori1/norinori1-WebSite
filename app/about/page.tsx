@@ -58,14 +58,6 @@ export default function AboutPage() {
                       ],
                     },
                     {
-                      category: "Research",
-                      items: [
-                        { label: "TensorFlow", icon: "tensorflow" as const, level: 1 },
-                        { label: "Game AI", icon: null, level: 3 },
-                        { label: "Gameplay Analytics", icon: null, level: 2 },
-                      ],
-                    },
-                    {
                       category: "Tools",
                       items: [
                         { label: "GitHub", icon: "github" as const, level: 5 },
