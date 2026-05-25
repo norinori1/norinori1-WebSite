@@ -72,3 +72,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via obscure Unicode homoglyphs for slashes and dots.
 **Learning:** Beyond common full-width and slash-like characters, more obscure Unicode characters such as Set Minus (\u2216), Reverse Solidus Operator (\u29F5), Big Solidus (\u29F8), and Two Dot Leader (\u2025) can be interpreted as path delimiters or traversal tokens by various components.
 **Prevention:** Ensure relative path blocklists in URL sanitizers are comprehensive and include advanced Unicode homoglyphs (\u2216, \u29F5, \u29F8, \u29F9, \u2025, \u2026, \uFE52, \uFF61) specifically at the start of a path to prevent protocol-relative URL and traversal bypasses.
+
+## 2025-06-01 - URL Sanitization Hardening against Advanced Unicode Obfuscation
+**Vulnerability:** Potential filter bypass via obscure Unicode characters.
+**Learning:** Even with comprehensive stripping, certain characters like Arabic Letter Mark (U+061C) and Mongolian Variation Selectors (U+180B-U+180F) can be used to obfuscate protocols. Additionally, characters like Hyphenation Point (U+2027) can be interpreted as dots by some parsers, potentially leading to path traversal or open redirect bypasses if not properly handled at the start of a path.
+**Prevention:** Continuously update sanitization regexes to include newly discovered or less common "ignorable" or "dangerous" Unicode characters. Ensure homoglyph lists for path delimiters are comprehensive.

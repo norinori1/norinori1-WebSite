@@ -314,6 +314,21 @@ const testCases = {
       expected: "about:blank",
       description: "Halfwidth ideographic full stop bypass in relative path",
     },
+    {
+      url: "java\u061Cscript:alert(1)",
+      expected: "about:blank",
+      description: "Arabic Letter Mark in protocol",
+    },
+    {
+      url: "https://example.com/\u180Bvariation\u180Fselector",
+      expected: "https://example.com/variationselector",
+      description: "Mongolian variation selectors (stripped)",
+    },
+    {
+      url: "/\u2027\u2027/etc/passwd",
+      expected: "about:blank",
+      description: "Hyphenation point bypass in relative path",
+    },
   ],
 };
 

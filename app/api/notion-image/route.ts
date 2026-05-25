@@ -136,6 +136,8 @@ function applySecurityHeaders(response: NextResponse, isError = false): NextResp
   headers.set("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none';");
   headers.set("X-Download-Options", "noopen");
   headers.set("X-Permitted-Cross-Domain-Policies", "none");
+  headers.set("Referrer-Policy", "no-referrer");
+  headers.set("X-Robots-Tag", "noindex, nofollow");
 
   if (isError) {
     headers.set("Cache-Control", "no-store, must-revalidate");

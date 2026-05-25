@@ -27,11 +27,13 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // - Non-characters and replacement (U+FDD0-U+FDEF, U+FFFD, U+FFFE, U+FFFF)
   // - Tag characters (U+E0000-U+E007F)
   // - Variation selectors (U+FE00-U+FE0F, U+E0100-U+E01EF)
+  // - Mongolian variation selectors (U+180B-U+180D, U+180F)
   // - Obscure spaces and blanks (U+1680, U+2800)
   // - Special purpose and annotation characters (U+FFF9-U+FFFC)
   // - Khmer invisible characters (U+17B4, U+17B5)
+  // - Arabic Letter Mark (U+061C)
   const trimmedUrl = normalizedUrl.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}\uFE00-\uFE0F\u{E0100}-\u{E01EF}\u1680\u2800\uFFF9-\uFFFC\u17B4\u17B5]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}\uFE00-\uFE0F\u{E0100}-\u{E01EF}\u1680\u2800\uFFF9-\uFFFC\u17B4\u17B5\u061C\u180B-\u180D\u180F]/gu,
     "",
   );
 
@@ -41,10 +43,10 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // might normalize to cross-origin redirects or use for path traversal.
   // Homoglyphs included:
   // - Slashes: / (U+002F), \ (U+005C), ⁄ (U+2044), ∕ (U+2215), ∖ (U+2216), ⧵ (U+29F5), ⧸ (U+29F8), ⧹ (U+29F9), ／ (U+FF0F), ＼ (U+FF3C)
-  // - Dots: . (U+002E), ․ (U+2024), ‥ (U+2025), … (U+2026), 。 (U+3002), ﹒ (U+FE52), ． (U+FF0E), ｡ (U+FF61)
+  // - Dots: . (U+002E), ․ (U+2024), ‥ (U+2025), … (U+2026), ‧ (U+2027), 。 (U+3002), ﹒ (U+FE52), ． (U+FF0E), ｡ (U+FF61)
   if (
     (trimmedUrl.startsWith("/") &&
-      !/^\/([\\\/]|\s|\.|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C)/.test(
+      !/^\/([\\\/]|\s|\.|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u2027|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C)/.test(
         trimmedUrl,
       )) ||
     trimmedUrl.startsWith("#")
