@@ -45,14 +45,6 @@ const skills: { category: string; items: { label: string; icon: IconName | null;
     ],
   },
   {
-    category: "Research",
-    items: [
-      { label: "TensorFlow", icon: "tensorflow", level: 1 },
-      { label: "Game AI", icon: null, level: 3 },
-      { label: "Gameplay Analytics", icon: null, level: 2 },
-    ],
-  },
-  {
     category: "Tools & Workflow",
     items: [
       { label: "GitHub", icon: "github", level: 5 },
