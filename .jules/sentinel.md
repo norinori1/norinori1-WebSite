@@ -77,3 +77,8 @@
 **Vulnerability:** Potential filter bypass via obscure Unicode characters.
 **Learning:** Even with comprehensive stripping, certain characters like Arabic Letter Mark (U+061C) and Mongolian Variation Selectors (U+180B-U+180F) can be used to obfuscate protocols. Additionally, characters like Hyphenation Point (U+2027) can be interpreted as dots by some parsers, potentially leading to path traversal or open redirect bypasses if not properly handled at the start of a path.
 **Prevention:** Continuously update sanitization regexes to include newly discovered or less common "ignorable" or "dangerous" Unicode characters. Ensure homoglyph lists for path delimiters are comprehensive.
+
+## 2025-06-02 - Path Bypass via Regional Dot Homoglyphs
+**Vulnerability:** Potential path traversal or open redirect bypass via Arabic and Canadian syllabics dot homoglyphs.
+**Learning:** Characters like Arabic Full Stop (U+06D4) and Canadian Syllabics Full Stop (U+166E) can be interpreted as standard dots by various components in the web stack. If these are not included in the blocklist for relative paths (e.g., preventing `//` or `..`), they can be used to bypass security filters.
+**Prevention:** Maintain a comprehensive list of Unicode homoglyphs for dots and slashes, including regional variations like U+06D4 and U+166E, and ensure they are blocked at the start of paths in URL sanitizers.

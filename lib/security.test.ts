@@ -329,6 +329,16 @@ const testCases = {
       expected: "about:blank",
       description: "Hyphenation point bypass in relative path",
     },
+    {
+      url: "/\u06D4\u06D4/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic full stop bypass in relative path",
+    },
+    {
+      url: "/\u166E\u166E/etc/passwd",
+      expected: "about:blank",
+      description: "Canadian syllabics full stop bypass in relative path",
+    },
   ],
 };
 
