@@ -339,6 +339,56 @@ const testCases = {
       expected: "about:blank",
       description: "Canadian syllabics full stop bypass in relative path",
     },
+    {
+      url: "/\u1803\u1803/etc/passwd",
+      expected: "about:blank",
+      description: "Mongolian full stop bypass in relative path",
+    },
+    {
+      url: "/\u1809\u1809/etc/passwd",
+      expected: "about:blank",
+      description: "Mongolian Manchu full stop bypass in relative path",
+    },
+    {
+      url: "/\uA4F8\uA4F8/etc/passwd",
+      expected: "about:blank",
+      description: "Lisu letter tone mya jeu bypass in relative path",
+    },
+    {
+      url: "/\uA60E\uA60E/etc/passwd",
+      expected: "about:blank",
+      description: "Vai full stop bypass in relative path",
+    },
+    {
+      url: "/\u2E3C\u2E3C/etc/passwd",
+      expected: "about:blank",
+      description: "Stenographic full stop bypass in relative path",
+    },
+    {
+      url: "/\u2E33\u2E33/etc/passwd",
+      expected: "about:blank",
+      description: "Raised dot bypass in relative path",
+    },
+    {
+      url: "/\u0701\u0701/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac supralinear full stop bypass in relative path",
+    },
+    {
+      url: "/\u0702\u0702/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac sublinear full stop bypass in relative path",
+    },
+    {
+      url: "/\u10FB\u10FB/etc/passwd",
+      expected: "about:blank",
+      description: "Georgian paragraph separator bypass in relative path",
+    },
+    {
+      url: "https://example.com/non\u00A0breaking\u00A0space",
+      expected: "https://example.com/nonbreakingspace",
+      description: "Strip non-breaking space (U+00A0)",
+    },
   ],
 };
 
