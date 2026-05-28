@@ -87,3 +87,8 @@
 **Vulnerability:** Potential open redirect or path traversal bypass via URL-encoded characters in relative paths.
 **Learning:** Security filters that only check for literal characters like `/`, `\`, or `.` can be bypassed if the browser or a downstream component decodes the URL before processing it. For example, `/%2f/attacker.com` might be normalized to `//attacker.com` by some browsers, leading to an open redirect.
 **Prevention:** URL sanitizers should explicitly include URL-encoded variants (e.g., `%2f`, `%5c`, `%2e`) in their blocklists for relative paths, especially when used to prevent protocol-relative URLs or directory traversal.
+
+## 2026-05-28 - Relative Path Bypass via Encoded Control Characters
+**Vulnerability:** Potential open redirect bypass via URL-encoded control characters and spaces.
+**Learning:** Security filters that block protocol-relative URLs (e.g., `//`) can be bypassed if the browser or a downstream component decodes or ignores URL-encoded control characters (e.g., `%09`, `%0a`, `%0d`) or spaces (`%20`) at the start of a path. For example, `/%09/attacker.com` might be normalized to `//attacker.com` by some browsers, leading to an open redirect.
+**Prevention:** Relative path sanitizers must explicitly include URL-encoded control characters (`%00` through `%1f`) and space (`%20`) in their blocklists when used to prevent protocol-relative URL bypasses.

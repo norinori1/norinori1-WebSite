@@ -45,10 +45,10 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // Homoglyphs included:
   // - Slashes: / (U+002F), \ (U+005C), ⁄ (U+2044), ∕ (U+2215), ∖ (U+2216), ⧵ (U+29F5), ⧸ (U+29F8), ⧹ (U+29F9), ／ (U+FF0F), ＼ (U+FF3C)
   // - Dots: . (U+002E), ․ (U+2024), ‥ (U+2025), … (U+2026), ‧ (U+2027), 。 (U+3002), ﹒ (U+FE52), ． (U+FF0E), ｡ (U+FF61), ۔ (U+06D4), ᙮ (U+166E), ᠃ (U+1803), ᠉ (U+1809), ꓸ (U+A4F8), ꘎ (U+A60E), ⸼ (U+2E3C), ⸳ (U+2E33), ܂ (U+0701), ܂ (U+0702), ჻ (U+10FB)
-  // - URL-encoded: %2f (slash), %5c (backslash), %2e (dot) - case insensitive
+  // - URL-encoded: %2f (slash), %5c (backslash), %2e (dot), %00-%1f (controls), %20 (space) - case insensitive
   if (
     (trimmedUrl.startsWith("/") &&
-      !/^\/([\\\/]|\s|\.|%2[fe]|%5c|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u2027|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C|\u06D4|\u166E|\u1803|\u1809|\uA4F8|\uA60E|\u2E3C|\u2E33|\u0701|\u0702|\u10FB)/i.test(
+      !/^\/([\\\/]|\s|\.|%0[0-9a-f]|%1[0-9a-f]|%20|%2[fe]|%5c|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u2027|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C|\u06D4|\u166E|\u1803|\u1809|\uA4F8|\uA60E|\u2E3C|\u2E33|\u0701|\u0702|\u10FB)/i.test(
         trimmedUrl,
       )) ||
     trimmedUrl.startsWith("#")
