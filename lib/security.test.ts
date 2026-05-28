@@ -389,6 +389,26 @@ const testCases = {
       expected: "https://example.com/nonbreakingspace",
       description: "Strip non-breaking space (U+00A0)",
     },
+    {
+      url: "/%2f/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded slash bypass in relative path",
+    },
+    {
+      url: "/%2F/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded slash bypass in relative path (uppercase)",
+    },
+    {
+      url: "/%5cattacker.com",
+      expected: "about:blank",
+      description: "URL-encoded backslash bypass in relative path",
+    },
+    {
+      url: "/%2e%2e/etc/passwd",
+      expected: "about:blank",
+      description: "URL-encoded dot bypass in relative path (traversal)",
+    },
   ],
 };
 

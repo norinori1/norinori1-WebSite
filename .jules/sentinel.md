@@ -82,3 +82,8 @@
 **Vulnerability:** Potential path traversal or open redirect bypass via Arabic and Canadian syllabics dot homoglyphs.
 **Learning:** Characters like Arabic Full Stop (U+06D4) and Canadian Syllabics Full Stop (U+166E) can be interpreted as standard dots by various components in the web stack. If these are not included in the blocklist for relative paths (e.g., preventing `//` or `..`), they can be used to bypass security filters.
 **Prevention:** Maintain a comprehensive list of Unicode homoglyphs for dots and slashes, including regional variations like U+06D4 and U+166E, and ensure they are blocked at the start of paths in URL sanitizers.
+
+## 2026-05-27 - Path Bypass via URL Encoding
+**Vulnerability:** Potential open redirect or path traversal bypass via URL-encoded characters in relative paths.
+**Learning:** Security filters that only check for literal characters like `/`, `\`, or `.` can be bypassed if the browser or a downstream component decodes the URL before processing it. For example, `/%2f/attacker.com` might be normalized to `//attacker.com` by some browsers, leading to an open redirect.
+**Prevention:** URL sanitizers should explicitly include URL-encoded variants (e.g., `%2f`, `%5c`, `%2e`) in their blocklists for relative paths, especially when used to prevent protocol-relative URLs or directory traversal.
