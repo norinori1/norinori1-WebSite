@@ -409,6 +409,36 @@ const testCases = {
       expected: "about:blank",
       description: "URL-encoded dot bypass in relative path (traversal)",
     },
+    {
+      url: "/%09/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded tab bypass in relative path",
+    },
+    {
+      url: "/%0a/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded newline bypass in relative path",
+    },
+    {
+      url: "/%0D/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded carriage return bypass in relative path",
+    },
+    {
+      url: "/%20/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded space bypass in relative path",
+    },
+    {
+      url: "/%00/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded null bypass in relative path",
+    },
+    {
+      url: "/%1f/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded control char (US) bypass in relative path",
+    },
   ],
 };
 
