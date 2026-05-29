@@ -92,3 +92,8 @@
 **Vulnerability:** Potential open redirect bypass via URL-encoded control characters and spaces.
 **Learning:** Security filters that block protocol-relative URLs (e.g., `//`) can be bypassed if the browser or a downstream component decodes or ignores URL-encoded control characters (e.g., `%09`, `%0a`, `%0d`) or spaces (`%20`) at the start of a path. For example, `/%09/attacker.com` might be normalized to `//attacker.com` by some browsers, leading to an open redirect.
 **Prevention:** Relative path sanitizers must explicitly include URL-encoded control characters (`%00` through `%1f`) and space (`%20`) in their blocklists when used to prevent protocol-relative URL bypasses.
+
+## 2026-05-29 - URL Sanitization Hardening against Obscure Dot Homoglyphs
+**Vulnerability:** Potential open redirect and path traversal bypass via obscure Unicode dot-like characters.
+**Learning:** Beyond common homoglyphs, characters like Ethiopic Full Stop (U+1362), Middle Dot (U+00B7), Dot Above (U+02D9), Greek Ano Teleia (U+0387), and Armenian Full Stop (U+0589) can be interpreted as standard dots by various parsers or environments. Furthermore, invisible word separators like Ethiopic Wordspace (U+1361) and Aegean Word Separator Dot (U+10101) can be used to obfuscate protocols if not stripped.
+**Prevention:** Path-based sanitizers should block a comprehensive list of Unicode homoglyphs for dots and slashes at the start of a path. Additionally, all known Unicode "word separators" and "ignorable" characters should be stripped during the sanitization process to prevent protocol-related bypasses.
