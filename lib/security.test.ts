@@ -390,6 +390,51 @@ const testCases = {
       description: "Strip non-breaking space (U+00A0)",
     },
     {
+      url: "https://example.com/ethiopic\u1361wordspace",
+      expected: "https://example.com/ethiopicwordspace",
+      description: "Strip Ethiopic wordspace (U+1361)",
+    },
+    {
+      url: "https://example.com/aegean\u{10101}separator",
+      expected: "https://example.com/aegeanseparator",
+      description: "Strip Aegean word separator dot (U+10101)",
+    },
+    {
+      url: "/\u1362\u1362/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic full stop bypass in relative path",
+    },
+    {
+      url: "/\u00B7\u00B7/etc/passwd",
+      expected: "about:blank",
+      description: "Middle dot bypass in relative path",
+    },
+    {
+      url: "/\u02D9\u02D9/etc/passwd",
+      expected: "about:blank",
+      description: "Dot above bypass in relative path",
+    },
+    {
+      url: "/\u0387\u0387/etc/passwd",
+      expected: "about:blank",
+      description: "Greek ano teleia bypass in relative path",
+    },
+    {
+      url: "/\u0589\u0589/etc/passwd",
+      expected: "about:blank",
+      description: "Armenian full stop bypass in relative path",
+    },
+    {
+      url: "/\u05C9\u05C9/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew holam bypass in relative path",
+    },
+    {
+      url: "/\u05C8\u05C8/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew qamets qatan bypass in relative path",
+    },
+    {
       url: "/%2f/attacker.com",
       expected: "about:blank",
       description: "URL-encoded slash bypass in relative path",

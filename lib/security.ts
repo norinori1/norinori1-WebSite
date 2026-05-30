@@ -33,8 +33,9 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // - Khmer invisible characters (U+17B4, U+17B5)
   // - Arabic Letter Mark (U+061C)
   // - Non-breaking space (U+00A0)
+  // - Ethiopic Wordspace (U+1361) and Aegean Word Separator Dot (U+10101)
   const trimmedUrl = normalizedUrl.replace(
-    /[\x00-\x1F\x7F-\x9F\s\u00A0\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}\uFE00-\uFE0F\u{E0100}-\u{E01EF}\u1680\u2800\uFFF9-\uFFFC\u17B4\u17B5\u061C\u180B-\u180D\u180F]/gu,
+    /[\x00-\x1F\x7F-\x9F\s\u00A0\u200E\u200F\u202A-\u202E\u2060-\u206F\u200B-\u200D\uFEFF\u2028\u2029\u00AD\u034F\u115F\u1160\u3164\uFFA0\u180E\u2000-\u200A\u202F\u205F\u3000\uFDD0-\uFDEF\uFFFD\uFFFE\uFFFF\u{E0000}-\u{E007F}\uFE00-\uFE0F\u{E0100}-\u{E01EF}\u1680\u2800\uFFF9-\uFFFC\u17B4\u17B5\u061C\u180B-\u180D\u180F\u1361\u{10101}]/gu,
     "",
   );
 
@@ -44,11 +45,11 @@ export function sanitizeUrl(url: string | undefined | null): string {
   // might normalize to cross-origin redirects or use for path traversal.
   // Homoglyphs included:
   // - Slashes: / (U+002F), \ (U+005C), ⁄ (U+2044), ∕ (U+2215), ∖ (U+2216), ⧵ (U+29F5), ⧸ (U+29F8), ⧹ (U+29F9), ／ (U+FF0F), ＼ (U+FF3C)
-  // - Dots: . (U+002E), ․ (U+2024), ‥ (U+2025), … (U+2026), ‧ (U+2027), 。 (U+3002), ﹒ (U+FE52), ． (U+FF0E), ｡ (U+FF61), ۔ (U+06D4), ᙮ (U+166E), ᠃ (U+1803), ᠉ (U+1809), ꓸ (U+A4F8), ꘎ (U+A60E), ⸼ (U+2E3C), ⸳ (U+2E33), ܂ (U+0701), ܂ (U+0702), ჻ (U+10FB)
+  // - Dots: . (U+002E), ․ (U+2024), ‥ (U+2025), … (U+2026), ‧ (U+2027), 。 (U+3002), ﹒ (U+FE52), ． (U+FF0E), ｡ (U+FF61), ۔ (U+06D4), ᙮ (U+166E), ᠃ (U+1803), ᠉ (U+1809), ꓸ (U+A4F8), ꘎ (U+A60E), ⸼ (U+2E3C), ⸳ (U+2E33), ܂ (U+0701), ܂ (U+0702), ჻ (U+10FB), ። (U+1362), · (U+00B7), ˙ (U+02D9), · (U+0387), ։ (U+0589), ׉ (U+05C9), ׈ (U+05C8)
   // - URL-encoded: %2f (slash), %5c (backslash), %2e (dot), %00-%1f (controls), %20 (space) - case insensitive
   if (
     (trimmedUrl.startsWith("/") &&
-      !/^\/([\\\/]|\s|\.|%0[0-9a-f]|%1[0-9a-f]|%20|%2[fe]|%5c|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u2027|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C|\u06D4|\u166E|\u1803|\u1809|\uA4F8|\uA60E|\u2E3C|\u2E33|\u0701|\u0702|\u10FB)/i.test(
+      !/^\/([\\\/]|\s|\.|%0[0-9a-f]|%1[0-9a-f]|%20|%2[fe]|%5c|\u2044|\u2215|\u2216|\u29F5|\u29F8|\u29F9|\u2024|\u2025|\u2026|\u2027|\u3002|\uFE52|\uFF0E|\uFF61|\uFF0F|\uFF3C|\u06D4|\u166E|\u1803|\u1809|\uA4F8|\uA60E|\u2E3C|\u2E33|\u0701|\u0702|\u10FB|\u1362|\u00B7|\u02D9|\u0387|\u0589|\u05C9|\u05C8)/i.test(
         trimmedUrl,
       )) ||
     trimmedUrl.startsWith("#")
