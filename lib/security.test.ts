@@ -484,6 +484,41 @@ const testCases = {
       expected: "about:blank",
       description: "URL-encoded control char (US) bypass in relative path",
     },
+    {
+      url: "/\uFE12\uFE12/etc/passwd",
+      expected: "about:blank",
+      description: "Vertical full stop bypass in relative path",
+    },
+    {
+      url: "/\u2219\u2219/etc/passwd",
+      expected: "about:blank",
+      description: "Bullet operator bypass in relative path",
+    },
+    {
+      url: "/\u22C5\u22C5/etc/passwd",
+      expected: "about:blank",
+      description: "Dot operator bypass in relative path",
+    },
+    {
+      url: "/\u2022\u2022/etc/passwd",
+      expected: "about:blank",
+      description: "Bullet bypass in relative path",
+    },
+    {
+      url: "/\u05B9\u05B9/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew holam bypass in relative path (05B9)",
+    },
+    {
+      url: "/\u05BC\u05BC/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point dagesh bypass in relative path",
+    },
+    {
+      url: "/\uFE68\uFE68attacker.com",
+      expected: "about:blank",
+      description: "Small reverse solidus bypass in relative path",
+    },
   ],
 };
 

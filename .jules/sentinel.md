@@ -97,3 +97,8 @@
 **Vulnerability:** Potential open redirect and path traversal bypass via obscure Unicode dot-like characters.
 **Learning:** Beyond common homoglyphs, characters like Ethiopic Full Stop (U+1362), Middle Dot (U+00B7), Dot Above (U+02D9), Greek Ano Teleia (U+0387), and Armenian Full Stop (U+0589) can be interpreted as standard dots by various parsers or environments. Furthermore, invisible word separators like Ethiopic Wordspace (U+1361) and Aegean Word Separator Dot (U+10101) can be used to obfuscate protocols if not stripped.
 **Prevention:** Path-based sanitizers should block a comprehensive list of Unicode homoglyphs for dots and slashes at the start of a path. Additionally, all known Unicode "word separators" and "ignorable" characters should be stripped during the sanitization process to prevent protocol-related bypasses.
+
+## 2026-05-30 - URL Hardening against Punctuation-based Homoglyphs
+**Vulnerability:** Potential open redirect and path traversal bypass via punctuation-like Unicode homoglyphs for slashes and dots.
+**Learning:** In addition to regional characters, standard mathematical operators and punctuation marks like Vertical Full Stop (U+FE12), Bullet Operator (U+2219), Dot Operator (U+22C5), Bullet (U+2022), and Small Reverse Solidus (U+FE68) can be misinterpreted as path delimiters or traversal tokens in certain contexts. Hebrew points like Holam (U+05B9) and Dagesh (U+05BC) also present similar risks due to their dot-like appearance and potential normalization.
+**Prevention:** Ensure the relative path blocklist in `sanitizeUrl` includes a wide array of mathematical and punctuation-based homoglyphs for slashes and dots (\uFE12, \u2219, \u22C5, \u2022, \u05B9, \u05BC, \uFE68) at the start of the path to prevent bypasses.
