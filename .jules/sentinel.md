@@ -102,3 +102,8 @@
 **Vulnerability:** Potential open redirect and path traversal bypass via mathematical and religious punctuation homoglyphs.
 **Learning:** Mathematical operators like Bullet Operator (U+2219) and Dot Operator (U+22C5), along with religious marks like Hebrew Point Holam (U+05B9) and Dagesh (U+05BC), can be visually similar to dots and sometimes normalized or interpreted as such by different components. Additionally, Small Reverse Solidus (U+FE68) and Vertical Full Stop (U+FE12) are often overlooked.
 **Prevention:** Maintain an exhaustive list of dot and slash homoglyphs in path-based sanitizers, specifically targeting characters that could be interpreted as path delimiters or traversal tokens at the start of a URL.
+
+## 2026-06-03 - URL Sanitization Hardening against Word Separator Homoglyphs
+**Vulnerability:** Potential open redirect and protocol obfuscation via obscure Word Separator characters.
+**Learning:** Characters like Word Separator Bar (U+2E30) can be interpreted as dots by some environments, while Word Separator Middle Dot (U+2E31) and Aegean Word Separator Line (U+10100) can be used to obfuscate protocols if not stripped. Furthermore, Hebrew points like Holam Haser (U+05BA) and Qubuts (U+05BB) are additional dot-like homoglyphs that can bypass path-based filters.
+**Prevention:** Ensure that all known Unicode Word Separator characters are either stripped during sanitization or included in the blocklist for relative paths if they can be interpreted as path delimiters or traversal tokens.
