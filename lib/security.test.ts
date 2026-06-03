@@ -400,6 +400,16 @@ const testCases = {
       description: "Strip Aegean word separator dot (U+10101)",
     },
     {
+      url: "https://example.com/middle\u2E31dot",
+      expected: "https://example.com/middledot",
+      description: "Strip word separator middle dot (U+2E31)",
+    },
+    {
+      url: "https://example.com/aegean\u{10100}line",
+      expected: "https://example.com/aegeanline",
+      description: "Strip Aegean word separator line (U+10100)",
+    },
+    {
       url: "/\u1362\u1362/etc/passwd",
       expected: "about:blank",
       description: "Ethiopic full stop bypass in relative path",
@@ -518,6 +528,21 @@ const testCases = {
       url: "/\u05BC\u05BC/etc/passwd",
       expected: "about:blank",
       description: "Hebrew dagesh (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u2E30\u2E30/etc/passwd",
+      expected: "about:blank",
+      description: "Word separator bar (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05BA\u05BA/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew holam haser (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05BB\u05BB/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew qubuts (dot-like) bypass in relative path",
     },
   ],
 };
