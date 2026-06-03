@@ -138,6 +138,10 @@ function applySecurityHeaders(response: NextResponse, isError = false): NextResp
   headers.set("X-Permitted-Cross-Domain-Policies", "none");
   headers.set("Referrer-Policy", "no-referrer");
   headers.set("X-Robots-Tag", "noindex, nofollow");
+  headers.set(
+    "Strict-Transport-Security",
+    "max-age=63072000; includeSubDomains; preload",
+  );
 
   if (isError) {
     headers.set("Cache-Control", "no-store, must-revalidate");

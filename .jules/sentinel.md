@@ -107,3 +107,8 @@
 **Vulnerability:** Potential open redirect and protocol obfuscation via obscure Word Separator characters.
 **Learning:** Characters like Word Separator Bar (U+2E30) can be interpreted as dots by some environments, while Word Separator Middle Dot (U+2E31) and Aegean Word Separator Line (U+10100) can be used to obfuscate protocols if not stripped. Furthermore, Hebrew points like Holam Haser (U+05BA) and Qubuts (U+05BB) are additional dot-like homoglyphs that can bypass path-based filters.
 **Prevention:** Ensure that all known Unicode Word Separator characters are either stripped during sanitization or included in the blocklist for relative paths if they can be interpreted as path delimiters or traversal tokens.
+
+## 2026-06-04 - Path Bypass via Combining Marks and Digit Homoglyphs
+**Vulnerability:** Potential open redirect and path traversal bypass via Arabic-Indic digit zero and Hebrew combining marks.
+**Learning:** Arabic-Indic digits zero (U+0660, U+06F0) and various Hebrew vowel points/combining marks (U+05B0-U+05B6, U+05C1-U+05C5) can be visually similar to dots or interpreted as path separators by certain parsers. Furthermore, when using these in JavaScript regular expressions, ranges (e.g., `\u05B0-\u05B6`) inside an alternation group `(a|b|c)` might not always behave as expected for combining marks unless handled carefully.
+**Prevention:** Maintain an exhaustive list of dot-like homoglyphs and combining marks in relative path blocklists, using individual character literals within the regex for maximum reliability. Additionally, enforce HSTS on all sensitive API routes for defense-in-depth.
