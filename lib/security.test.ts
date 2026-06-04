@@ -544,6 +544,51 @@ const testCases = {
       expected: "about:blank",
       description: "Hebrew qubuts (dot-like) bypass in relative path",
     },
+    {
+      url: "/\u0660\u0660/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic-Indic digit zero (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u06F0\u06F0/etc/passwd",
+      expected: "about:blank",
+      description: "Extended Arabic-Indic digit zero (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u2023\u2023/etc/passwd",
+      expected: "about:blank",
+      description: "Triangular bullet (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u2043\u2043/etc/passwd",
+      expected: "about:blank",
+      description: "Hyphen bullet (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05B0\u05B0/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew sheva (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05B1\u05B1/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew hataf segol (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05B4\u05B4/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew hiriq (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05C4\u05C4/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew upper dot (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u05C5\u05C5/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew lower dot (dot-like) bypass in relative path",
+    },
   ],
 };
 
