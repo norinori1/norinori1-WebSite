@@ -112,3 +112,8 @@
 **Vulnerability:** Potential open redirect and path traversal bypass via Arabic-Indic digit zero and Hebrew combining marks.
 **Learning:** Arabic-Indic digits zero (U+0660, U+06F0) and various Hebrew vowel points/combining marks (U+05B0-U+05B6, U+05C1-U+05C5) can be visually similar to dots or interpreted as path separators by certain parsers. Furthermore, when using these in JavaScript regular expressions, ranges (e.g., `\u05B0-\u05B6`) inside an alternation group `(a|b|c)` might not always behave as expected for combining marks unless handled carefully.
 **Prevention:** Maintain an exhaustive list of dot-like homoglyphs and combining marks in relative path blocklists, using individual character literals within the regex for maximum reliability. Additionally, enforce HSTS on all sensitive API routes for defense-in-depth.
+
+## 2026-06-04 - Path and Protocol Hardening against Commercial Minus and Runic Homoglyphs
+**Vulnerability:** Potential open redirect or protocol obfuscation via Commercial Minus and Runic punctuation marks.
+**Learning:** Characters like Commercial Minus Sign (U+2052) and Runic punctuation marks (U+16EB, U+16EC, U+16ED) can be visually similar to slashes or dots and may be interpreted as such by some parsers or used for phishing. Similarly, characters like Infix Wedge (U+2E0B) can be used to obfuscate protocols if not stripped.
+**Prevention:** Include Commercial Minus and Runic marks in relative path blocklists at the start of URLs. Also, expand the list of "ignorable" characters to be stripped during sanitization to include obscure marks like the Infix Wedge.

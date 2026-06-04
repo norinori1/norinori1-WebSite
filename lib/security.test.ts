@@ -589,6 +589,41 @@ const testCases = {
       expected: "about:blank",
       description: "Hebrew lower dot (dot-like) bypass in relative path",
     },
+    {
+      url: "/\u2052\u2052attacker.com",
+      expected: "about:blank",
+      description: "Commercial minus sign bypass in relative path",
+    },
+    {
+      url: "/\u16EB\u16EB/etc/passwd",
+      expected: "about:blank",
+      description: "Runic single punctuation bypass in relative path",
+    },
+    {
+      url: "/\u16EC\u16EC/etc/passwd",
+      expected: "about:blank",
+      description: "Runic multiple punctuation bypass in relative path",
+    },
+    {
+      url: "/\u16ED\u16ED/etc/passwd",
+      expected: "about:blank",
+      description: "Runic cross punctuation bypass in relative path",
+    },
+    {
+      url: "java\u2E0Bscript:alert(1)",
+      expected: "about:blank",
+      description: "Infix wedge in protocol",
+    },
+    {
+      url: "https://example.com/hyphen\u2E1Adiaeresis",
+      expected: "https://example.com/hyphendiaeresis",
+      description: "Strip hyphen with diaeresis",
+    },
+    {
+      url: "https://example.com/siglum\u2E1B",
+      expected: "https://example.com/siglum",
+      description: "Strip siglum",
+    },
   ],
 };
 
