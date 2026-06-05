@@ -589,6 +589,66 @@ const testCases = {
       expected: "about:blank",
       description: "Hebrew lower dot (dot-like) bypass in relative path",
     },
+    {
+      url: "/\u2E37\u2E37/etc/passwd",
+      expected: "about:blank",
+      description: "Double dot bypass in relative path",
+    },
+    {
+      url: "/\u2E38\u2E38/etc/passwd",
+      expected: "about:blank",
+      description: "Triple dot bypass in relative path",
+    },
+    {
+      url: "/\u2E39\u2E39/etc/passwd",
+      expected: "about:blank",
+      description: "Quaternary dot bypass in relative path",
+    },
+    {
+      url: "/\u22EE\u22EE/etc/passwd",
+      expected: "about:blank",
+      description: "Vertical ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u22EF\u22EF/etc/passwd",
+      expected: "about:blank",
+      description: "Midline horizontal ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u22F0\u22F0/etc/passwd",
+      expected: "about:blank",
+      description: "Up right ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u22F1\u22F1/etc/passwd",
+      expected: "about:blank",
+      description: "Down right ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u05C7\u05C7/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point qamets qatan bypass in relative path",
+    },
+    {
+      url: "/\u060D\u060Dattacker.com",
+      expected: "about:blank",
+      description: "Arabic date separator bypass in relative path",
+    },
+    {
+      url: "/\u05B7\u05B7/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point patah bypass in relative path",
+    },
+    {
+      url: "/\u05B8\u05B8/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point qamets bypass in relative path",
+    },
+    {
+      url: "/%7f/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded DEL bypass in relative path",
+    },
   ],
 };
 

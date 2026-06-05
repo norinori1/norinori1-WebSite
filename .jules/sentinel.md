@@ -112,3 +112,8 @@
 **Vulnerability:** Potential open redirect and path traversal bypass via Arabic-Indic digit zero and Hebrew combining marks.
 **Learning:** Arabic-Indic digits zero (U+0660, U+06F0) and various Hebrew vowel points/combining marks (U+05B0-U+05B6, U+05C1-U+05C5) can be visually similar to dots or interpreted as path separators by certain parsers. Furthermore, when using these in JavaScript regular expressions, ranges (e.g., `\u05B0-\u05B6`) inside an alternation group `(a|b|c)` might not always behave as expected for combining marks unless handled carefully.
 **Prevention:** Maintain an exhaustive list of dot-like homoglyphs and combining marks in relative path blocklists, using individual character literals within the regex for maximum reliability. Additionally, enforce HSTS on all sensitive API routes for defense-in-depth.
+
+## 2026-06-05 - Path Bypass via Obscure Unicode Homoglyphs and URL-encoded DEL
+**Vulnerability:** Potential open redirect and path traversal bypass via Vertical Ellipsis, Word Separator Dots, and URL-encoded DEL.
+**Learning:** Obscure Unicode characters such as Vertical Ellipsis (U+22EE), Midline Horizontal Ellipsis (U+22EF), Word Separator Dots (U+2E37-U+2E39), and Arabic Date Separator (U+060D) can be interpreted as standard dots or slashes by some parsers. Furthermore, while literal control characters are often stripped, their URL-encoded counterparts (like %7f for DEL) at the start of a path can sometimes be used to bypass filters that expect a clean relative path starting with a single slash.
+**Prevention:** Continuously monitor and update relative path blocklists to include newly identified Unicode homoglyphs and URL-encoded control characters (especially %7f) to prevent normalization-based bypasses.
