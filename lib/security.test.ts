@@ -125,6 +125,21 @@ const testCases = {
       description: "URL with line/paragraph separators (stripped)",
     },
     {
+      url: "java\u2E0Bscript:alert(1)",
+      expected: "about:blank",
+      description: "Infix wedge in protocol",
+    },
+    {
+      url: "java\u2E1Ascript:alert(1)",
+      expected: "about:blank",
+      description: "Hyphen with diaeresis in protocol",
+    },
+    {
+      url: "java\u2E1Bscript:alert(1)",
+      expected: "about:blank",
+      description: "Siglum in protocol",
+    },
+    {
       url: "https://example.com/" + "a".repeat(8193),
       expected: "about:blank",
       description: "Overly long URL",
@@ -588,6 +603,86 @@ const testCases = {
       url: "/\u05C5\u05C5/etc/passwd",
       expected: "about:blank",
       description: "Hebrew lower dot (dot-like) bypass in relative path",
+    },
+    {
+      url: "/\u2052/attacker.com",
+      expected: "about:blank",
+      description: "Commercial minus sign bypass in relative path",
+    },
+    {
+      url: "/\u16EB\u16EB/etc/passwd",
+      expected: "about:blank",
+      description: "Runic single punctuation bypass in relative path",
+    },
+    {
+      url: "/\u16EC\u16EC/etc/passwd",
+      expected: "about:blank",
+      description: "Runic multiple punctuation bypass in relative path",
+    },
+    {
+      url: "/\u16ED\u16ED/etc/passwd",
+      expected: "about:blank",
+      description: "Runic cross punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E37\u2E37/etc/passwd",
+      expected: "about:blank",
+      description: "Word separator double dot bypass in relative path",
+    },
+    {
+      url: "/\u2E38\u2E38/etc/passwd",
+      expected: "about:blank",
+      description: "Word separator triple dot bypass in relative path",
+    },
+    {
+      url: "/\u2E39\u2E39/etc/passwd",
+      expected: "about:blank",
+      description: "Word separator quadruple dot bypass in relative path",
+    },
+    {
+      url: "/\u22EE\u22EE/etc/passwd",
+      expected: "about:blank",
+      description: "Vertical ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u22EF\u22EF/etc/passwd",
+      expected: "about:blank",
+      description: "Midline horizontal ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u22F0\u22F0/etc/passwd",
+      expected: "about:blank",
+      description: "Up right diagonal ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u22F1\u22F1/etc/passwd",
+      expected: "about:blank",
+      description: "Down right diagonal ellipsis bypass in relative path",
+    },
+    {
+      url: "/\u060D\u060D/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic date separator bypass in relative path",
+    },
+    {
+      url: "/\u05B7\u05B7/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point patah bypass in relative path",
+    },
+    {
+      url: "/\u05B8\u05B8/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point qamets bypass in relative path",
+    },
+    {
+      url: "/\u05C7\u05C7/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew point qamets qatan bypass in relative path (alt)",
+    },
+    {
+      url: "/%7f/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded DEL bypass in relative path",
     },
   ],
 };
