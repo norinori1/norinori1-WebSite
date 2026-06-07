@@ -37,6 +37,16 @@ const testCases = {
       expected: false,
       description: "Overly long URL in isTrustedImageHost",
     },
+    {
+      url: null as unknown as string,
+      expected: false,
+      description: "Null input in isTrustedImageHost",
+    },
+    {
+      url: 123 as unknown as string,
+      expected: false,
+      description: "Non-string input in isTrustedImageHost",
+    },
   ],
   sanitizeUrl: [
     {
@@ -683,6 +693,36 @@ const testCases = {
       url: "/%7f/attacker.com",
       expected: "about:blank",
       description: "URL-encoded DEL bypass in relative path",
+    },
+    {
+      url: "/\u066B\u066B/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic decimal separator bypass in relative path",
+    },
+    {
+      url: "/\u066C\u066C/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic thousands separator bypass in relative path",
+    },
+    {
+      url: "/\u205E\u205E/etc/passwd",
+      expected: "about:blank",
+      description: "Vertical four dots bypass in relative path",
+    },
+    {
+      url: null as unknown as string,
+      expected: "",
+      description: "Null input in sanitizeUrl",
+    },
+    {
+      url: undefined as unknown as string,
+      expected: "",
+      description: "Undefined input in sanitizeUrl",
+    },
+    {
+      url: {} as unknown as string,
+      expected: "",
+      description: "Object input in sanitizeUrl",
     },
   ],
 };
