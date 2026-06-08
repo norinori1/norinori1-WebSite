@@ -117,3 +117,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via punctuation marks and ellipses interpreted as delimiters.
 **Learning:** Obscure Unicode characters such as Commercial Minus Sign (\u2052), vertical and diagonal ellipses (\u22EE-\u22F1), and Arabic Date Separator (\u060D) can be normalized or interpreted as slashes/dots. Furthermore, various Hebrew points and Runic punctuation marks can be used as homoglyphs for path delimiters at the start of a URL.
 **Prevention:** Maintain an exhaustive list of dot and slash homoglyphs in relative path blocklists. Additionally, strip obscure "ignorable" characters like Infix Wedge (\u2E0B), Hyphen with Diaeresis (\u2E1A), and Siglum (\u2E1B) to prevent protocol-relative URL and protocol obfuscation bypasses.
+
+## 2026-06-08 - Path Bypass via Double Encoding and Multi-Dot Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via double URL encoding and obscure multi-dot homoglyphs.
+**Learning:** URL sanitizers can be bypassed if they don't account for the percent sign (`%25`) at the start of a path, which can be used to double-encode dangerous characters (e.g., `/%252f/` becomes `//`). Additionally, obscure multi-dot Unicode characters like Two Dot Punctuation (\u205A), Four Dot Mark (\u205B), Dotted Cross (\u205C), and Tricolon (\u205D) can be interpreted as path delimiters or traversal tokens.
+**Prevention:** Include `%25` and multi-dot homoglyphs (\u205A, \u205B, \u205C, \u205D) in the blocklist for relative paths starting with dangerous characters. Furthermore, strip obscure characters like Ring Point (\u2E30) and Aegean Check Mark (\u10102) to prevent protocol obfuscation.
