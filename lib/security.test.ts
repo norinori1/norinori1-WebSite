@@ -430,9 +430,19 @@ const testCases = {
       description: "Strip word separator middle dot (U+2E31)",
     },
     {
+      url: "https://example.com/ring\u2E30point",
+      expected: "https://example.com/ringpoint",
+      description: "Strip ring point (U+2E30)",
+    },
+    {
       url: "https://example.com/aegean\u{10100}line",
       expected: "https://example.com/aegeanline",
       description: "Strip Aegean word separator line (U+10100)",
+    },
+    {
+      url: "https://example.com/aegean\u{10102}check",
+      expected: "https://example.com/aegeancheck",
+      description: "Strip Aegean check mark (U+10102)",
     },
     {
       url: "/\u1362\u1362/etc/passwd",
@@ -690,9 +700,34 @@ const testCases = {
       description: "Hebrew point qamets qatan bypass in relative path (alt)",
     },
     {
+      url: "/\u205A\u205A/etc/passwd",
+      expected: "about:blank",
+      description: "Two dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u205B\u205B/etc/passwd",
+      expected: "about:blank",
+      description: "Four dot mark bypass in relative path",
+    },
+    {
+      url: "/\u205C\u205C/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted cross bypass in relative path",
+    },
+    {
+      url: "/\u205D\u205D/etc/passwd",
+      expected: "about:blank",
+      description: "Tricolon bypass in relative path",
+    },
+    {
       url: "/%7f/attacker.com",
       expected: "about:blank",
       description: "URL-encoded DEL bypass in relative path",
+    },
+    {
+      url: "/%252f/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded percent bypass in relative path",
     },
     {
       url: "/\u066B\u066B/etc/passwd",
