@@ -122,3 +122,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via double URL encoding and obscure multi-dot homoglyphs.
 **Learning:** URL sanitizers can be bypassed if they don't account for the percent sign (`%25`) at the start of a path, which can be used to double-encode dangerous characters (e.g., `/%252f/` becomes `//`). Additionally, obscure multi-dot Unicode characters like Two Dot Punctuation (\u205A), Four Dot Mark (\u205B), Dotted Cross (\u205C), and Tricolon (\u205D) can be interpreted as path delimiters or traversal tokens.
 **Prevention:** Include `%25` and multi-dot homoglyphs (\u205A, \u205B, \u205C, \u205D) in the blocklist for relative paths starting with dangerous characters. Furthermore, strip obscure characters like Ring Point (\u2E30) and Aegean Check Mark (\u10102) to prevent protocol obfuscation.
+
+## 2026-06-10 - URL Sanitization Hardening against Advanced Punctuation Homoglyphs
+**Vulnerability:** Open redirect and protocol obfuscation via obscure punctuation and dotted homoglyphs.
+**Learning:** Obscure Unicode characters such as Three/Four/Five Dot Punctuation (\u2056, \u2058, \u2059), Squared Four Dot Punctuation (\u2E2C), and Dotted Solidus (\u2E4A) can be used as homoglyphs for dots and slashes to bypass path-based filters. Additionally, characters like Turned Comma (\u2E32) and Raised Comma (\u2E34) can be used to obfuscate protocols like `javascript:` if they are not stripped before validation.
+**Prevention:** Maintain an exhaustive blocklist for relative paths and a comprehensive strip list for "ignorable" or "dangerous" punctuation in URL sanitizers. Always verify suspected bypasses with a reproduction script to ensure coverage.
