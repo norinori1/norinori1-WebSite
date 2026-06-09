@@ -745,6 +745,76 @@ const testCases = {
       description: "Vertical four dots bypass in relative path",
     },
     {
+      url: "/\u2056\u2056/etc/passwd",
+      expected: "about:blank",
+      description: "Three dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2058\u2058/etc/passwd",
+      expected: "about:blank",
+      description: "Four dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2059\u2059/etc/passwd",
+      expected: "about:blank",
+      description: "Five dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E2C\u2E2C/etc/passwd",
+      expected: "about:blank",
+      description: "Squared four dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E2D\u2E2D/etc/passwd",
+      expected: "about:blank",
+      description: "Five dot mark bypass in relative path",
+    },
+    {
+      url: "/\u2E3D\u2E3D/etc/passwd",
+      expected: "about:blank",
+      description: "Vertical six dots bypass in relative path",
+    },
+    {
+      url: "/\u2E48\u2E48/etc/passwd",
+      expected: "about:blank",
+      description: "Low kavyka with dot bypass in relative path",
+    },
+    {
+      url: "/\u2E4A\u2E4Aattacker.com",
+      expected: "about:blank",
+      description: "Dotted solidus bypass in relative path",
+    },
+    {
+      url: "java\u2E32script:alert(1)",
+      expected: "about:blank",
+      description: "Turned comma in protocol (stripped)",
+    },
+    {
+      url: "java\u2E34script:alert(1)",
+      expected: "about:blank",
+      description: "Raised comma in protocol (stripped)",
+    },
+    {
+      url: "java\u2E35script:alert(1)",
+      expected: "about:blank",
+      description: "Turned semicolon in protocol (stripped)",
+    },
+    {
+      url: "java\u2E49script:alert(1)",
+      expected: "about:blank",
+      description: "Double stacked comma in protocol (stripped)",
+    },
+    {
+      url: "java\u204Fscript:alert(1)",
+      expected: "about:blank",
+      description: "Reversed semicolon in protocol (stripped)",
+    },
+    {
+      url: "java\u2E1Dscript:alert(1)",
+      expected: "about:blank",
+      description: "Right low paraphrase bracket in protocol (stripped)",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
