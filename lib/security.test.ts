@@ -815,6 +815,26 @@ const testCases = {
       description: "Right low paraphrase bracket in protocol (stripped)",
     },
     {
+      url: "https\u2E1C://example.com",
+      expected: "https://example.com/",
+      description: "Left low paraphrase bracket in protocol (stripped)",
+    },
+    {
+      url: "/\u2E3E\u2E3E/etc/passwd",
+      expected: "about:blank",
+      description: "Vertical five dots bypass in relative path",
+    },
+    {
+      url: "/\u2E41\u2E41/etc/passwd",
+      expected: "about:blank",
+      description: "Reversed comma with dot bypass in relative path",
+    },
+    {
+      url: "/\u2E5D\u2E5D/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted vertical bar bypass in relative path",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
