@@ -127,3 +127,8 @@
 **Vulnerability:** Open redirect and protocol obfuscation via obscure punctuation and dotted homoglyphs.
 **Learning:** Obscure Unicode characters such as Three/Four/Five Dot Punctuation (\u2056, \u2058, \u2059), Squared Four Dot Punctuation (\u2E2C), and Dotted Solidus (\u2E4A) can be used as homoglyphs for dots and slashes to bypass path-based filters. Additionally, characters like Turned Comma (\u2E32) and Raised Comma (\u2E34) can be used to obfuscate protocols like `javascript:` if they are not stripped before validation.
 **Prevention:** Maintain an exhaustive blocklist for relative paths and a comprehensive strip list for "ignorable" or "dangerous" punctuation in URL sanitizers. Always verify suspected bypasses with a reproduction script to ensure coverage.
+
+## 2026-06-11 - URL Sanitization Hardening against Obscure Unicode Homoglyphs
+**Vulnerability:** Open redirect and protocol-relative URL bypass via obscure Unicode dot and slash homoglyphs.
+**Learning:** Obscure Unicode characters such as Double/Triple Solidus Operators (\u2AFD, \u2AFE), Two/Three Dots Over One Dot Punctuation (\u2E2A, \u2E2B), and various dotted punctuation marks (e.g., \u2E5A-\u2E5C, \u0700, \u0703) can be interpreted as path delimiters or dots by different environments. Furthermore, Syriac Abbreviation Mark (\u070F) and Double Hyphen (\u2E40) are additional "ignorable" characters that can be used to obfuscate protocols if not stripped.
+**Prevention:** Maintain an exhaustive blocklist for relative paths and a comprehensive strip list for "ignorable" or "dangerous" characters in URL sanitizers. Always verify suspected bypasses with a reproduction script to ensure coverage of obscure Unicode ranges.

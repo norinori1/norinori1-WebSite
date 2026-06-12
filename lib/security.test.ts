@@ -835,6 +835,101 @@ const testCases = {
       description: "Dotted vertical bar bypass in relative path",
     },
     {
+      url: "/\u2AFD\u2AFDattacker.com",
+      expected: "about:blank",
+      description: "Double solidus operator bypass in relative path",
+    },
+    {
+      url: "/\u2AFE\u2AFEattacker.com",
+      expected: "about:blank",
+      description: "Triple solidus operator bypass in relative path",
+    },
+    {
+      url: "/\u2E2A\u2E2A/etc/passwd",
+      expected: "about:blank",
+      description: "Two dots over one dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E2B\u2E2B/etc/passwd",
+      expected: "about:blank",
+      description: "Three dots over one dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E51\u2E51/etc/passwd",
+      expected: "about:blank",
+      description: "Low asterisk bypass in relative path",
+    },
+    {
+      url: "/\u2E5A\u2E5A/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted square bypass in relative path",
+    },
+    {
+      url: "/\u2E5B\u2E5B/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted circle bypass in relative path",
+    },
+    {
+      url: "/\u2E5C\u2E5C/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted diamond bypass in relative path",
+    },
+    {
+      url: "/\u061E\u061E/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic triple dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u0700\u0700/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac end of paragraph bypass in relative path",
+    },
+    {
+      url: "/\u0703\u0703/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac colon bypass in relative path",
+    },
+    {
+      url: "/\u1365\u1365/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic semicolon bypass in relative path",
+    },
+    {
+      url: "/\u1366\u1366/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic colon bypass in relative path",
+    },
+    {
+      url: "/\u16EE\u16EE/etc/passwd",
+      expected: "about:blank",
+      description: "Runic belthone punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E44\u2E44/etc/passwd",
+      expected: "about:blank",
+      description: "Double suspension dot bypass in relative path",
+    },
+    {
+      url: "/\u1804\u1804/etc/passwd",
+      expected: "about:blank",
+      description: "Mongolian colon bypass in relative path",
+    },
+    {
+      url: "/\u1805\u1805/etc/passwd",
+      expected: "about:blank",
+      description: "Mongolian four dots bypass in relative path",
+    },
+    {
+      url: "java\u070Fscript:alert(1)",
+      expected: "about:blank",
+      description: "Syriac abbreviation mark in protocol (stripped)",
+    },
+    {
+      url: "java\u2E40script:alert(1)",
+      expected: "about:blank",
+      description: "Double hyphen in protocol (stripped)",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
