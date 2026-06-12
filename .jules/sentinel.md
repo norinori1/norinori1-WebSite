@@ -132,3 +132,8 @@
 **Vulnerability:** Open redirect and protocol-relative URL bypass via obscure Unicode dot and slash homoglyphs.
 **Learning:** Obscure Unicode characters such as Double/Triple Solidus Operators (\u2AFD, \u2AFE), Two/Three Dots Over One Dot Punctuation (\u2E2A, \u2E2B), and various dotted punctuation marks (e.g., \u2E5A-\u2E5C, \u0700, \u0703) can be interpreted as path delimiters or dots by different environments. Furthermore, Syriac Abbreviation Mark (\u070F) and Double Hyphen (\u2E40) are additional "ignorable" characters that can be used to obfuscate protocols if not stripped.
 **Prevention:** Maintain an exhaustive blocklist for relative paths and a comprehensive strip list for "ignorable" or "dangerous" characters in URL sanitizers. Always verify suspected bypasses with a reproduction script to ensure coverage of obscure Unicode ranges.
+
+## 2026-06-12 - URL Sanitization Hardening against Supplemental Dot Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via supplemental Unicode dot-over/under punctuation.
+**Learning:** Obscure Unicode characters from the Supplemental Punctuation block, specifically One/Two/Three/Four/Five/Six Dot Over/Under Punctuation (\u2E54-\u2E59), were not included in the blocklist for relative paths. These characters can be interpreted as dots by various parsers and browsers, potentially allowing protocol-relative URL (e.g., //) or path traversal bypasses.
+**Prevention:** Maintain an exhaustive blocklist for relative paths that includes all variants of dot and slash homoglyphs across different Unicode blocks. Use reproduction scripts to systematically test ranges of related characters.
