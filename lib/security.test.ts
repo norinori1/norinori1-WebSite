@@ -920,6 +920,36 @@ const testCases = {
       description: "Mongolian four dots bypass in relative path",
     },
     {
+      url: "/\u2E54\u2E54/etc/passwd",
+      expected: "about:blank",
+      description: "One dot over two dots punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E55\u2E55/etc/passwd",
+      expected: "about:blank",
+      description: "Two dots over one dot punctuation (alt) bypass in relative path",
+    },
+    {
+      url: "/\u2E56\u2E56/etc/passwd",
+      expected: "about:blank",
+      description: "Three dots over one dot punctuation (alt) bypass in relative path",
+    },
+    {
+      url: "/\u2E57\u2E57/etc/passwd",
+      expected: "about:blank",
+      description: "Four dots over one dot punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E58\u2E58/etc/passwd",
+      expected: "about:blank",
+      description: "Five dots over one dot punctuation (alt) bypass in relative path",
+    },
+    {
+      url: "/\u2E59\u2E59/etc/passwd",
+      expected: "about:blank",
+      description: "Six dots over one dot punctuation bypass in relative path",
+    },
+    {
       url: "java\u070Fscript:alert(1)",
       expected: "about:blank",
       description: "Syriac abbreviation mark in protocol (stripped)",
