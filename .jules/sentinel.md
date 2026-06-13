@@ -137,3 +137,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via supplemental Unicode dot-over/under punctuation.
 **Learning:** Obscure Unicode characters from the Supplemental Punctuation block, specifically One/Two/Three/Four/Five/Six Dot Over/Under Punctuation (\u2E54-\u2E59), were not included in the blocklist for relative paths. These characters can be interpreted as dots by various parsers and browsers, potentially allowing protocol-relative URL (e.g., //) or path traversal bypasses.
 **Prevention:** Maintain an exhaustive blocklist for relative paths that includes all variants of dot and slash homoglyphs across different Unicode blocks. Use reproduction scripts to systematically test ranges of related characters.
+
+## 2026-06-13 - URL Sanitization Hardening against Advanced Supplemental Punctuation Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via obscure Supplemental Punctuation homoglyphs.
+**Learning:** Characters like Inverted low kavyka with dot (\u2E46), Virgule with middle dot (\u2E4B), and Triple-dotted punctuation (\u2E4F) can be interpreted as dots or slashes by some parsers or browsers. If these are not explicitly blocked at the start of a relative path, they can be used to bypass protocol-relative URL (//) or path traversal (..) filters.
+**Prevention:** Continuously monitor and update relative path blocklists to include newly identified Unicode homoglyphs from supplemental blocks (e.g., U+2E46, U+2E4B, U+2E4C, U+2E4D, U+2E4E, U+2E4F, U+2E52).
