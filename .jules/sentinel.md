@@ -142,3 +142,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via obscure Supplemental Punctuation homoglyphs.
 **Learning:** Characters like Inverted low kavyka with dot (\u2E46), Virgule with middle dot (\u2E4B), and Triple-dotted punctuation (\u2E4F) can be interpreted as dots or slashes by some parsers or browsers. If these are not explicitly blocked at the start of a relative path, they can be used to bypass protocol-relative URL (//) or path traversal (..) filters.
 **Prevention:** Continuously monitor and update relative path blocklists to include newly identified Unicode homoglyphs from supplemental blocks (e.g., U+2E46, U+2E4B, U+2E4C, U+2E4D, U+2E4E, U+2E4F, U+2E52).
+
+## 2026-06-14 - URL Sanitization Hardening against Multi-Block Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via obscure Unicode homoglyphs from multiple blocks.
+**Learning:** Beyond common supplemental punctuation, obscure characters from Syriac (U+0704-U+0709), Coptic (U+2CF9-U+2CFA), Tifinagh (U+2D70), and Lisu (U+A4FF) blocks, as well as specific General/Supplemental Punctuation like Two Dot Punctuation (U+2051), Cross Punti (U+2E50), and Medieval Comma (U+2E53), can be interpreted as path delimiters or dots.
+**Prevention:** Maintain an exhaustive, multi-block blocklist for relative paths in URL sanitizers. Use reproduction scripts to systematically identify and verify homoglyphs across the entire Unicode space.
