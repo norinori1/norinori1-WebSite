@@ -910,6 +910,41 @@ const testCases = {
       description: "Double suspension dot bypass in relative path",
     },
     {
+      url: "/\u2E46\u2E46/etc/passwd",
+      expected: "about:blank",
+      description: "Inverted low kavyka with dot bypass in relative path",
+    },
+    {
+      url: "/\u2E4B\u2E4Battacker.com",
+      expected: "about:blank",
+      description: "Virgule with middle dot bypass in relative path",
+    },
+    {
+      url: "/\u2E4C\u2E4C/etc/passwd",
+      expected: "about:blank",
+      description: "Five-dot mark bypass in relative path",
+    },
+    {
+      url: "/\u2E4D\u2E4Dattacker.com",
+      expected: "about:blank",
+      description: "Two-dotted virgule bypass in relative path",
+    },
+    {
+      url: "/\u2E4E\u2E4Eattacker.com",
+      expected: "about:blank",
+      description: "Punctuation virgule with positive slope bypass in relative path",
+    },
+    {
+      url: "/\u2E4F\u2E4F/etc/passwd",
+      expected: "about:blank",
+      description: "Triple-dotted punctuation bypass in relative path",
+    },
+    {
+      url: "/\u2E52\u2E52/etc/passwd",
+      expected: "about:blank",
+      description: "Tilde with dot above bypass in relative path",
+    },
+    {
       url: "/\u1804\u1804/etc/passwd",
       expected: "about:blank",
       description: "Mongolian colon bypass in relative path",
