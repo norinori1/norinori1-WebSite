@@ -147,3 +147,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via obscure Unicode homoglyphs from multiple blocks.
 **Learning:** Beyond common supplemental punctuation, obscure characters from Syriac (U+0704-U+0709), Coptic (U+2CF9-U+2CFA), Tifinagh (U+2D70), and Lisu (U+A4FF) blocks, as well as specific General/Supplemental Punctuation like Two Dot Punctuation (U+2051), Cross Punti (U+2E50), and Medieval Comma (U+2E53), can be interpreted as path delimiters or dots.
 **Prevention:** Maintain an exhaustive, multi-block blocklist for relative paths in URL sanitizers. Use reproduction scripts to systematically identify and verify homoglyphs across the entire Unicode space.
+
+## 2026-06-15 - URL Sanitization Hardening against Supplemental Dotted Homoglyphs
+**Vulnerability:** Potential open redirect and path traversal bypass via obscure Unicode dotted punctuation.
+**Learning:** Obscure Unicode characters from the Supplemental Punctuation block (U+2E01, U+2E04, U+2E05, U+2E07, U+2E08, U+2E13, U+2E16, U+2E1E, U+2E1F) were not included in the blocklist for relative paths or the strip list for protocols. These can be used to bypass security filters.
+**Prevention:** Maintain an exhaustive blocklist for relative paths and a comprehensive strip list for "ignorable" or "dangerous" characters in URL sanitizers. Use reproduction scripts to systematically identify and verify homoglyphs across the entire Unicode space.

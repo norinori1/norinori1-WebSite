@@ -1010,6 +1010,51 @@ const testCases = {
       description: "Lisu punctuation full stop bypass in relative path",
     },
     {
+      url: "/\u2E01\u2E01/etc/passwd",
+      expected: "about:blank",
+      description: "Right angle dotted substitution marker bypass in relative path",
+    },
+    {
+      url: "/\u2E04\u2E04/etc/passwd",
+      expected: "about:blank",
+      description: "Left dotted substitution bracket bypass in relative path",
+    },
+    {
+      url: "/\u2E05\u2E05/etc/passwd",
+      expected: "about:blank",
+      description: "Right dotted substitution bracket bypass in relative path",
+    },
+    {
+      url: "/\u2E07\u2E07/etc/passwd",
+      expected: "about:blank",
+      description: "Raised dotted interpolation marker bypass in relative path",
+    },
+    {
+      url: "/\u2E08\u2E08/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted transposition marker bypass in relative path",
+    },
+    {
+      url: "/\u2E13\u2E13/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted obelos bypass in relative path",
+    },
+    {
+      url: "/\u2E16\u2E16/etc/passwd",
+      expected: "about:blank",
+      description: "Dotted right-pointing angle bypass in relative path",
+    },
+    {
+      url: "/\u2E1E\u2E1E/etc/passwd",
+      expected: "about:blank",
+      description: "Tilde with dot above bypass in relative path",
+    },
+    {
+      url: "/\u2E1F\u2E1F/etc/passwd",
+      expected: "about:blank",
+      description: "Tilde with dot below bypass in relative path",
+    },
+    {
       url: "/\u1804\u1804/etc/passwd",
       expected: "about:blank",
       description: "Mongolian colon bypass in relative path",
@@ -1058,6 +1103,51 @@ const testCases = {
       url: "java\u2E40script:alert(1)",
       expected: "about:blank",
       description: "Double hyphen in protocol (stripped)",
+    },
+    {
+      url: "java\u2E01script:alert(1)",
+      expected: "about:blank",
+      description: "Right angle dotted substitution marker in protocol (stripped)",
+    },
+    {
+      url: "java\u2E04script:alert(1)",
+      expected: "about:blank",
+      description: "Left dotted substitution bracket in protocol (stripped)",
+    },
+    {
+      url: "java\u2E05script:alert(1)",
+      expected: "about:blank",
+      description: "Right dotted substitution bracket in protocol (stripped)",
+    },
+    {
+      url: "java\u2E07script:alert(1)",
+      expected: "about:blank",
+      description: "Raised dotted interpolation marker in protocol (stripped)",
+    },
+    {
+      url: "java\u2E08script:alert(1)",
+      expected: "about:blank",
+      description: "Dotted transposition marker in protocol (stripped)",
+    },
+    {
+      url: "java\u2E13script:alert(1)",
+      expected: "about:blank",
+      description: "Dotted obelos in protocol (stripped)",
+    },
+    {
+      url: "java\u2E16script:alert(1)",
+      expected: "about:blank",
+      description: "Dotted right-pointing angle in protocol (stripped)",
+    },
+    {
+      url: "java\u2E1Escript:alert(1)",
+      expected: "about:blank",
+      description: "Tilde with dot above in protocol (stripped)",
+    },
+    {
+      url: "java\u2E1Fscript:alert(1)",
+      expected: "about:blank",
+      description: "Tilde with dot below in protocol (stripped)",
     },
     {
       url: null as unknown as string,
