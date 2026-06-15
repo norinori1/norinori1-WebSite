@@ -945,6 +945,71 @@ const testCases = {
       description: "Tilde with dot above bypass in relative path",
     },
     {
+      url: "/\u2051\u2051/etc/passwd",
+      expected: "about:blank",
+      description: "Two dot punctuation bypass in relative path (alt)",
+    },
+    {
+      url: "/\u2E50\u2E50/etc/passwd",
+      expected: "about:blank",
+      description: "Cross punti bypass in relative path",
+    },
+    {
+      url: "/\u2E53\u2E53/etc/passwd",
+      expected: "about:blank",
+      description: "Medieval comma bypass in relative path",
+    },
+    {
+      url: "/\u0704\u0704/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac dotted colon bypass in relative path",
+    },
+    {
+      url: "/\u0705\u0705/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac vertical colon bypass in relative path",
+    },
+    {
+      url: "/\u0706\u0706/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac horizontal colon bypass in relative path",
+    },
+    {
+      url: "/\u0707\u0707/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac oblique colon bypass in relative path",
+    },
+    {
+      url: "/\u0708\u0708/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac music mark bypass in relative path",
+    },
+    {
+      url: "/\u0709\u0709/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac music mark alt bypass in relative path",
+    },
+    {
+      url: "/\u2CF9\u2CF9/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic full stop bypass in relative path",
+    },
+    {
+      url: "/\u2CFA\u2CFA/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic semicolon bypass in relative path",
+    },
+    {
+      url: "/\u2D70\u2D70/etc/passwd",
+      expected: "about:blank",
+      description: "Tifinagh separator mark bypass in relative path",
+    },
+    {
+      url: "/\uA4FF\uA4FF/etc/passwd",
+      expected: "about:blank",
+      description: "Lisu punctuation full stop bypass in relative path",
+    },
+    {
       url: "/\u1804\u1804/etc/passwd",
       expected: "about:blank",
       description: "Mongolian colon bypass in relative path",
