@@ -1055,6 +1055,61 @@ const testCases = {
       description: "Tilde with dot below bypass in relative path",
     },
     {
+      url: "/\u2E17\u2E17attacker.com",
+      expected: "about:blank",
+      description: "Oblique slant bypass in relative path",
+    },
+    {
+      url: "/\u2E09\u2E09attacker.com",
+      expected: "about:blank",
+      description: "Left transcription bracket bypass in relative path",
+    },
+    {
+      url: "/\u2E0A\u2E0Aattacker.com",
+      expected: "about:blank",
+      description: "Right transcription bracket bypass in relative path",
+    },
+    {
+      url: "/\u2E0C\u2E0Cattacker.com",
+      expected: "about:blank",
+      description: "Raised wedge bypass in relative path",
+    },
+    {
+      url: "/\u2E0D\u2E0Dattacker.com",
+      expected: "about:blank",
+      description: "Low wedge bypass in relative path",
+    },
+    {
+      url: "/\u2E12\u2E12attacker.com",
+      expected: "about:blank",
+      description: "Dotted reversed comma bypass in relative path",
+    },
+    {
+      url: "/\u2E18\u2E18attacker.com",
+      expected: "about:blank",
+      description: "Inverted interrogation mark bypass in relative path",
+    },
+    {
+      url: "/\u2E19\u2E19attacker.com",
+      expected: "about:blank",
+      description: "Palm branch bypass in relative path",
+    },
+    {
+      url: "/%80/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded C1 control (0x80) bypass in relative path",
+    },
+    {
+      url: "/%9f/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded C1 control (0x9f) bypass in relative path",
+    },
+    {
+      url: "/%a0/attacker.com",
+      expected: "about:blank",
+      description: "URL-encoded non-breaking space (0xa0) bypass in relative path",
+    },
+    {
       url: "/\u1804\u1804/etc/passwd",
       expected: "about:blank",
       description: "Mongolian colon bypass in relative path",
@@ -1148,6 +1203,46 @@ const testCases = {
       url: "java\u2E1Fscript:alert(1)",
       expected: "about:blank",
       description: "Tilde with dot below in protocol (stripped)",
+    },
+    {
+      url: "java\u2E17script:alert(1)",
+      expected: "about:blank",
+      description: "Oblique slant in protocol (stripped)",
+    },
+    {
+      url: "java\u2E09script:alert(1)",
+      expected: "about:blank",
+      description: "Left transcription bracket in protocol (stripped)",
+    },
+    {
+      url: "java\u2E0Ascript:alert(1)",
+      expected: "about:blank",
+      description: "Right transcription bracket in protocol (stripped)",
+    },
+    {
+      url: "java\u2E0Cscript:alert(1)",
+      expected: "about:blank",
+      description: "Raised wedge in protocol (stripped)",
+    },
+    {
+      url: "java\u2E0Dscript:alert(1)",
+      expected: "about:blank",
+      description: "Low wedge in protocol (stripped)",
+    },
+    {
+      url: "java\u2E12script:alert(1)",
+      expected: "about:blank",
+      description: "Dotted reversed comma in protocol (stripped)",
+    },
+    {
+      url: "java\u2E18script:alert(1)",
+      expected: "about:blank",
+      description: "Inverted interrogation mark in protocol (stripped)",
+    },
+    {
+      url: "java\u2E19script:alert(1)",
+      expected: "about:blank",
+      description: "Palm branch in protocol (stripped)",
     },
     {
       url: null as unknown as string,

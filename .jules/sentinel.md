@@ -152,3 +152,8 @@
 **Vulnerability:** Potential open redirect and path traversal bypass via obscure Unicode dotted punctuation.
 **Learning:** Obscure Unicode characters from the Supplemental Punctuation block (U+2E01, U+2E04, U+2E05, U+2E07, U+2E08, U+2E13, U+2E16, U+2E1E, U+2E1F) were not included in the blocklist for relative paths or the strip list for protocols. These can be used to bypass security filters.
 **Prevention:** Maintain an exhaustive blocklist for relative paths and a comprehensive strip list for "ignorable" or "dangerous" characters in URL sanitizers. Use reproduction scripts to systematically identify and verify homoglyphs across the entire Unicode space.
+
+## 2026-06-16 - URL Sanitization: Avoiding "Security Theater" in Stripping
+**Vulnerability:** Potential protocol obfuscation via character stripping.
+**Learning:** Globally stripping characters from a URL before protocol validation can be dangerous. If a sanitizer strips a character like an "oblique slant" (\u2E17), an attacker can use it to hide a dangerous protocol (e.g., `java\u2E17script:`). The sanitizer then "helps" the attacker by reconstructing the malicious string.
+**Prevention:** Only strip characters that are truly invisible or purely ignorable. For other obscure punctuation, prefer blocking them at the start of relative paths (to prevent open redirects) but leaving them in absolute URLs so they cause protocol validation to fail naturally.
