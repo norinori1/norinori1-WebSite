@@ -157,3 +157,8 @@
 **Vulnerability:** Potential protocol obfuscation via character stripping.
 **Learning:** Globally stripping characters from a URL before protocol validation can be dangerous. If a sanitizer strips a character like an "oblique slant" (\u2E17), an attacker can use it to hide a dangerous protocol (e.g., `java\u2E17script:`). The sanitizer then "helps" the attacker by reconstructing the malicious string.
 **Prevention:** Only strip characters that are truly invisible or purely ignorable. For other obscure punctuation, prefer blocking them at the start of relative paths (to prevent open redirects) but leaving them in absolute URLs so they cause protocol validation to fail naturally.
+
+## 2026-06-18 - URL Sanitization: Avoiding "Security Theater" in Stripping
+**Vulnerability:** Potential protocol obfuscation and relative path bypass via character stripping.
+**Learning:** Globally stripping characters that are visually similar to dots or slashes (homoglyphs) before validation can be dangerous. For example, stripping an "Ethiopic Wordspace" (U+1361) can turn a malicious "፡/attacker.com" into a dangerous relative path "/attacker.com" after the strip but before the relative path blocklist check. This "helps" the attacker by reconstructing a payload that bypasses security filters.
+**Prevention:** Only strip characters that are truly invisible or purely ignorable. For other visible punctuation that could be interpreted as path delimiters, prefer blocking them at the start of relative paths (to prevent open redirects) but leaving them in absolute URLs so they cause protocol or hostname validation to fail naturally.
