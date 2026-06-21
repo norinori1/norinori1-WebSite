@@ -1095,6 +1095,66 @@ const testCases = {
       description: "Palm branch bypass in relative path",
     },
     {
+      url: "/\u1363\u1363/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic comma bypass in relative path",
+    },
+    {
+      url: "/\u1364\u1364/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic semicolon bypass in relative path",
+    },
+    {
+      url: "/\u1367\u1367/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic question mark bypass in relative path",
+    },
+    {
+      url: "/\u1368\u1368/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic paragraph separator bypass in relative path",
+    },
+    {
+      url: "/\u2CFB\u2CFB/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic indirect question mark bypass in relative path",
+    },
+    {
+      url: "/\u2CFC\u2CFC/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic verse divider bypass in relative path",
+    },
+    {
+      url: "/\u2CFE\u2CFE/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic full stop bypass in relative path",
+    },
+    {
+      url: "/\u2CFF\u2CFF/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic morphological divider bypass in relative path",
+    },
+    {
+      url: "/\u05C0\u05C0/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew paseq bypass in relative path",
+    },
+    {
+      url: "/\u05C3\u05C3/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew sof pasuq bypass in relative path",
+    },
+    {
+      url: "/\u05C6\u05C6/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew nun hafukha bypass in relative path",
+    },
+    {
+      url: "/\u066D\u066D/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic five pointed star bypass in relative path",
+    },
+    {
       url: "/%80/attacker.com",
       expected: "about:blank",
       description: "URL-encoded C1 control (0x80) bypass in relative path",
