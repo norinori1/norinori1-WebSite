@@ -157,3 +157,8 @@
 **Vulnerability:** Potential protocol obfuscation via character stripping.
 **Learning:** Globally stripping characters from a URL before protocol validation can be dangerous. If a sanitizer strips a character like an "oblique slant" (\u2E17), an attacker can use it to hide a dangerous protocol (e.g., `java\u2E17script:`). The sanitizer then "helps" the attacker by reconstructing the malicious string.
 **Prevention:** Only strip characters that are truly invisible or purely ignorable. For other obscure punctuation, prefer blocking them at the start of relative paths (to prevent open redirects) but leaving them in absolute URLs so they cause protocol validation to fail naturally.
+
+## 2026-06-23 - Path Bypass via Middle Eastern and African Homoglyphs
+**Vulnerability:** Open redirect and path traversal bypass via homoglyphs in Coptic, Ethiopic, Hebrew, and Arabic blocks.
+**Learning:** Characters like Coptic Direct Question Mark (U+2CFC), Ethiopic Preface Colon (U+1363), Hebrew Paseq (U+05C0), and Arabic Five Pointed Star (U+066D) can be interpreted as path separators or dots by some components. These were missing from the relative path blocklist.
+**Prevention:** Maintain an exhaustive list of dot and slash homoglyphs across all Unicode blocks in relative path blocklists to prevent protocol-relative URL and traversal bypasses.
