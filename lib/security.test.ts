@@ -1245,6 +1245,96 @@ const testCases = {
       description: "Visible palm branch in protocol is NOT stripped and causes failure",
     },
     {
+      url: "/\u1363\u1363attacker.com",
+      expected: "about:blank",
+      description: "Ethiopic comma bypass in relative path",
+    },
+    {
+      url: "/\u1364\u1364attacker.com",
+      expected: "about:blank",
+      description: "Ethiopic semicolon bypass (alt) in relative path",
+    },
+    {
+      url: "/\u1367\u1367attacker.com",
+      expected: "about:blank",
+      description: "Ethiopic question mark bypass in relative path",
+    },
+    {
+      url: "/\u1368\u1368attacker.com",
+      expected: "about:blank",
+      description: "Ethiopic section mark bypass in relative path",
+    },
+    {
+      url: "/\u2CFB\u2CFBattacker.com",
+      expected: "about:blank",
+      description: "Coptic full stop (alt) bypass in relative path",
+    },
+    {
+      url: "/\u2CFC\u2CFCattacker.com",
+      expected: "about:blank",
+      description: "Coptic semicolon (alt) bypass in relative path",
+    },
+    {
+      url: "/\u2CFD\u2CFDattacker.com",
+      expected: "about:blank",
+      description: "Coptic fraction one half bypass in relative path",
+    },
+    {
+      url: "/\u2CFE\u2CFEattacker.com",
+      expected: "about:blank",
+      description: "Coptic full stop (alt 2) bypass in relative path",
+    },
+    {
+      url: "/\u2CFF\u2CFFattacker.com",
+      expected: "about:blank",
+      description: "Coptic morphological divider bypass in relative path",
+    },
+    {
+      url: "/\u05C0\u05C0attacker.com",
+      expected: "about:blank",
+      description: "Hebrew paseq bypass in relative path",
+    },
+    {
+      url: "/\u05C3\u05C3attacker.com",
+      expected: "about:blank",
+      description: "Hebrew sof pasuq bypass in relative path",
+    },
+    {
+      url: "/\u05C6\u05C6attacker.com",
+      expected: "about:blank",
+      description: "Hebrew nun hafukha bypass in relative path",
+    },
+    {
+      url: "/\u066D\u066Dattacker.com",
+      expected: "about:blank",
+      description: "Arabic five-pointed star bypass in relative path",
+    },
+    {
+      url: "/\u070A\u070Aattacker.com",
+      expected: "about:blank",
+      description: "Syriac abbreviation mark (alt) bypass in relative path",
+    },
+    {
+      url: "/\u070B\u070Battacker.com",
+      expected: "about:blank",
+      description: "Syriac abbreviation mark (alt 2) bypass in relative path",
+    },
+    {
+      url: "/\u070C\u070Cattacker.com",
+      expected: "about:blank",
+      description: "Syriac abbreviation mark (alt 3) bypass in relative path",
+    },
+    {
+      url: "/\u070D\u070Dattacker.com",
+      expected: "about:blank",
+      description: "Syriac harklean asterisk bypass in relative path",
+    },
+    {
+      url: "/\u070E\u070Eattacker.com",
+      expected: "about:blank",
+      description: "Syriac harklean obelos bypass in relative path",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
