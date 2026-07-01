@@ -1245,6 +1245,96 @@ const testCases = {
       description: "Visible palm branch in protocol is NOT stripped and causes failure",
     },
     {
+      url: "/\u2CFB\u2CFB/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic full stop bypass in relative path",
+    },
+    {
+      url: "/\u2CFC\u2CFC/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic semicolon bypass in relative path (alt)",
+    },
+    {
+      url: "/\u2CFD\u2CFD/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic fraction bypass in relative path",
+    },
+    {
+      url: "/\u2CFE\u2CFE/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic full stop (alt) bypass in relative path",
+    },
+    {
+      url: "/\u2CFF\u2CFF/etc/passwd",
+      expected: "about:blank",
+      description: "Coptic morphological divider bypass in relative path",
+    },
+    {
+      url: "/\u1363\u1363/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic comma bypass in relative path",
+    },
+    {
+      url: "/\u1364\u1364/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic semicolon bypass in relative path (alt 2)",
+    },
+    {
+      url: "/\u1367\u1367/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic question mark bypass in relative path",
+    },
+    {
+      url: "/\u1368\u1368/etc/passwd",
+      expected: "about:blank",
+      description: "Ethiopic paragraph separator bypass in relative path (alt)",
+    },
+    {
+      url: "/\u05C0\u05C0/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew paseq bypass in relative path",
+    },
+    {
+      url: "/\u05C3\u05C3/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew sof pasuq bypass in relative path",
+    },
+    {
+      url: "/\u05C6\u05C6/etc/passwd",
+      expected: "about:blank",
+      description: "Hebrew nun hafukha bypass in relative path",
+    },
+    {
+      url: "/\u066D\u066D/etc/passwd",
+      expected: "about:blank",
+      description: "Arabic five pointed star bypass in relative path",
+    },
+    {
+      url: "/\u070A\u070A/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac contraction bypass in relative path",
+    },
+    {
+      url: "/\u070B\u070B/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac harklean asterisk bypass in relative path",
+    },
+    {
+      url: "/\u070C\u070C/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac harklean obelos bypass in relative path",
+    },
+    {
+      url: "/\u070D\u070D/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac harklean metobelos bypass in relative path",
+    },
+    {
+      url: "/\u070E\u070E/etc/passwd",
+      expected: "about:blank",
+      description: "Syriac paragraph separator bypass in relative path (alt 2)",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
