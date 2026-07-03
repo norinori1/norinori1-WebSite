@@ -1335,6 +1335,186 @@ const testCases = {
       description: "Visible palm branch in protocol is NOT stripped and causes failure",
     },
     {
+      url: "/\u{10290}attacker.com",
+      expected: "about:blank",
+      description: "Carian word separator line bypass in relative path",
+    },
+    {
+      url: "/\u{10291}attacker.com",
+      expected: "about:blank",
+      description: "Carian word separator dot bypass in relative path",
+    },
+    {
+      url: "/\u{145B1}attacker.com",
+      expected: "about:blank",
+      description: "Anatolian hieroglyph word divider bypass in relative path",
+    },
+    {
+      url: "/\u{103D0}attacker.com",
+      expected: "about:blank",
+      description: "Old Persian word divider bypass in relative path",
+    },
+    {
+      url: "/\u{1039F}attacker.com",
+      expected: "about:blank",
+      description: "Ugaritic word divider bypass in relative path",
+    },
+    {
+      url: "/\u{1091F}attacker.com",
+      expected: "about:blank",
+      description: "Phoenician word divider bypass in relative path",
+    },
+    {
+      url: "/\u{1029F}attacker.com",
+      expected: "about:blank",
+      description: "Lycian word divider bypass in relative path",
+    },
+    {
+      url: "/\u{1093F}attacker.com",
+      expected: "about:blank",
+      description: "Lydian word divider bypass in relative path",
+    },
+    {
+      url: "/\u{109BE}attacker.com",
+      expected: "about:blank",
+      description: "Meroitic cursive word divider two dots bypass in relative path",
+    },
+    {
+      url: "/\u{109BF}attacker.com",
+      expected: "about:blank",
+      description: "Meroitic cursive word divider three dots bypass in relative path",
+    },
+    {
+      url: "/\u{10A7F}attacker.com",
+      expected: "about:blank",
+      description: "Old South Arabian word divider bypass in relative path",
+    },
+    {
+      url: "/\u{10AF6}attacker.com",
+      expected: "about:blank",
+      description: "Manichaean punctuation dot bypass in relative path",
+    },
+    {
+      url: "/\u{10B39}attacker.com",
+      expected: "about:blank",
+      description: "Avestan abbreviation mark bypass in relative path",
+    },
+    {
+      url: "/\u{10B3A}attacker.com",
+      expected: "about:blank",
+      description: "Avestan punctuation tiny two dots over one dot bypass in relative path",
+    },
+    {
+      url: "/\u{10B3B}attacker.com",
+      expected: "about:blank",
+      description: "Avestan punctuation small two dots over one dot bypass in relative path",
+    },
+    {
+      url: "/\u{10B3C}attacker.com",
+      expected: "about:blank",
+      description: "Avestan punctuation large two dots over one dot bypass in relative path",
+    },
+    {
+      url: "/\u{10B3D}attacker.com",
+      expected: "about:blank",
+      description: "Avestan punctuation large two rings over one ring bypass in relative path",
+    },
+    {
+      url: "/\u{10B3E}attacker.com",
+      expected: "about:blank",
+      description: "Avestan punctuation large two dots bypass in relative path",
+    },
+    {
+      url: "/\u{10B3F}attacker.com",
+      expected: "about:blank",
+      description: "Avestan punctuation large two rings bypass in relative path",
+    },
+    {
+      url: "/\u{10A50}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation dot bypass in relative path",
+    },
+    {
+      url: "/\u{10A51}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation small dot bypass in relative path",
+    },
+    {
+      url: "/\u{10A52}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation circle bypass in relative path",
+    },
+    {
+      url: "/\u{10A53}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation crescent bar bypass in relative path",
+    },
+    {
+      url: "/\u{10A54}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation mangalam bypass in relative path",
+    },
+    {
+      url: "/\u{10A55}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation lotus bypass in relative path",
+    },
+    {
+      url: "/\u{10A56}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation danda bypass in relative path",
+    },
+    {
+      url: "/\u{10A57}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation double danda bypass in relative path",
+    },
+    {
+      url: "/\u{10A58}attacker.com",
+      expected: "about:blank",
+      description: "Kharoshthi punctuation lines bypass in relative path",
+    },
+    {
+      url: "/\u{10CF9}attacker.com",
+      expected: "about:blank",
+      description: "Old Hungarian punctuation bypass 1 in relative path",
+    },
+    {
+      url: "/\u{10CFF}attacker.com",
+      expected: "about:blank",
+      description: "Old Hungarian punctuation bypass 2 in relative path",
+    },
+    {
+      url: "/\u{12470}attacker.com",
+      expected: "about:blank",
+      description: "Cuneiform word divider bypass in relative path",
+    },
+    {
+      url: "/\u{12471}attacker.com",
+      expected: "about:blank",
+      description: "Cuneiform vertical colon bypass in relative path",
+    },
+    {
+      url: "/\u{12472}attacker.com",
+      expected: "about:blank",
+      description: "Cuneiform diagonally slanted colon bypass in relative path",
+    },
+    {
+      url: "/\u{12473}attacker.com",
+      expected: "about:blank",
+      description: "Cuneiform diagonally slanted triple colon bypass in relative path",
+    },
+    {
+      url: "/\u{10E7E}attacker.com",
+      expected: "about:blank",
+      description: "Elamite punctuation bypass in relative path",
+    },
+    {
+      url: "/\u{10A9F}attacker.com",
+      expected: "about:blank",
+      description: "Old North Arabian number one bypass in relative path",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
