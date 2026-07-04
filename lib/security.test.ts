@@ -1349,6 +1349,26 @@ const testCases = {
       expected: "",
       description: "Object input in sanitizeUrl",
     },
+    {
+      url: "/\u{10290}\u{10290}attacker.com",
+      expected: "about:blank",
+      description: "Script-specific word separator bypass in relative path (U+10290)",
+    },
+    {
+      url: "/\u{145B1}\u{145B1}attacker.com",
+      expected: "about:blank",
+      description: "Script-specific word separator bypass in relative path (U+145B1)",
+    },
+    {
+      url: "/\u{109BF}\u{109BF}attacker.com",
+      expected: "about:blank",
+      description: "Script-specific word separator bypass in relative path (U+109BF)",
+    },
+    {
+      url: "/\u{10E7E}\u{10E7E}attacker.com",
+      expected: "about:blank",
+      description: "Script-specific word separator bypass in relative path (U+10E7E)",
+    },
   ],
 };
 

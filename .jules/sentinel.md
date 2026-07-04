@@ -162,3 +162,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via obscure Unicode punctuation from Coptic, Ethiopic, Hebrew, Arabic, and Syriac blocks.
 **Learning:** Characters like Coptic Old Nubian Full Stop (U+2CFB), Ethiopic Comma (U+1363), Hebrew Sof Pasuq (U+05C3), Arabic Five Pointed Star (U+066D), and Syriac Punctuation (U+070E) can be interpreted as path delimiters or dots by various parsers or browsers. If these are not explicitly blocked at the start of a relative path, they can be used to bypass protocol-relative URL (//) or path traversal (..) filters.
 **Prevention:** Maintain an exhaustive blocklist for relative paths in URL sanitizers that includes all variants of dot and slash homoglyphs across all Unicode blocks, particularly those from regional and obscure scripts. Use systematic reproduction scripts to verify coverage.
+
+## 2026-06-18 - URL Sanitization Hardening against Ancient Script Word Dividers
+**Vulnerability:** Open redirect and path traversal bypass via obscure word dividers from ancient scripts.
+**Learning:** Ancient scripts such as Carian (U+10290, U+10291, U+1029F), Ugaritic (U+1039F), Phoenician (U+1091F, U+1093F), and Anatolian Hieroglyphs (U+145B1) use specific word divider characters that can be interpreted as dots or slashes by some parsers. Additionally, Meroitic (U+109BE-U+109BF) and Old South/North Arabian (U+10A7F, U+10AF6, U+10A9F) include number and divider marks that are dot-like homoglyphs.
+**Prevention:** Include these specific script word dividers and dot-like homoglyphs in the relative path blocklist. When adding many such characters, ensure the PR remains manageable and focused by including a representative subset of tests while maintaining the full logic in the code.
