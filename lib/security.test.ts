@@ -1335,6 +1335,21 @@ const testCases = {
       description: "Visible palm branch in protocol is NOT stripped and causes failure",
     },
     {
+      url: "/\u{10290}/attacker.com",
+      expected: "about:blank",
+      description: "Carian word separator line bypass in relative path",
+    },
+    {
+      url: "/\u{145B1}/attacker.com",
+      expected: "about:blank",
+      description: "Anatolian Hieroglyph word divider bypass in relative path",
+    },
+    {
+      url: "/\u{103D0}/attacker.com",
+      expected: "about:blank",
+      description: "Old Persian word divider bypass in relative path",
+    },
+    {
       url: null as unknown as string,
       expected: "",
       description: "Null input in sanitizeUrl",
