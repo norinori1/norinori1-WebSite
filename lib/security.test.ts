@@ -1240,6 +1240,21 @@ const testCases = {
       description: "Syriac punctuation bypass in relative path",
     },
     {
+      url: "/\u{10290}\u{10290}attacker.com",
+      expected: "about:blank",
+      description: "Carian word separator line bypass in relative path",
+    },
+    {
+      url: "/\u{145B1}\u{145B1}attacker.com",
+      expected: "about:blank",
+      description: "Anatolian hieroglyph word divider bypass in relative path",
+    },
+    {
+      url: "/\u{12470}\u{12470}/etc/passwd",
+      expected: "about:blank",
+      description: "Cuneiform punctuation bypass in relative path",
+    },
+    {
       url: "java\u070Fscript:alert(1)",
       expected: "about:blank",
       description: "Visible Syriac abbreviation mark in protocol is NOT stripped and causes failure",
