@@ -162,3 +162,8 @@
 **Vulnerability:** Open redirect and path traversal bypass via obscure Unicode punctuation from Coptic, Ethiopic, Hebrew, Arabic, and Syriac blocks.
 **Learning:** Characters like Coptic Old Nubian Full Stop (U+2CFB), Ethiopic Comma (U+1363), Hebrew Sof Pasuq (U+05C3), Arabic Five Pointed Star (U+066D), and Syriac Punctuation (U+070E) can be interpreted as path delimiters or dots by various parsers or browsers. If these are not explicitly blocked at the start of a relative path, they can be used to bypass protocol-relative URL (//) or path traversal (..) filters.
 **Prevention:** Maintain an exhaustive blocklist for relative paths in URL sanitizers that includes all variants of dot and slash homoglyphs across all Unicode blocks, particularly those from regional and obscure scripts. Use systematic reproduction scripts to verify coverage.
+
+## 2026-06-18 - Regex Handling of Astral Plane Homoglyphs
+**Vulnerability:** Incomplete blocking of script-specific homoglyphs due to incorrect regex construction.
+**Learning:** When using the `u` (Unicode) flag in JavaScript regular expressions, astral plane characters (e.g., `\u{10290}`) placed inside an alternation group `(a|b|c)` MUST be separated by the pipe operator `|`. Without the pipe, the regex engine treats the sequence as a concatenation, requiring all characters to appear in that exact order to match. Conversely, placing them inside a character class `[]` is also valid but requires careful range handling.
+**Prevention:** Always verify security filters with unit tests for each individual homoglyph. In `lib/security.ts`, ensure all astral plane characters in the relative path blocklist are correctly separated by pipes within the capture group to ensure individual matching.
