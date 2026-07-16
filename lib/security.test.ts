@@ -1095,6 +1095,16 @@ const testCases = {
       description: "Palm branch bypass in relative path",
     },
     {
+      url: "/\u{10290}\u{10290}attacker.com",
+      expected: "about:blank",
+      description: "Carian word separator line bypass in relative path",
+    },
+    {
+      url: "/\u{12470}\u{12470}attacker.com",
+      expected: "about:blank",
+      description: "Cuneiform punctuation sign samane bypass in relative path",
+    },
+    {
       url: "/%80/attacker.com",
       expected: "about:blank",
       description: "URL-encoded C1 control (0x80) bypass in relative path",
