@@ -8,6 +8,8 @@ import NotionBlocks from "@/components/NotionBlocks";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ShareButtons from "@/components/ShareButtons";
+import Thumbnail from "@/components/Thumbnail";
+import { UIIcon } from "@/components/PlatformIcon";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
@@ -127,174 +129,115 @@ export default async function NewsDetailPage({ params }: Props) {
       />
       <SiteHeader />
 
-      <div style={{ paddingTop: "64px" }}>
-        <section className="section">
-          <div className="container" style={{ maxWidth: "860px" }}>
-            <Link
-              href="/news"
-              style={{
-                color: "var(--color-neutral-500)",
-                textDecoration: "none",
-                fontSize: "0.9rem",
-              }}
-            >
-              ← News 一覧に戻る
-            </Link>
+      {news.coverImageUrl ? (
+        <header className="article-hero">
+          <Image
+            src={`/api/notion-image?pageId=${news.id}&prop=CoverImage`}
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            priority
+            unoptimized
+          />
+          <div className="container article-hero-copy">
+            <h1>{news.title}</h1>
+          </div>
+        </header>
+      ) : (
+        <header className="container article-header">
+          <h1>{news.title}</h1>
+        </header>
+      )}
 
-            {news.coverImageUrl && (
-              <div
-                style={{
-                  marginTop: "1.5rem",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  aspectRatio: "16/9",
-                  position: "relative",
-                  maxHeight: "400px",
-                }}
-              >
-                <Image
-                  src={`/api/notion-image?pageId=${news.id}&prop=CoverImage`}
-                  alt={`${news.title} cover`}
-                  fill
-                  sizes="(max-width: 860px) calc(100vw - 2rem), 860px"
-                  style={{ objectFit: "cover" }}
-                  priority
-                  unoptimized
-                />
-              </div>
-            )}
+      <section className="section">
+        <div className="container">
+          <Link href="/news" className="back-link">
+            <UIIcon name="arrowLeft" size={14} />
+            News 一覧
+          </Link>
 
-            <div style={{ marginTop: "1.5rem" }}>
-              <h1
-                style={{
-                  margin: 0,
-                  fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-                }}
-              >
-                {news.title}
-              </h1>
+          <div className="article-layout">
+            <div className="article-body">
+              {news.excerpt && <p className="section-lead">{news.excerpt}</p>}
 
-              {news.date && (
-                <p
-                  style={{
-                    marginTop: "0.5rem",
-                    fontSize: "0.9rem",
-                    color: "var(--color-neutral-500)",
-                  }}
-                >
-                  {formatDate(news.date)}
-                </p>
+              {blocks.length > 0 && (
+                <>
+                  <hr className="divider" />
+                  <NotionBlocks blocks={blocks} />
+                </>
               )}
-
-              {news.excerpt && (
-                <p
-                  style={{
-                    marginTop: "0.75rem",
-                    color: "var(--color-neutral-700)",
-                    lineHeight: "1.8",
-                  }}
-                >
-                  {news.excerpt}
-                </p>
-              )}
-
-              <div style={{ marginTop: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {news.tags.map((tag) => (
-                  <span key={tag} className="chip">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <ShareButtons
-                title={news.title}
-                url={`${siteUrl}/news/${slug}`}
-              />
             </div>
 
-            {blocks.length > 0 && (
-              <div style={{ marginTop: "2.5rem" }}>
-                <NotionBlocks blocks={blocks} />
+            <aside className="article-aside">
+              {news.date && (
+                <div className="article-aside-block">
+                  <p className="label article-aside-label">Date</p>
+                  <p className="article-meta">{formatDate(news.date)}</p>
+                </div>
+              )}
+
+              {news.tags.length > 0 && (
+                <div className="article-aside-block">
+                  <p className="label article-aside-label">Tags</p>
+                  <div className="chips">
+                    {news.tags.map((tag) => (
+                      <span key={tag} className="chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="article-aside-block">
+                <p className="label article-aside-label">Share</p>
+                <ShareButtons title={news.title} url={`${siteUrl}/news/${slug}`} />
               </div>
-            )}
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      {otherNews.length > 0 && (
+        <section className="section section-alt">
+          <div className="container">
+            <div className="section-head-row">
+              <div className="section-head">
+                <p className="section-eyebrow label is-drawn">More</p>
+                <h2>ほかのお知らせ</h2>
+              </div>
+              <Link href="/news" className="link-arrow">
+                すべてのお知らせ
+                <UIIcon name="arrowRight" size={16} />
+              </Link>
+            </div>
+
+            <div className="card-grid">
+              {otherNews.map((n) => (
+                <article key={n.id} className="work-card">
+                  {n.coverImageUrl && (
+                    <Thumbnail
+                      src={`/api/notion-image?pageId=${n.id}&prop=CoverImage`}
+                      alt={`${n.title} のカバー画像`}
+                      sizes="(max-width: 640px) calc(100vw - 2.5rem), 280px"
+                    />
+                  )}
+                  <div className="work-body">
+                    <h3 className="card-title">
+                      <Link href={`/news/${n.slug}`} className="stretch-link">
+                        {n.title}
+                      </Link>
+                    </h3>
+                    {n.date && <p className="card-date">{formatDate(n.date)}</p>}
+                    {n.excerpt && <p className="work-desc">{n.excerpt}</p>}
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
-
-        {otherNews.length > 0 && (
-          <section className="section section-alt">
-            <div className="container">
-              <h2 style={{ fontSize: "1.5rem", marginBottom: "1.5rem" }}>Other News</h2>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-                  gap: "1.25rem",
-                }}
-              >
-                {otherNews.map((n) => (
-                  <Link
-                    key={n.id}
-                    href={`/news/${n.slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <article className="work-card" style={{ height: "100%" }}>
-                      {n.coverImageUrl && (
-                        <div
-                          style={{
-                            marginBottom: "0.75rem",
-                            borderRadius: "8px",
-                            overflow: "hidden",
-                            aspectRatio: "16/9",
-                            position: "relative",
-                          }}
-                        >
-                          <Image
-                            src={`/api/notion-image?pageId=${n.id}&prop=CoverImage`}
-                            alt={`${n.title} cover`}
-                            fill
-                            sizes="(max-width: 640px) calc(50vw - 1.5rem), 280px"
-                            style={{ objectFit: "cover" }}
-                            unoptimized
-                          />
-                        </div>
-                      )}
-                      <h3 style={{ fontSize: "0.95rem", margin: 0 }}>{n.title}</h3>
-                      {n.date && (
-                        <p style={{ margin: "0.35rem 0 0", fontSize: "0.8rem", color: "var(--color-neutral-500)" }}>
-                          {formatDate(n.date)}
-                        </p>
-                      )}
-                      {n.excerpt && (
-                        <p
-                          style={{
-                            margin: "0.4rem 0 0",
-                            fontSize: "0.85rem",
-                            color: "var(--color-neutral-600)",
-                            overflow: "hidden",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                        >
-                          {n.excerpt}
-                        </p>
-                      )}
-                    </article>
-                  </Link>
-                ))}
-              </div>
-              <div style={{ marginTop: "1.5rem" }}>
-                <Link
-                  href="/news"
-                  style={{ color: "var(--color-primary)", textDecoration: "none", fontSize: "0.95rem" }}
-                >
-                  ← News 一覧をすべて見る
-                </Link>
-              </div>
-            </div>
-          </section>
-        )}
-      </div>
+      )}
 
       <SiteFooter />
     </main>

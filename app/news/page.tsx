@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { listNews } from "@/lib/notion/news";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import ScrollReveal from "@/components/ScrollReveal";
+import Thumbnail from "@/components/Thumbnail";
+import { UIIcon } from "@/components/PlatformIcon";
 
 export const revalidate = 3600;
 
@@ -37,102 +39,75 @@ export default async function NewsPage() {
     <main className="site-root">
       <SiteHeader />
 
-      <div style={{ paddingTop: "64px" }}>
-        <section className="section">
-          <div className="container">
-            <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <Image src="/news-icon.svg" alt="" width={40} height={40} aria-hidden="true" />
+      <section className="section page-head">
+        <div className="container">
+          <div className="section-head">
+            <p className="section-eyebrow label is-drawn">
+              <span className="section-num">05</span>
               News
-            </h1>
+            </p>
+            <h1 className="section-title">お知らせ</h1>
             <p className="section-lead">
               新作の進捗、公開情報、アップデートなど最新情報をお届けします。
             </p>
-
-            {error ? (
-              <div className="notion-callout" style={{ marginTop: "2rem" }}>
-                <p>
-                  データの取得に失敗しました。しばらく待ってから再度アクセスしてください。
-                </p>
-                {process.env.NODE_ENV === "development" && (
-                  <pre style={{ fontSize: "0.8rem", whiteSpace: "pre-wrap" }}>{error}</pre>
-                )}
-              </div>
-            ) : newsItems.length === 0 ? (
-              <p style={{ marginTop: "2rem", color: "var(--color-neutral-500)" }}>
-                ニュース記事はまだありません。
-              </p>
-            ) : (
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
-                  gap: "1.5rem",
-                  marginTop: "2rem",
-                }}
-              >
-                {newsItems.map((item) => (
-                  <article key={item.id} className="work-card">
-                    {item.coverImageUrl && (
-                      <div
-                        style={{
-                          marginBottom: "0.75rem",
-                          borderRadius: "8px",
-                          overflow: "hidden",
-                          aspectRatio: "16/9",
-                          position: "relative",
-                          background: "var(--color-neutral-100)",
-                        }}
-                      >
-                        <Image
-                          src={`/api/notion-image?pageId=${item.id}&prop=CoverImage`}
-                          alt={`${item.title} cover`}
-                          fill
-                          sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
-                          style={{ objectFit: "contain" }}
-                          unoptimized
-                        />
-                      </div>
-                    )}
-                    <div className="work-head">
-                      <h2 style={{ fontSize: "1.1rem", margin: 0 }}>{item.title}</h2>
-                    </div>
-                    {item.date && (
-                      <p
-                        style={{
-                          margin: "0.4rem 0",
-                          fontSize: "0.85rem",
-                          color: "var(--color-neutral-500)",
-                        }}
-                      >
-                        {formatDate(item.date)}
-                      </p>
-                    )}
-                    {item.excerpt && (
-                      <p style={{ margin: "0.5rem 0", color: "var(--color-neutral-700)" }}>
-                        {item.excerpt}
-                      </p>
-                    )}
-                    <div className="chips">
-                      {item.tags.map((tag) => (
-                        <span key={tag} className="chip">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <Link
-                      href={`/news/${item.slug}`}
-                      className="work-link"
-                      style={{ display: "inline-block", marginTop: "1rem" }}
-                    >
-                      続きを読む →
-                    </Link>
-                  </article>
-                ))}
-              </div>
-            )}
           </div>
-        </section>
-      </div>
+
+          {error ? (
+            <div className="state-panel">
+              <h3>お知らせを読み込めませんでした</h3>
+              <p>しばらく待ってから再度アクセスしてください。</p>
+              {process.env.NODE_ENV === "development" && (
+                <pre style={{ fontSize: "0.8rem", whiteSpace: "pre-wrap" }}>{error}</pre>
+              )}
+            </div>
+          ) : newsItems.length === 0 ? (
+            <div className="state-panel">
+              <h3>まだお知らせはありません</h3>
+              <p>更新があればここに掲載します。</p>
+            </div>
+          ) : (
+            <div className="card-grid">
+              {newsItems.map((item, i) => (
+                <ScrollReveal key={item.id} delay={i * 70}>
+                  <article className="work-card">
+                    {item.coverImageUrl && (
+                      <Thumbnail
+                        src={`/api/notion-image?pageId=${item.id}&prop=CoverImage`}
+                        alt={`${item.title} のカバー画像`}
+                      />
+                    )}
+                    <div className="work-body">
+                      <h2 className="card-title">
+                        <Link href={`/news/${item.slug}`} className="stretch-link">
+                          {item.title}
+                        </Link>
+                      </h2>
+                      {item.date && <p className="card-date">{formatDate(item.date)}</p>}
+                      {item.excerpt && <p className="work-desc">{item.excerpt}</p>}
+                      {item.tags.length > 0 && (
+                        <div className="work-meta">
+                          <div className="chips">
+                            {item.tags.map((tag) => (
+                              <span key={tag} className="chip">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      <div className="work-actions">
+                        <span className="hex-action" aria-hidden="true" title="続きを読む">
+                          <UIIcon name="hexArrowRight" size={26} strokeWidth={1.4} />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                </ScrollReveal>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
 
       <SiteFooter />
     </main>

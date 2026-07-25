@@ -87,3 +87,74 @@ export default function PlatformIcon({ name, size = 24, className }: PlatformIco
     </svg>
   );
 }
+
+/* --------------------------------------------------------------------------
+   UI icons
+   Brand marks above are solid single-path glyphs; interface icons read better
+   as strokes, so they get their own map and renderer rather than a flag on
+   PlatformIcon. Same file, same currentColor convention.
+   These replace the emoji and literal arrow characters (☀️ 🌙 ☰ 🔍 → ↗) that
+   previously stood in for icons and rendered differently on every OS.
+   -------------------------------------------------------------------------- */
+type IconPath = string | readonly string[];
+
+// `satisfies` (not `as const`) keeps literal key names for UIIconName while
+// letting every value collapse to the same string | string[] shape — with
+// `as const` here, TS instead unions each icon's exact tuple type and chokes
+// trying to resolve a single `.map` overload for the mix of shapes below.
+const uiIcons = {
+  sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42",
+  moon: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z",
+  menu: "M3 6h18M3 12h18M3 18h18",
+  close: "M18 6 6 18M6 6l12 12",
+  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35",
+  arrowRight: "M5 12h14M13 6l6 6-6 6",
+  arrowLeft: "M19 12H5M11 18l-6-6 6-6",
+  arrowUpRight: "M7 17 17 7M8 7h9v9",
+  chevronDown: "M6 9l6 6 6-6",
+  // Two-path icons: a hexagon outline (echoing the wordmark) as path 1, an
+  // arrow as path 2. .hex-action in globals.css fills the hexagon and
+  // recolours the arrow on hover/focus — see that rule for why they're split.
+  hexArrowRight: [
+    "M12 2.5 20 7.25 20 16.75 12 21.5 4 16.75 4 7.25Z",
+    "M7.5 12h9M13 8l4 4-4 4",
+  ],
+  hexArrowUpRight: [
+    "M12 2.5 20 7.25 20 16.75 12 21.5 4 16.75 4 7.25Z",
+    "M8.5 15.5 15.5 8.5M9.5 8.5h6v6",
+  ],
+} satisfies Record<string, IconPath>;
+
+export type UIIconName = keyof typeof uiIcons;
+
+interface UIIconProps {
+  name: UIIconName;
+  size?: number;
+  className?: string;
+  strokeWidth?: number;
+}
+
+export function UIIcon({ name, size = 18, className, strokeWidth = 2 }: UIIconProps) {
+  const d = uiIcons[name];
+  const paths = Array.isArray(d) ? d : [d];
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      {paths.map((p, i) => (
+        <path key={i} d={p} />
+      ))}
+    </svg>
+  );
+}

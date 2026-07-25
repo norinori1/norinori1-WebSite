@@ -1,14 +1,19 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
 
 interface ScrollRevealProps {
   children: ReactNode;
+  /** Stagger in ms. Applied as a CSS transition-delay, not a JS timer. */
   delay?: number;
   className?: string;
 }
 
-export default function ScrollReveal({ children, delay = 0, className = "" }: ScrollRevealProps) {
+export default function ScrollReveal({
+  children,
+  delay = 0,
+  className = "",
+}: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,11 +29,7 @@ export default function ScrollReveal({ children, delay = 0, className = "" }: Sc
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (delay > 0) {
-            setTimeout(() => el.classList.add("visible"), delay);
-          } else {
-            el.classList.add("visible");
-          }
+          el.classList.add("visible");
           observer.unobserve(el);
         }
       },
@@ -37,10 +38,14 @@ export default function ScrollReveal({ children, delay = 0, className = "" }: Sc
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay]);
+  }, []);
 
   return (
-    <div ref={ref} className={`reveal${className ? ` ${className}` : ""}`}>
+    <div
+      ref={ref}
+      className={`reveal${className ? ` ${className}` : ""}`}
+      style={delay ? ({ "--reveal-delay": `${delay}ms` } as CSSProperties) : undefined}
+    >
       {children}
     </div>
   );

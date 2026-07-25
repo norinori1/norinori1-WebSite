@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { listWorks } from "@/lib/notion/works";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -27,34 +26,37 @@ export default async function WorksPage() {
     <main className="site-root">
       <SiteHeader />
 
-      <div style={{ paddingTop: "64px" }}>
-        <section className="section">
-          <div className="container">
-            <h1 style={{ fontSize: "clamp(2rem, 4vw, 3rem)", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <Image src="/works-icon.svg" alt="" width={40} height={40} aria-hidden="true" />
+      <section className="section page-head">
+        <div className="container">
+          <div className="section-head">
+            <p className="section-eyebrow label is-drawn">
+              <span className="section-num">02</span>
               Works
-            </h1>
-            <p className="section-lead">制作したゲーム作品の一覧です。</p>
-
-            {error ? (
-              <div className="notion-callout" style={{ marginTop: "2rem" }}>
-                <p>
-                  データの取得に失敗しました。しばらく待ってから再度アクセスしてください。
-                </p>
-                {process.env.NODE_ENV === "development" && (
-                  <pre style={{ fontSize: "0.8rem", whiteSpace: "pre-wrap" }}>{error}</pre>
-                )}
-              </div>
-            ) : works.length === 0 ? (
-              <p style={{ marginTop: "2rem", color: "var(--color-neutral-500)" }}>
-                作品情報を準備中です。
-              </p>
-            ) : (
-              <WorksClient works={works} />
-            )}
+            </p>
+            <h1 className="section-title">制作した作品</h1>
+            <p className="section-lead">
+              Unity・Roblox・Scratch などで公開しているゲームと開発ツールの一覧です。
+            </p>
           </div>
-        </section>
-      </div>
+
+          {error ? (
+            <div className="state-panel">
+              <h3>作品情報を読み込めませんでした</h3>
+              <p>しばらく待ってから再度アクセスしてください。</p>
+              {process.env.NODE_ENV === "development" && (
+                <pre style={{ fontSize: "0.8rem", whiteSpace: "pre-wrap" }}>{error}</pre>
+              )}
+            </div>
+          ) : works.length === 0 ? (
+            <div className="state-panel">
+              <h3>準備中です</h3>
+              <p>作品情報を準備しています。もう少しお待ちください。</p>
+            </div>
+          ) : (
+            <WorksClient works={works} />
+          )}
+        </div>
+      </section>
 
       <SiteFooter />
     </main>
