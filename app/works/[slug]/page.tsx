@@ -9,6 +9,8 @@ import { sanitizeUrl } from "@/lib/security";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ShareButtons from "@/components/ShareButtons";
+import Thumbnail from "@/components/Thumbnail";
+import { UIIcon } from "@/components/PlatformIcon";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app";
@@ -118,73 +120,53 @@ export default async function WorkDetailPage({ params }: Props) {
       />
       <SiteHeader />
 
-      <div style={{ paddingTop: "64px" }}>
-        <section className="section">
-          <div className="container" style={{ maxWidth: "860px" }}>
-            <Link
-              href="/works"
-              style={{
-                color: "var(--color-neutral-500)",
-                textDecoration: "none",
-                fontSize: "0.9rem",
-              }}
-            >
-              ← Works 一覧に戻る
+      {work.thumbnailUrl ? (
+        <header className="article-hero">
+          <Image
+            src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            priority
+            unoptimized
+          />
+          <div className="container article-hero-copy">
+            <p className="article-meta">
+              <span className={`badge badge-${work.status.toLowerCase()}`}>{work.status}</span>
+              {work.platforms.join(" / ")}
+            </p>
+            <h1>{work.title}</h1>
+          </div>
+        </header>
+      ) : (
+        <header className="container article-header">
+          <Link href="/works" className="back-link">
+            <UIIcon name="arrowLeft" size={14} />
+            Works 一覧
+          </Link>
+          <h1>{work.title}</h1>
+          <p className="article-meta">
+            <span className={`badge badge-${work.status.toLowerCase()}`}>{work.status}</span>
+            {work.platforms.join(" / ")}
+          </p>
+        </header>
+      )}
+
+      <section className="section">
+        <div className="container">
+          {work.thumbnailUrl && (
+            <Link href="/works" className="back-link">
+              <UIIcon name="arrowLeft" size={14} />
+              Works 一覧
             </Link>
+          )}
 
-            {work.thumbnailUrl && (
-              <div
-                style={{
-                  marginTop: "1.5rem",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  aspectRatio: "16/9",
-                  position: "relative",
-                  maxHeight: "400px",
-                }}
-              >
-                <Image
-                  src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
-                  alt={`${work.title} thumbnail`}
-                  fill
-                  sizes="(max-width: 860px) calc(100vw - 2rem), 860px"
-                  style={{ objectFit: "cover" }}
-                  priority
-                  unoptimized
-                />
-              </div>
-            )}
+          <div className="article-body">
+            {work.description && <p className="section-lead">{work.description}</p>}
 
-            <div style={{ marginTop: "1.5rem" }}>
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}
-              >
-                <h1
-                  style={{
-                    margin: 0,
-                    fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
-                  }}
-                >
-                  {work.title}
-                </h1>
-                <span className={`badge badge-${work.status.toLowerCase()}`}>
-                  {work.status}
-                </span>
-              </div>
-
-              {work.description && (
-                <p
-                  style={{
-                    marginTop: "0.75rem",
-                    color: "var(--color-neutral-700)",
-                    lineHeight: "1.8",
-                  }}
-                >
-                  {work.description}
-                </p>
-              )}
-
-              <div style={{ marginTop: "1rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+            {(work.tags.length > 0 || work.platforms.length > 0) && (
+              <div className="chips" style={{ marginTop: "var(--space-5)" }}>
                 {work.tags.map((tag) => (
                   <span key={tag} className="chip">
                     {tag}
@@ -196,114 +178,80 @@ export default async function WorkDetailPage({ params }: Props) {
                   </span>
                 ))}
               </div>
+            )}
 
-              <ShareButtons
-                title={work.title}
-                url={`${process.env.NEXT_PUBLIC_SITE_URL ?? "https://norinori1.vercel.app"}/works/${slug}`}
-              />
-
-              {work.link && (
+            {work.link && (
+              <p style={{ marginTop: "var(--space-5)" }}>
                 <a
                   href={sanitizeUrl(work.link)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary"
-                  style={{
-                    display: "inline-block",
-                    marginTop: "1.25rem",
-                    background: "var(--color-primary)",
-                    color: "#fff",
-                    border: "none",
-                  }}
                 >
-                  Play / Visit ↗
+                  プレイする
+                  <UIIcon name="arrowUpRight" size={16} />
                 </a>
-              )}
+              </p>
+            )}
+
+            <div style={{ marginTop: "var(--space-6)" }}>
+              <ShareButtons
+                title={work.title}
+                url={`${siteUrl}/works/${slug}`}
+              />
             </div>
 
             {blocks.length > 0 && (
-              <div style={{ marginTop: "2.5rem" }}>
+              <>
+                <hr className="divider" />
                 <NotionBlocks blocks={blocks} />
-              </div>
+              </>
             )}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {otherWorks.length > 0 && (
-          <section className="section section-alt">
-            <div className="container">
-              <h2 style={{ fontSize: "1.5rem", marginBottom: "1.5rem" }}>Other Works</h2>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-                  gap: "1.25rem",
-                }}
-              >
-                {otherWorks.map((w) => (
-                  <Link
-                    key={w.id}
-                    href={`/works/${w.slug}`}
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <article className="work-card" style={{ height: "100%" }}>
-                      {w.thumbnailUrl && (
-                        <div
-                          style={{
-                            marginBottom: "0.75rem",
-                            borderRadius: "8px",
-                            overflow: "hidden",
-                            aspectRatio: "16/9",
-                            position: "relative",
-                          }}
-                        >
-                          <Image
-                            src={`/api/notion-image?pageId=${w.id}&prop=Thumbnail`}
-                            alt={`${w.title} thumbnail`}
-                            fill
-                            sizes="(max-width: 640px) calc(50vw - 1.5rem), 220px"
-                            style={{ objectFit: "cover" }}
-                            unoptimized
-                          />
-                        </div>
-                      )}
-                      <div className="work-head">
-                        <h3 style={{ fontSize: "0.95rem", margin: 0 }}>{w.title}</h3>
-                        <span className={`badge badge-${w.status.toLowerCase()}`}>
-                          {w.status}
-                        </span>
-                      </div>
-                      {w.description && (
-                        <p
-                          style={{
-                            margin: "0.4rem 0 0",
-                            fontSize: "0.85rem",
-                            color: "var(--color-neutral-600)",
-                            overflow: "hidden",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                        >
-                          {w.description}
-                        </p>
-                      )}
-                    </article>
-                  </Link>
-                ))}
+      {otherWorks.length > 0 && (
+        <section className="section section-alt">
+          <div className="container">
+            <div className="section-head-row">
+              <div className="section-head">
+                <p className="section-eyebrow label is-drawn">More</p>
+                <h2>ほかの作品</h2>
               </div>
-              <div style={{ marginTop: "1.5rem" }}>
-                <Link
-                  href="/works"
-                  style={{ color: "var(--color-primary)", textDecoration: "none", fontSize: "0.95rem" }}
-                >
-                  ← Works 一覧をすべて見る
-                </Link>
-              </div>
+              <Link href="/works" className="link-arrow">
+                すべての作品
+                <UIIcon name="arrowRight" size={16} />
+              </Link>
             </div>
-          </section>
-        )}
-      </div>
+
+            <div className="card-grid">
+              {otherWorks.map((w) => (
+                <article key={w.id} className="work-card">
+                  {w.thumbnailUrl && (
+                    <Thumbnail
+                      src={`/api/notion-image?pageId=${w.id}&prop=Thumbnail`}
+                      alt={`${w.title} のサムネイル`}
+                      sizes="(max-width: 640px) calc(100vw - 2.5rem), 280px"
+                    />
+                  )}
+                  <div className="work-body">
+                    <div className="work-head">
+                      <h3 className="card-title">
+                        <Link href={`/works/${w.slug}`} className="stretch-link">
+                          {w.title}
+                        </Link>
+                      </h3>
+                      <span className={`badge badge-${w.status.toLowerCase()}`}>{w.status}</span>
+                    </div>
+                    {w.description && <p className="work-desc">{w.description}</p>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <SiteFooter />
     </main>

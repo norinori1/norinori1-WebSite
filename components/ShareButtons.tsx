@@ -10,7 +10,6 @@ interface ShareButtonsProps {
 
 export default function ShareButtons({ title, url }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
-  const [xHovered, setXHovered] = useState(false);
 
   const tweetText = encodeURIComponent(`${title} – norinori1`);
   const tweetUrl = encodeURIComponent(url);
@@ -33,21 +32,12 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.5rem",
-        marginTop: "1rem",
-        flexWrap: "wrap",
-      }}
-    >
+    <div className="share-row">
       <a
         href={twitterHref}
         target="_blank"
         rel="noopener noreferrer"
-        onMouseEnter={() => setXHovered(true)}
-        onMouseLeave={() => setXHovered(false)}
+        className="share-btn"
         onClick={() =>
           trackEvent("share", {
             method: "twitter",
@@ -56,21 +46,6 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
             event_category: "engagement",
           })
         }
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.4rem",
-          padding: "0.4rem 1rem",
-          background: "var(--color-neutral-900)",
-          border: "1px solid var(--color-neutral-900)",
-          borderRadius: "999px",
-          fontSize: "0.85rem",
-          color: "var(--color-neutral-50)",
-          textDecoration: "none",
-          fontWeight: 600,
-          opacity: xHovered ? 0.75 : 1,
-          transition: "opacity 0.2s",
-        }}
         aria-label="X (Twitter) でシェア"
       >
         {/* X / Twitter icon */}
@@ -83,20 +58,7 @@ export default function ShareButtons({ title, url }: ShareButtonsProps) {
       <button
         type="button"
         onClick={handleCopy}
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.4rem",
-          padding: "0.4rem 1rem",
-          border: "1px solid var(--color-neutral-500)",
-          borderRadius: "999px",
-          fontSize: "0.85rem",
-          color: copied ? "var(--color-primary)" : "var(--color-neutral-700)",
-          background: "transparent",
-          cursor: "pointer",
-          fontWeight: 600,
-          transition: "border-color 0.2s, color 0.2s",
-        }}
+        className={`share-btn${copied ? " is-done" : ""}`}
         aria-label="リンクをコピー"
       >
         {copied ? (

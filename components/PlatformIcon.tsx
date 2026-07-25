@@ -87,3 +87,53 @@ export default function PlatformIcon({ name, size = 24, className }: PlatformIco
     </svg>
   );
 }
+
+/* --------------------------------------------------------------------------
+   UI icons
+   Brand marks above are solid single-path glyphs; interface icons read better
+   as strokes, so they get their own map and renderer rather than a flag on
+   PlatformIcon. Same file, same currentColor convention.
+   These replace the emoji and literal arrow characters (☀️ 🌙 ☰ 🔍 → ↗) that
+   previously stood in for icons and rendered differently on every OS.
+   -------------------------------------------------------------------------- */
+const uiIcons = {
+  sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42",
+  moon: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z",
+  menu: "M3 6h18M3 12h18M3 18h18",
+  close: "M18 6 6 18M6 6l12 12",
+  search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.35-4.35",
+  arrowRight: "M5 12h14M13 6l6 6-6 6",
+  arrowLeft: "M19 12H5M11 18l-6-6 6-6",
+  arrowUpRight: "M7 17 17 7M8 7h9v9",
+  chevronDown: "M6 9l6 6 6-6",
+} as const;
+
+export type UIIconName = keyof typeof uiIcons;
+
+interface UIIconProps {
+  name: UIIconName;
+  size?: number;
+  className?: string;
+  strokeWidth?: number;
+}
+
+export function UIIcon({ name, size = 18, className, strokeWidth = 2 }: UIIconProps) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    >
+      <path d={uiIcons[name]} />
+    </svg>
+  );
+}

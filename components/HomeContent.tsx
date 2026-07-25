@@ -6,9 +6,10 @@ import { useEffect } from "react";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollReveal from "@/components/ScrollReveal";
+import Thumbnail from "@/components/Thumbnail";
 import { trackEvent } from "@/lib/analytics";
 import { sanitizeUrl } from "@/lib/security";
-import PlatformIcon, { type IconName } from "@/components/PlatformIcon";
+import PlatformIcon, { UIIcon, type IconName } from "@/components/PlatformIcon";
 import type { Work, NewsItem } from "@/types/notion";
 
 interface HomeContentProps {
@@ -54,8 +55,6 @@ const skills: { category: string; items: { label: string; icon: IconName | null;
   },
 ];
 
-const basePath = "";
-
 function formatDate(dateStr: string): string {
   if (!dateStr) return "";
   const d = new Date(dateStr);
@@ -64,6 +63,30 @@ function formatDate(dateStr: string): string {
     month: "long",
     day: "numeric",
   });
+}
+
+/** `01 —— ABOUT` + heading + optional lead. The recurring section voice. */
+function SectionHead({
+  num,
+  eyebrow,
+  title,
+  lead,
+}: {
+  num: string;
+  eyebrow: string;
+  title: string;
+  lead?: string;
+}) {
+  return (
+    <div className="section-head">
+      <p className="section-eyebrow label">
+        <span className="section-num">{num}</span>
+        {eyebrow}
+      </p>
+      <h2>{title}</h2>
+      {lead && <p className="section-lead">{lead}</p>}
+    </div>
+  );
 }
 
 export default function HomeContent({ featuredWorks, recentNews, fetchError }: HomeContentProps) {
@@ -126,157 +149,179 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
 
       <section id="top" className="hero" aria-label="Hero">
         <div className="hero-particles" aria-hidden="true">
-          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "10%", left: "8%"  }} />
-          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "20%", left: "88%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "60%", left: "15%" }} />
-          <span className="hero-particle hero-particle--lg hero-particle--slow"   style={{ top: "75%", left: "75%" }} />
-          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "35%", left: "50%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--fast"   style={{ top: "85%", left: "30%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--medium" style={{ top: "15%", left: "65%" }} />
-          <span className="hero-particle hero-particle--md hero-particle--slow"   style={{ top: "50%", left: "92%" }} />
+          <span className="hero-particle hero-particle--lg hero-particle--slow" style={{ top: "12%", left: "72%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "24%", left: "90%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--fast" style={{ top: "68%", left: "80%" }} />
+          <span className="hero-particle hero-particle--lg hero-particle--slow" style={{ top: "78%", left: "58%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--medium" style={{ top: "44%", left: "94%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--fast" style={{ top: "88%", left: "88%" }} />
         </div>
+
         <div className="container hero-content">
+          <p className="hero-eyebrow label hero-animate hero-animate-eyebrow">
+            Game Developer &amp; Creator
+          </p>
           <Image
-            src={`${basePath}/norinori1-splash-white.svg`}
-            alt="norinori1 logo with Game Developer & Creator branding"
+            src="/norinori1-splash-white.svg"
+            alt="norinori1"
             className="hero-splash hero-animate hero-animate-logo"
-            width={560}
-            height={120}
+            width={520}
+            height={123}
             priority
           />
-          <div className="hero-copy">
-            <p className="hero-subtitle hero-animate hero-animate-sub mono">Game Developer & Creator</p>
-            <p className="hero-animate hero-animate-desc">
-              Unity、Roblox、Scratchなど複数プラットフォームで、
-              ユニークなゲーム体験と開発ツールを継続的に制作しています。
-            </p>
-          </div>
+          <p className="hero-desc hero-animate hero-animate-desc">
+            Unity、Roblox、Scratchなど複数プラットフォームで、
+            ユニークなゲーム体験と開発ツールを継続的に制作しています。
+          </p>
           <div className="hero-cta hero-animate hero-animate-cta">
             <a className="btn btn-primary" href="#works">
               作品を見る
+              <UIIcon name="arrowRight" size={16} />
             </a>
             <a className="btn btn-secondary" href="#about">
               プロフィール
             </a>
           </div>
         </div>
+
+        <a href="#about" className="hero-scroll hero-animate hero-animate-scroll" aria-label="下へスクロール">
+          <span className="label">Scroll</span>
+          <UIIcon name="chevronDown" size={18} />
+        </a>
       </section>
 
       <section id="about" className="section">
         <div className="container">
           <ScrollReveal>
-            <h2>About</h2>
-            <p className="section-lead">
-              ゲーム開発者として、戦略・パズル・ローグライクを中心に開発しています。
-              最新技術の実験やコミュニティ向けツール開発にも注力しています。
-            </p>
+            <SectionHead
+              num="01"
+              eyebrow="About"
+              title="つくっているもの"
+              lead="ゲーム開発者として、戦略・パズル・ローグライクを中心に開発しています。最新技術の実験やコミュニティ向けツール開発にも注力しています。"
+            />
+          </ScrollReveal>
+          <ScrollReveal delay={80}>
+            <Link href="/about" className="link-arrow">
+              プロフィールを詳しく見る
+              <UIIcon name="arrowRight" size={16} />
+            </Link>
           </ScrollReveal>
         </div>
       </section>
 
       <section id="works" className="section section-alt">
         <div className="container">
-          <ScrollReveal>
-            <h2>Works</h2>
-            <p className="section-lead">Featuredに設定されたゲーム作品です。</p>
-          </ScrollReveal>
+          <div className="section-head-row">
+            <ScrollReveal>
+              <SectionHead
+                num="02"
+                eyebrow="Works"
+                title="Featured Works"
+                lead="Featuredに設定されたゲーム作品です。"
+              />
+            </ScrollReveal>
+            <ScrollReveal delay={80}>
+              <Link href="/works" className="link-arrow">
+                すべての作品
+                <UIIcon name="arrowRight" size={16} />
+              </Link>
+            </ScrollReveal>
+          </div>
+
           {fetchError ? (
-            <div className="notion-callout" style={{ marginTop: "2rem" }}>
-              <p>
-                作品情報の取得に失敗しました。しばらく待ってから再度アクセスしてください。
-              </p>
+            <div className="state-panel">
+              <h3>作品情報を読み込めませんでした</h3>
+              <p>しばらく待ってから再度アクセスしてください。</p>
             </div>
           ) : featuredWorks.length === 0 ? (
-            <p style={{ marginTop: "2rem", color: "var(--color-neutral-500)" }}>
-              作品情報を準備中です。
-            </p>
+            <div className="state-panel">
+              <h3>準備中です</h3>
+              <p>作品情報を準備しています。もう少しお待ちください。</p>
+            </div>
           ) : (
             <div className="works-grid">
               {featuredWorks.map((work, i) => (
-                <ScrollReveal key={work.id} delay={i * 80}>
-                  <article
-                    className="work-card"
-                    onClick={() =>
-                      trackEvent("game_card_click", {
-                        game_id: work.id,
-                        game_title: work.title,
-                        event_category: "engagement",
-                      })
-                    }
-                  >
+                <ScrollReveal
+                  key={work.id}
+                  delay={i * 70}
+                  className={i === 0 ? "work-card-wide" : undefined}
+                >
+                  <article className="work-card">
                     {work.thumbnailUrl && (
-                      <div
-                        style={{
-                          marginBottom: "0.75rem",
-                          borderRadius: "8px",
-                          overflow: "hidden",
-                          aspectRatio: "16/9",
-                          position: "relative",
-                          background: "var(--color-neutral-100)",
-                        }}
-                      >
-                        <Image
-                          src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
-                          alt={`${work.title} thumbnail`}
-                          fill
-                          sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
-                          style={{ objectFit: "contain" }}
-                          unoptimized
-                        />
-                      </div>
+                      <Thumbnail
+                        src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
+                        alt={`${work.title} のサムネイル`}
+                      />
                     )}
-                    <div className="work-head">
-                      <h3>{work.title}</h3>
-                      <span className={`badge badge-${work.status.toLowerCase()}`}>
-                        {work.status}
-                      </span>
-                    </div>
-                    {work.description && <p>{work.description}</p>}
-                    <div className="chips">
-                      {work.tags.map((tag) => (
-                        <span key={tag} className="chip">
-                          {tag}
+                    <div className="work-body">
+                      <div className="work-head">
+                        <h3>
+                          <Link
+                            href={`/works/${work.slug}`}
+                            className="stretch-link"
+                            onClick={() =>
+                              trackEvent("game_card_detail_click", {
+                                game_id: work.id,
+                                game_title: work.title,
+                                event_category: "engagement",
+                              })
+                            }
+                          >
+                            {work.title}
+                          </Link>
+                        </h3>
+                        <span className={`badge badge-${work.status.toLowerCase()}`}>
+                          {work.status}
                         </span>
-                      ))}
-                    </div>
-                    <div className="chips chips-platform">
-                      {work.platforms.map((platform) => (
-                        <span key={platform} className="chip platform-chip">
-                          {platform}
+                      </div>
+
+                      {work.description && <p className="work-desc">{work.description}</p>}
+
+                      <div className="work-meta">
+                        {work.tags.length > 0 && (
+                          <div className="chips">
+                            {work.tags.map((tag) => (
+                              <span key={tag} className="chip">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                        {work.platforms.length > 0 && (
+                          <div className="chips">
+                            {work.platforms.map((platform) => (
+                              <span key={platform} className="chip platform-chip">
+                                {platform}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="work-actions">
+                        <span className="link-arrow" aria-hidden="true">
+                          詳細を見る
+                          <UIIcon name="arrowRight" size={16} />
                         </span>
-                      ))}
-                    </div>
-                    <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                      <Link
-                        href={`/works/${work.slug}`}
-                        className="work-link"
-                        onClick={() =>
-                          trackEvent("game_card_detail_click", {
-                            game_id: work.id,
-                            game_title: work.title,
-                            event_category: "engagement",
-                          })
-                        }
-                      >
-                        詳細を見る →
-                      </Link>
-                      {work.link && (
-                        <a
-                          className="work-link"
-                          href={sanitizeUrl(work.link)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() =>
-                            trackEvent("game_link_click", {
-                              game_id: work.id,
-                              destination_url: work.link,
-                              event_category: "outbound",
-                            })
-                          }
-                        >
-                          Visit ↗
-                        </a>
-                      )}
+                        {work.link && (
+                          <a
+                            className="link-arrow is-external"
+                            href={sanitizeUrl(work.link)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() =>
+                              trackEvent("game_link_click", {
+                                game_id: work.id,
+                                destination_url: work.link,
+                                event_category: "outbound",
+                              })
+                            }
+                          >
+                            プレイする
+                            <UIIcon name="arrowUpRight" size={16} />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </article>
                 </ScrollReveal>
@@ -289,24 +334,31 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
       <section id="skills" className="section">
         <div className="container">
           <ScrollReveal>
-            <h2>Skills</h2>
+            <SectionHead
+              num="03"
+              eyebrow="Skills"
+              title="使っている道具"
+              lead="日常的に触れている技術と、いま学んでいる技術です。"
+            />
           </ScrollReveal>
           <div className="skills-grid">
-            {skills.map((skill) => (
-              <ScrollReveal key={skill.category}>
+            {skills.map((skill, i) => (
+              <ScrollReveal key={skill.category} delay={i * 70}>
                 <article className="skill-card">
                   <h3>{skill.category}</h3>
-                  <div className="skill-badges">
+                  <div className="skill-list">
                     {skill.items.map(({ label, icon, level }) => (
-                      <span key={label} className="skill-badge">
-                        {icon && <PlatformIcon name={icon} size={15} />}
-                        {label}
-                        <span className="skill-dots" aria-label={`レベル ${level}/5`}>
+                      <div key={label} className="skill-row">
+                        <span className="skill-name">
+                          {icon && <PlatformIcon name={icon} size={16} />}
+                          {label}
+                        </span>
+                        <span className="skill-meter" aria-label={`習熟度 ${level}/5`}>
                           {[1, 2, 3, 4, 5].map((n) => (
-                            <span key={n} className={`skill-dot${n <= level ? " filled" : ""}`} />
+                            <span key={n} className={`skill-seg${n <= level ? " filled" : ""}`} />
                           ))}
                         </span>
-                      </span>
+                      </div>
                     ))}
                   </div>
                 </article>
@@ -319,11 +371,16 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
       <section id="platforms" className="section section-alt">
         <div className="container">
           <ScrollReveal>
-            <h2>Platforms</h2>
+            <SectionHead
+              num="04"
+              eyebrow="Platforms"
+              title="活動している場所"
+              lead="作品の公開や、開発の記録を残している場所です。"
+            />
           </ScrollReveal>
           <div className="platform-grid">
             {platforms.map((platform, i) => (
-              <ScrollReveal key={platform.name} delay={i * 60}>
+              <ScrollReveal key={platform.name} delay={i * 50}>
                 <a
                   className="platform-card"
                   href={platform.url}
@@ -336,7 +393,7 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                     })
                   }
                 >
-                  <PlatformIcon name={platform.icon} size={30} className="platform-card-icon" />
+                  <PlatformIcon name={platform.icon} size={26} className="platform-card-icon" />
                   <h3>{platform.name}</h3>
                 </a>
               </ScrollReveal>
@@ -347,83 +404,70 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
 
       <section id="news" className="section">
         <div className="container">
-          <ScrollReveal>
-            <h2>News</h2>
-            <p className="section-lead">
-              新作の進捗、公開情報、アップデート情報をこのセクションで発信していきます。
-            </p>
-          </ScrollReveal>
-          {recentNews.length > 0 && (
-            <>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-                  gap: "1.25rem",
-                  marginTop: "2rem",
-                }}
-              >
-                {recentNews.map((item, i) => (
-                  <ScrollReveal key={item.id} delay={i * 80}>
-                    <article className="work-card">
-                      {item.coverImageUrl && (
-                        <div
-                          style={{
-                            marginBottom: "0.75rem",
-                            borderRadius: "8px",
-                            overflow: "hidden",
-                            aspectRatio: "16/9",
-                            position: "relative",
-                            background: "var(--color-neutral-100)",
-                          }}
-                        >
-                          <Image
-                            src={`/api/notion-image?pageId=${item.id}&prop=CoverImage`}
-                            alt={`${item.title} cover`}
-                            fill
-                            sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1200px) calc(50vw - 2rem), 400px"
-                            style={{ objectFit: "contain" }}
-                            unoptimized
-                          />
-                        </div>
-                      )}
-                      <h3 style={{ margin: 0, fontSize: "1rem" }}>{item.title}</h3>
-                      {item.date && (
-                        <p style={{ margin: "0.35rem 0 0", fontSize: "0.8rem", color: "var(--color-neutral-500)" }}>
-                          {formatDate(item.date)}
-                        </p>
-                      )}
-                      {item.excerpt && (
-                        <p style={{ margin: "0.5rem 0", fontSize: "0.9rem", color: "var(--color-neutral-700)", lineHeight: "1.6" }}>
-                          {item.excerpt}
-                        </p>
-                      )}
-                      <Link
-                        href={`/news/${item.slug}`}
-                        className="work-link"
-                        style={{ display: "inline-block", marginTop: "0.75rem" }}
-                        onClick={() =>
-                          trackEvent("news_card_click", {
-                            news_id: item.id,
-                            news_title: item.title,
-                            event_category: "engagement",
-                          })
-                        }
-                      >
-                        続きを読む →
-                      </Link>
-                    </article>
-                  </ScrollReveal>
-                ))}
-              </div>
-              <ScrollReveal>
-                <div style={{ marginTop: "2rem", textAlign: "center" }}>
-                  <Link href="/news" className="btn btn-secondary">
-                    News 一覧を見る →
-                  </Link>
-                </div>
+          <div className="section-head-row">
+            <ScrollReveal>
+              <SectionHead
+                num="05"
+                eyebrow="News"
+                title="最近の記録"
+                lead="新作の進捗、公開情報、アップデート情報を発信しています。"
+              />
+            </ScrollReveal>
+            {recentNews.length > 0 && (
+              <ScrollReveal delay={80}>
+                <Link href="/news" className="link-arrow">
+                  すべてのお知らせ
+                  <UIIcon name="arrowRight" size={16} />
+                </Link>
               </ScrollReveal>
-            </>
+            )}
+          </div>
+
+          {recentNews.length === 0 ? (
+            <div className="state-panel">
+              <h3>まだお知らせはありません</h3>
+              <p>更新があればここに掲載します。</p>
+            </div>
+          ) : (
+            <div className="card-grid">
+              {recentNews.map((item, i) => (
+                <ScrollReveal key={item.id} delay={i * 70}>
+                  <article className="work-card">
+                    {item.coverImageUrl && (
+                      <Thumbnail
+                        src={`/api/notion-image?pageId=${item.id}&prop=CoverImage`}
+                        alt={`${item.title} のカバー画像`}
+                      />
+                    )}
+                    <div className="work-body">
+                      <h3 className="card-title">
+                        <Link
+                          href={`/news/${item.slug}`}
+                          className="stretch-link"
+                          onClick={() =>
+                            trackEvent("news_card_click", {
+                              news_id: item.id,
+                              news_title: item.title,
+                              event_category: "engagement",
+                            })
+                          }
+                        >
+                          {item.title}
+                        </Link>
+                      </h3>
+                      {item.date && <p className="card-date">{formatDate(item.date)}</p>}
+                      {item.excerpt && <p className="work-desc">{item.excerpt}</p>}
+                      <div className="work-actions">
+                        <span className="link-arrow" aria-hidden="true">
+                          続きを読む
+                          <UIIcon name="arrowRight" size={16} />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                </ScrollReveal>
+              ))}
+            </div>
           )}
         </div>
       </section>
