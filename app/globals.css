@@ -534,6 +534,79 @@ a {
   animation: scroll-hint 2.4s var(--ease-in-out) infinite;
 }
 
+/* Technical-drawing motif filling the empty right side of the hero —
+   concentric hexagons echoing the wordmark. Purely decorative (see
+   components/HeroBlueprint.tsx). */
+.hero-blueprint {
+  position: absolute;
+  right: -4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(46vw, 620px);
+  height: auto;
+  color: #fff;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  animation: bp-breathe 7s var(--ease-in-out) infinite;
+}
+
+.bp-line {
+  stroke-opacity: 0.5;
+}
+
+.bp-ring-outer {
+  stroke-opacity: 0.55;
+  transform-origin: 200px 200px;
+  animation: bp-rotate 70s linear infinite;
+}
+
+.bp-ring-inner {
+  stroke-opacity: 0.8;
+  transform-origin: 200px 200px;
+  animation: bp-rotate-reverse 95s linear infinite;
+}
+
+.bp-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+@keyframes bp-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bp-rotate-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes bp-breathe {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-blueprint {
+    display: none;
+  }
+}
+
 /* ==========================================================================
    Buttons
    ========================================================================== */
@@ -723,6 +796,61 @@ a {
   transform: translate(3px, -3px);
 }
 
+/* Card actions: a hexagon echoing the wordmark, filled with the accent on
+   hover/focus. Two <path>s per icon (see UIIcon's hexArrow* entries) — the
+   hexagon and the arrow are recoloured independently so the arrow reads as
+   a cutout once the hexagon fills solid. */
+.hex-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  color: var(--color-neutral-500);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.hex-action svg path:first-child {
+  fill: none;
+  stroke: currentColor;
+  transition:
+    fill var(--dur-base) var(--ease-out),
+    stroke var(--dur-base) var(--ease-out);
+}
+
+.hex-action svg path:last-child {
+  fill: none;
+  stroke: currentColor;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    stroke var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.hex-action:hover svg,
+.hex-action:focus-visible svg {
+  transform: rotate(30deg);
+}
+
+.hex-action:hover svg path:first-child,
+.hex-action:focus-visible svg path:first-child {
+  fill: var(--color-accent);
+  stroke: var(--color-accent);
+}
+
+.hex-action:hover svg path:last-child,
+.hex-action:focus-visible svg path:last-child {
+  stroke: #fff;
+  transform: rotate(-30deg);
+}
+
+.hex-action svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
 /* ==========================================================================
    Cards
    ========================================================================== */
@@ -871,13 +999,14 @@ a {
   gap: var(--space-2);
 }
 
-/* Pushes the action row to the bottom so ragged copy lengths still align. */
+/* Pushes the action row to the bottom so ragged copy lengths still align.
+   Actions are icon-only hex buttons, right-aligned under the card copy. */
 .work-actions {
   margin-top: auto;
   padding-top: var(--space-4);
   display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
 }
 
 /* Stretched link: the whole card is clickable, and it is a real <a>, so it
@@ -1147,6 +1276,71 @@ a {
   color: var(--color-neutral-500);
 }
 
+.works-filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  color: var(--color-neutral-700);
+  font-size: var(--text-base);
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.works-filter-toggle:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.works-filter-toggle svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.works-filter-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.filter-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Filters collapse to zero height rather than unmount — grid-rows animates
+   smoothly without knowing the content's height up front. `inert` (set in
+   JSX) keeps focus out of the hidden buttons; this only handles the visual
+   side. */
+.works-filters-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-slow) var(--ease-out);
+}
+
+.works-filters-panel.is-open {
+  grid-template-rows: 1fr;
+}
+
+.works-filters-panel > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
 /* ==========================================================================
    Empty / error states
    ========================================================================== */
@@ -1352,9 +1546,12 @@ a {
 
 .article-hero {
   position: relative;
+  width: 100%;
+  /* `aspect-ratio` + `max-height` together compute width from the ratio once
+     the height cap kicks in (460px × 21/9 ≈ 1073px) — the block shrank off
+     centre instead of filling the viewport. Set height directly instead. */
+  height: clamp(280px, 38vw, 460px);
   margin-top: var(--header-h, 68px);
-  aspect-ratio: 21 / 9;
-  max-height: 460px;
   overflow: hidden;
   background: var(--color-neutral-100);
 }
@@ -1415,9 +1612,56 @@ a {
   color: rgb(255 255 255 / 0.78);
 }
 
+/* Body + a sticky sidebar ("title block" in drafting terms) so the wide
+   measure-limited column doesn't leave the page looking lopsided. */
+.article-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 240px;
+  gap: var(--space-10);
+  align-items: start;
+  margin-top: var(--space-8);
+}
+
 .article-body {
   max-width: 74ch;
-  margin-top: var(--space-8);
+}
+
+.article-aside {
+  position: sticky;
+  top: calc(var(--header-h, 68px) + var(--space-6));
+  display: grid;
+  gap: var(--space-6);
+  border-left: 1px solid var(--color-border);
+  padding-left: var(--space-5);
+}
+
+.article-aside-block {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.article-aside-label {
+  margin: 0;
+  color: var(--color-accent);
+}
+
+.article-aside .article-meta {
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .article-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .article-aside {
+    position: static;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    padding-left: 0;
+    padding-top: var(--space-5);
+  }
 }
 
 .back-link {
@@ -2007,7 +2251,7 @@ a {
   }
 
   .article-hero {
-    aspect-ratio: 4 / 3;
+    height: clamp(220px, 52vw, 320px);
   }
 
   .works-toolbar {
@@ -2071,6 +2315,12 @@ a {
     display: none;
   }
 
+  .hero-blueprint,
+  .bp-ring-outer,
+  .bp-ring-inner {
+    animation: none;
+  }
+
   .btn-ripple-wave {
     display: none;
   }
@@ -2090,6 +2340,13 @@ a {
   .work-card:hover,
   .platform-card:hover,
   .site-footer a:hover {
+    transform: none;
+  }
+
+  .hex-action:hover svg,
+  .hex-action:focus-visible svg,
+  .hex-action:hover svg path:last-child,
+  .hex-action:focus-visible svg path:last-child {
     transform: none;
   }
 

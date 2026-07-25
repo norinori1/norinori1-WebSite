@@ -141,53 +141,60 @@ export default async function NewsDetailPage({ params }: Props) {
             unoptimized
           />
           <div className="container article-hero-copy">
-            {news.date && <p className="article-meta">{formatDate(news.date)}</p>}
             <h1>{news.title}</h1>
           </div>
         </header>
       ) : (
         <header className="container article-header">
-          <Link href="/news" className="back-link">
-            <UIIcon name="arrowLeft" size={14} />
-            News 一覧
-          </Link>
           <h1>{news.title}</h1>
-          {news.date && <p className="article-meta">{formatDate(news.date)}</p>}
         </header>
       )}
 
       <section className="section">
         <div className="container">
-          {news.coverImageUrl && (
-            <Link href="/news" className="back-link">
-              <UIIcon name="arrowLeft" size={14} />
-              News 一覧
-            </Link>
-          )}
+          <Link href="/news" className="back-link">
+            <UIIcon name="arrowLeft" size={14} />
+            News 一覧
+          </Link>
 
-          <div className="article-body">
-            {news.excerpt && <p className="section-lead">{news.excerpt}</p>}
+          <div className="article-layout">
+            <div className="article-body">
+              {news.excerpt && <p className="section-lead">{news.excerpt}</p>}
 
-            {news.tags.length > 0 && (
-              <div className="chips" style={{ marginTop: "var(--space-5)" }}>
-                {news.tags.map((tag) => (
-                  <span key={tag} className="chip">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div style={{ marginTop: "var(--space-6)" }}>
-              <ShareButtons title={news.title} url={`${siteUrl}/news/${slug}`} />
+              {blocks.length > 0 && (
+                <>
+                  <hr className="divider" />
+                  <NotionBlocks blocks={blocks} />
+                </>
+              )}
             </div>
 
-            {blocks.length > 0 && (
-              <>
-                <hr className="divider" />
-                <NotionBlocks blocks={blocks} />
-              </>
-            )}
+            <aside className="article-aside">
+              {news.date && (
+                <div className="article-aside-block">
+                  <p className="label article-aside-label">Date</p>
+                  <p className="article-meta">{formatDate(news.date)}</p>
+                </div>
+              )}
+
+              {news.tags.length > 0 && (
+                <div className="article-aside-block">
+                  <p className="label article-aside-label">Tags</p>
+                  <div className="chips">
+                    {news.tags.map((tag) => (
+                      <span key={tag} className="chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="article-aside-block">
+                <p className="label article-aside-label">Share</p>
+                <ShareButtons title={news.title} url={`${siteUrl}/news/${slug}`} />
+              </div>
+            </aside>
           </div>
         </div>
       </section>

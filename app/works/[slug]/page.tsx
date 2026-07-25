@@ -134,79 +134,84 @@ export default async function WorkDetailPage({ params }: Props) {
           <div className="container article-hero-copy">
             <p className="article-meta">
               <span className={`badge badge-${work.status.toLowerCase()}`}>{work.status}</span>
-              {work.platforms.join(" / ")}
             </p>
             <h1>{work.title}</h1>
           </div>
         </header>
       ) : (
         <header className="container article-header">
-          <Link href="/works" className="back-link">
-            <UIIcon name="arrowLeft" size={14} />
-            Works 一覧
-          </Link>
           <h1>{work.title}</h1>
           <p className="article-meta">
             <span className={`badge badge-${work.status.toLowerCase()}`}>{work.status}</span>
-            {work.platforms.join(" / ")}
           </p>
         </header>
       )}
 
       <section className="section">
         <div className="container">
-          {work.thumbnailUrl && (
-            <Link href="/works" className="back-link">
-              <UIIcon name="arrowLeft" size={14} />
-              Works 一覧
-            </Link>
-          )}
+          <Link href="/works" className="back-link">
+            <UIIcon name="arrowLeft" size={14} />
+            Works 一覧
+          </Link>
 
-          <div className="article-body">
-            {work.description && <p className="section-lead">{work.description}</p>}
+          <div className="article-layout">
+            <div className="article-body">
+              {work.description && <p className="section-lead">{work.description}</p>}
 
-            {(work.tags.length > 0 || work.platforms.length > 0) && (
-              <div className="chips" style={{ marginTop: "var(--space-5)" }}>
-                {work.tags.map((tag) => (
-                  <span key={tag} className="chip">
-                    {tag}
-                  </span>
-                ))}
-                {work.platforms.map((platform) => (
-                  <span key={platform} className="chip platform-chip">
-                    {platform}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {work.link && (
-              <p style={{ marginTop: "var(--space-5)" }}>
-                <a
-                  href={sanitizeUrl(work.link)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                >
-                  プレイする
-                  <UIIcon name="arrowUpRight" size={16} />
-                </a>
-              </p>
-            )}
-
-            <div style={{ marginTop: "var(--space-6)" }}>
-              <ShareButtons
-                title={work.title}
-                url={`${siteUrl}/works/${slug}`}
-              />
+              {blocks.length > 0 && (
+                <>
+                  <hr className="divider" />
+                  <NotionBlocks blocks={blocks} />
+                </>
+              )}
             </div>
 
-            {blocks.length > 0 && (
-              <>
-                <hr className="divider" />
-                <NotionBlocks blocks={blocks} />
-              </>
-            )}
+            <aside className="article-aside">
+              {work.platforms.length > 0 && (
+                <div className="article-aside-block">
+                  <p className="label article-aside-label">Platforms</p>
+                  <div className="chips">
+                    {work.platforms.map((platform) => (
+                      <span key={platform} className="chip platform-chip">
+                        {platform}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {work.tags.length > 0 && (
+                <div className="article-aside-block">
+                  <p className="label article-aside-label">Tags</p>
+                  <div className="chips">
+                    {work.tags.map((tag) => (
+                      <span key={tag} className="chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {work.link && (
+                <div className="article-aside-block">
+                  <a
+                    href={sanitizeUrl(work.link)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    プレイする
+                    <UIIcon name="arrowUpRight" size={16} />
+                  </a>
+                </div>
+              )}
+
+              <div className="article-aside-block">
+                <p className="label article-aside-label">Share</p>
+                <ShareButtons title={work.title} url={`${siteUrl}/works/${slug}`} />
+              </div>
+            </aside>
           </div>
         </div>
       </section>

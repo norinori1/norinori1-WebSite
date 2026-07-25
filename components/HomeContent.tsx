@@ -7,6 +7,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollReveal from "@/components/ScrollReveal";
 import Thumbnail from "@/components/Thumbnail";
+import HeroBlueprint from "@/components/HeroBlueprint";
 import { trackEvent } from "@/lib/analytics";
 import { sanitizeUrl } from "@/lib/security";
 import PlatformIcon, { UIIcon, type IconName } from "@/components/PlatformIcon";
@@ -148,14 +149,16 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
       <SiteHeader />
 
       <section id="top" className="hero" aria-label="Hero">
+        {/* Kept to 4 and pushed to the top/bottom edges so they frame
+            HeroBlueprint's diagram rather than clutter its centre. */}
         <div className="hero-particles" aria-hidden="true">
-          <span className="hero-particle hero-particle--lg hero-particle--slow" style={{ top: "12%", left: "72%" }} />
-          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "24%", left: "90%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--fast" style={{ top: "68%", left: "80%" }} />
-          <span className="hero-particle hero-particle--lg hero-particle--slow" style={{ top: "78%", left: "58%" }} />
-          <span className="hero-particle hero-particle--sm hero-particle--medium" style={{ top: "44%", left: "94%" }} />
-          <span className="hero-particle hero-particle--md hero-particle--fast" style={{ top: "88%", left: "88%" }} />
+          <span className="hero-particle hero-particle--lg hero-particle--slow" style={{ top: "8%", left: "68%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--medium" style={{ top: "18%", left: "95%" }} />
+          <span className="hero-particle hero-particle--sm hero-particle--fast" style={{ top: "82%", left: "92%" }} />
+          <span className="hero-particle hero-particle--md hero-particle--slow" style={{ top: "90%", left: "62%" }} />
         </div>
+
+        <HeroBlueprint />
 
         <div className="container hero-content">
           <p className="hero-eyebrow label hero-animate hero-animate-eyebrow">
@@ -299,16 +302,21 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                       </div>
 
                       <div className="work-actions">
-                        <span className="link-arrow" aria-hidden="true">
-                          詳細を見る
-                          <UIIcon name="arrowRight" size={16} />
+                        {/* Decorative: the card is already a stretched link to
+                            this same destination, so this isn't a second
+                            link — that would be a redundant stop for
+                            screen-reader users. */}
+                        <span className="hex-action" aria-hidden="true" title="詳細を見る">
+                          <UIIcon name="hexArrowRight" size={26} strokeWidth={1.4} />
                         </span>
                         {work.link && (
                           <a
-                            className="link-arrow is-external"
+                            className="hex-action"
                             href={sanitizeUrl(work.link)}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="プレイする"
+                            title="プレイする"
                             onClick={() =>
                               trackEvent("game_link_click", {
                                 game_id: work.id,
@@ -317,8 +325,7 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                               })
                             }
                           >
-                            プレイする
-                            <UIIcon name="arrowUpRight" size={16} />
+                            <UIIcon name="hexArrowUpRight" size={26} strokeWidth={1.4} />
                           </a>
                         )}
                       </div>
@@ -458,9 +465,8 @@ export default function HomeContent({ featuredWorks, recentNews, fetchError }: H
                       {item.date && <p className="card-date">{formatDate(item.date)}</p>}
                       {item.excerpt && <p className="work-desc">{item.excerpt}</p>}
                       <div className="work-actions">
-                        <span className="link-arrow" aria-hidden="true">
-                          続きを読む
-                          <UIIcon name="arrowRight" size={16} />
+                        <span className="hex-action" aria-hidden="true" title="続きを読む">
+                          <UIIcon name="hexArrowRight" size={26} strokeWidth={1.4} />
                         </span>
                       </div>
                     </div>

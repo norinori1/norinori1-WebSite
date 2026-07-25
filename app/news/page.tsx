@@ -96,9 +96,8 @@ export default async function NewsPage() {
                         </div>
                       )}
                       <div className="work-actions">
-                        <span className="link-arrow" aria-hidden="true">
-                          続きを読む
-                          <UIIcon name="arrowRight" size={16} />
+                        <span className="hex-action" aria-hidden="true" title="続きを読む">
+                          <UIIcon name="hexArrowRight" size={26} strokeWidth={1.4} />
                         </span>
                       </div>
                     </div>

@@ -96,6 +96,12 @@ export default function PlatformIcon({ name, size = 24, className }: PlatformIco
    These replace the emoji and literal arrow characters (☀️ 🌙 ☰ 🔍 → ↗) that
    previously stood in for icons and rendered differently on every OS.
    -------------------------------------------------------------------------- */
+type IconPath = string | readonly string[];
+
+// `satisfies` (not `as const`) keeps literal key names for UIIconName while
+// letting every value collapse to the same string | string[] shape — with
+// `as const` here, TS instead unions each icon's exact tuple type and chokes
+// trying to resolve a single `.map` overload for the mix of shapes below.
 const uiIcons = {
   sun: "M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42",
   moon: "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z",
@@ -106,7 +112,18 @@ const uiIcons = {
   arrowLeft: "M19 12H5M11 18l-6-6 6-6",
   arrowUpRight: "M7 17 17 7M8 7h9v9",
   chevronDown: "M6 9l6 6 6-6",
-} as const;
+  // Two-path icons: a hexagon outline (echoing the wordmark) as path 1, an
+  // arrow as path 2. .hex-action in globals.css fills the hexagon and
+  // recolours the arrow on hover/focus — see that rule for why they're split.
+  hexArrowRight: [
+    "M12 2.5 20 7.25 20 16.75 12 21.5 4 16.75 4 7.25Z",
+    "M7.5 12h9M13 8l4 4-4 4",
+  ],
+  hexArrowUpRight: [
+    "M12 2.5 20 7.25 20 16.75 12 21.5 4 16.75 4 7.25Z",
+    "M8.5 15.5 15.5 8.5M9.5 8.5h6v6",
+  ],
+} satisfies Record<string, IconPath>;
 
 export type UIIconName = keyof typeof uiIcons;
 
@@ -118,6 +135,8 @@ interface UIIconProps {
 }
 
 export function UIIcon({ name, size = 18, className, strokeWidth = 2 }: UIIconProps) {
+  const d = uiIcons[name];
+  const paths = Array.isArray(d) ? d : [d];
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +152,9 @@ export function UIIcon({ name, size = 18, className, strokeWidth = 2 }: UIIconPr
       focusable="false"
       className={className}
     >
-      <path d={uiIcons[name]} />
+      {paths.map((p, i) => (
+        <path key={i} d={p} />
+      ))}
     </svg>
   );
 }
