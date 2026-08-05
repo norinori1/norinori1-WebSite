@@ -36,22 +36,35 @@ function RichText({ items }: { items: RichTextItemResponse[] }) {
   );
 }
 
-type FullBlock = BlockObjectResponse;
+type FullBlock = BlockObjectResponse & { children?: NotionBlock[] };
 
 function isFullBlock(block: NotionBlock): block is FullBlock {
   return "type" in block;
 }
 
+/**
+ * Render a Notion block's nested children, if any. Used by block types that
+ * can contain other blocks (callouts, toggles, quotes, list items) so their
+ * content stays visually grouped with the parent instead of being dropped.
+ */
+function NestedChildren({ blocks }: { blocks: NotionBlock[] | undefined }) {
+  if (!blocks || blocks.length === 0) return null;
+  return <>{renderBlocks(blocks)}</>;
+}
+
 /** Render a single Notion block. */
-function NotionBlock({ block }: { block: NotionBlock }) {
+function NotionBlockView({ block }: { block: NotionBlock }) {
   if (!isFullBlock(block)) return null;
 
   switch (block.type) {
     case "paragraph":
       return (
-        <p>
-          <RichText items={block.paragraph.rich_text} />
-        </p>
+        <>
+          <p>
+            <RichText items={block.paragraph.rich_text} />
+          </p>
+          <NestedChildren blocks={block.children} />
+        </>
       );
 
     case "heading_1":
@@ -79,6 +92,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
       return (
         <li>
           <RichText items={block.bulleted_list_item.rich_text} />
+          <NestedChildren blocks={block.children} />
         </li>
       );
 
@@ -86,6 +100,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
       return (
         <li>
           <RichText items={block.numbered_list_item.rich_text} />
+          <NestedChildren blocks={block.children} />
         </li>
       );
 
@@ -102,6 +117,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
       return (
         <blockquote>
           <RichText items={block.quote.rich_text} />
+          <NestedChildren blocks={block.children} />
         </blockquote>
       );
 
@@ -114,6 +130,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
           {emoji && <span className="notion-callout-icon">{emoji}</span>}
           <div>
             <RichText items={block.callout.rich_text} />
+            <NestedChildren blocks={block.children} />
           </div>
         </div>
       );
@@ -169,6 +186,7 @@ function NotionBlock({ block }: { block: NotionBlock }) {
           <summary>
             <RichText items={block.toggle.rich_text} />
           </summary>
+          <NestedChildren blocks={block.children} />
         </details>
       );
 
@@ -179,9 +197,10 @@ function NotionBlock({ block }: { block: NotionBlock }) {
 
 /**
  * Render a list of Notion blocks, grouping consecutive list items into
- * proper <ul>/<ol> elements.
+ * proper <ul>/<ol> elements. Used both for a page's top-level blocks and,
+ * recursively, for any block's nested children.
  */
-export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
+function renderBlocks(blocks: NotionBlock[]): React.ReactNode[] {
   const elements: React.ReactNode[] = [];
   let i = 0;
 
@@ -206,7 +225,7 @@ export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
       elements.push(
         <ul key={`ul-${i}`}>
           {items.map((b) => (
-            <NotionBlock key={(b as FullBlock).id} block={b} />
+            <NotionBlockView key={(b as FullBlock).id} block={b} />
           ))}
         </ul>,
       );
@@ -227,16 +246,24 @@ export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
       elements.push(
         <ol key={`ol-${i}`}>
           {items.map((b) => (
-            <NotionBlock key={(b as FullBlock).id} block={b} />
+            <NotionBlockView key={(b as FullBlock).id} block={b} />
           ))}
         </ol>,
       );
       continue;
     }
 
-    elements.push(<NotionBlock key={block.id} block={block} />);
+    elements.push(<NotionBlockView key={block.id} block={block} />);
     i++;
   }
 
-  return <div className="prose prose-slate max-w-none notion-content">{elements}</div>;
+  return elements;
+}
+
+export default function NotionBlocks({ blocks }: { blocks: NotionBlock[] }) {
+  return (
+    <div className="prose prose-slate max-w-none notion-content">
+      {renderBlocks(blocks)}
+    </div>
+  );
 }
