@@ -1887,6 +1887,23 @@ a {
   flex-shrink: 0;
 }
 
+/* Callouts and toggles can contain nested paragraphs (e.g. a multi-line
+   callout authored in Notion). Keep that content tight to the block instead
+   of inheriting the prose plugin's full paragraph spacing. */
+.notion-callout p,
+.notion-toggle p {
+  margin: 0;
+}
+
+.notion-callout p + p,
+.notion-toggle p + p {
+  margin-top: var(--space-2);
+}
+
+.notion-toggle > *:not(summary) {
+  margin-top: var(--space-2);
+}
+
 .notion-image-caption {
   margin-top: var(--space-2);
   font-size: var(--text-sm);
