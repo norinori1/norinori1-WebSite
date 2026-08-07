@@ -46,6 +46,7 @@ const links: { name: string; url: string; icon: IconName }[] = [
   { name: "X (Twitter)", url: "https://x.com/norinori1_", icon: "x" },
   { name: "itch.io", url: "https://norinori1.itch.io", icon: "itchio" },
   { name: "Scratch", url: "https://scratch.mit.edu/users/norinori1/", icon: "scratch" },
+  { name: "AtCoder", url: "https://atcoder.jp/users/norinori1", icon: "web" },
 ];
 
 export default function AboutPage() {

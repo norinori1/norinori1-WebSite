@@ -27,6 +27,7 @@ const platforms: { name: string; url: string; icon: IconName }[] = [
   { name: "Zenn", url: "https://zenn.dev/norinori1", icon: "zenn" },
   { name: "Scratch", url: "https://scratch.mit.edu/users/norinori1/", icon: "scratch" },
   { name: "unityroom", url: "https://unityroom.com/users/csn31btru8plo50zijv4", icon: "unity" },
+  { name: "AtCoder", url: "https://atcoder.jp/users/norinori1", icon: "web" },
 ];
 
 const skills: { category: string; items: { label: string; icon: IconName | null; level: number }[] }[] = [
