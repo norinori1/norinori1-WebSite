@@ -1,3 +1,15 @@
+export const WORK_CATEGORIES = [
+  "Unity Games",
+  "Roblox Games",
+  "Scratch Games",
+  "VRChat Worlds",
+  "VRChat Gimmicks",
+  "Avatar Assets",
+  "Developer Tools",
+] as const;
+
+export type WorkCategory = (typeof WORK_CATEGORIES)[number] | "Other";
+
 export type Work = {
   id: string;
   title: string;
@@ -9,6 +21,7 @@ export type Work = {
   platforms: string[];
   thumbnailUrl: string | null;
   featured: boolean;
+  category: WorkCategory;
 };
 
 export type NewsItem = {

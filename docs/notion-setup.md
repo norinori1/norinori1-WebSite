@@ -51,10 +51,57 @@ Notion でゲーム作品を管理するデータベースを作成します。
 | `Description` | Text（テキスト） | 作品の短い説明文 |
 | `Link` | URL | 作品へのリンク（itch.io等） |
 | `Status` | Select（セレクト） | 公開状態。選択肢：`Latest`、`Featured`、`Released` |
+| `Category` | Select（セレクト） | 作品の種類。下記の7分類。未設定でも作品は表示される |
 | `Tags` | Multi-select（マルチセレクト） | タグ（例：`Unity`、`Puzzle`、`Action`） |
 | `Platforms` | Multi-select（マルチセレクト） | 対応プラットフォーム（例：`PC`、`Web`、`Discord`） |
 | `Thumbnail` | Files & media（ファイル） | サムネイル画像 |
 | `Featured` | Checkbox（チェックボックス） | 注目作品フラグ（一覧でソートに使用） |
+
+### Category とギャラリーの分類
+
+`Category` は作品の種類、`Tags` はジャンル・特徴、`Platforms` は対応環境を表します。
+Unity / Roblox / Scratch の分類を Platforms から推測しません。
+Category の選択肢は次の順で設定してください。
+
+1. `Unity Games`
+2. `Roblox Games`
+3. `Scratch Games`
+4. `VRChat Worlds`
+5. `VRChat Gimmicks`
+6. `Avatar Assets`
+7. `Developer Tools`
+
+Category が未設定、または上記以外の値でも、作品は末尾の `Other / 未分類` に表示されます。
+`Other` を Notion の選択肢として追加する必要はありません。
+絞り込み後に作品がないカテゴリは、見出しとジャンプナビの両方を非表示にします。
+一覧は複数ページを取得するため、100件を超えた作品も表示対象になります。
+
+### 既存作品の移行
+
+更新直前にスキーマと全作品を再取得し、Category の新しい選択肢や分類済みの値があれば、
+既存の判断を上書きせず確認してください。変更は Category の追加と次の13作品への設定に限定します。
+
+| Category | 作品 |
+|---|---|
+| Unity Games | ZINTOROAD、POLARITY UNDER、Block Crushing Game、Puzzle Ball Stage Maker |
+| Scratch Games | 5人からの挑戦状、Block Crush Game [Scratch Edition]、Block Miner、Puzzle Ball、Puzzle ball 2、Puzzle Ball 3! |
+| Developer Tools | Github-Railway-Map、Scratch Data Structures Generator、Scratch Text Asset Creator |
+| 未設定（Other に表示） | ROGUE LYCAN、血液がんの治療に伴走する超簡単！育成ゲーム |
+
+本文、画像、Title、Slug、Status、Featured、Tags、Platforms、リンクなど、Category 以外は保持します。
+更新後に再取得し、15作品が残っていること、分類が一致すること、ほかのプロパティ・本文が変わっていないことを確認してください。
+未分類の2作品は、種類の判断が決まってから Category だけを設定します。
+
+一覧はチェックボックス `Featured` または `Status = Featured` を注目作品として強調します。
+デフォルトはカテゴリ内で注目作品優先・タイトル昇順です。タイトル順・ステータス順を選ぶとその順序を優先します。
+トップページの注目作品取得条件（`Status = Featured`）は従来どおりです。
+タグはすべてに一致（AND）、プラットフォームはいずれかに一致（OR）、両者は AND で組み合わせます。
+
+### ローカル検証
+
+`npm run test:works` は追加フレームワークを使わず、TypeScript で簡易テストをコンパイルして実行します。
+カテゴリ・検索・ソート・フィルターの組み合わせと、Notion SDK を模擬した205レコードの複数ページ取得を確認します。
+画面用の検証データと Notion 実接続の結果は区別してください。
 
 ### ページ本文について
 

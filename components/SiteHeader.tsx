@@ -2,11 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { trackEvent } from "@/lib/analytics";
 import { UIIcon } from "@/components/PlatformIcon";
+
+// Server and initial hydration must agree even when next-themes reads a saved theme.
+const subscribeToMount = () => () => {};
+const clientMounted = () => true;
+const serverMounted = () => false;
 
 const navItems = [
   { href: "/about", label: "About", icon: "/about-icon.svg", event: "about" },
@@ -23,8 +28,7 @@ export default function SiteHeader() {
   const headerRef = useRef<HTMLElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  // resolvedTheme is undefined until hydration; hide toggle until mounted
-  const mounted = resolvedTheme !== undefined;
+  const mounted = useSyncExternalStore(subscribeToMount, clientMounted, serverMounted);
   const isDark = resolvedTheme === "dark";
 
   // Watch a zero-height sentinel rather than listening to every scroll event.

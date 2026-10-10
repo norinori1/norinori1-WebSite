@@ -1,0 +1,145 @@
+{
+  "database": "https://www.notion.so/330edeb49f80801fb296f4978ec73f1a",
+  "status": "verified",
+  "observedWorks": 15,
+  "scope": "Category only; add seven options and set the thirteen approved works",
+  "assignments": {
+    "zintoroad": "Unity Games",
+    "polarity-under": "Unity Games",
+    "block-crushing-game": "Unity Games",
+    "puzzle-ball-stage-maker": "Unity Games",
+    "challenge-from-5-peope": "Scratch Games",
+    "block-crush-scratch": "Scratch Games",
+    "block-miner": "Scratch Games",
+    "puzzle-ball": "Scratch Games",
+    "puzzle-ball-2": "Scratch Games",
+    "puzzle-ball-3": "Scratch Games",
+    "github-railway-map": "Developer Tools",
+    "scratch-data-structures-generator": "Developer Tools",
+    "scratch-text-asset-creator": "Developer Tools"
+  },
+  "unchangedUnclassified": [
+    "rogue-lycan",
+    "super-easy-game-blood-cancer"
+  ],
+  "verifiedAt": "2026-10-10 07:10:12 UTC",
+  "categoryOptions": [
+    "Unity Games",
+    "Roblox Games",
+    "Scratch Games",
+    "VRChat Worlds",
+    "VRChat Gimmicks",
+    "Avatar Assets",
+    "Developer Tools"
+  ],
+  "preservedSchema": true,
+  "preservedWorks": 15,
+  "perWork": [
+    {
+      "slug": "scratch-data-structures-generator",
+      "category": "Developer Tools",
+      "expectedCategory": "Developer Tools",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "scratch-text-asset-creator",
+      "category": "Developer Tools",
+      "expectedCategory": "Developer Tools",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "puzzle-ball-3",
+      "category": "Scratch Games",
+      "expectedCategory": "Scratch Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "block-crush-scratch",
+      "category": "Scratch Games",
+      "expectedCategory": "Scratch Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "block-crushing-game",
+      "category": "Unity Games",
+      "expectedCategory": "Unity Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "puzzle-ball-stage-maker",
+      "category": "Unity Games",
+      "expectedCategory": "Unity Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "polarity-under",
+      "category": "Unity Games",
+      "expectedCategory": "Unity Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "zintoroad",
+      "category": "Unity Games",
+      "expectedCategory": "Unity Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "rogue-lycan",
+      "category": null,
+      "expectedCategory": null,
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "challenge-from-5-peope",
+      "category": "Scratch Games",
+      "expectedCategory": "Scratch Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "block-miner",
+      "category": "Scratch Games",
+      "expectedCategory": "Scratch Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "puzzle-ball-2",
+      "category": "Scratch Games",
+      "expectedCategory": "Scratch Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "puzzle-ball",
+      "category": "Scratch Games",
+      "expectedCategory": "Scratch Games",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "super-easy-game-blood-cancer",
+      "category": null,
+      "expectedCategory": null,
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    },
+    {
+      "slug": "github-railway-map",
+      "category": "Developer Tools",
+      "expectedCategory": "Developer Tools",
+      "propertiesPreserved": true,
+      "pageAndBodyPreserved": true
+    }
+  ],
+  "note": "Fetched all active rows and every page before and after. Compared every non-Category property, content, cover and icon. Temporary S3 query signatures excluded from page comparisons. Connector read/write verified; local website has no Notion API token."
+}
