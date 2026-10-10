@@ -1,0 +1,78 @@
+{
+  "source": "Published Notion text snapshot and explicit synthetic cases. Image artwork is verification-only; no live SDK credentials.",
+  "viewports": [
+    {
+      "theme": "light",
+      "width": 320,
+      "page": 320,
+      "thumb": "contain",
+      "galleryColumns": 1,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "dark",
+      "width": 320,
+      "page": 320,
+      "thumb": "contain",
+      "galleryColumns": 1,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "light",
+      "width": 390,
+      "page": 390,
+      "thumb": "contain",
+      "galleryColumns": 1,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "dark",
+      "width": 390,
+      "page": 390,
+      "thumb": "contain",
+      "galleryColumns": 1,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "light",
+      "width": 768,
+      "page": 768,
+      "thumb": "contain",
+      "galleryColumns": 3,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "dark",
+      "width": 768,
+      "page": 768,
+      "thumb": "contain",
+      "galleryColumns": 3,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "light",
+      "width": 1280,
+      "page": 1280,
+      "thumb": "contain",
+      "galleryColumns": 3,
+      "hiddenFocus": true
+    },
+    {
+      "theme": "dark",
+      "width": 1280,
+      "page": 1280,
+      "thumb": "contain",
+      "galleryColumns": 3,
+      "hiddenFocus": true
+    }
+  ],
+  "checks": [
+    "Direct links, other query preservation, history, ArrowLeft/Right wrapping, Home/End and roving focus",
+    "Gallery native dialog: Enter/Space, modal focus, Escape, close button and trigger focus restoration; actual block-image proxy redirects",
+    "Empty optional tabs, missing thumbnail/link, invalid/duplicate URL exclusion and additional-only primary CTA",
+    "All 15 published legacy bodies preserve every text line, canonical URLs; same-category related works exclude the current work",
+    "Long title and unchanged gallery card count/layout after shared card extraction",
+    "JavaScript disabled: all server-rendered sections readable; screenshot links remain usable"
+  ],
+  "pageErrors": []
+}

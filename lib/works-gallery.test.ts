@@ -5,7 +5,7 @@ import { filterWorks, sortWorks, groupWorks, normalizeCategory, isFeaturedWork }
 function work(title: string, overrides: Partial<Work> = {}): Work {
   return { id: title, title, slug: title, description: "遊べる Puzzle ゲーム", link: "", status: "Released",
     tags: ["Puzzle", "Physics"], platforms: ["Web"], thumbnailUrl: null, featured: false,
-    category: "Unity Games", ...overrides };
+    category: "Unity Games", additionalLinks: [], engines: [], repository: "", ...overrides };
 }
 
 const fixtures = [

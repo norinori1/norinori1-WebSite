@@ -30,6 +30,11 @@ async function runTests() {
             Title: { type: "title", title: [{ plain_text: `Work ${number}` }] },
             Slug: { type: "rich_text", rich_text: [{ plain_text: number === 204 ? "" : `work-${number}` }] },
             Status: { type: "select", select: { name: "Released" } },
+            ...(number === 2 ? {
+              "Additional Links": { type: "rich_text", rich_text: [{ plain_text: "https://a.example\n" }, { plain_text: "https://b.example" }] },
+              Engines: { type: "multi_select", multi_select: [{ name: "Unity" }] },
+              Repository: { type: "url", url: "https://github.com/test/project" },
+            } : {}),
             ...(category ? { Category: { type: "select", select: { name: category } } } : {}),
           } };
         }),
@@ -42,6 +47,12 @@ async function runTests() {
     assert.equal(works[0].category, "Other");
     assert.equal(works[1].category, "Other");
     assert.equal(works[2].category, "Unity Games");
+    assert.deepEqual(works[0].additionalLinks, []);
+    assert.deepEqual(works[0].engines, []);
+    assert.equal(works[0].repository, "");
+    assert.deepEqual(works[2].additionalLinks, ["https://a.example", "https://b.example"]);
+    assert.deepEqual(works[2].engines, ["Unity"]);
+    assert.equal(works[2].repository, "https://github.com/test/project");
     assert.deepEqual(calls.map((call) => call.start_cursor), [undefined, "page-2", "page-3"]);
     assert.ok(calls.every((call) => call.data_source_id === "test-source" && call.filter && call.sorts));
     calls.length = 0;

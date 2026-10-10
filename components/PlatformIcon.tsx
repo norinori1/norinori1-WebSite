@@ -112,6 +112,8 @@ const uiIcons = {
   arrowLeft: "M19 12H5M11 18l-6-6 6-6",
   arrowUpRight: "M7 17 17 7M8 7h9v9",
   chevronDown: "M6 9l6 6 6-6",
+  portal: ["M6 21V10a6 8 0 0 1 12 0v11", "M9 21V10a3 5 0 0 1 6 0v11", "M3 21h18"],
+  package: ["m12 3 9 5v8l-9 5-9-5V8Z", "m3 8 9 5 9-5M12 13v8M7.5 5.5l9 5"],
   // Two-path icons: a hexagon outline (echoing the wordmark) as path 1, an
   // arrow as path 2. .hex-action in globals.css fills the hexagon and
   // recolours the arrow on hover/focus — see that rule for why they're split.

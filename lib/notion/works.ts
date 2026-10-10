@@ -6,6 +6,7 @@ import { getNotionClient, resolveDataSourceId } from "./client";
 import { getPageBlocks, type NotionBlock } from "./blocks";
 import type { Work } from "@/types/notion";
 import { normalizeCategory } from "../works-gallery";
+import { parseAdditionalLinks } from "../work-links";
 
 function getDatabaseId(): string {
   const id = process.env.NOTION_GAMES_DB;
@@ -79,6 +80,9 @@ function pageToWork(page: PageObjectResponse): Work {
     slug: extractText(p["Slug"]),
     description: extractText(p["Description"]),
     link: extractUrl(p["Link"]),
+    additionalLinks: parseAdditionalLinks(extractText(p["Additional Links"])),
+    engines: extractMultiSelect(p["Engines"]),
+    repository: extractUrl(p["Repository"]),
     status: (extractSelect(p["Status"]) as Work["status"]) || "Released",
     tags: extractMultiSelect(p["Tags"]),
     platforms: extractMultiSelect(p["Platforms"]),

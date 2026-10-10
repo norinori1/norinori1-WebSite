@@ -7,5 +7,5 @@
     "incremental": false,
     "outDir": ".next/works-tests"
   },
-  "include": ["lib/works-gallery.test.ts", "lib/notion/works.test.ts", "lib/security.test.ts"]
+  "include": ["lib/works-gallery.test.ts", "lib/notion/works.test.ts", "lib/security.test.ts", "lib/work-detail.test.ts"]
 }

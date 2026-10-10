@@ -1,0 +1,18 @@
+{
+  "issue": 137,
+  "baseCommit": "37aecb3",
+  "checks": {
+    "lint": 0,
+    "typecheck": 0,
+    "tests": 0,
+    "regularBuild": 0,
+    "fixtureBuild": 0
+  },
+  "schema": {
+    "addedProperty": "Additional Links",
+    "type": "rich_text",
+    "existingDefinitionsPreserved": true,
+    "pageContentChanges": 0
+  },
+  "browser": "browser-results.json"
+}

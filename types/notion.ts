@@ -16,6 +16,9 @@ export type Work = {
   slug: string;
   description: string;
   link: string;
+  additionalLinks: string[];
+  engines: string[];
+  repository: string;
   status: "Latest" | "Featured" | "Released";
   tags: string[];
   platforms: string[];
