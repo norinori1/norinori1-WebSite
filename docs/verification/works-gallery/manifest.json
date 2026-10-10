@@ -38,7 +38,7 @@
     "docs/verification/works-gallery/build.log": "1d2c83fe11a0ac3323fa7ea8a32a998f1aea3c0748e18bf71d050d3e6a35bfb0",
     "docs/verification/works-gallery/category-artwork.png": "f7fe6949d98791db5a9b336412a8d9a37efbdab997135c3d07cd48217c0beaad",
     "docs/verification/works-gallery/category-artwork.svg": "b09e57c1d95171c460993dd07d06e6a2cf6d0ba9fc122b24148f4915cbf93894",
-    "docs/verification/works-gallery/fixture-build.log": "079e584ba75e1d5ff66d35fe2dca5012f6e494ca63e8432994098fd703d45100",
+    "docs/verification/works-gallery/fixture-build.log": "dc3adc8a803e2fcba56997791b871578dabc04c6652f2bd5b5028cb768a5129d",
     "docs/verification/works-gallery/lint.log": "844046a5268272fdc4430bcd571682889af6008aa44e36a6945bdd3c04f0e8f9",
     "docs/verification/works-gallery/notion-migration.json": "34d3ae9681d52dad7253c51003dd5c4e4c70187ffb91d01c63958fe8326cfec8",
     "docs/verification/works-gallery/README.md": "8cb57a21d5a2f6cf961183e2fc48e63cf2d9bd22fe3560d89d0964db032aa0eb",
@@ -58,7 +58,7 @@
     "docs/verification/works-gallery/works-mobile-filters-light.png": "ae133fa3f55a68a3bb0326dd53a1e385728a86ff6bae6fa2e5b2b0d02f9339ce"
   },
   "artifactNotes": [
-    "Log trailing horizontal whitespace removed for Git formatting; command output and results preserved."
+    "Log trailing whitespace and excess final blank lines removed for Git formatting; command output and results preserved."
   ],
   "review": {
     "request": "SVG artwork for every category",
