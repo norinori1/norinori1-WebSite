@@ -1,0 +1,275 @@
+> tsc -p tsconfig.works-tests.json && node .next/works-tests/lib/works-gallery.test.js && node .next/works-tests/lib/notion/works.test.js && node .next/works-tests/lib/security.test.js
+Works gallery: categories, search, tag AND / platform OR, ordering, Featured and empty results passed.
+Notion Works: 205 rows across 3 pages, mapping, missing slug, Featured listing, slugs and failure propagation passed.
+--- Testing isTrustedImageHost ---
+✅ PASSED: Valid S3 signed URL
+✅ PASSED: Generic S3 host (removed from allowlist)
+✅ PASSED: Insecure HTTP URL
+✅ PASSED: Untrusted host
+✅ PASSED: URL with credentials
+✅ PASSED: URL with trailing dot in hostname (normalized)
+✅ PASSED: Overly long URL in isTrustedImageHost
+✅ PASSED: Null input in isTrustedImageHost
+✅ PASSED: Non-string input in isTrustedImageHost
+--- Testing sanitizeUrl ---
+✅ PASSED: Safe HTTPS URL
+✅ PASSED: Unsafe javascript protocol
+✅ PASSED: Null byte in protocol
+✅ PASSED: Safe relative path
+✅ PASSED: Relative path with traversal
+✅ PASSED: Relative path starting with dot (neutralized for safety)
+✅ PASSED: Protocol-relative URL
+✅ PASSED: Normalization bypass /\
+✅ PASSED: URL with backspace control character
+✅ PASSED: CRLF in protocol
+✅ PASSED: Whitespace in hostname (stripped)
+✅ PASSED: C1 control character in protocol
+✅ PASSED: URL with RTL override (stripped)
+✅ PASSED: URL with zero-width space (stripped)
+✅ PASSED: URL with ZWJ, word joiner, and BOM (stripped)
+✅ PASSED: URL with BiDi isolates (stripped)
+✅ PASSED: URL with line/paragraph separators (stripped)
+✅ PASSED: Infix wedge in protocol
+✅ PASSED: Hyphen with diaeresis in protocol
+✅ PASSED: Siglum in protocol
+✅ PASSED: Overly long URL
+✅ PASSED: URL that exceeds limit after URL encoding
+✅ PASSED: Invisible mathematical operator in protocol
+✅ PASSED: Backslash normalization in authority
+✅ PASSED: Full-width character normalization
+✅ PASSED: Reject credentials in absolute URL
+✅ PASSED: Reject obfuscated credential bypass (tab)
+✅ PASSED: Strip trailing dots from hostname in sanitizeUrl
+✅ PASSED: Reject single-colon http/https
+✅ PASSED: Strip soft hyphen
+✅ PASSED: Strip combining grapheme joiner
+✅ PASSED: Strip Hangul fillers
+✅ PASSED: Strip Mongolian vowel separator
+✅ PASSED: Strip additional Unicode spaces
+✅ PASSED: Strip non-characters and replacement character
+✅ PASSED: Strip Tag characters
+✅ PASSED: Khmer invisible character U+17B4 in protocol
+✅ PASSED: Khmer invisible character U+17B5 in protocol
+✅ PASSED: URL with variation selectors (stripped)
+✅ PASSED: URL with variation selectors supplement (stripped)
+✅ PASSED: URL with Ogham space mark (stripped)
+✅ PASSED: URL with Braille pattern blank (stripped)
+✅ PASSED: URL with interlinear annotation and object replacement (stripped)
+✅ PASSED: Full-width slash bypass in relative path
+✅ PASSED: Full-width backslash bypass in relative path
+✅ PASSED: Full-width dot bypass in relative path
+✅ PASSED: One dot leader bypass in relative path
+✅ PASSED: Ideographic full stop bypass in relative path
+✅ PASSED: Fraction slash bypass in relative path
+✅ PASSED: Division slash bypass in relative path
+✅ PASSED: Set minus (slash-like) bypass in relative path
+✅ PASSED: Reverse solidus operator bypass in relative path
+✅ PASSED: Big solidus bypass in relative path
+✅ PASSED: Big reverse solidus bypass in relative path
+✅ PASSED: Two dot leader bypass in relative path
+✅ PASSED: Horizontal ellipsis bypass in relative path
+✅ PASSED: Small full stop bypass in relative path
+✅ PASSED: Halfwidth ideographic full stop bypass in relative path
+✅ PASSED: Arabic Letter Mark in protocol
+✅ PASSED: Mongolian variation selectors (stripped)
+✅ PASSED: Hyphenation point bypass in relative path
+✅ PASSED: Arabic full stop bypass in relative path
+✅ PASSED: Canadian syllabics full stop bypass in relative path
+✅ PASSED: Mongolian full stop bypass in relative path
+✅ PASSED: Mongolian Manchu full stop bypass in relative path
+✅ PASSED: Lisu letter tone mya jeu bypass in relative path
+✅ PASSED: Vai full stop bypass in relative path
+✅ PASSED: Stenographic full stop bypass in relative path
+✅ PASSED: Raised dot bypass in relative path
+✅ PASSED: Syriac supralinear full stop bypass in relative path
+✅ PASSED: Syriac sublinear full stop bypass in relative path
+✅ PASSED: Georgian paragraph separator bypass in relative path
+✅ PASSED: Strip non-breaking space (U+00A0)
+✅ PASSED: Visible Ethiopic wordspace (U+1361) is preserved and encoded in absolute URL
+✅ PASSED: Visible Aegean word separator dot (U+10101) is preserved and encoded in absolute URL
+✅ PASSED: Visible word separator middle dot (U+2E31) is preserved and encoded in absolute URL
+✅ PASSED: Visible ring point (U+2E30) is preserved and encoded in absolute URL
+✅ PASSED: Visible Aegean word separator line (U+10100) is preserved and encoded in absolute URL
+✅ PASSED: Visible Aegean check mark (U+10102) is preserved and encoded in absolute URL
+✅ PASSED: Ethiopic full stop bypass in relative path
+✅ PASSED: Middle dot bypass in relative path
+✅ PASSED: Dot above bypass in relative path
+✅ PASSED: Greek ano teleia bypass in relative path
+✅ PASSED: Armenian full stop bypass in relative path
+✅ PASSED: Hebrew holam bypass in relative path
+✅ PASSED: Hebrew qamets qatan bypass in relative path
+✅ PASSED: URL-encoded slash bypass in relative path
+✅ PASSED: URL-encoded slash bypass in relative path (uppercase)
+✅ PASSED: URL-encoded backslash bypass in relative path
+✅ PASSED: URL-encoded dot bypass in relative path (traversal)
+✅ PASSED: URL-encoded tab bypass in relative path
+✅ PASSED: URL-encoded newline bypass in relative path
+✅ PASSED: URL-encoded carriage return bypass in relative path
+✅ PASSED: URL-encoded space bypass in relative path
+✅ PASSED: URL-encoded null bypass in relative path
+✅ PASSED: URL-encoded control char (US) bypass in relative path
+✅ PASSED: Small reverse solidus bypass in relative path
+✅ PASSED: Vertical full stop bypass in relative path
+✅ PASSED: Bullet operator bypass in relative path
+✅ PASSED: Dot operator bypass in relative path
+✅ PASSED: Bullet bypass in relative path
+✅ PASSED: Hebrew holam (dot-like) bypass in relative path
+✅ PASSED: Hebrew dagesh (dot-like) bypass in relative path
+✅ PASSED: Word separator bar (dot-like) bypass in relative path
+✅ PASSED: Hebrew holam haser (dot-like) bypass in relative path
+✅ PASSED: Hebrew qubuts (dot-like) bypass in relative path
+✅ PASSED: Arabic-Indic digit zero (dot-like) bypass in relative path
+✅ PASSED: Extended Arabic-Indic digit zero (dot-like) bypass in relative path
+✅ PASSED: Triangular bullet (dot-like) bypass in relative path
+✅ PASSED: Hyphen bullet (dot-like) bypass in relative path
+✅ PASSED: Hebrew sheva (dot-like) bypass in relative path
+✅ PASSED: Hebrew hataf segol (dot-like) bypass in relative path
+✅ PASSED: Hebrew hiriq (dot-like) bypass in relative path
+✅ PASSED: Hebrew upper dot (dot-like) bypass in relative path
+✅ PASSED: Hebrew lower dot (dot-like) bypass in relative path
+✅ PASSED: Commercial minus sign bypass in relative path
+✅ PASSED: Runic single punctuation bypass in relative path
+✅ PASSED: Runic multiple punctuation bypass in relative path
+✅ PASSED: Runic cross punctuation bypass in relative path
+✅ PASSED: Word separator double dot bypass in relative path
+✅ PASSED: Word separator triple dot bypass in relative path
+✅ PASSED: Word separator quadruple dot bypass in relative path
+✅ PASSED: Vertical ellipsis bypass in relative path
+✅ PASSED: Midline horizontal ellipsis bypass in relative path
+✅ PASSED: Up right diagonal ellipsis bypass in relative path
+✅ PASSED: Down right diagonal ellipsis bypass in relative path
+✅ PASSED: Arabic date separator bypass in relative path
+✅ PASSED: Hebrew point patah bypass in relative path
+✅ PASSED: Hebrew point qamets bypass in relative path
+✅ PASSED: Hebrew point qamets qatan bypass in relative path (alt)
+✅ PASSED: Two dot punctuation bypass in relative path
+✅ PASSED: Four dot mark bypass in relative path
+✅ PASSED: Dotted cross bypass in relative path
+✅ PASSED: Tricolon bypass in relative path
+✅ PASSED: URL-encoded DEL bypass in relative path
+✅ PASSED: URL-encoded percent bypass in relative path
+✅ PASSED: Arabic decimal separator bypass in relative path
+✅ PASSED: Arabic thousands separator bypass in relative path
+✅ PASSED: Vertical four dots bypass in relative path
+✅ PASSED: Three dot punctuation bypass in relative path
+✅ PASSED: Four dot punctuation bypass in relative path
+✅ PASSED: Five dot punctuation bypass in relative path
+✅ PASSED: Squared four dot punctuation bypass in relative path
+✅ PASSED: Five dot mark bypass in relative path
+✅ PASSED: Vertical six dots bypass in relative path
+✅ PASSED: Low kavyka with dot bypass in relative path
+✅ PASSED: Dotted solidus bypass in relative path
+✅ PASSED: Visible turned comma in protocol is NOT stripped and causes failure
+✅ PASSED: Visible raised comma in protocol is NOT stripped and causes failure
+✅ PASSED: Visible turned semicolon in protocol is NOT stripped and causes failure
+✅ PASSED: Visible double stacked comma in protocol is NOT stripped and causes failure
+✅ PASSED: Visible reversed semicolon in protocol is NOT stripped and causes failure
+✅ PASSED: Visible right low paraphrase bracket in protocol is NOT stripped and causes failure
+✅ PASSED: Visible left low paraphrase bracket in protocol is NOT stripped and causes failure
+✅ PASSED: Vertical five dots bypass in relative path
+✅ PASSED: Reversed comma with dot bypass in relative path
+✅ PASSED: Dotted vertical bar bypass in relative path
+✅ PASSED: Double solidus operator bypass in relative path
+✅ PASSED: Triple solidus operator bypass in relative path
+✅ PASSED: Two dots over one dot punctuation bypass in relative path
+✅ PASSED: Three dots over one dot punctuation bypass in relative path
+✅ PASSED: Low asterisk bypass in relative path
+✅ PASSED: Dotted square bypass in relative path
+✅ PASSED: Dotted circle bypass in relative path
+✅ PASSED: Dotted diamond bypass in relative path
+✅ PASSED: Arabic triple dot punctuation bypass in relative path
+✅ PASSED: Syriac end of paragraph bypass in relative path
+✅ PASSED: Syriac colon bypass in relative path
+✅ PASSED: Ethiopic semicolon bypass in relative path
+✅ PASSED: Ethiopic colon bypass in relative path
+✅ PASSED: Runic belthone punctuation bypass in relative path
+✅ PASSED: Double suspension dot bypass in relative path
+✅ PASSED: Inverted low kavyka with dot bypass in relative path
+✅ PASSED: Virgule with middle dot bypass in relative path
+✅ PASSED: Five-dot mark bypass in relative path
+✅ PASSED: Two-dotted virgule bypass in relative path
+✅ PASSED: Punctuation virgule with positive slope bypass in relative path
+✅ PASSED: Triple-dotted punctuation bypass in relative path
+✅ PASSED: Tilde with dot above bypass in relative path
+✅ PASSED: Two dot punctuation bypass in relative path (alt)
+✅ PASSED: Cross punti bypass in relative path
+✅ PASSED: Medieval comma bypass in relative path
+✅ PASSED: Syriac dotted colon bypass in relative path
+✅ PASSED: Syriac vertical colon bypass in relative path
+✅ PASSED: Syriac horizontal colon bypass in relative path
+✅ PASSED: Syriac oblique colon bypass in relative path
+✅ PASSED: Syriac music mark bypass in relative path
+✅ PASSED: Syriac music mark alt bypass in relative path
+✅ PASSED: Coptic full stop bypass in relative path
+✅ PASSED: Coptic semicolon bypass in relative path
+✅ PASSED: Tifinagh separator mark bypass in relative path
+✅ PASSED: Lisu punctuation full stop bypass in relative path
+✅ PASSED: Right angle dotted substitution marker bypass in relative path
+✅ PASSED: Left dotted substitution bracket bypass in relative path
+✅ PASSED: Right dotted substitution bracket bypass in relative path
+✅ PASSED: Raised dotted interpolation marker bypass in relative path
+✅ PASSED: Dotted transposition marker bypass in relative path
+✅ PASSED: Dotted obelos bypass in relative path
+✅ PASSED: Dotted right-pointing angle bypass in relative path
+✅ PASSED: Tilde with dot above bypass in relative path
+✅ PASSED: Tilde with dot below bypass in relative path
+✅ PASSED: Oblique slant bypass in relative path
+✅ PASSED: Left transcription bracket bypass in relative path
+✅ PASSED: Right transcription bracket bypass in relative path
+✅ PASSED: Raised wedge bypass in relative path
+✅ PASSED: Low wedge bypass in relative path
+✅ PASSED: Dotted reversed comma bypass in relative path
+✅ PASSED: Inverted interrogation mark bypass in relative path
+✅ PASSED: Palm branch bypass in relative path
+✅ PASSED: URL-encoded C1 control (0x80) bypass in relative path
+✅ PASSED: URL-encoded C1 control (0x9f) bypass in relative path
+✅ PASSED: URL-encoded non-breaking space (0xa0) bypass in relative path
+✅ PASSED: Mongolian colon bypass in relative path
+✅ PASSED: Mongolian four dots bypass in relative path
+✅ PASSED: One dot over two dots punctuation bypass in relative path
+✅ PASSED: Two dots over one dot punctuation (alt) bypass in relative path
+✅ PASSED: Three dots over one dot punctuation (alt) bypass in relative path
+✅ PASSED: Four dots over one dot punctuation bypass in relative path
+✅ PASSED: Five dots over one dot punctuation (alt) bypass in relative path
+✅ PASSED: Six dots over one dot punctuation bypass in relative path
+✅ PASSED: Coptic old nubian full stop bypass in relative path
+✅ PASSED: Coptic old nubian semicolon bypass in relative path
+✅ PASSED: Coptic old nubian comma bypass in relative path
+✅ PASSED: Coptic old nubian full stop with curled tail bypass in relative path
+✅ PASSED: Coptic morphological divider bypass in relative path
+✅ PASSED: Ethiopic comma bypass in relative path
+✅ PASSED: Ethiopic semicolon bypass in relative path
+✅ PASSED: Ethiopic question mark bypass in relative path
+✅ PASSED: Ethiopic paragraph separator bypass in relative path
+✅ PASSED: Hebrew punctuation paseq bypass in relative path
+✅ PASSED: Hebrew punctuation sof pasuq bypass in relative path
+✅ PASSED: Hebrew punctuation nun hafukha bypass in relative path
+✅ PASSED: Arabic five pointed star bypass in relative path
+✅ PASSED: Syriac contraction bypass in relative path
+✅ PASSED: Syriac harklean asteriscus bypass in relative path
+✅ PASSED: Syriac harklean obelus bypass in relative path
+✅ PASSED: Syriac harklean metobelus bypass in relative path
+✅ PASSED: Syriac punctuation bypass in relative path
+✅ PASSED: Visible Syriac abbreviation mark in protocol is NOT stripped and causes failure
+✅ PASSED: Visible double hyphen in protocol is NOT stripped and causes failure
+✅ PASSED: Visible right angle dotted substitution marker in protocol is NOT stripped and causes failure
+✅ PASSED: Visible left dotted substitution bracket in protocol is NOT stripped and causes failure
+✅ PASSED: Visible right dotted substitution bracket in protocol is NOT stripped and causes failure
+✅ PASSED: Visible raised dotted interpolation marker in protocol is NOT stripped and causes failure
+✅ PASSED: Visible dotted transposition marker in protocol is NOT stripped and causes failure
+✅ PASSED: Visible dotted obelos in protocol is NOT stripped and causes failure
+✅ PASSED: Visible dotted right-pointing angle in protocol is NOT stripped and causes failure
+✅ PASSED: Visible tilde with dot above in protocol is NOT stripped and causes failure
+✅ PASSED: Visible tilde with dot below in protocol is NOT stripped and causes failure
+✅ PASSED: Visible oblique slant in protocol is NOT stripped and causes failure
+✅ PASSED: Visible left transcription bracket in protocol is NOT stripped and causes failure
+✅ PASSED: Visible right transcription bracket in protocol is NOT stripped and causes failure
+✅ PASSED: Visible raised wedge in protocol is NOT stripped and causes failure
+✅ PASSED: Visible low wedge in protocol is NOT stripped and causes failure
+✅ PASSED: Visible dotted reversed comma in protocol is NOT stripped and causes failure
+✅ PASSED: Visible inverted interrogation mark in protocol is NOT stripped and causes failure
+✅ PASSED: Visible palm branch in protocol is NOT stripped and causes failure
+✅ PASSED: Null input in sanitizeUrl
+✅ PASSED: Undefined input in sanitizeUrl
+✅ PASSED: Object input in sanitizeUrl
+✨ All security tests passed!

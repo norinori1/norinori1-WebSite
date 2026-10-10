@@ -1,0 +1,72 @@
+{
+  "verifiedAt": "2026-10-10T08:59:51.894Z",
+  "basedOnCommit": "16f73cf5019466b2f07081207c0f06145264c7fd",
+  "scope": "Uncommitted working-tree implementation after category artwork review; sources bound by SHA-256",
+  "checks": {
+    "install": "PASS",
+    "lint": "PASS",
+    "typecheck": "PASS",
+    "dataTests": "PASS",
+    "normalBuild": "PASS",
+    "fixtureProductionBuild": "PASS",
+    "browser": "PASS",
+    "notionMigration": "VERIFIED",
+    "categoryArtwork": "PASS"
+  },
+  "sourceHashes": {
+    "app/works/page.tsx": "7df16c4efa37a247e9a60225d125647e1c141951a3fd81d23b7b4b61d8e6e9b2",
+    "components/WorksClient.tsx": "bdba5f41b51b99880666d1f9af23df7e31d23999f85ed911871f5b97d0d262f2",
+    "components/WorksClient.module.css": "63b12d6f48cc3bb054245570bdb16347232c18534e9f997ca6390bcd453e7e4f",
+    "components/SiteHeader.tsx": "314030e951828f8812b96416c4bfcaeae5b97aa96a7e7a432b14919e9784a56c",
+    "types/notion.ts": "c8b598adc818b8ead6376b631b0b813200b4ef802999c909056170175adf89fd",
+    "lib/works-gallery.ts": "76abae4f8514f2e99fc1428e63f1066d003e8e7fe9ac23e4400f77d34194b2f9",
+    "lib/works-gallery.test.ts": "199bdceae6e9ce441a27c8a850ed2a96a50852dc90cb1a50fd1b10ca8be71802",
+    "lib/notion/works.ts": "70b7acee6d87c356ec321c1354356c9c313d93d41290121189aaa2e3d1119f1c",
+    "lib/notion/works.test.ts": "d9a75cab7409547823f9751232f9af8698b883f9382f0ce452a3e900237ebb22",
+    "tsconfig.works-tests.json": "77e3bdcb6d74e761c9a1efb20e6e51a4b942a70d585a2089806b1c1bcc5a235b",
+    "package.json": "17a8954e6f61c9e10b28e9530dacef62f210e4d01c5910cd086eb50bfce8cba6",
+    "package-lock.json": "d3e16629d40d0488dc16eb01b016a71289f3ee7f7c2d740305c33fd05b705a31",
+    "docs/notion-setup.md": "b2684917fd3d40a43cb8735f04dfe4f70a7d2e46c6d4ee5c6963d3e51aedd419",
+    "scripts/works-browser-fixture.cjs": "bbf79f6b2007f1e920a01374b9a1c48674f37d2422838cd63816d8d0a33504ea",
+    "scripts/verify-works-browser.mjs": "d190d344f52d1ec9d3586e7389b17c5fdd0783a420f198a07612ce3ea48b5998",
+    "components/WorkCategoryArtwork.tsx": "989236a741e0c7a5fbe8223ce9ca1deca7316da11315e6974eae1eff77fda58d",
+    "components/PlatformIcon.tsx": "31d85b1b7ca0e8966dff72b16fd93b016cc00705ee178a0b0ec0a4eb95aae091"
+  },
+  "artifactHashes": {
+    "docs/verification/works-gallery/browser-results.json": "9d45b295e3d0be2702487d7a77b6f7ed4276fae80e6b1478c48aaf46bc8f730a",
+    "docs/verification/works-gallery/browser-run.log": "d0da4d15f82c9475abe6c956fc391822917283ede0998168ee4a121c245b97f1",
+    "docs/verification/works-gallery/build.log": "1d2c83fe11a0ac3323fa7ea8a32a998f1aea3c0748e18bf71d050d3e6a35bfb0",
+    "docs/verification/works-gallery/category-artwork.png": "f7fe6949d98791db5a9b336412a8d9a37efbdab997135c3d07cd48217c0beaad",
+    "docs/verification/works-gallery/category-artwork.svg": "b09e57c1d95171c460993dd07d06e6a2cf6d0ba9fc122b24148f4915cbf93894",
+    "docs/verification/works-gallery/fixture-build.log": "dc3adc8a803e2fcba56997791b871578dabc04c6652f2bd5b5028cb768a5129d",
+    "docs/verification/works-gallery/lint.log": "844046a5268272fdc4430bcd571682889af6008aa44e36a6945bdd3c04f0e8f9",
+    "docs/verification/works-gallery/notion-migration.json": "34d3ae9681d52dad7253c51003dd5c4e4c70187ffb91d01c63958fe8326cfec8",
+    "docs/verification/works-gallery/README.md": "8cb57a21d5a2f6cf961183e2fc48e63cf2d9bd22fe3560d89d0964db032aa0eb",
+    "docs/verification/works-gallery/test-works.log": "d4ed46934293a1714220c5a05f7c783ee0dbb3f580f6bed6a56f7744a5016371",
+    "docs/verification/works-gallery/typecheck.log": "876a78f501152b31e4169f125e7364e7fcee6804f5b694c1f03c0920feb6ae45",
+    "docs/verification/works-gallery/works-1280-dark.png": "cfcb933018ddfaf84503cda1f129443326a07bde94397fca76bc6c4763873830",
+    "docs/verification/works-gallery/works-1280-light.png": "f65928889b3278360f680a72635bc4ffb74cf808a5551d3f1c7f063455633793",
+    "docs/verification/works-gallery/works-320-dark.png": "91d621c4eeaec0147fb8e6e79aadb2bb6fb1449e85aec4a0faf1606178eb6b20",
+    "docs/verification/works-gallery/works-320-light.png": "f4959021bc3f921e55bc011bc9b1cbeb1c0c485a2c2f49c8c5f9cb20e7f35990",
+    "docs/verification/works-gallery/works-390-dark.png": "020dcdda64e80921810126eae277f0f015091d45ea8943c5f550561b6e48552f",
+    "docs/verification/works-gallery/works-390-light.png": "e1c1728a8defe3cb61bdca5cdc9299a40d7e632550354a682ebc8b4dacdc25d1",
+    "docs/verification/works-gallery/works-768-dark.png": "66f8199f32e98a98c8acffce357e07aeabcaa8b99225be8a5d59f5978f4d1613",
+    "docs/verification/works-gallery/works-768-light.png": "465a15eccaffe0a0fd971126d847f8d0e3c7de4be26aa5c52a134ca306ae18f2",
+    "docs/verification/works-gallery/works-active-filters-light.png": "a313357327e40bf54dc739d4db8516c39368ae57f5310f9673960c56d97ff242",
+    "docs/verification/works-gallery/works-empty-dark.png": "edf020ee12c01fa82bfd6c9467b970aade7ea352c2512cbd76170990993d5c54",
+    "docs/verification/works-gallery/works-filters-320-dark.png": "ecf632c3133c7db172a4505489067a86398dc421597058ef7aecafcc2f82de84",
+    "docs/verification/works-gallery/works-mobile-filters-light.png": "ae133fa3f55a68a3bb0326dd53a1e385728a86ff6bae6fa2e5b2b0d02f9339ce"
+  },
+  "artifactNotes": [
+    "Log trailing whitespace and excess final blank lines removed for Git formatting; command output and results preserved."
+  ],
+  "review": {
+    "request": "SVG artwork for every category",
+    "categories": 8,
+    "placements": [
+      "category headings",
+      "category jump navigation"
+    ],
+    "browser": "PASS"
+  }
+}

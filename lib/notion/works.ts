@@ -1,9 +1,11 @@
 import type {
   PageObjectResponse,
 } from "@notionhq/client/build/src/api-endpoints";
+import { isFullPage, iteratePaginatedAPI } from "@notionhq/client";
 import { getNotionClient, resolveDataSourceId } from "./client";
 import { getPageBlocks, type NotionBlock } from "./blocks";
 import type { Work } from "@/types/notion";
+import { normalizeCategory } from "../works-gallery";
 
 function getDatabaseId(): string {
   const id = process.env.NOTION_GAMES_DB;
@@ -82,6 +84,7 @@ function pageToWork(page: PageObjectResponse): Work {
     platforms: extractMultiSelect(p["Platforms"]),
     thumbnailUrl: extractFileUrl(p["Thumbnail"]),
     featured: extractCheckbox(p["Featured"]),
+    category: normalizeCategory(extractSelect(p["Category"])),
   };
 }
 
@@ -91,7 +94,7 @@ export async function listFeaturedWorks(): Promise<Work[]> {
   const dbId = getDatabaseId();
   const dataSourceId = await resolveDataSourceId(dbId);
 
-  const response = await notion.dataSources.query({
+  const pages = iteratePaginatedAPI(notion.dataSources.query, {
     data_source_id: dataSourceId,
     filter: {
       property: "Status",
@@ -100,9 +103,11 @@ export async function listFeaturedWorks(): Promise<Work[]> {
     sorts: [{ property: "Title", direction: "ascending" }],
   });
 
-  return (response.results as PageObjectResponse[])
-    .map(pageToWork)
-    .filter((w) => w.slug);
+  const works: Work[] = [];
+  for await (const page of pages) {
+    if (isFullPage(page)) works.push(pageToWork(page));
+  }
+  return works.filter((work) => work.slug);
 }
 
 /** Return all published works from the Games DB, ordered by Featured then title. */
@@ -111,7 +116,7 @@ export async function listWorks(): Promise<Work[]> {
   const dbId = getDatabaseId();
   const dataSourceId = await resolveDataSourceId(dbId);
 
-  const response = await notion.dataSources.query({
+  const pages = iteratePaginatedAPI(notion.dataSources.query, {
     data_source_id: dataSourceId,
     filter: {
       property: "Status",
@@ -123,9 +128,11 @@ export async function listWorks(): Promise<Work[]> {
     ],
   });
 
-  return (response.results as PageObjectResponse[])
-    .map(pageToWork)
-    .filter((w) => w.slug);
+  const works: Work[] = [];
+  for await (const page of pages) {
+    if (isFullPage(page)) works.push(pageToWork(page));
+  }
+  return works.filter((work) => work.slug);
 }
 
 /** Return a single work by slug, including its Notion page blocks. */

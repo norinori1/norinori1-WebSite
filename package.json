@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:works": "tsc -p tsconfig.works-tests.json && node .next/works-tests/lib/works-gallery.test.js && node .next/works-tests/lib/notion/works.test.js && node .next/works-tests/lib/security.test.js"
   },
   "dependencies": {
     "@notionhq/client": "^5.15.0",

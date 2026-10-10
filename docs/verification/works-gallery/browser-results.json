@@ -1,0 +1,798 @@
+{
+  "data": "Local Notion SDK fixtures: CMS snapshot plus six synthetic edge cases; not a live website-to-Notion connection",
+  "viewports": [
+    {
+      "width": 320,
+      "theme": "light",
+      "screenshot": "works-320-light.png",
+      "columns": 2,
+      "pageWidth": 320,
+      "viewport": 320,
+      "artworkRatio": 1.7777777777777777,
+      "titleLines": 1.999336870026525,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "screenshot": "works-320-dark.png",
+      "columns": 2,
+      "pageWidth": 320,
+      "viewport": 320,
+      "artworkRatio": 1.7777777777777777,
+      "titleLines": 1.999336870026525,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "screenshot": "works-390-light.png",
+      "columns": 2,
+      "pageWidth": 390,
+      "viewport": 390,
+      "artworkRatio": 1.7777777777777777,
+      "titleLines": 1.999336870026525,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "screenshot": "works-390-dark.png",
+      "columns": 2,
+      "pageWidth": 390,
+      "viewport": 390,
+      "artworkRatio": 1.7777777777777777,
+      "titleLines": 1.999336870026525,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "screenshot": "works-768-light.png",
+      "columns": 3,
+      "pageWidth": 768,
+      "viewport": 768,
+      "artworkRatio": 1.777910447761194,
+      "titleLines": 2,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 768,
+      "theme": "dark",
+      "screenshot": "works-768-dark.png",
+      "columns": 3,
+      "pageWidth": 768,
+      "viewport": 768,
+      "artworkRatio": 1.777910447761194,
+      "titleLines": 2,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 1280,
+      "theme": "light",
+      "screenshot": "works-1280-light.png",
+      "columns": 4,
+      "pageWidth": 1280,
+      "viewport": 1280,
+      "artworkRatio": 1.7777777777777777,
+      "titleLines": 2,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    },
+    {
+      "width": 1280,
+      "theme": "dark",
+      "screenshot": "works-1280-dark.png",
+      "columns": 4,
+      "pageWidth": 1280,
+      "viewport": 1280,
+      "artworkRatio": 1.7777777777777777,
+      "titleLines": 2,
+      "navScrollable": true,
+      "panelHidden": true,
+      "h1": 1,
+      "headingLevel": "H2",
+      "placeholders": 3,
+      "tagCounts": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
+    }
+  ],
+  "interactions": [
+    "320px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "390px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "768px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "1280px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "Theme toggle works in both directions; all saved-theme reloads have no hydration errors",
+    "Closed panel is hidden and inert; keyboard skips its buttons; controls have visible focus styles",
+    "Title and description search trims whitespace; searching does not expand filters; empty categories disappear",
+    "Tag AND, platform OR and combined AND; chips remove individual selections while closed; clear filters preserves search",
+    "Escape closes panel and returns focus to toggle",
+    "All four sort orders override Featured promotion as specified; checkbox-only and Status-only Featured are highlighted",
+    "Zero results hide sections and nav; reset restores all works and focuses search",
+    "Category jump clears fixed header; entire card navigates to existing detail route",
+    "390px touch: open, select, close, remove chip, horizontally scroll nav, jump and open card"
+  ],
+  "pageErrors": [],
+  "status": "PASS"
+}

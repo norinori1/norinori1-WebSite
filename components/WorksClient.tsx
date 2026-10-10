@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import Link from "next/link";
 import type { Work } from "@/types/notion";
-import { sanitizeUrl } from "@/lib/security";
+import { filterWorks, sortWorks, groupWorks, isFeaturedWork, type SortOption } from "@/lib/works-gallery";
+import styles from "./WorksClient.module.css";
 import Thumbnail from "@/components/Thumbnail";
+import WorkCategoryArtwork from "@/components/WorkCategoryArtwork";
 import PlatformIcon, { UIIcon, type IconName } from "@/components/PlatformIcon";
 
 // Tags that map to SVG icons from PlatformIcon (tech/platform tags)
@@ -102,184 +104,85 @@ const PLATFORM_SVG_ICONS: Record<string, IconName> = {
   Web: "web",
 };
 
-type SortOption = "default" | "title-asc" | "title-desc" | "status";
-
-interface WorksClientProps {
-  works: Work[];
-}
-
-export default function WorksClient({ works }: WorksClientProps) {
+export default function WorksClient({ works }: { works: Work[] }) {
   const [search, setSearch] = useState("");
   const [activeTags, setActiveTags] = useState<Set<string>>(new Set());
   const [activePlatforms, setActivePlatforms] = useState<Set<string>>(new Set());
   const [sort, setSort] = useState<SortOption>("default");
-  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  // Tracks whether the toolbar has scrolled past the top of the page (and
-  // therefore stuck to the header) — same zero-height-sentinel technique as
-  // SiteHeader's is-scrolled state, so it works identically once the toolbar
-  // itself goes static on narrow viewports.
-  const [isStuck, setIsStuck] = useState(false);
-  const sentinelRef = useRef<HTMLDivElement>(null);
+  const filterToggleRef = useRef<HTMLButtonElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const sentinel = sentinelRef.current;
-    if (!sentinel) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsStuck(!entry.isIntersecting),
-      { threshold: 0 },
-    );
-    observer.observe(sentinel);
-    return () => observer.disconnect();
-  }, []);
-
-  // Collect all unique tags from all works
-  const allTags = useMemo(() => {
-    const tagSet = new Set<string>();
-    works.forEach((w) => w.tags.forEach((t) => tagSet.add(t)));
-    return Array.from(tagSet).sort((a, b) => a.localeCompare(b, "ja"));
-  }, [works]);
-
-  // Collect all unique platforms from all works
-  const allPlatforms = useMemo(() => {
-    const platformSet = new Set<string>();
-    works.forEach((w) => w.platforms.forEach((p) => platformSet.add(p)));
-    return Array.from(platformSet).sort((a, b) => a.localeCompare(b, "ja"));
-  }, [works]);
-
-  const hasActiveFilters = activeTags.size > 0 || activePlatforms.size > 0;
+  const allTags = useMemo(() =>
+    Array.from(new Set(works.flatMap((work) => work.tags))).sort((a, b) => a.localeCompare(b, "ja")), [works]);
+  const allPlatforms = useMemo(() =>
+    Array.from(new Set(works.flatMap((work) => work.platforms))).sort((a, b) => a.localeCompare(b, "ja")), [works]);
+  const filteredWorks = useMemo(() =>
+    sortWorks(filterWorks(works, search, activeTags, activePlatforms), sort),
+    [works, search, activeTags, activePlatforms, sort]);
+  const groups = useMemo(() => groupWorks(filteredWorks), [filteredWorks]);
   const activeFilterCount = activeTags.size + activePlatforms.size;
-  // Filters stay tucked away once the toolbar has stuck to the header, unless
-  // something depends on them being visible: a filter is applied (hiding it
-  // would make it un-clearable), the user is mid-search, or they asked for
-  // it via the toggle.
-  const showFilters =
-    !isStuck || isSearchFocused || search.trim() !== "" || hasActiveFilters || isExpanded;
 
-  const toggleTag = (tag: string) => {
-    setActiveTags((prev) => {
-      const next = new Set(prev);
-      if (next.has(tag)) {
-        next.delete(tag);
-      } else {
-        next.add(tag);
-      }
+  function toggleSelection(value: string, setter: typeof setActiveTags) {
+    setter((previous) => {
+      const next = new Set(previous);
+      if (next.has(value)) next.delete(value);
+      else next.add(value);
       return next;
     });
-  };
+  }
 
-  const togglePlatform = (platform: string) => {
-    setActivePlatforms((prev) => {
-      const next = new Set(prev);
-      if (next.has(platform)) {
-        next.delete(platform);
-      } else {
-        next.add(platform);
-      }
-      return next;
-    });
-  };
+  function clearFilters() {
+    setActiveTags(new Set());
+    setActivePlatforms(new Set());
+  }
 
-  const filteredWorks = useMemo(() => {
-    let result = works;
-
-    // Search filter (title + description)
-    if (search.trim()) {
-      const q = search.toLowerCase();
-      result = result.filter(
-        (w) =>
-          w.title.toLowerCase().includes(q) ||
-          w.description.toLowerCase().includes(q),
-      );
-    }
-
-    // Tag filter (AND logic: all active tags must be present)
-    if (activeTags.size > 0) {
-      result = result.filter((w) =>
-        Array.from(activeTags).every((t) => w.tags.includes(t)),
-      );
-    }
-
-    // Platform filter (OR logic: at least one selected platform must be present)
-    if (activePlatforms.size > 0) {
-      result = result.filter((w) =>
-        Array.from(activePlatforms).some((p) => w.platforms.includes(p)),
-      );
-    }
-
-    // Sort
-    if (sort !== "default") {
-      result = [...result];
-      if (sort === "title-asc") {
-        result.sort((a, b) => a.title.localeCompare(b.title, "ja"));
-      } else if (sort === "title-desc") {
-        result.sort((a, b) => b.title.localeCompare(a.title, "ja"));
-      } else if (sort === "status") {
-        const statusOrder: Record<string, number> = {
-          Featured: 0,
-          Latest: 1,
-          Released: 2,
-        };
-        result.sort((a, b) => {
-          const aOrder = statusOrder[a.status] ?? 99;
-          const bOrder = statusOrder[b.status] ?? 99;
-          return aOrder - bOrder;
-        });
-      }
-    }
-    // "default": keep server order (Featured first, then title)
-
-    return result;
-  }, [works, search, activeTags, activePlatforms, sort]);
+  function resetSearch() {
+    setSearch("");
+    clearFilters();
+    searchRef.current?.focus();
+  }
 
   return (
-    <div>
-      {/* Marks "still at the top of the page" for showFilters — see the
-          sentinel effect above. */}
-      <div ref={sentinelRef} aria-hidden="true" />
-
-      <div className="works-toolbar">
-        {/* Search and Sort */}
-        <div className="works-controls">
-          <div className="works-search-wrap">
-            <span className="works-search-icon">
+    <div className={styles.gallery}>
+      <div className={styles.toolbar}>
+        <div className={styles.controls}>
+          <div className={styles.searchWrap}>
+            <span className="works-search-icon" aria-hidden="true">
               <UIIcon name="search" size={16} />
             </span>
             <input
+              ref={searchRef}
               type="search"
-              className="works-search"
+              className={`works-search ${styles.search}`}
               placeholder="作品名・説明で検索..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onFocus={() => setIsSearchFocused(true)}
-              onBlur={() => setIsSearchFocused(false)}
+              onChange={(event) => setSearch(event.target.value)}
               aria-label="作品を検索"
             />
           </div>
           <select
-            className="works-sort"
+            className={`works-sort ${styles.sort}`}
             value={sort}
-            onChange={(e) => setSort(e.target.value as SortOption)}
+            onChange={(event) => setSort(event.target.value as SortOption)}
             aria-label="並び順"
           >
-            <option value="default">並び順: デフォルト</option>
+            <option value="default">Featured 優先</option>
             <option value="title-asc">タイトル A → Z</option>
             <option value="title-desc">タイトル Z → A</option>
             <option value="status">ステータス順</option>
           </select>
           {(allPlatforms.length > 0 || allTags.length > 0) && (
             <button
+              ref={filterToggleRef}
               type="button"
-              className="works-filter-toggle"
-              onClick={() => setIsExpanded((prev) => !prev)}
-              aria-expanded={showFilters}
+              className={`works-filter-toggle ${styles.filterToggle}`}
+              onClick={() => setIsExpanded((previous) => !previous)}
+              aria-expanded={isExpanded}
               aria-controls="works-filters-panel"
             >
               フィルター
-              {hasActiveFilters && (
-                <span className="filter-count-badge">{activeFilterCount}</span>
-              )}
+              {activeFilterCount > 0 && <span className="filter-count-badge">{activeFilterCount}</span>}
               <UIIcon name="chevronDown" size={14} />
             </button>
           )}
@@ -287,175 +190,154 @@ export default function WorksClient({ works }: WorksClientProps) {
 
         <div
           id="works-filters-panel"
-          className={`works-filters-panel${showFilters ? " is-open" : ""}`}
-          inert={!showFilters ? true : undefined}
+          className={styles.filterPanel}
+          hidden={!isExpanded}
+          inert={!isExpanded}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              setIsExpanded(false);
+              filterToggleRef.current?.focus();
+            }
+          }}
         >
-          <div>
-            {/* Platform Filter Buttons */}
-            {allPlatforms.length > 0 && (
-              <div className="works-tag-filters" role="group" aria-label="プラットフォームで絞り込む">
-                {allPlatforms.map((platform) => {
-                  const iconName = PLATFORM_SVG_ICONS[platform] ?? "web";
-                  return (
-                    <button
-                      key={platform}
-                      type="button"
-                      className={`works-tag-btn${activePlatforms.has(platform) ? " active" : ""}`}
-                      onClick={() => togglePlatform(platform)}
-                      aria-pressed={activePlatforms.has(platform)}
-                    >
-                      <span className="works-tag-icon" aria-hidden="true">
-                        <PlatformIcon name={iconName} size={13} />
-                      </span>
-                      {platform}
-                    </button>
-                  );
-                })}
-                {activePlatforms.size > 0 && (
+          {allPlatforms.length > 0 && (
+            <fieldset className={styles.filterGroup}>
+              <legend>プラットフォーム <span>いずれかに一致</span></legend>
+              <div className="works-tag-filters">
+                {allPlatforms.map((platform) => (
                   <button
+                    key={platform}
                     type="button"
-                    className="works-tag-clear"
-                    onClick={() => setActivePlatforms(new Set())}
-                    aria-label="プラットフォームフィルターをクリア"
+                    className={`works-tag-btn ${styles.filterButton}${activePlatforms.has(platform) ? " active" : ""}`}
+                    onClick={() => toggleSelection(platform, setActivePlatforms)}
+                    aria-pressed={activePlatforms.has(platform)}
                   >
-                    <UIIcon name="close" size={13} />
-                    クリア
+                    <span className="works-tag-icon" aria-hidden="true">
+                      <PlatformIcon name={PLATFORM_SVG_ICONS[platform] ?? "web"} size={13} />
+                    </span>
+                    {platform}
                   </button>
-                )}
+                ))}
               </div>
-            )}
-
-            {/* Tag Filter Buttons */}
-            {allTags.length > 0 && (
-              <div className="works-tag-filters" role="group" aria-label="タグで絞り込む">
+            </fieldset>
+          )}
+          {allTags.length > 0 && (
+            <fieldset className={styles.filterGroup}>
+              <legend>タグ <span>すべてに一致</span></legend>
+              <div className="works-tag-filters">
                 {allTags.map((tag) => (
                   <button
                     key={tag}
                     type="button"
-                    className={`works-tag-btn${activeTags.has(tag) ? " active" : ""}`}
-                    onClick={() => toggleTag(tag)}
+                    className={`works-tag-btn ${styles.filterButton}${activeTags.has(tag) ? " active" : ""}`}
+                    onClick={() => toggleSelection(tag, setActiveTags)}
                     aria-pressed={activeTags.has(tag)}
                   >
-                    <span className="works-tag-icon" aria-hidden="true">
-                      <TagIcon tag={tag} size={13} />
-                    </span>
+                    <span className="works-tag-icon" aria-hidden="true"><TagIcon tag={tag} size={13} /></span>
                     {tag}
                   </button>
                 ))}
-                {activeTags.size > 0 && (
-                  <button
-                    type="button"
-                    className="works-tag-clear"
-                    onClick={() => setActiveTags(new Set())}
-                    aria-label="タグフィルターをクリア"
-                  >
-                    <UIIcon name="close" size={13} />
-                    クリア
-                  </button>
-                )}
               </div>
-            )}
-
-            {/* Results count when filtered */}
-            {(search.trim() || hasActiveFilters) && (
-              <p className="works-result-count">
-                {filteredWorks.length} 件の作品が見つかりました
-              </p>
-            )}
-          </div>
+            </fieldset>
+          )}
         </div>
       </div>
 
-      {/* Works Grid */}
-      {filteredWorks.length === 0 ? (
-        <div className="state-panel">
-          <h3>該当する作品がありません</h3>
-          <p>検索語やフィルターの条件を変えてみてください。</p>
-        </div>
-      ) : (
-        <div className="works-grid">
-          {filteredWorks.map((work) => (
-            <article key={work.id} className="work-card">
-              {work.thumbnailUrl && (
-                <Thumbnail
-                  src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
-                  alt={`${work.title} のサムネイル`}
-                />
-              )}
-              <div className="work-body">
-                <div className="work-head">
-                  <h2 className="card-title">
-                    <Link href={`/works/${work.slug}`} className="stretch-link">
-                      {work.title}
-                    </Link>
-                  </h2>
-                  <span className={`badge badge-${work.status.toLowerCase()}`}>
-                    {work.status}
-                  </span>
-                </div>
-
-                {work.description && <p className="work-desc">{work.description}</p>}
-
-                <div className="work-meta">
-                  {work.tags.length > 0 && (
-                    <div className="chips">
-                      {work.tags.map((tag) => (
-                        <button
-                          key={tag}
-                          type="button"
-                          className={`chip chip-tag${activeTags.has(tag) ? " chip-tag-active" : ""}`}
-                          onClick={() => toggleTag(tag)}
-                          title={`"${tag}" で絞り込む`}
-                          aria-pressed={activeTags.has(tag)}
-                        >
-                          <TagIcon tag={tag} size={12} />
-                          {tag}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                  {work.platforms.length > 0 && (
-                    <div className="chips">
-                      {work.platforms.map((platform) => (
-                        <button
-                          key={platform}
-                          type="button"
-                          className={`chip chip-tag platform-chip${activePlatforms.has(platform) ? " chip-tag-active" : ""}`}
-                          onClick={() => togglePlatform(platform)}
-                          title={`"${platform}" で絞り込む`}
-                          aria-pressed={activePlatforms.has(platform)}
-                        >
-                          {platform}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="work-actions">
-                  {/* Decorative: the card title above is already a stretched
-                      link to this same destination. */}
-                  <span className="hex-action" aria-hidden="true" title="詳細を見る">
-                    <UIIcon name="hexArrowRight" size={26} strokeWidth={1.4} />
-                  </span>
-                  {work.link && (
-                    <a
-                      href={sanitizeUrl(work.link)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hex-action"
-                      aria-label="プレイする"
-                      title="プレイする"
-                    >
-                      <UIIcon name="hexArrowUpRight" size={26} strokeWidth={1.4} />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
+      {activeFilterCount > 0 && (
+        <div className={styles.activeFilters} role="group" aria-label="選択中のフィルター">
+          {Array.from(activePlatforms).map((platform) => (
+            <button key={`platform-${platform}`} type="button" className={styles.removeChip}
+              onClick={() => toggleSelection(platform, setActivePlatforms)}
+              aria-label={`プラットフォーム ${platform} を解除`}>
+              <span>環境: {platform}</span><UIIcon name="close" size={13} />
+            </button>
           ))}
+          {Array.from(activeTags).map((tag) => (
+            <button key={`tag-${tag}`} type="button" className={styles.removeChip}
+              onClick={() => toggleSelection(tag, setActiveTags)}
+              aria-label={`タグ ${tag} を解除`}>
+              <span>タグ: {tag}</span><UIIcon name="close" size={13} />
+            </button>
+          ))}
+          <button type="button" className={styles.resetButton} onClick={clearFilters}>
+            フィルター全解除
+          </button>
         </div>
       )}
+
+      <p className={styles.resultCount} role="status" aria-live="polite" aria-atomic="true">
+        {filteredWorks.length} 件の作品
+        {search.trim() || activeFilterCount > 0 ? ` / 全 ${works.length} 件` : ""}
+      </p>
+
+      {groups.length > 0 && (
+        <nav className={styles.categoryNav} aria-label="作品カテゴリへ移動">
+          {groups.map((group) => (
+            <a key={group.category} href={`#${group.id}`}>
+              <WorkCategoryArtwork category={group.category} className={styles.categoryNavArtwork} />
+              {group.label}<span aria-label={`${group.works.length} 件`}>{group.works.length}</span>
+            </a>
+          ))}
+        </nav>
+      )}
+
+      {filteredWorks.length === 0 ? (
+        <div className="state-panel">
+          <h2>該当する作品がありません</h2>
+          <p>検索語やフィルターの条件を変えてみてください。</p>
+          <button type="button" className={styles.resetButton} onClick={resetSearch}>
+            検索・絞り込みをリセット
+          </button>
+        </div>
+      ) : groups.map((group) => (
+        <section key={group.category} className={styles.categorySection} aria-labelledby={group.id}>
+          <div className={styles.categoryHead}>
+            <span className={styles.categoryNumber} aria-hidden="true">{group.number}</span>
+            <WorkCategoryArtwork category={group.category} className={styles.categoryArtwork} />
+            <h2 id={group.id} tabIndex={-1}>{group.label}</h2>
+            <span className={styles.categoryCount}>{group.works.length} 件</span>
+          </div>
+          <div className={styles.grid}>
+            {group.works.map((work) => (
+              <article key={work.id} className={styles.card}>
+                <Link href={`/works/${work.slug}`}
+                  className={`${styles.cardLink}${isFeaturedWork(work) ? ` ${styles.featured}` : ""}`}>
+                  <div className={styles.artwork}>
+                    {work.thumbnailUrl ? (
+                      <Thumbnail
+                        src={`/api/notion-image?pageId=${work.id}&prop=Thumbnail`}
+                        alt={`${work.title} のサムネイル`}
+                        sizes="(min-width: 1024px) 280px, (min-width: 640px) 30vw, 45vw"
+                      />
+                    ) : (
+                      <div className={styles.placeholder} aria-hidden="true">
+                        <UIIcon name="hexArrowRight" size={36} strokeWidth={1} />
+                        <span>WORKS</span>
+                      </div>
+                    )}
+                    {isFeaturedWork(work) && (
+                      <span className={styles.featuredBadge}>★ Featured</span>
+                    )}
+                  </div>
+                  <div className={styles.cardBody}>
+                    <h3 className={styles.cardTitle} title={work.title}>{work.title}</h3>
+                    <span className={`badge badge-${work.status.toLowerCase()} ${styles.status}`}>
+                      {work.status}
+                    </span>
+                    {work.tags.length > 0 && (
+                      <div className={styles.tags}>
+                        {work.tags.slice(0, 2).map((tag) => (
+                          <span key={tag} className={styles.tag} title={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
