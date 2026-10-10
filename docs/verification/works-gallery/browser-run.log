@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "screenshots": 8,
+  "interactions": [
+    "320px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "390px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "768px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "1280px: search, collapsed panel, explicit toggle, platform OR, clearing and panel overflow passed",
+    "Theme toggle works in both directions; all saved-theme reloads have no hydration errors",
+    "Closed panel is hidden and inert; keyboard skips its buttons; controls have visible focus styles",
+    "Title and description search trims whitespace; searching does not expand filters; empty categories disappear",
+    "Tag AND, platform OR and combined AND; chips remove individual selections while closed; clear filters preserves search",
+    "Escape closes panel and returns focus to toggle",
+    "All four sort orders override Featured promotion as specified; checkbox-only and Status-only Featured are highlighted",
+    "Zero results hide sections and nav; reset restores all works and focuses search",
+    "Category jump clears fixed header; entire card navigates to existing detail route",
+    "390px touch: open, select, close, remove chip, horizontally scroll nav, jump and open card"
+  ]
+}

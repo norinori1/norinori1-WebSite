@@ -6,6 +6,7 @@ import type { Work } from "@/types/notion";
 import { filterWorks, sortWorks, groupWorks, isFeaturedWork, type SortOption } from "@/lib/works-gallery";
 import styles from "./WorksClient.module.css";
 import Thumbnail from "@/components/Thumbnail";
+import WorkCategoryArtwork from "@/components/WorkCategoryArtwork";
 import PlatformIcon, { UIIcon, type IconName } from "@/components/PlatformIcon";
 
 // Tags that map to SVG icons from PlatformIcon (tech/platform tags)
@@ -273,6 +274,7 @@ export default function WorksClient({ works }: { works: Work[] }) {
         <nav className={styles.categoryNav} aria-label="作品カテゴリへ移動">
           {groups.map((group) => (
             <a key={group.category} href={`#${group.id}`}>
+              <WorkCategoryArtwork category={group.category} className={styles.categoryNavArtwork} />
               {group.label}<span aria-label={`${group.works.length} 件`}>{group.works.length}</span>
             </a>
           ))}
@@ -291,6 +293,7 @@ export default function WorksClient({ works }: { works: Work[] }) {
         <section key={group.category} className={styles.categorySection} aria-labelledby={group.id}>
           <div className={styles.categoryHead}>
             <span className={styles.categoryNumber} aria-hidden="true">{group.number}</span>
+            <WorkCategoryArtwork category={group.category} className={styles.categoryArtwork} />
             <h2 id={group.id} tabIndex={-1}>{group.label}</h2>
             <span className={styles.categoryCount}>{group.works.length} 件</span>
           </div>

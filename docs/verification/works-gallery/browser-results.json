@@ -37,7 +37,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 320,
@@ -75,7 +134,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 390,
@@ -113,7 +231,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 390,
@@ -151,7 +328,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 40,
+          "height": 40,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 768,
@@ -189,7 +425,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 768,
@@ -227,7 +522,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 1280,
@@ -238,7 +592,7 @@
       "viewport": 1280,
       "artworkRatio": 1.7777777777777777,
       "titleLines": 2,
-      "navScrollable": false,
+      "navScrollable": true,
       "panelHidden": true,
       "h1": 1,
       "headingLevel": "H2",
@@ -265,7 +619,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     },
     {
       "width": 1280,
@@ -276,7 +689,7 @@
       "viewport": 1280,
       "artworkRatio": 1.7777777777777777,
       "titleLines": 2,
-      "navScrollable": false,
+      "navScrollable": true,
       "panelHidden": true,
       "h1": 1,
       "headingLevel": "H2",
@@ -303,7 +716,66 @@
         2,
         2,
         2
-      ]
+      ],
+      "headingArtworks": [
+        {
+          "category": "Unity Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Roblox Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Scratch Games",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Worlds",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "VRChat Gimmicks",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Avatar Assets",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Developer Tools",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        },
+        {
+          "category": "Other",
+          "width": 56,
+          "height": 56,
+          "hidden": "true",
+          "focusable": "false"
+        }
+      ],
+      "navArtworks": 8
     }
   ],
   "interactions": [

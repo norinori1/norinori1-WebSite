@@ -1,0 +1,35 @@
+▲ Next.js 16.2.6 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 5.4s
+  Running TypeScript ...
+  Finished TypeScript in 2.2s ...
+  Collecting page data using 13 workers ...
+  Generating static pages using 13 workers (0/31) ...
+  Generating static pages using 13 workers (7/31)
+  Generating static pages using 13 workers (15/31)
+  Generating static pages using 13 workers (23/31)
+✓ Generating static pages using 13 workers (31/31) in 469ms
+  Finalizing page optimization ...
+
+Route (app)                                   Revalidate  Expire
+┌ ○ /                                                 1h      1y
+├ ○ /_not-found
+├ ○ /about
+├ ƒ /api/notion-image
+├ ○ /news                                             1h      1y
+├ ● /news/[slug]
+├ ○ /robots.txt
+├ ○ /sitemap.xml
+├ ○ /works                                            1h      1y
+└ ● /works/[slug]                                     1h      1y
+  ├ /works/scratch-data-structures-generator          1h      1y
+  ├ /works/scratch-text-asset-creator                 1h      1y
+  ├ /works/puzzle-ball-3                              1h      1y
+  └ [+18 more paths]
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

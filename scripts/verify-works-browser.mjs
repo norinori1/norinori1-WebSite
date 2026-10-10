@@ -76,7 +76,9 @@ try {
           navScrollable: nav.scrollWidth > nav.clientWidth, panelHidden: document.getElementById("works-filters-panel").hidden,
           h1: document.querySelectorAll("h1").length, headingLevel: heading.tagName,
           placeholders: [...document.querySelectorAll("article > a")].filter((card) => !card.querySelector("img")).length,
-          tagCounts: [...document.querySelectorAll("article > a")].map((card) => card.querySelectorAll('[class*="__tags"] > span').length) };
+          tagCounts: [...document.querySelectorAll("article > a")].map((card) => card.querySelectorAll('[class*="__tags"] > span').length),
+          headingArtworks: [...document.querySelectorAll('section[aria-labelledby^="works-"] > div:first-child > svg[data-work-category]')].map((svg) => ({ category: svg.dataset.workCategory, width: svg.getBoundingClientRect().width, height: svg.getBoundingClientRect().height, hidden: svg.getAttribute("aria-hidden"), focusable: svg.getAttribute("focusable") })),
+          navArtworks: nav.querySelectorAll("svg[data-work-category]").length };
       });
       assert.equal(layout.columns, width >= 1024 ? 4 : width >= 640 ? 3 : 2);
       assert.ok(layout.pageWidth <= width, `Page overflows at ${width}`);
@@ -87,11 +89,26 @@ try {
       assert.equal(layout.headingLevel, "H2");
       assert.ok(layout.placeholders >= 3);
       assert.ok(layout.tagCounts.every((count) => count <= 2));
+      assert.deepEqual(layout.headingArtworks.map((artwork) => artwork.category), [...categories.slice(0, 7), "Other"]);
+      assert.ok(layout.headingArtworks.every((artwork) => artwork.width === (width < 640 ? 40 : 56) && artwork.width === artwork.height && artwork.hidden === "true" && artwork.focusable === "false"));
+      assert.equal(layout.navArtworks, 8);
       if (width < 640) assert.ok(layout.navScrollable);
       assert.equal(await cards(page).count(), 21);
       assert.ok(await cards(page).getByText("★ Featured", { exact: true }).count() >= 4);
       const name = `works-${width}-${theme}.png`;
       await capture(page, name);
+      if (width === 1280 && theme === "dark") {
+        const drawings = await sections(page).locator('svg[data-work-category]').evaluateAll((svgs) => svgs.map((svg) => {
+          const copy = svg.cloneNode(true);
+          copy.removeAttribute("class");
+          copy.setAttribute("width", "80");
+          copy.setAttribute("height", "80");
+          copy.setAttribute("color", getComputedStyle(svg).color);
+          return copy.outerHTML;
+        }));
+        const sheet = `<svg xmlns="http://www.w3.org/2000/svg" width="960" height="280" viewBox="0 0 960 280" role="img" aria-label="Works カテゴリ別の SVG イラスト"><title>Works カテゴリ別の SVG イラスト</title><rect width="960" height="280" fill="#080e19"/>${drawings.map((svg, index) => `<g transform="translate(${index % 4 * 240 + 80} ${Math.floor(index / 4) * 140 + 16})">${svg}<text x="40" y="107" text-anchor="middle" fill="#d8e4f5" font-family="sans-serif" font-size="14">${categories[index]}</text></g>`).join("")}</svg>`;
+        await writeFile(resolve(output, "category-artwork.svg"), sheet + "\n");
+      }
       results.viewports.push({ width, theme, screenshot: name, ...layout });
     }
     // Exercise the same controls at every target viewport, including 320px.

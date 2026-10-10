@@ -1,7 +1,7 @@
 {
-  "verifiedAt": "2026-10-10T07:30:54.523Z",
-  "basedOnCommit": "b1a7ea22b5870ced758a0a618fd0e7707957ce47",
-  "scope": "Uncommitted working-tree implementation; sources bound by SHA-256",
+  "verifiedAt": "2026-10-10T08:59:51.894Z",
+  "basedOnCommit": "16f73cf5019466b2f07081207c0f06145264c7fd",
+  "scope": "Uncommitted working-tree implementation after category artwork review; sources bound by SHA-256",
   "checks": {
     "install": "PASS",
     "lint": "PASS",
@@ -10,12 +10,13 @@
     "normalBuild": "PASS",
     "fixtureProductionBuild": "PASS",
     "browser": "PASS",
-    "notionMigration": "VERIFIED"
+    "notionMigration": "VERIFIED",
+    "categoryArtwork": "PASS"
   },
   "sourceHashes": {
     "app/works/page.tsx": "7df16c4efa37a247e9a60225d125647e1c141951a3fd81d23b7b4b61d8e6e9b2",
-    "components/WorksClient.tsx": "6b19baa815e978a7c61a6e99d7ac8b9a1ab6fed823cd10a30466b8b28f22a96e",
-    "components/WorksClient.module.css": "f991c4f47bcff4ae19cc9a0d43149120656279f0fee8eb65a1db10590921ac9b",
+    "components/WorksClient.tsx": "bdba5f41b51b99880666d1f9af23df7e31d23999f85ed911871f5b97d0d262f2",
+    "components/WorksClient.module.css": "63b12d6f48cc3bb054245570bdb16347232c18534e9f997ca6390bcd453e7e4f",
     "components/SiteHeader.tsx": "314030e951828f8812b96416c4bfcaeae5b97aa96a7e7a432b14919e9784a56c",
     "types/notion.ts": "c8b598adc818b8ead6376b631b0b813200b4ef802999c909056170175adf89fd",
     "lib/works-gallery.ts": "76abae4f8514f2e99fc1428e63f1066d003e8e7fe9ac23e4400f77d34194b2f9",
@@ -27,30 +28,45 @@
     "package-lock.json": "d3e16629d40d0488dc16eb01b016a71289f3ee7f7c2d740305c33fd05b705a31",
     "docs/notion-setup.md": "b2684917fd3d40a43cb8735f04dfe4f70a7d2e46c6d4ee5c6963d3e51aedd419",
     "scripts/works-browser-fixture.cjs": "bbf79f6b2007f1e920a01374b9a1c48674f37d2422838cd63816d8d0a33504ea",
-    "scripts/verify-works-browser.mjs": "77b66d74364151295bd674ec64c6e9738c6d818bfaca190da8b218321ac63c1c"
+    "scripts/verify-works-browser.mjs": "d190d344f52d1ec9d3586e7389b17c5fdd0783a420f198a07612ce3ea48b5998",
+    "components/WorkCategoryArtwork.tsx": "989236a741e0c7a5fbe8223ce9ca1deca7316da11315e6974eae1eff77fda58d",
+    "components/PlatformIcon.tsx": "31d85b1b7ca0e8966dff72b16fd93b016cc00705ee178a0b0ec0a4eb95aae091"
   },
   "artifactHashes": {
-    "docs/verification/works-gallery/browser-results.json": "8d5c9eccc922d76221f8a7824d16f0e6ef493af5e4d38bbe5b6c99c68e66ad24",
-    "docs/verification/works-gallery/build.log": "498b356dd36ad74bbec2b9df4ce4d43343d8d789916975e1fb3ab86000eed929",
+    "docs/verification/works-gallery/browser-results.json": "9d45b295e3d0be2702487d7a77b6f7ed4276fae80e6b1478c48aaf46bc8f730a",
+    "docs/verification/works-gallery/browser-run.log": "d0da4d15f82c9475abe6c956fc391822917283ede0998168ee4a121c245b97f1",
+    "docs/verification/works-gallery/build.log": "1d2c83fe11a0ac3323fa7ea8a32a998f1aea3c0748e18bf71d050d3e6a35bfb0",
+    "docs/verification/works-gallery/category-artwork.png": "f7fe6949d98791db5a9b336412a8d9a37efbdab997135c3d07cd48217c0beaad",
+    "docs/verification/works-gallery/category-artwork.svg": "b09e57c1d95171c460993dd07d06e6a2cf6d0ba9fc122b24148f4915cbf93894",
+    "docs/verification/works-gallery/fixture-build.log": "079e584ba75e1d5ff66d35fe2dca5012f6e494ca63e8432994098fd703d45100",
     "docs/verification/works-gallery/lint.log": "844046a5268272fdc4430bcd571682889af6008aa44e36a6945bdd3c04f0e8f9",
     "docs/verification/works-gallery/notion-migration.json": "34d3ae9681d52dad7253c51003dd5c4e4c70187ffb91d01c63958fe8326cfec8",
-    "docs/verification/works-gallery/README.md": "55f25fbe8041f14b701412aa011cbac9498f0372478d2cf161ca76de18521f71",
+    "docs/verification/works-gallery/README.md": "8cb57a21d5a2f6cf961183e2fc48e63cf2d9bd22fe3560d89d0964db032aa0eb",
     "docs/verification/works-gallery/test-works.log": "d4ed46934293a1714220c5a05f7c783ee0dbb3f580f6bed6a56f7744a5016371",
     "docs/verification/works-gallery/typecheck.log": "876a78f501152b31e4169f125e7364e7fcee6804f5b694c1f03c0920feb6ae45",
-    "docs/verification/works-gallery/works-1280-dark.png": "7009999569a48e38634df9179ca09aacc05a523685defdba5f3aee0c856e61c4",
-    "docs/verification/works-gallery/works-1280-light.png": "6fd081c6a038edd4f0afe87f79425e352f505233b135a61f9d873efd65d9156c",
-    "docs/verification/works-gallery/works-320-dark.png": "0e24def58d4c67f5bae0d001967a1fe193e42cadd73c6504f03934f08d0028d5",
-    "docs/verification/works-gallery/works-320-light.png": "6550255f7fd1b2a76fbbd6164e9342f4801c81c2dcc6e746c7f7ed79bf1640c1",
-    "docs/verification/works-gallery/works-390-dark.png": "e3622f88b1ce972fb69dfaeecdb537a4a452b53242d8ccc2b97619f419eb7f9b",
-    "docs/verification/works-gallery/works-390-light.png": "5a4d314ed8403c7edeff5947a74397db605ba7ef40e9134cc9426af2c887e237",
-    "docs/verification/works-gallery/works-768-dark.png": "775db78b32adf5845e0113a0c7e93fb07b33551d8fdc8c89b7c0fb39f3990ef0",
-    "docs/verification/works-gallery/works-768-light.png": "5da4f0c2fa8d51783e5cc266457787123aefc09dadfb4d5a636c48deb5410ccb",
-    "docs/verification/works-gallery/works-active-filters-light.png": "dd1cfd0b15a0055fa860ab0cc0dc859ea75db3466017b572a5320873ffb6842a",
+    "docs/verification/works-gallery/works-1280-dark.png": "cfcb933018ddfaf84503cda1f129443326a07bde94397fca76bc6c4763873830",
+    "docs/verification/works-gallery/works-1280-light.png": "f65928889b3278360f680a72635bc4ffb74cf808a5551d3f1c7f063455633793",
+    "docs/verification/works-gallery/works-320-dark.png": "91d621c4eeaec0147fb8e6e79aadb2bb6fb1449e85aec4a0faf1606178eb6b20",
+    "docs/verification/works-gallery/works-320-light.png": "f4959021bc3f921e55bc011bc9b1cbeb1c0c485a2c2f49c8c5f9cb20e7f35990",
+    "docs/verification/works-gallery/works-390-dark.png": "020dcdda64e80921810126eae277f0f015091d45ea8943c5f550561b6e48552f",
+    "docs/verification/works-gallery/works-390-light.png": "e1c1728a8defe3cb61bdca5cdc9299a40d7e632550354a682ebc8b4dacdc25d1",
+    "docs/verification/works-gallery/works-768-dark.png": "66f8199f32e98a98c8acffce357e07aeabcaa8b99225be8a5d59f5978f4d1613",
+    "docs/verification/works-gallery/works-768-light.png": "465a15eccaffe0a0fd971126d847f8d0e3c7de4be26aa5c52a134ca306ae18f2",
+    "docs/verification/works-gallery/works-active-filters-light.png": "a313357327e40bf54dc739d4db8516c39368ae57f5310f9673960c56d97ff242",
     "docs/verification/works-gallery/works-empty-dark.png": "edf020ee12c01fa82bfd6c9467b970aade7ea352c2512cbd76170990993d5c54",
-    "docs/verification/works-gallery/works-filters-320-dark.png": "a1cd519bd8268fd3c88b863ea12b73a79e2260a057f01a954c79511f87e9853a",
-    "docs/verification/works-gallery/works-mobile-filters-light.png": "45b61eaddb842892ce5f1f6b1e26a2e6023ef93dd28335e2ba17f64bb340ecce"
+    "docs/verification/works-gallery/works-filters-320-dark.png": "ecf632c3133c7db172a4505489067a86398dc421597058ef7aecafcc2f82de84",
+    "docs/verification/works-gallery/works-mobile-filters-light.png": "ae133fa3f55a68a3bb0326dd53a1e385728a86ff6bae6fa2e5b2b0d02f9339ce"
   },
   "artifactNotes": [
-    "Build log trailing horizontal whitespace removed for Git formatting; command output and result preserved."
-  ]
+    "Log trailing horizontal whitespace removed for Git formatting; command output and results preserved."
+  ],
+  "review": {
+    "request": "SVG artwork for every category",
+    "categories": 8,
+    "placements": [
+      "category headings",
+      "category jump navigation"
+    ],
+    "browser": "PASS"
+  }
 }

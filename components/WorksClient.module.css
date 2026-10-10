@@ -161,9 +161,25 @@
   margin-top: var(--space-6);
 }
 
+.categoryArtwork, .categoryNavArtwork {
+  display: block;
+  flex-shrink: 0;
+  color: var(--color-primary-dark);
+}
+
+.categoryArtwork {
+  width: 56px;
+  height: 56px;
+}
+
+.categoryNavArtwork {
+  width: 24px;
+  height: 24px;
+}
+
 .categoryHead {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-3);
   margin-bottom: var(--space-4);
   padding-bottom: var(--space-3);
@@ -336,6 +352,7 @@
   .sort { flex: 1; min-width: 0; }
   .controls { gap: var(--space-2); }
   .categoryHead { gap: var(--space-2); }
+  .categoryArtwork { width: 40px; height: 40px; }
   .categoryHead h2 { font-size: var(--text-lg); }
   .cardBody { padding: var(--space-2); }
   .cardTitle { font-size: var(--text-sm); }

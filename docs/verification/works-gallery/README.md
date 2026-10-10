@@ -3,6 +3,13 @@
 2026-10-10、Issue #135 の作業ツリーで検証。ソースと成果物の SHA-256 は `manifest.json` に記録します。
 未コミットの実装に対する結果であり、ベースコミット単体の結果ではありません。
 
+Human Review の「カテゴリごとに絵がほしい」に対応し、7分類＋Other の SVG イラストを追加しました。
+各見出しとジャンプナビで同じ絵を使い、既存の青い Blueprint 表現と明暗テーマに合わせています。
+Unity・Roblox・Scratch は既存ロゴ、VRChat Worlds はポータル、VRChat Gimmicks は動くキューブ、
+Avatar Assets はキャラクター、Developer Tools はコードエディター、Other は重なる作品を表しています。
+絵は装飾として読み上げ・フォーカス対象から除外し、カテゴリ名は従来どおりテキストで表示します。
+4画面幅で見出しの絵の表示・サイズ、ジャンプナビの絵、カテゴリ名の読み上げ、既存操作を再確認しました。
+
 | 検証 | 結果 |
 |---|---|
 | `npm ci` | 完了（依存・ロックファイルは変更せず） |
@@ -29,6 +36,9 @@
 追加の4枚は `works-filters-320-dark.png`、`works-active-filters-light.png`、
 `works-mobile-filters-light.png`、`works-empty-dark.png`。
 全キャプチャでサムネイルの読み込み完了を確認し、文字・カード・操作の収まりを直接確認しました。
+
+[カテゴリの SVG 一覧](category-artwork.svg) と [PNG プレビュー](category-artwork.png) は、
+実画面の SVG から書き出した8カテゴリの絵です。画面キャプチャも SVG 追加後の最終版に更新しました。
 
 ## 検証データと実接続の区別
 
