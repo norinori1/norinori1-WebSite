@@ -7,7 +7,7 @@ import Image from "next/image";
 import { sanitizeUrl } from "@/lib/security";
 
 /** Render Notion rich text with inline formatting preserved. */
-function RichText({ items }: { items: RichTextItemResponse[] }) {
+export function RichText({ items }: { items: RichTextItemResponse[] }) {
   return (
     <>
       {items.map((item, i) => {
@@ -30,7 +30,7 @@ function RichText({ items }: { items: RichTextItemResponse[] }) {
           );
         }
 
-        return <span key={i}>{node}</span>;
+        return <span key={i} style={{ whiteSpace: "pre-wrap" }}>{node}</span>;
       })}
     </>
   );
@@ -69,23 +69,32 @@ function NotionBlockView({ block }: { block: NotionBlock }) {
 
     case "heading_1":
       return (
+        <>
         <h2>
           <RichText items={block.heading_1.rich_text} />
         </h2>
+        <NestedChildren blocks={block.children} />
+        </>
       );
 
     case "heading_2":
       return (
+        <>
         <h3>
           <RichText items={block.heading_2.rich_text} />
         </h3>
+        <NestedChildren blocks={block.children} />
+        </>
       );
 
     case "heading_3":
       return (
+        <>
         <h4>
           <RichText items={block.heading_3.rich_text} />
         </h4>
+        <NestedChildren blocks={block.children} />
+        </>
       );
 
     case "bulleted_list_item":
@@ -139,6 +148,10 @@ function NotionBlockView({ block }: { block: NotionBlock }) {
     case "divider":
       return <hr />;
 
+    case "to_do":
+      return <div><span aria-label={block.to_do.checked ? "完了" : "未完了"}>{block.to_do.checked ? "☑" : "☐"} </span>
+        <RichText items={block.to_do.rich_text} /><NestedChildren blocks={block.children} /></div>;
+
     case "image": {
       // Use the proxy for Notion-hosted (signed S3) URLs so they never expire.
       // External URLs are stable and can be used directly, but we sanitize them for safety.
@@ -191,7 +204,9 @@ function NotionBlockView({ block }: { block: NotionBlock }) {
       );
 
     default:
-      return null;
+      if (block.children?.length) return <NestedChildren blocks={block.children} />;
+      return <p><a href={`https://www.notion.so/${encodeURIComponent(block.id.replaceAll("-", ""))}`}
+        target="_blank" rel="noopener noreferrer">Notionでコンテンツを開く</a></p>;
   }
 }
 

@@ -1,0 +1,192 @@
+[
+  {
+    "id": "192b2d5046ad4f8c876e0209ef021c69",
+    "title": "Block Crush Game [Scratch Edition]",
+    "slug": "block-crush-scratch",
+    "link": "https://norinori1.itch.io/block-crush-game-scratch-edition",
+    "additionalLinks": "",
+    "engines": [
+      "Scratch"
+    ],
+    "repository": "",
+    "body": "爆弾を落としてブロックを消していく、爽快感重視のパズルゲームです。多彩なギミックブロックを駆使して連鎖させ、画面上部まで迫る前にブロックを一掃します。ストレス解消にぴったりの、高得点を狙う作品です。"
+  },
+  {
+    "id": "e6fb6ed38ed94b1e8a5d60eb13d5cf5b",
+    "title": "Block Crushing Game",
+    "slug": "block-crushing-game",
+    "link": "https://norinori1.itch.io/block-crushing-game",
+    "additionalLinks": "",
+    "engines": [
+      "Unity",
+      "C#"
+    ],
+    "repository": "",
+    "body": "# 概要\n<br>爆弾を投下してブロックを破壊する、爽快感抜群の物理パズルです。コストを管理しながら、縦横列消去や範囲爆破などの多彩な爆弾を使い分け、コンボを狙います。ホールド機能を駆使してハイスコアを目指す作品です。\n# **謝礼**\nこのゲームのサムネイルは、e0916様に作ってもらいました！ありがとうございます! リンクは下記 : \n[Scratch - Imagine, Program, Share](https://scratch.mit.edu/users/e0916/)\n# 詳細\nマウスでどこに爆弾を落とすか決め、クリックで爆弾を落とす。<br>真上までブロックが到達するとゲームオーバーです。<br>4ターンごとにブロックが補充されます。<br>スペシャルブロック==========================<br>爆弾付きブロック・・3×3の範囲を全て消す!<br>矢印付きブロック・・その列のブロックを全て消す!<br>青矢印ブロック・・その列とその上下1列を消す!<br>爆弾付き・・矢印が通ったところをボムに変える!\n爽快感重視のプロジェクトです。<br>レベルが上がると、ブロックがたくさん補充されます<br>が、スコアがたくさん獲得できます。<br>ストレス発散もできます。(個人の感想です。)\n作者の記録・・2434020\nALL clearの条件・・ノーマルブロックをすべて消すこと<br>最初のターンは全消しがしやすいです。"
+  },
+  {
+    "id": "331edeb49f808045ba7cfe5f9e36bd8f",
+    "title": "Block Miner",
+    "slug": "block-miner",
+    "link": "https://scratch.mit.edu/projects/406576836/",
+    "additionalLinks": "",
+    "engines": [
+      "Scratch"
+    ],
+    "repository": "",
+    "body": "# 概要\nScratchでの自信作。つるはしの残量に気を付けて、道中で回復しながら、できるだけ先に掘り進めよう。道中でレアな鉱石に出会えるかも？\n# 詳細\n鉱石をたくさん集めてコインを集めましょう!\n上キー 又は 画面上部をタップ・・上移動<br>下キー 又は 画面下部をタップ・・下移動\nブロックに当たるとツルハシを消費してブロックを掘ることができます。<br>ツルハシがある限りは掘り続けられます!<br>でも、ツルハシがなくなってしまうとゲームオーバーです。<br>また、とげなどによって左上のHPが0になってもゲームオーバーです。<br>右上のボタンで一時停止も可能です。<br>奥に進むとより良い鉱石が現れるので、なるべく奥に進みましょう!<br>たまにクリティカルが出ます!クリティカルが出ると、石を一発で破壊できます!\n・ダメージ/状態異常を食らう障害物<br>針・・赤色をしたとがった針。当たるとダメージ<br>電気針・・黄色でとがっている。当たると2のダメージと何秒か上下移動ができなくなる(ひるむ)。(Lv.4\\~)<br>転がる石・・転がる石。移動速度が速い。当たるとダメージと5秒ほど上下移動ができなくなる。(Lv.3\\~)<br>バネ・・強制上移動。さらに6秒ほど上下移動ができなくなる。<br>下矢印・・強制下移動。さらに6秒ほど上下移動ができなくなる。\n<br>・鉱石系(Lv.2\\~)<br>石炭・・鉱石系の中では耐久力が低め。コインとス コアがほんの少し入る。<br>鉄・・鉱石系の中では耐久力が低め。コインとスコアが少し入る。<br>金・・耐久力は少し多い。コインとスコアが多く入る(Lv.3\\~)<br>エメラルド・・耐久力は多い。コインとスコアがより多く入る。出る確率が少ない。(Lv.3\\~)<br>ダイヤモンド・・耐久力はかなり多い。コインとスコアがかなり多く入る。出る確率が少ない。(Lv.4\\~)"
+  },
+  {
+    "id": "331edeb49f808010a4f2ee40dd7ab0cc",
+    "title": "5人からの挑戦状",
+    "slug": "challenge-from-5-peope",
+    "link": "https://scratch.mit.edu/projects/419837639/",
+    "additionalLinks": "",
+    "engines": [
+      "Scratch"
+    ],
+    "repository": "",
+    "body": "# 注目入りしました\n[ja.scratch-wiki.info](https://ja.scratch-wiki.info/wiki/%E6%B3%A8%E7%9B%AE%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E9%81%B8%E3%81%B0%E3%82%8C%E3%81%9F%E6%97%A5%E6%9C%AC%E5%9C%A8%E4%BD%8F%E8%80%85%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E4%B8%80%E8%A6%A7)\n# 概要\nScratch時代の傑作の1つ。\n弾幕をかわしながら、連戦で5人を倒そう\n# 詳細\n弾幕です。<br>マウスを使って操作します。<br>(4人目くらいから重くなります)<br>中を見て、その後全画面にすると軽くなります。<br>強さ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬<br>1人目 ★☆☆☆☆<br>2人目 ★★☆☆☆<br>3人目 ★★★★☆<br>4人目 ★★★★★<br>5人目 ★★★★★+★★<br>全てのボスは、近接攻撃をバリアします。<br>▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n<empty-block/>"
+  },
+  {
+    "id": "33aedeb49f8080fe807aeee1328f7fbb",
+    "title": "Github-Railway-Map",
+    "slug": "github-railway-map",
+    "link": "https://github.com/norinori1/GitHub-Railway-Map",
+    "additionalLinks": "",
+    "engines": [
+      "HTML5"
+    ],
+    "repository": "",
+    "body": "各ユーザーを地区とみなし、<br>Githubのパブリックリポジトリそれぞれを駅とみなして<br>路線図を作るツール考えてみた\n<empty-block/>"
+  },
+  {
+    "id": "ae54fa7aa72a4d18a313e37fab6f30fe",
+    "title": "POLARITY UNDER",
+    "slug": "polarity-under",
+    "link": "https://unityroom.com/games/polarity-under",
+    "additionalLinks": "",
+    "engines": [
+      "Unity",
+      "C#"
+    ],
+    "repository": "",
+    "body": "# Unity1week「うら」の作品\n# 概要\n<br>磁力（N極・S極）の反発を利用して進む、爽快な横スクロールアクションパズルです。タップで重力を反転させ、床に触れないよう浮遊しながら進むスコアアタックが特徴。Unityで制作された、直感的な操作性が魅力の作品です。"
+  },
+  {
+    "id": "331edeb49f8080bf9559e3e734098e57",
+    "title": "Puzzle Ball",
+    "slug": "puzzle-ball",
+    "link": "https://scratch.mit.edu/projects/338304840/",
+    "additionalLinks": "",
+    "engines": [
+      "Scratch"
+    ],
+    "repository": "",
+    "body": "# 概要\n同じ色のボールを3つ以上つなげて消すゲームの初代。\n# Scratch Coachに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n# 詳細\n繋げて消すパズルゲームです。<br>同じ種類のボール(コイン)を3つ以上繋げて消すと、<br>繋げた数×10スコアまたはコインが入ります<br>手数に気を付けながら目標スコアに達すればゴールです。<br>ゴールすれば次に行けます。<br>あと、手数の隣の \\>\\> みたいなボタンは、クリックすると手数が1減るが、一番下のボールを全て消す。スコアは入らない。\n★アイテム★<br>アイテムはコインを使いますがあなたの助けになるでしょう。\n50円ハンマー  選択されたボール/ブロックを一つ消す!<br>魔法ステッキ  障害物を全て消す。更にコインを全て回収する。<br>120円ハンマー 選択されたマスを中心に3×3にボール/ブロックを全て消す。<br>手数+5 手数が5増える。\nある一定のチェイン数まで消すと、魔法ステッキminiが現れます。クリックして使用。(手数を使用します)<br>★チェインボーナス★<br>魔法ステッキmini 魔法ステッキminiの下の色のボールを全て消す。一番下にある場合はランダムになる。<br>出現条件・・9個以上ボールを繋ぐ<br>ボス戦では、Fightの文字のボールが表示される。<br>どんなボールからでも、繋げることができる。\nブースター<br>ブースターは、買うと一定時間内なら色々なメリットを受けられる。<br>ただし、旗を押したりロードするとその効果の残り時間はなくなる。<br>★ログインボーナス★<br>毎日50coinがもらえます。<br>金曜日はさらに250coin追加でもらえます。<br>日曜日はさらに無料でスコアブーストが5分間与えられます。<br>土曜日はコインブーストが5分間与えられます。<br>どのステージまで攻略しているかによっては、追加でコインがもらえます。<br>ステージ0\\~4まで攻略 ボーナス0coin<br>ステージ5\\~9まで攻略 ボーナス5コイン<br>ステージ10\\~14まで攻略 ボーナス10coin<br>ステージ15\\~20 まで攻略 ボーナス20coin<br>ステージ20\\~ まで攻略 ボーナス30coin<br>★チャレンジモード★<br>クラウド変数対応モードです。<br>アイテムが使えず、スコアアップと言うアイテムも使えません。"
+  },
+  {
+    "id": "331edeb49f808058aaf9c385cb11afb9",
+    "title": "Puzzle ball 2",
+    "slug": "puzzle-ball-2",
+    "link": "https://scratch.mit.edu/projects/361154598/",
+    "additionalLinks": "",
+    "engines": [
+      "Scratch"
+    ],
+    "repository": "",
+    "body": "# 概要\n同じ色のボールを３つ以上繋げて消すパズルゲームの2作目。\n前作Puzzle ballとの大きな違いは、スコアベース以外のクリア条件を設定できるようになったこと。ビジュアル面も強化！\n# Scratch Coathに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n# 説明\nパズルballの次作です。<br>繋げて消すパズルゲームです。<br>同じ種類のボール(コイン)を3つ以上繋げて消すと、<br>繋げた数×10スコアまたはコインが入ります。<br>手数に気を付けながら目標に達すればゴールです。<br>障害物が増えすぎてもゲームオーバーです。\nゲームモード===============================<br>黄色Gather・・ボールが補充されません。<br>ボールを決まられた数消してください。\nSave・・猫を一番下に動かして、ボール密集地から抜け出せない猫を助けてください。\n紫Gather・・黄色Gatherとは違いボールが補充されます。<br>ボールを決まられた数消してください。\nOrder・・決められた種類の障害物を消してください。<br>障害物===================================<br>岩・・3つ繋げても消せませんが、隣接しているボールを消すとけすことができます。\n重力ブロック・・隣接するボールを消すと重力が逆になります\n増殖岩・・たまに1ターンごとに隣接しているボールや障害物を取り込みます。(catは取り込みませんが、魔法ステッキは取り込みます)\nアップダウンブロック・・+1の時は隣接しているボールを消すと手数+1だが、-1の時は逆効果になる。\nブロックディスペンサー 通るブロックを変え、岩にしてしまう、とても厄介な障害物。(level 33\\~)<br>Items====================================<br>ハンマー・・選択したボールや障害物を消します。<br>(ステージ5クリア後から)\nMazic start・・盤上に魔法ステッキがある状態でスタートします。(ステージ10クリア後から)\nMazic ハンマー・・障害物などを消した後、その種類の障害物やボール、コインなどをすべて消し、5ターンの間はその選んだ障害物やボール、コインは出てこなくなる。(レベル15から)\nレインボーボール・・盤上にどんなボールからでも繋げる【レインボーボール】が出てくるようになる。<br>(level15から)<br>Battle mode================================<br>2チームに分かれて対戦します。<br>ランダムのステージをクリアして、敵チームに勝ちましょう!<br>一番下のゲージは、現在の状況です。<br>レベル8クリア後からできます。<br>バトルモードをプレイすると、Bと書いてあるものが手に入りますが、これは【バトルポイント】です。<br>How to use Battle point?=======================<br>バトルポイントは、ショップから使うことができます。<br>ガシャ/gifts================================<br>ランダムにアイテムが手に入ります。<br>いいアイテムほど出にくいです。<br>70バトルポイントのガシャ玉からは、<br>・coin<br>・ハンマー<br>・マジックステッキ<br>・レインボーボール<br>などです。\n魔術ブロック<br>・9チェイン以上で魔法ステッキminiが出現!<br>下のブロックの色のボールをすべて消す!<br>・15チェイン以上で魔法ステッキUltraが出現!<br>盤上の全ての障害物とボールを消す!"
+  },
+  {
+    "id": "b7607f342039434cafb0579e0b91e6e8",
+    "title": "Puzzle Ball 3!",
+    "slug": "puzzle-ball-3",
+    "link": "https://norinori1.itch.io/puzzle-ball-3",
+    "additionalLinks": "",
+    "engines": [
+      "Scratch"
+    ],
+    "repository": "",
+    "body": "# 概要\n『Puzzle Ball 3!』は、ボールを3つ以上繋げて消すパズルです。多彩なギミックと直感的な操作が特徴の人気作。\n# Scratch Coathに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n<empty-block/>"
+  },
+  {
+    "id": "5f0b02e458f8400cb89dd34b8b644265",
+    "title": "Puzzle Ball Stage Maker",
+    "slug": "puzzle-ball-stage-maker",
+    "link": "https://norinori1.itch.io/puzzle-ball-stage-maker",
+    "additionalLinks": "",
+    "engines": [
+      "Unity",
+      "C#"
+    ],
+    "repository": "",
+    "body": "『Puzzle Ball Stage Maker』は、プレイヤーが自由にステージを作成・共有できるパズルツールです。直感的な操作でギミックを配置し、ステージを設計可能。自作のステージを実際にプレイして試行錯誤する楽しさが詰まった作品です。<br>Puzzle Ball のスクラッチのシリーズすべてを網羅しています\n<empty-block/>"
+  },
+  {
+    "id": "cab02629a82f423492361c166adaff58",
+    "title": "ROGUE LYCAN",
+    "slug": "rogue-lycan",
+    "link": "https://norinori1.github.io/Rogue-Lycan-Discord-Activity/",
+    "additionalLinks": "",
+    "engines": [
+      "HTML5",
+      "JavaScript",
+      "Discord API"
+    ],
+    "repository": "https://github.com/norinori1/Rogue-Lycan-Discord-Activity",
+    "body": "『ROGUE-LYCAN』は、人狼ゲームの心理戦にローグライクの要素を融合させた異欲作です。カードのドラフトやHP管理、特殊能力の選択を通じて、生存と勝利を目指す戦略的な駆け引きが楽しめます。\n<empty-block/>"
+  },
+  {
+    "id": "1bb3c8d65f644a879965f9e2fd2f44c9",
+    "title": "Scratch Data Structures Generator",
+    "slug": "scratch-data-structures-generator",
+    "link": "https://norinori1.github.io/Scratch-Data-Stractures-Generator/",
+    "additionalLinks": "",
+    "engines": [
+      "HTML5",
+      "JavaScript",
+      "JSON"
+    ],
+    "repository": "https://github.com/norinori1/Scratch-Data-Stractures-Generator",
+    "body": "Dictionary, HashSet, Priority Queue, Deque, Union-Find, Trie, Segment Tree, LRU Cache, Bloom Filter<br>をデータ構造に持つスプライトをバニラのScratchで使えるようにするツール。\n.sb3で出力可能\n<empty-block/>"
+  },
+  {
+    "id": "c9a0fbc0b91341ac9a547ac96272087f",
+    "title": "Scratch Text Asset Creator",
+    "slug": "scratch-text-asset-creator",
+    "link": "https://norinori1.github.io/Scratch-Text-Asset-Creator/",
+    "additionalLinks": "",
+    "engines": [
+      "HTML5",
+      "JavaScript",
+      "Canvas API"
+    ],
+    "repository": "https://github.com/norinori1/Scratch-Text-Asset-Creator",
+    "body": "◆Scratch Text Asset Creator◆\n「Text Display」のリメイク版\n こちらは、フォントファイルを選択し使う文字を選択・ペーストして、.sb3を生成して使用します<br>\\[1\\] scratch標準搭載ではないフォントを使用できます<br>\\[2\\] 前作より軽い・多機能\n\\[3\\]\\<c=50\\>リッチテキスト（風）\\</c\\>が使えちゃいます\n\\<c=50\\>\\<g=50\\>重ねがけもok!\\</c\\>\\</g\\>\n```plain text\ntext:YAML風にもテキスト表示設定できちゃいます\nx:0\ny:0\n```"
+  },
+  {
+    "id": "333edeb49f8080a6a2e8f7aa93218610",
+    "title": "血液がんの治療に伴走する超簡単！育成ゲーム\n",
+    "slug": "super-easy-game-blood-cancer",
+    "link": "",
+    "additionalLinks": "",
+    "engines": [
+      "Flutter"
+    ],
+    "repository": "",
+    "body": "# 賞\n100Program内の 優秀インタビュー賞 , Early Works賞(優秀プロトタイピング賞)\n# 感想\nリーダーの人が看護系だったので、大まかな仕様は自分がチームに入る前に決まっていた感じ\nあと、リーダーの人が優秀\n# 概要\n100Program というプログラムでチームで制作したプロダクトです。\n血液がんの患者さんをターゲットにした育成ゲーム。\nほかの育成ゲームとの違いとしては、<br>血液がん患者の看護・医療に必要な情報が患者さんから得られるようにできています\n患者さんが歩いた歩数、服薬、うがい、シャワー、体ふき（などの看護師さんが患者さんにやってもらいたいこと）を行うとゲーム内で報酬が得られる仕組みです。\n<empty-block/>"
+  },
+  {
+    "id": "09427215a92a4e4aa63ffdd1593d47f3",
+    "title": "ZINTOROAD",
+    "slug": "zintoroad",
+    "link": "https://norinori1.itch.io/zintoroad-beta",
+    "additionalLinks": "",
+    "engines": [
+      "Unity",
+      "C#"
+    ],
+    "repository": "",
+    "body": "<empty-block/>\n# ゲームクリエイター甲子園2025 ノミネート作品\n[ゲームクリエイター甲子園 2025 総合大賞・U-18ノミネート作品発表！](https://game.creators-guild.com/g4c/42567/)\n# **ゲームクリエイター甲子園 2025 総合大賞セミファイナリスト**\n[ゲームクリエイター甲子園 2025 総合大賞セミファイナリスト作品紹介！](https://game.creators-guild.com/g4c/43110/)\n# 概要\n陣取りとパズルを融合させた、爽快感のある戦略ローグライクゲームです。グリッド上にコストを払って3つの頂点を設置し、三角形をつくって敵を囲んで倒していくのが独自の特徴。限られたリソースで効率よく進路を確保する、思考と攻略の楽しさが詰まった作品です。\n<empty-block/>"
+  }
+]

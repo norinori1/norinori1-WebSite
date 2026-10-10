@@ -1,0 +1,217 @@
+{
+  "implementationSha": "406c61ae416f1a6d793521898b70638e93e0cf63",
+  "mode": "Native Notion final readback rendered through local SDK fixture; no live website API connection",
+  "pages": [
+    {
+      "slug": "block-crush-scratch",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "block-crushing-game",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "block-miner",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "challenge-from-5-peope",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "github-railway-map",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "polarity-under",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball-2",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball-3",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball-stage-maker",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "rogue-lycan",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "scratch-data-structures-generator",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "scratch-text-asset-creator",
+      "width": 1280,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "super-easy-game-blood-cancer",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "zintoroad",
+      "width": 1280,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "block-crush-scratch",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "block-crushing-game",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "block-miner",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "challenge-from-5-peope",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "github-railway-map",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "polarity-under",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball-2",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball-3",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "puzzle-ball-stage-maker",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "rogue-lycan",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "scratch-data-structures-generator",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "scratch-text-asset-creator",
+      "width": 390,
+      "tabs": 2,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "super-easy-game-blood-cancer",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    },
+    {
+      "slug": "zintoroad",
+      "width": 390,
+      "tabs": 3,
+      "originalBodyPreserved": true,
+      "propertyChanges": 0
+    }
+  ],
+  "errors": []
+}

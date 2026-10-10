@@ -1,0 +1,333 @@
+[
+  {
+    "slug": "block-crush-scratch",
+    "pageId": "192b2d5046ad4f8c876e0209ef021c69",
+    "expectedLastEditedAt": "2026-10-10T11:07:12.903Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Scratch",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要\n",
+        "new_str": ""
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "block-crushing-game",
+    "pageId": "e6fb6ed38ed94b1e8a5d60eb13d5cf5b",
+    "expectedLastEditedAt": "2026-10-10T11:07:28.221Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Unity\n- C#\n# ニュース・実績\n## 制作の裏話\n### **謝礼**\nこのゲームのサムネイルは、e0916様に作ってもらいました！ありがとうございます! リンクは下記 : \n[Scratch - Imagine, Program, Share](https://scratch.mit.edu/users/e0916/)",
+        "new_str": ""
+      },
+      {
+        "old_str": "## 遊び方・操作方法",
+        "new_str": "# 詳細"
+      },
+      {
+        "old_str": "# 詳細",
+        "new_str": "# **謝礼**\nこのゲームのサムネイルは、e0916様に作ってもらいました！ありがとうございます! リンクは下記 : \n[Scratch - Imagine, Program, Share](https://scratch.mit.edu/users/e0916/)\n# 詳細"
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "block-miner",
+    "pageId": "331edeb49f808045ba7cfe5f9e36bd8f",
+    "expectedLastEditedAt": "2026-10-10T11:07:42.972Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Scratch",
+        "new_str": ""
+      },
+      {
+        "old_str": "## 遊び方・操作方法",
+        "new_str": "# 詳細"
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "challenge-from-5-peope",
+    "pageId": "331edeb49f808010a4f2ee40dd7ab0cc",
+    "expectedLastEditedAt": "2026-10-10T11:08:20.468Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Scratch\n# ニュース・実績\n## 掲載・紹介\n### 注目入りしました\n[ja.scratch-wiki.info](https://ja.scratch-wiki.info/wiki/%E6%B3%A8%E7%9B%AE%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E9%81%B8%E3%81%B0%E3%82%8C%E3%81%9F%E6%97%A5%E6%9C%AC%E5%9C%A8%E4%BD%8F%E8%80%85%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E4%B8%80%E8%A6%A7)",
+        "new_str": ""
+      },
+      {
+        "old_str": "## 遊び方・操作方法",
+        "new_str": "# 詳細"
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      },
+      {
+        "old_str": "# 概要",
+        "new_str": "# 注目入りしました\n[ja.scratch-wiki.info](https://ja.scratch-wiki.info/wiki/%E6%B3%A8%E7%9B%AE%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88/%E9%81%B8%E3%81%B0%E3%82%8C%E3%81%9F%E6%97%A5%E6%9C%AC%E5%9C%A8%E4%BD%8F%E8%80%85%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E4%B8%80%E8%A6%A7)\n# 概要"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "github-railway-map",
+    "pageId": "33aedeb49f8080fe807aeee1328f7fbb",
+    "expectedLastEditedAt": "2026-10-10T11:08:35.634Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- HTML5",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要\n",
+        "new_str": ""
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "polarity-under",
+    "pageId": "ae54fa7aa72a4d18a313e37fab6f30fe",
+    "expectedLastEditedAt": "2026-10-10T11:08:50.285Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Unity\n- C#\n# ニュース・実績\n## 制作の裏話\nUnity1week「うら」の作品",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      },
+      {
+        "old_str": "# 概要",
+        "new_str": "# Unity1week「うら」の作品\n# 概要"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "puzzle-ball",
+    "pageId": "331edeb49f8080bf9559e3e734098e57",
+    "expectedLastEditedAt": "2026-10-10T11:09:57.416Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Scratch\n# ニュース・実績\n## 掲載・紹介\n### Scratch Coachに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)",
+        "new_str": ""
+      },
+      {
+        "old_str": "## 遊び方・操作方法",
+        "new_str": "# 詳細"
+      },
+      {
+        "old_str": "# 詳細",
+        "new_str": "# Scratch Coachに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n# 詳細"
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "puzzle-ball-2",
+    "pageId": "331edeb49f808058aaf9c385cb11afb9",
+    "expectedLastEditedAt": "2026-10-10T11:10:12.775Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Scratch\n# ニュース・実績\n## 掲載・紹介\n### Scratch Coathに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)",
+        "new_str": ""
+      },
+      {
+        "old_str": "## 遊び方・操作方法",
+        "new_str": "# 説明"
+      },
+      {
+        "old_str": "# 説明",
+        "new_str": "# Scratch Coathに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n# 説明"
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "puzzle-ball-stage-maker",
+    "pageId": "5f0b02e458f8400cb89dd34b8b644265",
+    "expectedLastEditedAt": "2026-10-10T11:12:33.009Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Unity\n- C#",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要\n",
+        "new_str": ""
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "rogue-lycan",
+    "pageId": "cab02629a82f423492361c166adaff58",
+    "expectedLastEditedAt": "2026-10-10T11:12:50.486Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- HTML5\n- JavaScript\n- Discord API\n## ソースコード・技術記事\n[リポジトリ](https://github.com/norinori1/Rogue-Lycan-Discord-Activity)",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要\n",
+        "new_str": ""
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "scratch-data-structures-generator",
+    "pageId": "1bb3c8d65f644a879965f9e2fd2f44c9",
+    "expectedLastEditedAt": "2026-10-10T11:13:05.375Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- HTML5\n- JavaScript\n- JSON\n## ソースコード・技術記事\n[リポジトリ](https://github.com/norinori1/Scratch-Data-Stractures-Generator)",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要\n",
+        "new_str": ""
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "scratch-text-asset-creator",
+    "pageId": "c9a0fbc0b91341ac9a547ac96272087f",
+    "expectedLastEditedAt": "2026-10-10T11:14:33.977Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- HTML5\n- JavaScript\n- Canvas API\n## ソースコード・技術記事\n[リポジトリ](https://github.com/norinori1/Scratch-Text-Asset-Creator)",
+        "new_str": ""
+      },
+      {
+        "old_str": "こちらは、フォントファイルを選択し使う文字を選択・ペーストして、.sb3を生成して使用します<br>\\[1\\] scratch標準搭載ではないフォントを使用できます<br>\\[2\\] 前作より軽い・多機能",
+        "new_str": " こちらは、フォントファイルを選択し使う文字を選択・ペーストして、.sb3を生成して使用します<br>\\[1\\] scratch標準搭載ではないフォントを使用できます<br>\\[2\\] 前作より軽い・多機能"
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要\n",
+        "new_str": ""
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false,
+    "note": "Original single leading space is included in inverse text. Notion may serialize it as child indentation; inspect nesting if restoration is requested."
+  },
+  {
+    "slug": "super-easy-game-blood-cancer",
+    "pageId": "333edeb49f8080a6a2e8f7aa93218610",
+    "expectedLastEditedAt": "2026-10-10T11:14:49.756Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Flutter\n# ニュース・実績\n## 受賞・ノミネート\n100Program内の 優秀インタビュー賞 , Early Works賞(優秀プロトタイピング賞)\n## 制作の裏話\nリーダーの人が看護系だったので、大まかな仕様は自分がチームに入る前に決まっていた感じ\nあと、リーダーの人が優秀",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      },
+      {
+        "old_str": "# 概要",
+        "new_str": "# 感想\nリーダーの人が看護系だったので、大まかな仕様は自分がチームに入る前に決まっていた感じ\nあと、リーダーの人が優秀\n# 概要"
+      },
+      {
+        "old_str": "# 感想",
+        "new_str": "# 賞\n100Program内の 優秀インタビュー賞 , Early Works賞(優秀プロトタイピング賞)\n# 感想"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "zintoroad",
+    "pageId": "09427215a92a4e4aa63ffdd1593d47f3",
+    "expectedLastEditedAt": "2026-10-10T10:39:24.383Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "\n# 技術・開発\n## 使用技術\n- Unity\n- C#\n# ニュース・実績\n## 受賞・ノミネート\n### ゲームクリエイター甲子園2025 ノミネート作品\n[ゲームクリエイター甲子園 2025 総合大賞・U-18ノミネート作品発表！](https://game.creators-guild.com/g4c/42567/)\n### **ゲームクリエイター甲子園 2025 総合大賞セミファイナリスト**\n[ゲームクリエイター甲子園 2025 総合大賞セミファイナリスト作品紹介！](https://game.creators-guild.com/g4c/43110/)",
+        "new_str": ""
+      },
+      {
+        "old_str": "## 概要",
+        "new_str": "# 概要"
+      },
+      {
+        "old_str": "# 作品紹介\n<empty-block/>",
+        "new_str": "<empty-block/>\n# ゲームクリエイター甲子園2025 ノミネート作品\n[ゲームクリエイター甲子園 2025 総合大賞・U-18ノミネート作品発表！](https://game.creators-guild.com/g4c/42567/)\n# **ゲームクリエイター甲子園 2025 総合大賞セミファイナリスト**\n[ゲームクリエイター甲子園 2025 総合大賞セミファイナリスト作品紹介！](https://game.creators-guild.com/g4c/43110/)"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  },
+  {
+    "slug": "puzzle-ball-3",
+    "pageId": "b7607f342039434cafb0579e0b91e6e8",
+    "expectedLastEditedAt": "2026-10-10T10:40:11.068Z",
+    "command": "update_content",
+    "content_updates": [
+      {
+        "old_str": "# 技術・開発\n## 使用技術\n- Scratch\n",
+        "new_str": ""
+      },
+      {
+        "old_str": "# 作品紹介\n## 概要",
+        "new_str": "# 概要"
+      },
+      {
+        "old_str": "# ニュース・実績\n## 掲載・紹介\n### Scratch Coathに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n<empty-block/>",
+        "new_str": "# Scratch Coathに掲載されました！\n[スクラッチ パズルゲーム｜無料で遊べる頭脳パズル集](https://scratch.coach/segment/pazzle/page/2/)\n<empty-block/>"
+      }
+    ],
+    "actualReadbackRoundTripVerified": true,
+    "executed": false
+  }
+]
