@@ -8,8 +8,49 @@ export type WorkLink = {
   icon: { kind: "platform"; name: IconName } | { kind: "ui"; name: UIIconName };
 };
 
+/**
+ * Notion's Additional Links may contain bare URLs, Markdown links, or HTML
+ * line breaks (when pasted from another editor). Return each URL separately.
+ */
 export function parseAdditionalLinks(text: string): string[] {
-  return text.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  return text.replace(/<br\s*\/?>/gi, "\n").split(/\r?\n/).flatMap((line) => {
+    const value = line.trim();
+    if (!value) return [];
+    const urls = [...value.matchAll(/https?:\/\/[^\s<>\])"']+/gi)].map((match) => match[0]);
+    return urls.length > 0 ? urls : [value];
+  });
+}
+
+/**
+ * Rich-text links in a Notion property have a display label in plain_text and
+ * the actual destination in href/text.link.url. Reading plain_text alone loses
+ * those destinations. Collect linked items in order while joining unlinked
+ * text chunks so a bare URL split across chunks is still parsed correctly.
+ */
+export function parseNotionAdditionalLinks(
+  parts: readonly {
+    plain_text: string;
+    href?: string | null;
+    text?: { link?: { url: string } | null };
+  }[],
+): string[] {
+  const links: string[] = [];
+  let unlinkedText = "";
+  const flushText = () => {
+    if (unlinkedText) links.push(...parseAdditionalLinks(unlinkedText));
+    unlinkedText = "";
+  };
+  for (const part of parts) {
+    const href = part.href || part.text?.link?.url;
+    if (href) {
+      flushText();
+      links.push(href);
+    } else {
+      unlinkedText += part.plain_text;
+    }
+  }
+  flushText();
+  return [...new Set(links)];
 }
 
 export function safeWorkUrl(value: string): string | null {

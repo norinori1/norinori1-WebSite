@@ -50,7 +50,7 @@ Notion でゲーム作品を管理するデータベースを作成します。
 | `Slug` | Text（テキスト） | URLスラグ（例：`zintoroad`）。**ユニークであること** |
 | `Description` | Text（テキスト） | 作品の短い説明文 |
 | `Link` | URL | 作品へのリンク（itch.io等） |
-| `Additional Links` | Text（テキスト、任意） | 追加のプレイ先・配布先。1行に1つのHTTP／HTTPS URL |
+| `Additional Links` | Text（テキスト、任意） | 追加のプレイ先・配布先。URLを改行区切りで入力、またはNotionのリンク付き文字列を複数登録 |
 | `Status` | Select（セレクト） | 公開状態。選択肢：`Latest`、`Featured`、`Released` |
 | `Category` | Select（セレクト） | 作品の種類。下記の7分類。未設定でも作品は表示される |
 | `Tags` | Multi-select（マルチセレクト） | タグ（例：`Unity`、`Puzzle`、`Action`） |
@@ -61,6 +61,7 @@ Notion でゲーム作品を管理するデータベースを作成します。
 ### 詳細ページのリンクと本文
 
 `Link` がメインCTA、`Additional Links` が記載順の補助CTAです。Linkが空／無効なら最初の有効な追加URLをメインにします。
+`Additional Links` は、1行に1URLを入力するほか、Notionで「みんなのゲームパレード」などの文字列にリンクを設定して複数並べても利用できます。Markdown形式のリンクや貼り付け時の `<br>` 区切りにも対応します。
 空行・不正URL・重複URLは表示しません。追加欄自体がなくても従来のLinkで動作します。
 ボタンのアイコンはリンク先に合わせて切り替わります。`Repository` は技術タブ用で、プレイ先として自動追加しません。
 
