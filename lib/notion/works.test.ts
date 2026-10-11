@@ -35,6 +35,13 @@ async function runTests() {
               Engines: { type: "multi_select", multi_select: [{ name: "Unity" }] },
               Repository: { type: "url", url: "https://github.com/test/project" },
             } : {}),
+            ...(number === 3 ? {
+              "Additional Links": { type: "rich_text", rich_text: [
+                { type: "text", plain_text: "Game Parade", href: "https://gameparade.creators-guild.com/works/legacy-2380/" },
+                { type: "text", plain_text: "\n\n" },
+                { type: "text", plain_text: "unityroom DEMO", href: "https://unityroom.com/games/zintoroad-beta" },
+              ] },
+            } : {}),
             ...(category ? { Category: { type: "select", select: { name: category } } } : {}),
           } };
         }),
@@ -51,6 +58,10 @@ async function runTests() {
     assert.deepEqual(works[0].engines, []);
     assert.equal(works[0].repository, "");
     assert.deepEqual(works[2].additionalLinks, ["https://a.example", "https://b.example"]);
+    assert.deepEqual(works[3].additionalLinks, [
+      "https://gameparade.creators-guild.com/works/legacy-2380/",
+      "https://unityroom.com/games/zintoroad-beta",
+    ]);
     assert.deepEqual(works[2].engines, ["Unity"]);
     assert.equal(works[2].repository, "https://github.com/test/project");
     assert.deepEqual(calls.map((call) => call.start_cursor), [undefined, "page-2", "page-3"]);
