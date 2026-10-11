@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import type { NotionBlock } from "./notion/blocks";
 import { splitWorkSections, buildIntroSegments, hasSectionContent, selectWorkTab } from "./work-sections";
-import { getWorkLinks, parseAdditionalLinks, workAction } from "./work-links";
+import { getWorkLinks, parseAdditionalLinks, parseNotionAdditionalLinks, workAction } from "./work-links";
 
 const text = (plain_text: string) => [{ plain_text }];
 function block(id: string, type: string, value = "", children?: NotionBlock[]): NotionBlock {
@@ -42,6 +42,28 @@ assert.equal(buildIntroSegments([block("screens", "heading_2", "スクリーン�
 assert.equal(selectWorkTab("tech", ["intro", "tech"]), "tech");
 for (const value of [null, "", "invalid", "news"]) assert.equal(selectWorkTab(value, ["intro", "tech"]), "intro");
 assert.deepEqual(parseAdditionalLinks(" https://a.example \r\n\nhttps://b.example\n "), ["https://a.example", "https://b.example"]);
+assert.deepEqual(parseAdditionalLinks(
+  String.raw`[ZINTOROAD \\| Game Parade](https://gameparade.creators-guild.com/works/legacy-2380/)<br><br>[ZINTOROAD\\[DEMO\\] \\| unityroom](https://unityroom.com/games/zintoroad-beta)`,
+), ["https://gameparade.creators-guild.com/works/legacy-2380/", "https://unityroom.com/games/zintoroad-beta"]);
+assert.deepEqual(parseAdditionalLinks("https://one.example https://two.example"), ["https://one.example", "https://two.example"]);
+const notionAdditionalLinks = parseNotionAdditionalLinks([
+  { plain_text: "Game Parade", href: "https://gameparade.creators-guild.com/works/legacy-2380/" },
+  { plain_text: "\n\n" },
+  { plain_text: "unityroom DEMO", text: { link: { url: "https://unityroom.com/games/zintoroad-beta" } } },
+  { plain_text: "\nhttps://raw" }, { plain_text: ".example/path" },
+  { plain_text: "\nhttps://unityroom.com/games/zintoroad-beta" },
+]);
+assert.deepEqual(notionAdditionalLinks, [
+  "https://gameparade.creators-guild.com/works/legacy-2380/",
+  "https://unityroom.com/games/zintoroad-beta",
+  "https://raw.example/path",
+]);
+assert.deepEqual(getWorkLinks({ link: "https://norinori1.itch.io/zintoroad-beta", additionalLinks: notionAdditionalLinks }).map((link) => link.href), [
+  "https://norinori1.itch.io/zintoroad-beta",
+  "https://gameparade.creators-guild.com/works/legacy-2380/",
+  "https://unityroom.com/games/zintoroad-beta",
+  "https://raw.example/path",
+]);
 const links = getWorkLinks({ link: "javascript:alert(1)", additionalLinks: ["", "mailto:user@example.com", "//example.com", "/relative", "https://user:pass@github.com/", "https://NORINORI1.itch.io", "https://norinori1.itch.io/", "https://github.com/norinori1/project"] });
 assert.equal(links.length, 2);
 assert.equal(links[0].service, "itch.io");
