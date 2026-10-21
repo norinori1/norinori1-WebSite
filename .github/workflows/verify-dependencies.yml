@@ -1,0 +1,28 @@
+name: Verify locked npm dependencies
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up patched Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+      - name: Install exactly from lockfile
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Run works tests
+        run: npm run test:works
